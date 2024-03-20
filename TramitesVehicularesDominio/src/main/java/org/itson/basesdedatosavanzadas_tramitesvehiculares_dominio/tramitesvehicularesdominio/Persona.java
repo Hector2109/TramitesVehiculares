@@ -85,6 +85,20 @@ public class Persona implements Serializable {
     @Column(name = "discapacidad", nullable = false)
     private Discapacidad discapacidad;
 
+     
+    public Persona(String curp, Date fecha_nacimiento, String rfc, String nombre, String apellido_paterno, String apellido_materno, String telefono, List<Tramite> tramites, Discapacidad discapacidad) {
+        this.curp = curp;
+        this.fecha_nacimiento = fecha_nacimiento;
+        this.rfc = rfc;
+        this.nombre = nombre;
+        this.apellido_paterno = apellido_paterno;
+        this.apellido_materno = apellido_materno;
+        this.telefono = telefono;
+        this.tramites = tramites;
+        this.discapacidad = discapacidad;
+    }
+
+    
     /**
      * Devuelve el identificador único de la persona.
      * @return El identificador único de la persona.

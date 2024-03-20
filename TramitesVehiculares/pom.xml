@@ -5,6 +5,18 @@
     <artifactId>TramitesVehiculares</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
+    <dependencies>
+        <dependency>
+            <groupId>org.itson.basesdedatosavanzadas_tramitesvehiculares_dominio</groupId>
+            <artifactId>TramitesVehicularesDominio</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia</groupId>
+            <artifactId>TramitesVehicularesPersisencia</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>19</maven.compiler.source>
