@@ -7,17 +7,22 @@ package org.itson.basesdedatosavanzadas_tramitesvehiculares_dominio.tramitesvehi
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 
 /**
  *
- * @author Abe
+ * @author Hector Espinoza & Abel Sanchez
  */
 @Entity
+@Inheritance (strategy = InheritanceType.JOINED)
+@DiscriminatorColumn (name = "tipo_tramite")
 @Table(name = "tramites")
 public class Tramite implements Serializable {
 
@@ -26,13 +31,11 @@ public class Tramite implements Serializable {
     @Column(name = "id_tramite")
     private Long id;
     
-    @Column(name = "fecha_tramite")
+    @Column(name = "fecha_tramite", nullable = false )
     private Date fecha_tramite;
+
     
-    @Column(name = "tipo")
-    private String tipo;
-    
-    @Column(name = "costo")
+    @Column(name = "costo", nullable = false)
     private Float costo;
 
     /**
@@ -51,21 +54,6 @@ public class Tramite implements Serializable {
         this.fecha_tramite = fecha_tramite;
     }
 
-    /**
-     * Regresa el tipo de tramite
-     * @return valor del tipo de tramite
-     */
-    public String getTipo() {
-        return tipo;
-    }
-
-    /**
-     * Establece el valor del tipo
-     * @param tipo valor del tipo de tramite
-     */
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
-    }
 
     /**
      * Regresa el valor del costo

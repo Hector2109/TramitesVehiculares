@@ -78,7 +78,6 @@ public class Persona implements Serializable {
 
     /**
      * Devuelve el identificador único de la persona.
-     *
      * @return El identificador único de la persona.
      */
     public Long getId() {
@@ -96,7 +95,6 @@ public class Persona implements Serializable {
 
     /**
      * Devuelve el CURP (Clave Única de Registro de Población) de la persona.
-     *
      * @return El CURP de la persona.
      */
     public String getCurp() {
@@ -105,7 +103,6 @@ public class Persona implements Serializable {
 
     /**
      * Establece el CURP (Clave Única de Registro de Población) de la persona.
-     *
      * @param curp El CURP de la persona.
      */
     public void setCurp(String curp) {
@@ -131,7 +128,6 @@ public class Persona implements Serializable {
 
     /**
      * Devuelve el RFC (Registro Federal de Contribuyentes) de la persona.
-     *
      * @return El RFC de la persona.
      */
     public String getRfc() {
@@ -140,7 +136,6 @@ public class Persona implements Serializable {
 
     /**
      * Establece el RFC (Registro Federal de Contribuyentes) de la persona.
-     *
      * @param rfc El RFC de la persona.
      */
     public void setRfc(String rfc) {
