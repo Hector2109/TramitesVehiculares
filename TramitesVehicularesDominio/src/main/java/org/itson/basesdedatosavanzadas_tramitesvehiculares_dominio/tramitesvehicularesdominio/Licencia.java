@@ -79,8 +79,4 @@ public class Licencia extends Tramite implements Serializable {
         this.estado = estado;
     }
 
-
-
-    
-
 }
