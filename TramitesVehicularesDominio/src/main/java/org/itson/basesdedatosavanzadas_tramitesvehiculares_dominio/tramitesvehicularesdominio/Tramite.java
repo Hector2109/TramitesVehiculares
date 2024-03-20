@@ -14,6 +14,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -21,8 +23,8 @@ import javax.persistence.Table;
  * @author Hector Espinoza & Abel Sanchez
  */
 @Entity
-@Inheritance (strategy = InheritanceType.JOINED)
-@DiscriminatorColumn (name = "tipo_tramite")
+@Inheritance(strategy = InheritanceType.JOINED)
+@DiscriminatorColumn(name = "tipo_tramite")
 @Table(name = "tramites")
 public class Tramite implements Serializable {
 
@@ -30,16 +32,21 @@ public class Tramite implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_tramite")
     private Long id;
-    
-    @Column(name = "fecha_tramite", nullable = false )
+
+    @Column(name = "fecha_tramite", nullable = false)
     private Date fecha_tramite;
 
-    
     @Column(name = "costo", nullable = false)
     private Float costo;
 
+    
+    @ManyToOne
+    @JoinColumn (name = "id_persona", nullable = false)
+    private Persona persona;
+
     /**
      * Regresa el valor de la fecha de tramite
+     *
      * @return valor de la fecha de tramite
      */
     public Date getFecha_tramite() {
@@ -48,15 +55,16 @@ public class Tramite implements Serializable {
 
     /**
      * Establece el valor de la fecha de tramite
+     *
      * @param fecha_tramite valor de la fecha de tramite
      */
     public void setFecha_tramite(Date fecha_tramite) {
         this.fecha_tramite = fecha_tramite;
     }
 
-
     /**
      * Regresa el valor del costo
+     *
      * @return valor del costo
      */
     public Float getCosto() {
@@ -65,14 +73,16 @@ public class Tramite implements Serializable {
 
     /**
      * Establece el valor del costo
+     *
      * @param costo valor del costo
      */
     public void setCosto(Float costo) {
         this.costo = costo;
     }
-    
+
     /**
      * Regresa el valor del id
+     *
      * @return valor del id
      */
     public Long getId() {
@@ -81,6 +91,7 @@ public class Tramite implements Serializable {
 
     /**
      * Establece el valor del id
+     *
      * @param id
      */
     public void setId(Long id) {
@@ -88,7 +99,26 @@ public class Tramite implements Serializable {
     }
 
     /**
+     * Obtiene la persona que realizo el trámite
+     * @return tramite
+     */
+    public Persona getPersona() {
+        return persona;
+    }
+
+    /**
+     * Establece la persona que realizó la persona
+     * @param persona persona que realizó el trámite
+     */
+    public void setPersona(Persona persona) {
+        this.persona = persona;
+    }
+    
+    
+
+    /**
      * Metodo hash de la entidad
+     *
      * @return regresa el hash del objeto
      */
     @Override
@@ -100,6 +130,7 @@ public class Tramite implements Serializable {
 
     /**
      * Verifica que el objeto del parametro sea igual
+     *
      * @param object objeto a comparar
      * @return regresa verdadero o falso si son iguales los objetos
      */
@@ -118,11 +149,12 @@ public class Tramite implements Serializable {
 
     /**
      * Regresa una cadena de texto con los valores de la entidad
+     *
      * @return cadena de texto con los valores
      */
     @Override
     public String toString() {
         return "org.itson.basesdedatosavanzadas_tramitesvehiculares_dominio.tramitesvehicularesdominio.Tramite[ id=" + id + " ]";
     }
-    
+
 }
