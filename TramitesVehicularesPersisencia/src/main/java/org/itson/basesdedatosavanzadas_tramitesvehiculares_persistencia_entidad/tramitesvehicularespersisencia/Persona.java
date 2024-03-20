@@ -1,4 +1,4 @@
-package org.itson.basesdedatosavanzadas_tramitesvehiculares_dominio.tramitesvehicularesdominio;
+package org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia_entidad.tramitesvehicularespersisencia;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -75,18 +75,20 @@ public class Persona implements Serializable {
     /**
      * Lista de tramites de la persona
      */
-    @OneToMany (cascade = CascadeType.PERSIST, mappedBy = "persona")
-    private List <Tramite> tramites;
-    
     /**
      * Indica si la persona tiene alguna discapacidad.
      */
     @Enumerated(EnumType.STRING)
     @Column(name = "discapacidad", nullable = false)
     private Discapacidad discapacidad;
+    
+//    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "persona")
+//    private List<Tramite> tramites;
 
-     
-    public Persona(String curp, Date fecha_nacimiento, String rfc, String nombre, String apellido_paterno, String apellido_materno, String telefono, List<Tramite> tramites, Discapacidad discapacidad) {
+    public Persona() {
+    }
+
+    public Persona(String curp, Date fecha_nacimiento, String rfc, String nombre, String apellido_paterno, String apellido_materno, String telefono, Discapacidad discapacidad) {
         this.curp = curp;
         this.fecha_nacimiento = fecha_nacimiento;
         this.rfc = rfc;
@@ -94,13 +96,24 @@ public class Persona implements Serializable {
         this.apellido_paterno = apellido_paterno;
         this.apellido_materno = apellido_materno;
         this.telefono = telefono;
-        this.tramites = tramites;
         this.discapacidad = discapacidad;
     }
-
     
+//    public Persona(String curp, Date fecha_nacimiento, String rfc, String nombre, String apellido_paterno, String apellido_materno, String telefono, List<Tramite> tramites, Discapacidad discapacidad) {
+//        this.curp = curp;
+//        this.fecha_nacimiento = fecha_nacimiento;
+//        this.rfc = rfc;
+//        this.nombre = nombre;
+//        this.apellido_paterno = apellido_paterno;
+//        this.apellido_materno = apellido_materno;
+//        this.telefono = telefono;
+//        this.tramites = tramites;
+//        this.discapacidad = discapacidad;
+//    }
+
     /**
      * Devuelve el identificador único de la persona.
+     *
      * @return El identificador único de la persona.
      */
     public Long getId() {
@@ -118,6 +131,7 @@ public class Persona implements Serializable {
 
     /**
      * Devuelve el CURP (Clave Única de Registro de Población) de la persona.
+     *
      * @return El CURP de la persona.
      */
     public String getCurp() {
@@ -126,6 +140,7 @@ public class Persona implements Serializable {
 
     /**
      * Establece el CURP (Clave Única de Registro de Población) de la persona.
+     *
      * @param curp El CURP de la persona.
      */
     public void setCurp(String curp) {
@@ -143,6 +158,7 @@ public class Persona implements Serializable {
 
     /**
      * Establece la fecha de nacimiento de la persona.
+     *
      * @param fecha_nacimiento La fecha de nacimiento de la persona.
      */
     public void setFecha_nacimiento(Date fecha_nacimiento) {
@@ -151,6 +167,7 @@ public class Persona implements Serializable {
 
     /**
      * Devuelve el RFC (Registro Federal de Contribuyentes) de la persona.
+     *
      * @return El RFC de la persona.
      */
     public String getRfc() {
@@ -159,6 +176,7 @@ public class Persona implements Serializable {
 
     /**
      * Establece el RFC (Registro Federal de Contribuyentes) de la persona.
+     *
      * @param rfc El RFC de la persona.
      */
     public void setRfc(String rfc) {
@@ -167,6 +185,7 @@ public class Persona implements Serializable {
 
     /**
      * Devuelve el nombre de la persona
+     *
      * @return nombre de la persona
      */
     public String getNombre() {
@@ -175,6 +194,7 @@ public class Persona implements Serializable {
 
     /**
      * Establece el nombre de la persona
+     *
      * @param nombre Nombre de la persona
      */
     public void setNombre(String nombre) {
@@ -183,6 +203,7 @@ public class Persona implements Serializable {
 
     /**
      * Devuelve el apellido paterno de la persona
+     *
      * @return apellido paterno de la persona
      */
     public String getApellido_paterno() {
@@ -191,6 +212,7 @@ public class Persona implements Serializable {
 
     /**
      * Establece el apellido paterno de la persona
+     *
      * @param apellido_paterno apellido paterno de la persona
      */
     public void setApellido_paterno(String apellido_paterno) {
@@ -199,6 +221,7 @@ public class Persona implements Serializable {
 
     /**
      * Devuelve el apellido materno de la persona.
+     *
      * @return El apellido materno de la persona.
      */
     public String getApellido_materno() {
@@ -207,6 +230,7 @@ public class Persona implements Serializable {
 
     /**
      * Establece el apellido materno de la persona.
+     *
      * @param apellido_materno El apellido materno de la persona.
      */
     public void setApellido_materno(String apellido_materno) {
@@ -215,6 +239,7 @@ public class Persona implements Serializable {
 
     /**
      * Devuelve el número de teléfono de la persona.
+     *
      * @return El número de teléfono de la persona.
      */
     public String getTelefono() {
@@ -223,6 +248,7 @@ public class Persona implements Serializable {
 
     /**
      * Establece el número de teléfono de la persona.
+     *
      * @param telefono El número de teléfono de la persona.
      */
     public void setTelefono(String telefono) {
@@ -247,25 +273,15 @@ public class Persona implements Serializable {
         this.discapacidad = discapacidad;
     }
 
-    /**
-     * Regresa los trámites de las personas
-     * @return lista de trámites
-     */
-    public List<Tramite> getTramite() {
-        return tramites;
-    }
+//    public List<Tramite> getTramites() {
+//        return tramites;
+//    }
+//
+//    public void setTramites(List<Tramite> tramites) {
+//        this.tramites = tramites;
+//    }
 
     
-    /**
-     * Modifica los trámites
-     * @param tramite trámites de la persona
-     */
-    public void setTramite(List<Tramite> tramites) {
-        this.tramites = tramites;
-    }
-    
-    
-
     @Override
     public int hashCode() {
         int hash = 0;

@@ -4,12 +4,12 @@
  */
 package org.itson.basesdedatosavanzadas_tramitesvehiculares_principal.tramitesvehiculares;
 
-import java.util.Date;
 import javax.persistence.EntityManager;
-import org.itson.basesdedatosavanzadas_tramitesvehiculares_dominio.tramitesvehicularesdominio.Discapacidad;
-import org.itson.basesdedatosavanzadas_tramitesvehiculares_dominio.tramitesvehicularesdominio.Persona;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia.tramitesvehicularespersisencia.Conexion;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia.tramitesvehicularespersisencia.IConexion;
+import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia_entidad.tramitesvehicularespersisencia.Licencia;
+import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia_entidad.tramitesvehicularespersisencia.Persona;
+import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia_entidad.tramitesvehicularespersisencia.Tramite;
 
 /**
  *
@@ -25,7 +25,8 @@ public class Principal {
         
         EntityManager em = conexion.crearConexion();
         em.getTransaction().begin();
-        Persona persona = new Persona("SAGA043222HSRNRJA1", new Date(2004, 5, 13), "JFLÑAJFDL", "Abel Eduardo", "Sanchez", "Guerrero", "6441298238", Discapacidad.DISCAPACITADO);
+        Persona persona = new Persona();
+        persona.setCurp("WTGGHHJGHHJ");
         
         em.persist(persona);
         em.getTransaction().commit();

@@ -13,7 +13,7 @@ public class Conexion implements IConexion{
 
     @Override
     public EntityManager crearConexion() {
-        EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("tramitesPU");
+        EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("TramitesPU");
         
         //Solicitamos una entity manager(acceso a la BD)
         EntityManager entityManager = emFactory.createEntityManager();

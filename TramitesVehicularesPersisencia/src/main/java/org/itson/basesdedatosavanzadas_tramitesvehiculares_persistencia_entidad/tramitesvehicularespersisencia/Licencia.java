@@ -1,13 +1,10 @@
-package org.itson.basesdedatosavanzadas_tramitesvehiculares_dominio.tramitesvehicularesdominio;
+package org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia_entidad.tramitesvehicularespersisencia;
 
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Column;
-import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 /**
@@ -15,7 +12,6 @@ import javax.persistence.Table;
  * @author Hector Espinoza & Abel Sanchez
  */
 @Entity
-@DiscriminatorValue("L")
 @Table (name = "licencias")
 public class Licencia extends Tramite implements Serializable {
 

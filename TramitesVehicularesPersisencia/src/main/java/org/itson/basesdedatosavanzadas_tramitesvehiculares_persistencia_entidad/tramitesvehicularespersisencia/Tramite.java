@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package org.itson.basesdedatosavanzadas_tramitesvehiculares_dominio.tramitesvehicularesdominio;
+package org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia_entidad.tramitesvehicularespersisencia;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -40,9 +40,9 @@ public class Tramite implements Serializable {
     private Float costo;
 
     
-    @ManyToOne
-    @JoinColumn (name = "id_persona", nullable = false)
-    private Persona persona;
+//    @ManyToOne
+//    @JoinColumn (name = "id_persona", nullable = false)
+//    private Persona persona;
 
     /**
      * Regresa el valor de la fecha de tramite
@@ -102,18 +102,18 @@ public class Tramite implements Serializable {
      * Obtiene la persona que realizo el trámite
      * @return tramite
      */
-    public Persona getPersona() {
-        return persona;
-    }
-
-    /**
-     * Establece la persona que realizó la persona
-     * @param persona persona que realizó el trámite
-     */
-    public void setPersona(Persona persona) {
-        this.persona = persona;
-    }
-    
+//    public Persona getPersona() {
+//        return persona;
+//    }
+//
+//    /**
+//     * Establece la persona que realizó la persona
+//     * @param persona persona que realizó el trámite
+//     */
+//    public void setPersona(Persona persona) {
+//        this.persona = persona;
+//    }
+//    
     
 
     /**

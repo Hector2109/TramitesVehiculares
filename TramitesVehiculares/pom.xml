@@ -6,21 +6,27 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
     <dependencies>
+        <!-- https://mvnrepository.com/artifact/com.mysql/mysql-connector-j -->
         <dependency>
-            <groupId>org.itson.basesdedatosavanzadas_tramitesvehiculares_dominio</groupId>
-            <artifactId>TramitesVehicularesDominio</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <groupId>com.mysql</groupId>
+            <artifactId>mysql-connector-j</artifactId>
+            <version>8.2.0</version>
         </dependency>
         <dependency>
             <groupId>org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia</groupId>
             <artifactId>TramitesVehicularesPersisencia</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
+        <dependency>
+            <groupId>org.netbeans.external</groupId>
+            <artifactId>AbsoluteLayout</artifactId>
+            <version>RELEASE160</version>
+        </dependency>
     </dependencies>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>19</maven.compiler.source>
-        <maven.compiler.target>19</maven.compiler.target>
-        <exec.mainClass>org.itson.basesdedatosavanzadas_tramitesvehiculares_principal.tramitesvehiculares.TramitesVehiculares</exec.mainClass>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <exec.mainClass>org.itson.basesdedatosavanzadas_tramitesvehiculares_principal.tramitesvehiculares.Principal</exec.mainClass>
     </properties>
 </project>
