@@ -2,6 +2,8 @@ package org.itson.basesdedatosavanzadas_tramitesvehiculares_dominio.tramitesvehi
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -9,6 +11,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -69,6 +72,12 @@ public class Persona implements Serializable {
     @Column(name = "telefono", nullable = false, length = 10)
     private String telefono;
 
+    /**
+     * Lista de tramites de la persona
+     */
+    @OneToMany (cascade = CascadeType.PERSIST, mappedBy = "persona")
+    private List <Tramite> tramites;
+    
     /**
      * Indica si la persona tiene alguna discapacidad.
      */
@@ -223,6 +232,25 @@ public class Persona implements Serializable {
     public void setDiscapacidad(Discapacidad discapacidad) {
         this.discapacidad = discapacidad;
     }
+
+    /**
+     * Regresa los trámites de las personas
+     * @return lista de trámites
+     */
+    public List<Tramite> getTramite() {
+        return tramites;
+    }
+
+    
+    /**
+     * Modifica los trámites
+     * @param tramite trámites de la persona
+     */
+    public void setTramite(List<Tramite> tramites) {
+        this.tramites = tramites;
+    }
+    
+    
 
     @Override
     public int hashCode() {
