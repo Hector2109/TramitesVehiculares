@@ -11,10 +11,6 @@ import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia_entidad.
  */
 public class PersonaDTO {
     
-    /**
-     * CURP (Clave Única de Registro de Población) de la persona.
-     */
-    private String curp;
 
     /**
      * Fecha de nacimiento de la persona.
@@ -64,11 +60,6 @@ public class PersonaDTO {
     }
    
 
-//    private List<Tramite> tramites;
-
-    public String getCurp() {
-        return curp;
-    }
 
     public Date getFecha_nacimiento() {
         return fecha_nacimiento;

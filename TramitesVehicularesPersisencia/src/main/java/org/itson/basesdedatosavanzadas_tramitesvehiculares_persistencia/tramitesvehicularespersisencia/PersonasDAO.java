@@ -6,6 +6,7 @@ import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaQuery;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.dto.PersonaDTO;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia.excepciones.PersistenciaException;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia_entidad.tramitesvehicularespersisencia.Persona;
@@ -50,17 +51,29 @@ public class PersonasDAO implements IPersonasDAO {
      */
     @Override
     public List<Persona> consultar() {
+        
         EntityManager entityManager = this.conexion.crearConexion();
+        
+        CriteriaQuery <Persona> criteria = entityManager.getCriteriaBuilder().createQuery(Persona.class);
+        
+        criteria.select(criteria.from(Persona.class));
 
-        //Objeto consulta que se esta construyendo
-        String jpqlQuery = """
-                           SELECT p FROM Persona p
-                           """;
-        //Consulta construida
-        TypedQuery<Persona> query = entityManager.createQuery(jpqlQuery, Persona.class);
-        List<Persona> personas = query.getResultList();
+        List<Persona> personas = entityManager.createQuery(criteria).getResultList();
+        
         entityManager.close();
+        
         return personas;
+//        EntityManager entityManager = this.conexion.crearConexion();
+//
+//        //Objeto consulta que se esta construyendo
+//        String jpqlQuery = """
+//                           SELECT p FROM Persona p
+//                           """;
+//        //Consulta construida
+//        TypedQuery<Persona> query = entityManager.createQuery(jpqlQuery, Persona.class);
+//        List<Persona> personas = query.getResultList();
+//        entityManager.close();
+//        return personas;
     }
 
     /**
@@ -73,6 +86,7 @@ public class PersonasDAO implements IPersonasDAO {
     public Persona consultarPeresona(int rfc)throws PersistenciaException {
 
         EntityManager entityManager = this.conexion.crearConexion();
+        
 
         try {
             String jpqlQuery = """

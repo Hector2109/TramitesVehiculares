@@ -34,10 +34,10 @@ public class Principal {
 
         
         PersonaBO personaBO = new PersonaBO();
-        personaBO.insercionMasiva();
         
-//        RegistrarLicencia RL = new RegistrarLicencia(personasDAO);
-//        RL.setVisible(true);
+        
+        RegistrarLicencia RL = new RegistrarLicencia(personaBO);
+        RL.setVisible(true);
 
 
 //        DlgPrincipal principal = new DlgPrincipal(conexion);
@@ -69,6 +69,7 @@ public class Principal {
 //
 //        em.getTransaction().commit();
 //        em.close();
+
     }
 
 }

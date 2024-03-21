@@ -37,8 +37,8 @@ public class PersonaBO implements IPersonaBO {
                 Discapacidad.NO_DISCAPACITADO);
         Persona persona2 = new Persona(
                 new Date(), "HSR210940254B",
-                "Hector",
-                "Espinoza",
+                "HECTOR",
+                "ESPINOZA",
                 AESEncriptador.encriptar("6448902540"),
                 Discapacidad.NO_DISCAPACITADO);
         Persona persona3 = new Persona(
@@ -55,7 +55,7 @@ public class PersonaBO implements IPersonaBO {
                 AESEncriptador.encriptar("6447805904"),
                 Discapacidad.DISCAPACITADO);
         Persona persona5 = new Persona(
-                new Date(), "RFC123456789E1",
+                new Date(), "RFC123456789E",
                 "CATALINA",
                 "CASTRO",
                 AESEncriptador.encriptar("8540598502"),

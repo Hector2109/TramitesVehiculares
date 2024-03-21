@@ -25,6 +25,7 @@ public class RegistrarLicencia extends javax.swing.JFrame {
      */
     public RegistrarLicencia(IPersonaBO personaBO) {
         initComponents();
+        personaBO.insercionMasiva();
         this.PersonaBO = personaBO;
         consultar();
     }
@@ -205,7 +206,7 @@ public class RegistrarLicencia extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID", "Nombre", "RFC", "Año de nacimiento"
+                "Nombre", "RFC", "Año de nacimiento"
             }
         ));
         tblPersonas.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -376,17 +377,21 @@ public class RegistrarLicencia extends javax.swing.JFrame {
             List<PersonaDTO> listaPersonas = PersonaBO.consultar();
             Object[] personaFila = new Object[3];
             modelo = (DefaultTableModel) tblPersonas.getModel();
-            for (PersonaDTO listapersonas : listaPersonas) {
-                personaFila[0] = listapersonas.getNombre()+" "+listapersonas.getApellido_materno()+" "+listapersonas.getApellido_paterno();
-                personaFila[1] = listapersonas.getCurp();
-                personaFila[2] = listapersonas.getFecha_nacimiento();
+            for (PersonaDTO persona : listaPersonas) {
+                if (persona.getApellido_materno() !=null){
+                personaFila[0] = persona.getNombre()+" "+persona.getApellido_paterno()+" "+persona.getApellido_materno();
+                }else{
+                    personaFila[0] = persona.getNombre()+" "+persona.getApellido_paterno();
+                }
+                personaFila[1] = persona.getRfc();
+                personaFila[2] = persona.getFecha_nacimiento();
 
                 modelo.addRow(personaFila);
             }
 
             tblPersonas.setModel(modelo);
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "No se puede acceder a los socios", "Error de consulta",
+            JOptionPane.showMessageDialog(this, "No se puede acceder a las personas", "Error de consulta",
                     JOptionPane.ERROR_MESSAGE);
         }
 
