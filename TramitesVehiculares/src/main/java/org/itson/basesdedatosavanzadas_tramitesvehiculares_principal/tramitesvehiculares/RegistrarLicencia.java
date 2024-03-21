@@ -205,7 +205,7 @@ public class RegistrarLicencia extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID", "Nombre", "Curp", "Año de nacimiento"
+                "ID", "Nombre", "RFC", "Año de nacimiento"
             }
         ));
         tblPersonas.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -239,7 +239,7 @@ public class RegistrarLicencia extends javax.swing.JFrame {
         btnRealizarTramite.setText("Realizar trámite");
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 30)); // NOI18N
-        jLabel6.setText("CURP");
+        jLabel6.setText("RFC");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -256,7 +256,9 @@ public class RegistrarLicencia extends javax.swing.JFrame {
                                 .addComponent(txtNombre)
                                 .addComponent(jLabel2))
                             .addGap(42, 42, 42)
-                            .addComponent(txtCURP, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(txtCURP, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel6))
                             .addGap(18, 18, 18)
                             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(jLabel4)
@@ -281,11 +283,6 @@ public class RegistrarLicencia extends javax.swing.JFrame {
                         .addGap(283, 283, 283)
                         .addComponent(jLabel5)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel2Layout.createSequentialGroup()
-                    .addGap(283, 283, 283)
-                    .addComponent(jLabel6)
-                    .addContainerGap(465, Short.MAX_VALUE)))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -294,7 +291,9 @@ public class RegistrarLicencia extends javax.swing.JFrame {
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -315,11 +314,6 @@ public class RegistrarLicencia extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(btnRealizarTramite, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27))
-            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel2Layout.createSequentialGroup()
-                    .addGap(110, 110, 110)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(479, Short.MAX_VALUE)))
         );
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 0, -1, 640));

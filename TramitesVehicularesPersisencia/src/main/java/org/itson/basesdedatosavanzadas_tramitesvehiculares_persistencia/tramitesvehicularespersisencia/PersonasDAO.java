@@ -55,4 +55,17 @@ public class PersonasDAO implements IPersonasDAO{
         entityManager.close();
         return personas;
     }
+
+    /**
+     * Obtiene una persona mediante un id
+     * @param id valor del id
+     * @return regresa el objeto de tipo persona
+     */
+    @Override
+    public Persona consultarPeresona(int id) {
+        
+        EntityManager entityManager = this.conexion.crearConexion();
+        Persona persona = new Persona();
+        return persona;
+    }
 }
