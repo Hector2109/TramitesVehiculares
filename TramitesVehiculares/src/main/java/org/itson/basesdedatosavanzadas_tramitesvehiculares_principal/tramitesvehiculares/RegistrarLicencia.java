@@ -7,8 +7,8 @@ package org.itson.basesdedatosavanzadas_tramitesvehiculares_principal.tramitesve
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia.excepciones.PersistenciaException;
-import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia.tramitesvehicularespersisencia.IPersonasDAO;
+import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.IPersonaBO;
+import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.dto.PersonaDTO;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia_entidad.tramitesvehicularespersisencia.Persona;
 
 /**
@@ -17,15 +17,15 @@ import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia_entidad.
  */
 public class RegistrarLicencia extends javax.swing.JFrame {
 
-    private final IPersonasDAO personasDAO;
+    private final IPersonaBO PersonaBO;
     DefaultTableModel modelo;
 
     /*
      * Creates new form RegistrarLicencia
      */
-    public RegistrarLicencia(IPersonasDAO personasDAO) {
+    public RegistrarLicencia(IPersonaBO personaBO) {
         initComponents();
-        this.personasDAO = personasDAO;
+        this.PersonaBO = personaBO;
         consultar();
     }
 
@@ -373,14 +373,13 @@ public class RegistrarLicencia extends javax.swing.JFrame {
     private void consultar() {
 
         try {
-            List<Persona> listaPersonas = personasDAO.consultar();
-            Object[] personaFila = new Object[4];
+            List<PersonaDTO> listaPersonas = PersonaBO.consultar();
+            Object[] personaFila = new Object[3];
             modelo = (DefaultTableModel) tblPersonas.getModel();
-            for (Persona listapersonas : listaPersonas) {
-                personaFila[0] = listapersonas.getId();
-                personaFila[1] = listapersonas.getNombre()+" "+listapersonas.getApellido_materno()+" "+listapersonas.getApellido_paterno();
-                personaFila[2] = listapersonas.getCurp();
-                personaFila[3] = listapersonas.getFecha_nacimiento();
+            for (PersonaDTO listapersonas : listaPersonas) {
+                personaFila[0] = listapersonas.getNombre()+" "+listapersonas.getApellido_materno()+" "+listapersonas.getApellido_paterno();
+                personaFila[1] = listapersonas.getCurp();
+                personaFila[2] = listapersonas.getFecha_nacimiento();
 
                 modelo.addRow(personaFila);
             }

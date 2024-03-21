@@ -3,6 +3,7 @@ package org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehi
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.dto.PersonaDTO;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia.tramitesvehicularespersisencia.Conexion;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia.tramitesvehicularespersisencia.IConexion;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia.tramitesvehicularespersisencia.PersonasDAO;
@@ -19,140 +20,140 @@ public class PersonaBO implements IPersonaBO {
 
     private PersonasDAO personasDAO;
 
-    public PersonaBO(PersonasDAO personasDAO) {
+    public PersonaBO() {
         IConexion conexion = new Conexion();
-        this.personasDAO = personasDAO;
+        personasDAO = new PersonasDAO(conexion);
     }
 
     @Override
     public void insercionMasiva() {
 
-        Persona persona1 = new Persona("GAVM540516HJCRRR02",
-                new Date(), "RFC1234567890",
+        Persona persona1 = new Persona(
+                new Date(), "RFC1234567891",
                 "MAURO",
                 "GARCIA",
                 "VARELA",
                 AESEncriptador.encriptar("6447801501"),
                 Discapacidad.NO_DISCAPACITADO);
-        Persona persona2 = new Persona("EIDH040921HSRSRCA9",
-                new Date(), "HSR2109402541",
+        Persona persona2 = new Persona(
+                new Date(), "HSR210940254B",
                 "Hector",
                 "Espinoza",
                 AESEncriptador.encriptar("6448902540"),
                 Discapacidad.NO_DISCAPACITADO);
-        Persona persona3 = new Persona("VASA420527HSPZNG05",
-                new Date(), "AAO8405408424",
+        Persona persona3 = new Persona(
+                new Date(), "AAO84054084C1",
                 "AGUSTIN",
                 "VAZQUEZ",
                 "SANDATE",
                 AESEncriptador.encriptar("6485506340"),
                 Discapacidad.DISCAPACITADO);
-        Persona persona4 = new Persona("VATA540713HSPZVN06",
-                new Date(), "TFV4745890802",
+        Persona persona4 = new Persona(
+                new Date(), "TFV47458908D1",
                 "ANACLETO",
                 "VAZQUEZ",
                 AESEncriptador.encriptar("6447805904"),
                 Discapacidad.DISCAPACITADO);
-        Persona persona5 = new Persona("CAVC570405MSPSLT08",
-                new Date(), "RFC1234567890",
+        Persona persona5 = new Persona(
+                new Date(), "RFC123456789E1",
                 "CATALINA",
                 "CASTRO",
                 AESEncriptador.encriptar("8540598502"),
                 Discapacidad.NO_DISCAPACITADO);
-        Persona persona6 = new Persona("VAPF420526HSPZLL00",
-                new Date(), "ASD8504840",
+        Persona persona6 = new Persona(
+                new Date(), "ASD8504840F1",
                 "FELIPE",
                 "VAZQUEZ",
                 "PALOMO",
                 AESEncriptador.encriptar("8405950150"),
                 Discapacidad.NO_DISCAPACITADO);
-        Persona persona7 = new Persona("GAML320621MSPLXS09",
-                new Date(), "IFS0123584080",
+        Persona persona7 = new Persona(
+                new Date(), "IFS01235840G1",
                 "LUISA",
                 "GALAVIZ",
                 AESEncriptador.encriptar("6840806204"),
                 Discapacidad.DISCAPACITADO);
-        Persona persona8 = new Persona("HUHG200901MSPRRL09",
-                new Date(), "NRB8403950850",
+        Persona persona8 = new Persona(
+                new Date(), "NRB84039508H1",
                 "MARIA GILA",
                 "HURTADO ",
                 AESEncriptador.encriptar("5587058901"),
                 Discapacidad.NO_DISCAPACITADO);
-        Persona persona9 = new Persona("CAVP441113HSPRDB04",
-                new Date(), "OPS8405890450",
+        Persona persona9 = new Persona(
+                new Date(), "OPS84058904I1",
                 "PABLO",
                 "CARDONA",
                 "VIDALES",
                 AESEncriptador.encriptar("8540598502"),
                 Discapacidad.NO_DISCAPACITADO);
-        Persona persona10 = new Persona("NIRS490513MSPXZC07",
-                new Date(), "OJQ5403590480",
+        Persona persona10 = new Persona(
+                new Date(), "OJQ54035904J1",
                 "MA SOCORRO",
                 "NIÑO",
                 "RUIZ ",
                 AESEncriptador.encriptar("8504803501"),
                 Discapacidad.NO_DISCAPACITADO);
-        Persona persona11 = new Persona("SAGA040513HSRNRBA1",
-                new Date(), "ABE4109045015",
+        Persona persona11 = new Persona(
+                new Date(), "ABE41090450K1",
                 "ABEL",
                 "SANCHEZ",
                 "GUERRERO",
                 AESEncriptador.encriptar("6447059660"),
                 Discapacidad.NO_DISCAPACITADO);
-        Persona persona12 = new Persona("QUEH490813HSPRSP01",
-                new Date(), "SIH8405680950",
+        Persona persona12 = new Persona(
+                new Date(), "SIH84056809L1",
                 "HIPOLITO",
                 "QUIROZ",
                 AESEncriptador.encriptar("8059055096"),
                 Discapacidad.NO_DISCAPACITADO);
-        Persona persona13 = new Persona("QUMP700429HSPRRD06 ",
-                new Date(), "TSG8065019650",
+        Persona persona13 = new Persona(
+                new Date(), "TSG80650196M1",
                 "PEDRO",
                 "MORENO",
                 AESEncriptador.encriptar("6084805502"),
                 Discapacidad.NO_DISCAPACITADO);
-        Persona persona14 = new Persona("MAMC661121MSPRRC05",
-                new Date(), "RQX5015036581",
+        Persona persona14 = new Persona(
+                new Date(), "RQX50150365N1",
                 "CECILIA",
                 "MARTINEZ",
                 AESEncriptador.encriptar("6889032324"),
                 Discapacidad.NO_DISCAPACITADO);
-        Persona persona15 = new Persona("TOHA480503HSPRRB01",
-                new Date(), "TMA8460150388",
+        Persona persona15 = new Persona(
+                new Date(), "TMA84601503O1",
                 "ABDON",
                 "TORRES",
                 AESEncriptador.encriptar("8406650120"),
                 Discapacidad.DISCAPACITADO);
-        Persona persona16 = new Persona("SISE760208HSPLRL11",
-                new Date(), "INS4509502440",
+        Persona persona16 = new Persona(
+                new Date(), "INS45095024P1",
                 "ELEAZAR",
                 "SILOS",
                 "SORIANO",
                 AESEncriptador.encriptar("8049503405"),
                 Discapacidad.NO_DISCAPACITADO);
-        Persona persona17 = new Persona("TOGJ271208MSPVVN07 ",
-                new Date(), "YSN840350S410",
+        Persona persona17 = new Persona(
+                new Date(), "YSN840350S4Q1",
                 "JUANA",
                 "TOVAR",
                 "GUEVARA",
                 AESEncriptador.encriptar("8506005848"),
                 Discapacidad.NO_DISCAPACITADO);
-        Persona persona18 = new Persona("RERT640413HSPYDL08",
-                new Date(), "TLQ8406032410",
+        Persona persona18 = new Persona(
+                new Date(), "TLQ84060324R1",
                 "TELESFORO",
                 "REYNA",
                 "RODRIGUEZ",
                 AESEncriptador.encriptar("8409504806"),
                 Discapacidad.NO_DISCAPACITADO);
-        Persona persona19 = new Persona("GARS500320HSPRDN00",
-                new Date(), "JNA8036850211",
+        Persona persona19 = new Persona(
+                new Date(), "JNA80368502S1",
                 "JUAN SANTOS",
                 "GARCIA",
                 "RODRIGUEZ",
                 AESEncriptador.encriptar("8098801544"),
                 Discapacidad.NO_DISCAPACITADO);
-        Persona persona20 = new Persona("DOTA790607MSPMRR06",
-                new Date(), "ANS8402230554",
+        Persona persona20 = new Persona(
+                new Date(), "ANS84022305T1",
                 "ARACELI",
                 "DOMINGUEZ",
                 "TORRES ",
@@ -183,6 +184,24 @@ public class PersonaBO implements IPersonaBO {
 
         personasDAO.insercionMasiva(personas);
 
+    }
+
+    @Override
+    public List<PersonaDTO> consultar() {
+
+        List<Persona> personas = personasDAO.consultar();
+        List<PersonaDTO> personasDTO = new ArrayList<>();
+
+        for (Persona persona : personas) {
+            personasDTO.add(new PersonaDTO(
+                    persona.getFecha_nacimiento(),
+                    persona.getRfc(),
+                    persona.getNombre(),
+                    persona.getApellido_paterno(),
+                    persona.getApellido_materno()));
+        }
+
+        return personasDTO;
     }
 
 }

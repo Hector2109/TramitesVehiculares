@@ -5,6 +5,8 @@
 package org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia.tramitesvehicularespersisencia;
 
 import java.util.List;
+import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.dto.PersonaDTO;
+import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia.excepciones.PersistenciaException;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia_entidad.tramitesvehicularespersisencia.Persona;
 
 /**
@@ -15,6 +17,6 @@ public interface IPersonasDAO {
     
     public List <Persona> insercionMasiva(List<Persona> personas);
     public List<Persona> consultar();
-    public Persona consultarPeresona(int id);
+    public Persona consultarPeresona(int rfc)throws PersistenciaException;
     
 }

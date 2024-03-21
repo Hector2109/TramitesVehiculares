@@ -33,10 +33,12 @@ public class Principal {
         IPersonasDAO personasDAO = new PersonasDAO(conexion);
 
         
-        PersonaBO personaBO = new PersonaBO((PersonasDAO) personasDAO);
+        PersonaBO personaBO = new PersonaBO();
+        personaBO.insercionMasiva();
         
-        RegistrarLicencia RL = new RegistrarLicencia(personasDAO);
-        RL.setVisible(true);
+//        RegistrarLicencia RL = new RegistrarLicencia(personasDAO);
+//        RL.setVisible(true);
+
 
 //        DlgPrincipal principal = new DlgPrincipal(conexion);
 //        principal.setVisible(true);

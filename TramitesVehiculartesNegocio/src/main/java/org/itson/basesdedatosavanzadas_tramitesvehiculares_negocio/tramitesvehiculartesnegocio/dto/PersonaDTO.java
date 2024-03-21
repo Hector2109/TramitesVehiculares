@@ -54,6 +54,14 @@ public class PersonaDTO {
      * Indica si la persona tiene alguna discapacidad.
      */
     private Discapacidad discapacidad;
+
+    public PersonaDTO(Date fecha_nacimiento, String rfc, String nombre, String apellido_paterno, String apellido_materno) {
+        this.fecha_nacimiento = fecha_nacimiento;
+        this.rfc = rfc;
+        this.nombre = nombre;
+        this.apellido_paterno = apellido_paterno;
+        this.apellido_materno = apellido_materno;
+    }
    
 
 //    private List<Tramite> tramites;

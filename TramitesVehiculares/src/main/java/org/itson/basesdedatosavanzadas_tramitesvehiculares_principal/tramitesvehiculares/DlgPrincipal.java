@@ -78,7 +78,7 @@ public class DlgPrincipal extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnInsercionMasivaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsercionMasivaActionPerformed
-        PersonaBO personaBO = new PersonaBO(personasDAO);
+        PersonaBO personaBO = new PersonaBO();
         personaBO.insercionMasiva();
     }//GEN-LAST:event_btnInsercionMasivaActionPerformed
 

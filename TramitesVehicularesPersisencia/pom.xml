@@ -51,6 +51,11 @@
             <version>2.7.10</version>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio</groupId>
+            <artifactId>TramitesVehiculartesNegocio</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
     </dependencies>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
