@@ -7,7 +7,7 @@ import javax.persistence.Persistence;
 
 /**
  *
- * @author Abe
+ * @author Hector Espinoza y Abel Sanchez
  */
 public class Conexion implements IConexion{
 

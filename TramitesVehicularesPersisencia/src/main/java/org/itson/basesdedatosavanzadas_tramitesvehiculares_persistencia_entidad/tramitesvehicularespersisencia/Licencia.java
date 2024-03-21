@@ -6,6 +6,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
@@ -20,6 +22,7 @@ public class Licencia extends Tramite implements Serializable {
     private String numero_licencia;
     
     /** Fecha de vigencia de la licencia. */
+    @Temporal(TemporalType.DATE)
     @Column(name = "vigencia", nullable = false)
     private Date vigencia;
     

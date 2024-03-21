@@ -17,6 +17,8 @@ import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
@@ -33,6 +35,7 @@ public class Tramite implements Serializable {
     @Column(name = "id_tramite")
     private Long id;
 
+    @Temporal(TemporalType.DATE)
     @Column(name = "fecha_tramite", nullable = false)
     private Date fecha_tramite;
 
