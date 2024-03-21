@@ -24,7 +24,7 @@ public class Principal {
      */
     public static void main(String[] args) {
         IConexion conexion = new Conexion();
-        
+
         EntityManager em = conexion.crearConexion();
         em.getTransaction().begin();
         Persona persona = new Persona();
@@ -36,18 +36,22 @@ public class Principal {
         persona.setFecha_nacimiento(new Date(2004, 05, 13));
         persona.setRfc("asdfghjklñqwe");
         persona.setTelefono("6441297653");
-        
+
         Licencia licencia = new Licencia();
         licencia.setFecha_tramite(new Date(2024, 01, 1));
-        licencia.setEstado((byte)0);
+        licencia.setEstado((byte) 0);
         licencia.setCosto(200f);
         licencia.setNumero_licencia("2345678");
         licencia.setVigencia(new Date(2028, 12, 12));
+
+        licencia.setPersona(persona); 
         
-        em.persist(persona);
         em.persist(licencia);
+
+        em.persist(persona); 
+
         em.getTransaction().commit();
         em.close();
     }
-    
+
 }

@@ -40,9 +40,9 @@ public class Tramite implements Serializable {
     private Float costo;
 
     
-//    @ManyToOne
-//    @JoinColumn (name = "id_persona", nullable = false)
-//    private Persona persona;
+    @ManyToOne
+    @JoinColumn (name = "id_persona", nullable = false)
+    private Persona persona;
 
     /**
      * Regresa el valor de la fecha de tramite
@@ -52,6 +52,19 @@ public class Tramite implements Serializable {
     public Date getFecha_tramite() {
         return fecha_tramite;
     }
+
+    public Tramite(Date fecha_tramite, Float costo, Persona persona) {
+        this.fecha_tramite = fecha_tramite;
+        this.costo = costo;
+        this.persona = persona;
+    }
+
+    public Tramite() {
+    }
+    
+    
+    
+    
 
     /**
      * Establece el valor de la fecha de tramite
@@ -102,18 +115,18 @@ public class Tramite implements Serializable {
      * Obtiene la persona que realizo el trámite
      * @return tramite
      */
-//    public Persona getPersona() {
-//        return persona;
-//    }
-//
-//    /**
-//     * Establece la persona que realizó la persona
-//     * @param persona persona que realizó el trámite
-//     */
-//    public void setPersona(Persona persona) {
-//        this.persona = persona;
-//    }
-//    
+    public Persona getPersona() {
+        return persona;
+    }
+
+    /**
+     * Establece la persona que realizó la persona
+     * @param persona persona que realizó el trámite
+     */
+    public void setPersona(Persona persona) {
+        this.persona = persona;
+    }
+    
     
 
     /**

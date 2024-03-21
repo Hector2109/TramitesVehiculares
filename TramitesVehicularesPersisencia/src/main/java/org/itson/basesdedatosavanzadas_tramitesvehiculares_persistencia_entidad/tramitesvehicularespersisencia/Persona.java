@@ -83,8 +83,8 @@ public class Persona implements Serializable {
     @Column(name = "discapacidad", nullable = false)
     private Discapacidad discapacidad;
    
-    //@OneToMany(cascade = CascadeType.PERSIST, mappedBy = "persona")
-//    private List<Tramite> tramites;
+    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "persona")
+    private List<Tramite> tramites;
 
     public Persona() {
     }
@@ -100,17 +100,17 @@ public class Persona implements Serializable {
         this.discapacidad = discapacidad;
     }
     
-//    public Persona(String curp, Date fecha_nacimiento, String rfc, String nombre, String apellido_paterno, String apellido_materno, String telefono, List<Tramite> tramites, Discapacidad discapacidad) {
-//        this.curp = curp;
-//        this.fecha_nacimiento = fecha_nacimiento;
-//        this.rfc = rfc;
-//        this.nombre = nombre;
-//        this.apellido_paterno = apellido_paterno;
-//        this.apellido_materno = apellido_materno;
-//        this.telefono = telefono;
-//        this.tramites = tramites;
-//        this.discapacidad = discapacidad;
-//    }
+    public Persona(String curp, Date fecha_nacimiento, String rfc, String nombre, String apellido_paterno, String apellido_materno, String telefono, List<Tramite> tramites, Discapacidad discapacidad) {
+        this.curp = curp;
+        this.fecha_nacimiento = fecha_nacimiento;
+        this.rfc = rfc;
+        this.nombre = nombre;
+        this.apellido_paterno = apellido_paterno;
+        this.apellido_materno = apellido_materno;
+        this.telefono = telefono;
+        this.tramites = tramites;
+        this.discapacidad = discapacidad;
+    }
 
     /**
      * Devuelve el identificador único de la persona.
@@ -274,13 +274,13 @@ public class Persona implements Serializable {
         this.discapacidad = discapacidad;
     }
 
-//    public List<Tramite> getTramites() {
-//        return tramites;
-//    }
-//
-//    public void setTramites(List<Tramite> tramites) {
-//        this.tramites = tramites;
-//    }
+    public List<Tramite> getTramites() {
+        return tramites;
+    }
+
+    public void setTramites(List<Tramite> tramites) {
+        this.tramites = tramites;
+    }
 
     
     @Override

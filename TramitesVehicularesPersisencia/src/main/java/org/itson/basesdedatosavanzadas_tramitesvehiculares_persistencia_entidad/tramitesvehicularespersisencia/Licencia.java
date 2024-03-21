@@ -27,6 +27,27 @@ public class Licencia extends Tramite implements Serializable {
     @Column(name = "estado", nullable = false)
     private byte estado;
 
+    public Licencia(
+            Date fecha_tramite, 
+            Float costo, 
+            Persona persona, 
+            String numero_licencia, 
+            Date vigencia, 
+            byte estado) {
+        super(fecha_tramite, costo, persona);
+        this.numero_licencia = numero_licencia;
+        this.vigencia = vigencia;
+        this.estado = estado;
+    }
+
+    public Licencia() {
+    }
+
+   
+    
+
+    
+
     /**
      * Devuelve el número de la licencia.
      * @return El número de la licencia.
