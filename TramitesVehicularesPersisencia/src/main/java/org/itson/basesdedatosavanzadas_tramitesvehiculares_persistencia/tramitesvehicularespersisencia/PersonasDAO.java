@@ -44,17 +44,15 @@ public class PersonasDAO implements IPersonasDAO{
     @Override
     public List<Persona> consultar() {
         EntityManager entityManager = this.conexion.crearConexion();
-        //Objeto constructor de consultas
-        CriteriaBuilder builder = entityManager.getCriteriaBuilder();
-        
+    
         //Objeto consulta que se esta construyendo
         String jpqlQuery = """
-                           SELECT * FROM personas
+                           SELECT p FROM Persona p
                            """;
         //Consulta construida
         TypedQuery<Persona> query = entityManager.createQuery(jpqlQuery,Persona.class);
-        List<Persona> videojuegos = query.getResultList();
+        List<Persona> personas = query.getResultList();
         entityManager.close();
-        return videojuegos;
+        return personas;
     }
 }

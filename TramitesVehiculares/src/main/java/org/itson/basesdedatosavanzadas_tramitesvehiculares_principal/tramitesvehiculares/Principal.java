@@ -8,6 +8,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.PersonaBO;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia.excepciones.PersistenciaException;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia.tramitesvehicularespersisencia.Conexion;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia.tramitesvehicularespersisencia.IConexion;
@@ -31,8 +32,11 @@ public class Principal {
         IConexion conexion = new Conexion();
         IPersonasDAO personasDAO = new PersonasDAO(conexion);
 
+        
+        PersonaBO personaBO = new PersonaBO((PersonasDAO) personasDAO);
+        personaBO.insercionMasiva();
+        
         List<Persona> listaPersonas = personasDAO.consultar();
-
         listaPersonas.forEach(socio -> System.out.println(listaPersonas));
 
 //        DlgPrincipal principal = new DlgPrincipal(conexion);
