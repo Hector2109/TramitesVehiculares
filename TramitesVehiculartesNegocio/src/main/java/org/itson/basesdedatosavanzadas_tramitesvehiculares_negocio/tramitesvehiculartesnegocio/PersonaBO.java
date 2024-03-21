@@ -68,7 +68,7 @@ public class PersonaBO implements IPersonaBO {
         personas.add(persona4);
         personas.add(persona5);
         
-        personasDAO.insersionMasiva(personas);
+        personasDAO.insercionMasiva(personas);
         
     }
     

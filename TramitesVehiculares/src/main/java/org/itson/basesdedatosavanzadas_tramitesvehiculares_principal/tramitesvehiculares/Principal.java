@@ -26,14 +26,15 @@ public class Principal {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        
+        
         IConexion conexion = new Conexion();
 
         
-        PersonasDAO personasDAO = new PersonasDAO(conexion);
+
         
-        PersonaBO personaBO = new PersonaBO(personasDAO);
-        
-        personaBO.insersionMasiva();
+        DlgPrincipal principal = new DlgPrincipal(conexion);
+        principal.setVisible(true);
 
 //        EntityManager em = conexion.crearConexion();
 //        em.getTransaction().begin();
