@@ -318,7 +318,9 @@ public class Persona implements Serializable {
 
     @Override
     public String toString() {
-        return "org.itson.basesdedatosavanzadas_tramitesvehiculares_dominio.tramitesvehicularesdominio.Persona[ id=" + id + " ]";
+        return "Persona{" + "id=" + id + ", curp=" + curp + ", fecha_nacimiento=" + fecha_nacimiento + ", rfc=" + rfc + ", nombre=" + nombre + ", apellido_paterno=" + apellido_paterno + ", apellido_materno=" + apellido_materno + ", telefono=" + telefono + ", discapacidad=" + discapacidad + ", tramites=" + tramites + '}';
     }
+
+
 
 }

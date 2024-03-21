@@ -4,11 +4,17 @@
  */
 package org.itson.basesdedatosavanzadas_tramitesvehiculares_principal.tramitesvehiculares;
 
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Abe
  */
 public class RegistrarLicencia extends javax.swing.JFrame {
+
+    DefaultTableModel modelo;
 
     /**
      * Creates new form RegistrarLicencia
@@ -26,6 +32,7 @@ public class RegistrarLicencia extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btnGroup1 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         btnInicio = new javax.swing.JButton();
         tbnPersonas = new javax.swing.JButton();
@@ -39,16 +46,16 @@ public class RegistrarLicencia extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        txtCURP = new javax.swing.JTextField();
+        txtNombre = new javax.swing.JTextField();
+        txtAnio = new javax.swing.JTextField();
+        btnBuscar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
-        jRadioButton3 = new javax.swing.JRadioButton();
-        jButton2 = new javax.swing.JButton();
+        tblPersonas = new javax.swing.JTable();
+        rdbtn1 = new javax.swing.JRadioButton();
+        rdbtn2 = new javax.swing.JRadioButton();
+        rdbtn3 = new javax.swing.JRadioButton();
+        btnRealizarTramite = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -57,7 +64,6 @@ public class RegistrarLicencia extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(130, 206, 238));
 
         btnInicio.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        btnInicio.setIcon(new javax.swing.ImageIcon("D:\\ITSON\\Semestre 4\\Base de datos\\Proyecto 2\\TramitesVehiculares\\TramitesVehiculares\\src\\main\\resources\\imagenes\\Casa.png")); // NOI18N
         btnInicio.setText(" Inicio      ");
         btnInicio.setBorder(null);
         btnInicio.addActionListener(new java.awt.event.ActionListener() {
@@ -67,7 +73,6 @@ public class RegistrarLicencia extends javax.swing.JFrame {
         });
 
         tbnPersonas.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        tbnPersonas.setIcon(new javax.swing.ImageIcon("D:\\ITSON\\Semestre 4\\Base de datos\\Proyecto 2\\TramitesVehiculares\\TramitesVehiculares\\src\\main\\resources\\imagenes\\Persona.png")); // NOI18N
         tbnPersonas.setText("Personas");
         tbnPersonas.setBorder(null);
         tbnPersonas.setBorderPainted(false);
@@ -78,7 +83,6 @@ public class RegistrarLicencia extends javax.swing.JFrame {
         });
 
         bntPlacas.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        bntPlacas.setIcon(new javax.swing.ImageIcon("D:\\ITSON\\Semestre 4\\Base de datos\\Proyecto 2\\TramitesVehiculares\\TramitesVehiculares\\src\\main\\resources\\imagenes\\Placas.png")); // NOI18N
         bntPlacas.setText(" Placas     ");
         bntPlacas.setBorder(null);
         bntPlacas.addActionListener(new java.awt.event.ActionListener() {
@@ -88,7 +92,6 @@ public class RegistrarLicencia extends javax.swing.JFrame {
         });
 
         btnReportes.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        btnReportes.setIcon(new javax.swing.ImageIcon("D:\\ITSON\\Semestre 4\\Base de datos\\Proyecto 2\\TramitesVehiculares\\TramitesVehiculares\\src\\main\\resources\\imagenes\\Reportes.png")); // NOI18N
         btnReportes.setText("Reportes");
         btnReportes.setBorder(null);
         btnReportes.addActionListener(new java.awt.event.ActionListener() {
@@ -99,7 +102,6 @@ public class RegistrarLicencia extends javax.swing.JFrame {
 
         btnLicencias.setBackground(new java.awt.Color(62, 117, 225));
         btnLicencias.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        btnLicencias.setIcon(new javax.swing.ImageIcon("D:\\ITSON\\Semestre 4\\Base de datos\\Proyecto 2\\TramitesVehiculares\\TramitesVehiculares\\src\\main\\resources\\imagenes\\LicenciaAzul.png")); // NOI18N
         btnLicencias.setText(" Licencias");
         btnLicencias.setBorder(null);
         btnLicencias.addActionListener(new java.awt.event.ActionListener() {
@@ -109,7 +111,6 @@ public class RegistrarLicencia extends javax.swing.JFrame {
         });
 
         btnConsultas.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        btnConsultas.setIcon(new javax.swing.ImageIcon("D:\\ITSON\\Semestre 4\\Base de datos\\Proyecto 2\\TramitesVehiculares\\TramitesVehiculares\\src\\main\\resources\\imagenes\\Buscar.png")); // NOI18N
         btnConsultas.setText("Consultas");
         btnConsultas.setBorder(null);
         btnConsultas.addActionListener(new java.awt.event.ActionListener() {
@@ -117,8 +118,6 @@ public class RegistrarLicencia extends javax.swing.JFrame {
                 btnConsultasActionPerformed(evt);
             }
         });
-
-        jLabel1.setIcon(new javax.swing.ImageIcon("D:\\ITSON\\Semestre 4\\Base de datos\\Proyecto 2\\TramitesVehiculares\\TramitesVehiculares\\src\\main\\resources\\imagenes\\Logo.png")); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -173,29 +172,29 @@ public class RegistrarLicencia extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 30)); // NOI18N
         jLabel5.setText("Años de vigencia");
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        txtCURP.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                txtCURPActionPerformed(evt);
             }
         });
 
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+        txtNombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
+                txtNombreActionPerformed(evt);
             }
         });
 
-        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+        txtAnio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField3ActionPerformed(evt);
+                txtAnioActionPerformed(evt);
             }
         });
 
-        jButton1.setBackground(new java.awt.Color(62, 117, 225));
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Buscar");
+        btnBuscar.setBackground(new java.awt.Color(62, 117, 225));
+        btnBuscar.setForeground(new java.awt.Color(255, 255, 255));
+        btnBuscar.setText("Buscar");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblPersonas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -206,27 +205,30 @@ public class RegistrarLicencia extends javax.swing.JFrame {
                 "Nombre", "Curp", "Año de nacimiento"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tblPersonas);
 
-        jRadioButton1.setText("1");
+        btnGroup1.add(rdbtn1);
+        rdbtn1.setText("1");
 
-        jRadioButton2.setText("2");
-        jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnGroup1.add(rdbtn2);
+        rdbtn2.setText("2");
+        rdbtn2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton2ActionPerformed(evt);
+                rdbtn2ActionPerformed(evt);
             }
         });
 
-        jRadioButton3.setText("3");
-        jRadioButton3.addActionListener(new java.awt.event.ActionListener() {
+        btnGroup1.add(rdbtn3);
+        rdbtn3.setText("3");
+        rdbtn3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton3ActionPerformed(evt);
+                rdbtn3ActionPerformed(evt);
             }
         });
 
-        jButton2.setBackground(new java.awt.Color(62, 117, 225));
-        jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setText("Realizar trámite");
+        btnRealizarTramite.setBackground(new java.awt.Color(62, 117, 225));
+        btnRealizarTramite.setForeground(new java.awt.Color(255, 255, 255));
+        btnRealizarTramite.setText("Realizar trámite");
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 30)); // NOI18N
         jLabel6.setText("CURP");
@@ -236,41 +238,41 @@ public class RegistrarLicencia extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(99, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
                         .addGroup(jPanel2Layout.createSequentialGroup()
                             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jTextField2)
+                                .addComponent(txtNombre)
                                 .addComponent(jLabel2))
                             .addGap(42, 42, 42)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtCURP, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(18, 18, 18)
                             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(jLabel4)
                                 .addGroup(jPanel2Layout.createSequentialGroup()
-                                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtAnio, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGap(29, 29, 29)
-                                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                    .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                 .addGap(81, 81, 81))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(344, 344, 344)
-                        .addComponent(jRadioButton1)
+                        .addComponent(rdbtn1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jRadioButton2)
+                        .addComponent(rdbtn2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jRadioButton3))
+                        .addComponent(rdbtn3))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(339, 339, 339)
-                        .addComponent(jButton2))
+                        .addComponent(btnRealizarTramite))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(283, 283, 283)
                         .addComponent(jLabel5)))
-                .addContainerGap(313, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel2Layout.createSequentialGroup()
                     .addGap(283, 283, 283)
@@ -289,21 +291,21 @@ public class RegistrarLicencia extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtCURP, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtAnio, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
                 .addComponent(jLabel5)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jRadioButton1)
-                    .addComponent(jRadioButton2)
-                    .addComponent(jRadioButton3))
+                    .addComponent(rdbtn1)
+                    .addComponent(rdbtn2)
+                    .addComponent(rdbtn3))
                 .addGap(18, 18, 18)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnRealizarTramite, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27))
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel2Layout.createSequentialGroup()
@@ -342,36 +344,58 @@ public class RegistrarLicencia extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnConsultasActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void txtCURPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCURPActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_txtCURPActionPerformed
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+    private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
+    }//GEN-LAST:event_txtNombreActionPerformed
 
-    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+    private void txtAnioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAnioActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField3ActionPerformed
+    }//GEN-LAST:event_txtAnioActionPerformed
 
-    private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
+    private void rdbtn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdbtn2ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton2ActionPerformed
+    }//GEN-LAST:event_rdbtn2ActionPerformed
 
-    private void jRadioButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton3ActionPerformed
+    private void rdbtn3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdbtn3ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton3ActionPerformed
+    }//GEN-LAST:event_rdbtn3ActionPerformed
 
+     private void consultar() {
 
+//        try {
+//            List<Persona> listaPersonas = sociosDAO.consultar();
+//            Object[] socioFila = new Object[4];
+//            modelo = (DefaultTableModel) tblSocios.getModel();
+//            for (Socio listaSocio : listaSocios) {
+//                socioFila[0] = listaSocio.getId();
+//                socioFila[1] = listaSocio.getNombre();
+//                socioFila[2] = listaSocio.getTelefono();
+//                socioFila[3] = listaSocio.getCorreo();
+//
+//                modelo.addRow(socioFila);
+//            }
+//
+//            tblSocios.setModel(modelo);
+//        } catch (PersistenciaException e) {
+//            JOptionPane.showMessageDialog(this, "No se puede acceder a los socios", "Error de consulta", 
+//                    JOptionPane.ERROR_MESSAGE);
+//        }
+
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bntPlacas;
+    private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnConsultas;
+    private javax.swing.ButtonGroup btnGroup1;
     private javax.swing.JButton btnInicio;
     private javax.swing.JButton btnLicencias;
+    private javax.swing.JButton btnRealizarTramite;
     private javax.swing.JButton btnReportes;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -380,14 +404,14 @@ public class RegistrarLicencia extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JRadioButton jRadioButton3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
+    private javax.swing.JRadioButton rdbtn1;
+    private javax.swing.JRadioButton rdbtn2;
+    private javax.swing.JRadioButton rdbtn3;
+    private javax.swing.JTable tblPersonas;
     private javax.swing.JButton tbnPersonas;
+    private javax.swing.JTextField txtAnio;
+    private javax.swing.JTextField txtCURP;
+    private javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables
 }

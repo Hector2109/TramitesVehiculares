@@ -2,6 +2,8 @@ package org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia.tramite
 
 import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia_entidad.tramitesvehicularespersisencia.Persona;
 
 /**
@@ -34,4 +36,25 @@ public class PersonasDAO implements IPersonasDAO{
         return personas;
     }
     
+
+    /**
+     * Metodo que consulta todos los personas registrados
+     * @return regresa la lista de personas
+     */
+    @Override
+    public List<Persona> consultar() {
+        EntityManager entityManager = this.conexion.crearConexion();
+        //Objeto constructor de consultas
+        CriteriaBuilder builder = entityManager.getCriteriaBuilder();
+        
+        //Objeto consulta que se esta construyendo
+        String jpqlQuery = """
+                           SELECT * FROM personas
+                           """;
+        //Consulta construida
+        TypedQuery<Persona> query = entityManager.createQuery(jpqlQuery,Persona.class);
+        List<Persona> videojuegos = query.getResultList();
+        entityManager.close();
+        return videojuegos;
+    }
 }

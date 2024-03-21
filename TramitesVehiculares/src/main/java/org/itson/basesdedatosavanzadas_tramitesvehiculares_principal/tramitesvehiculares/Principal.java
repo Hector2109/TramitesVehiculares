@@ -4,17 +4,16 @@
  */
 package org.itson.basesdedatosavanzadas_tramitesvehiculares_principal.tramitesvehiculares;
 
-import java.util.Date;
-import javax.persistence.EntityManager;
-import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.PersonaBO;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia.excepciones.PersistenciaException;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia.tramitesvehicularespersisencia.Conexion;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia.tramitesvehicularespersisencia.IConexion;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia.tramitesvehicularespersisencia.IPersonasDAO;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia.tramitesvehicularespersisencia.PersonasDAO;
-import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia_entidad.tramitesvehicularespersisencia.Discapacidad;
-import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia_entidad.tramitesvehicularespersisencia.Licencia;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia_entidad.tramitesvehicularespersisencia.Persona;
-import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia_entidad.tramitesvehicularespersisencia.Tramite;
 
 /**
  *
@@ -22,16 +21,22 @@ import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia_entidad.
  */
 public class Principal {
 
+    static final Logger logger = Logger.getLogger(Principal.class.getName());
+
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        
-        
-        IConexion conexion = new Conexion();
-        DlgPrincipal principal = new DlgPrincipal(conexion);
-        principal.setVisible(true);
 
+        IConexion conexion = new Conexion();
+        IPersonasDAO personasDAO = new PersonasDAO(conexion);
+
+        List<Persona> listaPersonas = personasDAO.consultar();
+
+        listaPersonas.forEach(socio -> System.out.println(listaPersonas));
+
+//        DlgPrincipal principal = new DlgPrincipal(conexion);
+//        principal.setVisible(true);
 //        EntityManager em = conexion.crearConexion();
 //        em.getTransaction().begin();
 //        Persona persona = new Persona();
