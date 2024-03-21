@@ -9,6 +9,6 @@ import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia_entidad.
  */
 public interface IPersonaBO {
     
-    public void insersionMasiva(List<Persona> personas);
+    public void insercionMasiva();
     
 }

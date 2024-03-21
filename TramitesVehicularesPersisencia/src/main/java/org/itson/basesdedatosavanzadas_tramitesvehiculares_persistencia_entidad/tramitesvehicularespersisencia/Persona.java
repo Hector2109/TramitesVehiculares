@@ -103,6 +103,16 @@ public class Persona implements Serializable {
         this.discapacidad = discapacidad;
     }
     
+    public Persona(String curp, Date fecha_nacimiento, String rfc, String nombre, String apellido_paterno, String telefono, Discapacidad discapacidad) {
+        this.curp = curp;
+        this.fecha_nacimiento = fecha_nacimiento;
+        this.rfc = rfc;
+        this.nombre = nombre;
+        this.apellido_paterno = apellido_paterno;
+        this.telefono = telefono;
+        this.discapacidad = discapacidad;
+    }
+    
     public Persona(String curp, Date fecha_nacimiento, String rfc, String nombre, String apellido_paterno, String apellido_materno, String telefono, List<Tramite> tramites, Discapacidad discapacidad) {
         this.curp = curp;
         this.fecha_nacimiento = fecha_nacimiento;

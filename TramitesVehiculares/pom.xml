@@ -23,6 +23,11 @@
             <version>RELEASE90</version>
             <type>jar</type>
         </dependency>
+        <dependency>
+            <groupId>org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio</groupId>
+            <artifactId>TramitesVehiculartesNegocio</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
     </dependencies>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

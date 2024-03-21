@@ -13,6 +13,6 @@ import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia_entidad.
  */
 public interface IPersonasDAO {
     
-    public List <Persona> insersionMasiva();
+    public List <Persona> insercionMasiva(List<Persona> personas);
     
 }

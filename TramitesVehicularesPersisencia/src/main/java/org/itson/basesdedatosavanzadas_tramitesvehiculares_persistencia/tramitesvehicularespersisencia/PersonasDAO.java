@@ -1,6 +1,7 @@
 package org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia.tramitesvehicularespersisencia;
 
 import java.util.List;
+import javax.persistence.EntityManager;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia_entidad.tramitesvehicularespersisencia.Persona;
 
 /**
@@ -20,8 +21,17 @@ public class PersonasDAO implements IPersonasDAO{
      * @return lista de personas insertadas
      */
     @Override
-    public List<Persona> insersionMasiva() {
+    public List<Persona> insercionMasiva(List<Persona> personas) {
+        EntityManager em = conexion.crearConexion();
         
+        em.getTransaction().begin();
+        
+        for (Persona persona : personas) {
+            em.persist(persona);
+        }
+        em.getTransaction().commit();
+        em.close();
+        return personas;
     }
     
 }
