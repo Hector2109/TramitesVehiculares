@@ -29,10 +29,6 @@ public class Principal {
         
         
         IConexion conexion = new Conexion();
-
-        
-
-        
         DlgPrincipal principal = new DlgPrincipal(conexion);
         principal.setVisible(true);
 
