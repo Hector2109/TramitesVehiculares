@@ -5,7 +5,6 @@
 package org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia_entidad.tramitesvehicularespersisencia;
 
 import java.io.Serializable;
-import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
@@ -19,6 +18,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.Fecha;
 
 /**
  *
@@ -37,7 +37,7 @@ public class Tramite implements Serializable {
 
     @Temporal(TemporalType.DATE)
     @Column(name = "fecha_tramite", nullable = false)
-    private Date fecha_tramite;
+    private Fecha fecha_tramite;
 
     @Column(name = "costo", nullable = false)
     private Float costo;
@@ -52,11 +52,11 @@ public class Tramite implements Serializable {
      *
      * @return valor de la fecha de tramite
      */
-    public Date getFecha_tramite() {
+    public Fecha getFecha_tramite() {
         return fecha_tramite;
     }
 
-    public Tramite(Date fecha_tramite, Float costo, Persona persona) {
+    public Tramite(Fecha fecha_tramite, Float costo, Persona persona) {
         this.fecha_tramite = fecha_tramite;
         this.costo = costo;
         this.persona = persona;
@@ -74,7 +74,7 @@ public class Tramite implements Serializable {
      *
      * @param fecha_tramite valor de la fecha de tramite
      */
-    public void setFecha_tramite(Date fecha_tramite) {
+    public void setFecha_tramite(Fecha fecha_tramite) {
         this.fecha_tramite = fecha_tramite;
     }
 

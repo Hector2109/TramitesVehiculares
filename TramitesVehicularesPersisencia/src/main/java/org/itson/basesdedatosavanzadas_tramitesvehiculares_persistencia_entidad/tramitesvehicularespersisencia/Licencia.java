@@ -1,13 +1,12 @@
 package org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia_entidad.tramitesvehicularespersisencia;
 
 import java.io.Serializable;
-import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.Fecha;
 
 /**
  *
@@ -24,18 +23,18 @@ public class Licencia extends Tramite implements Serializable {
     /** Fecha de vigencia de la licencia. */
     @Temporal(TemporalType.DATE)
     @Column(name = "vigencia", nullable = false)
-    private Date vigencia;
+    private Fecha vigencia;
     
     /** Estado de la licencia. */
     @Column(name = "estado", nullable = false)
     private byte estado;
 
     public Licencia(
-            Date fecha_tramite, 
+            Fecha fecha_tramite, 
             Float costo, 
             Persona persona, 
             String numero_licencia, 
-            Date vigencia, 
+            Fecha vigencia, 
             byte estado) {
         super(fecha_tramite, costo, persona);
         this.numero_licencia = numero_licencia;
@@ -71,7 +70,7 @@ public class Licencia extends Tramite implements Serializable {
      * Devuelve la fecha de vigencia de la licencia.
      * @return La fecha de vigencia de la licencia.
      */
-    public Date getVigencia() {
+    public Fecha getVigencia() {
         return vigencia;
     }
 
@@ -79,7 +78,7 @@ public class Licencia extends Tramite implements Serializable {
      * Establece la fecha de vigencia de la licencia.
      * @param vigencia La fecha de vigencia de la licencia.
      */
-    public void setVigencia(Date vigencia) {
+    public void setVigencia(Fecha vigencia) {
         this.vigencia = vigencia;
     }
 

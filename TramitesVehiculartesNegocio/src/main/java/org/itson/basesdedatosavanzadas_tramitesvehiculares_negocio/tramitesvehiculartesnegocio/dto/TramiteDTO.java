@@ -4,7 +4,7 @@
  */
 package org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.dto;
 
-import java.util.Date;
+import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.Fecha;
 
 /**
  *
@@ -12,13 +12,13 @@ import java.util.Date;
  */
 public class TramiteDTO {
     
-    private Date fecha_tramite;
+    private Fecha fecha_tramite;
 
     private Float costo; 
     
     private PersonaDTO personaDTO;
 
-    public Date getFecha_tramite() {
+    public Fecha getFecha_tramite() {
         return fecha_tramite;
     }
 

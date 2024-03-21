@@ -1,8 +1,12 @@
 package org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia.tramitesvehicularespersisencia;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceException;
+import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.Fecha;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.dto.PersonaDTO;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia.excepciones.PersistenciaException;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia_entidad.tramitesvehicularespersisencia.Licencia;
@@ -24,23 +28,26 @@ public class TramitesDAO implements ITramitesDAO {
     }
 
     @Override
-    public Licencia realizarTramiteLicencia(PersonaDTO personaDTO, int anios) {
+    public Licencia realizarTramiteLicencia(PersonaDTO personaDTO, int anios) throws PersistenceException{
 
         Persona persona = new Persona();
         try {
-            persona = personasDAO.consultarPeresona(personaDTO.getRfc());
+            persona = personasDAO.consultarPersona(personaDTO.getRfc());
             
 
             
             Licencia licencia = new Licencia();
             licencia.setPersona(persona);
-            Date fechaTramite = new Date();
+            Fecha fechaTramite = new Fecha();
             licencia.setFecha_tramite(fechaTramite);
-            Date fecha_vigencia = fechaTramite;
+            Fecha fecha_vigencia = new Fecha();
+            fecha_vigencia.add(Calendar.YEAR, anios);
+            //prueba hardcodeada
+            licencia.setNumero_licencia("123456789");
 
             if (anios == 1) {
 
-                fecha_vigencia.setYear(fecha_vigencia.getYear() + anios);
+                
                 licencia.setVigencia(fecha_vigencia);
                 if (persona.getDiscapacidad().equals("DISCAPACITADO")) {
                     licencia.setCosto(200.0F);
@@ -51,7 +58,6 @@ public class TramitesDAO implements ITramitesDAO {
             } else if (anios == 2) {
                 
                 licencia.setPersona(persona);
-                fecha_vigencia.setYear(fecha_vigencia.getYear() + anios);
                 licencia.setVigencia(fecha_vigencia);
                 if (persona.getDiscapacidad().equals("DISCAPACITADO")) {
                     licencia.setCosto(500.0F);
@@ -62,7 +68,6 @@ public class TramitesDAO implements ITramitesDAO {
             } else if (anios == 3) {
                 
                 licencia.setPersona(persona);
-                fecha_vigencia.setYear(fecha_vigencia.getYear() + anios);
                 licencia.setVigencia(fecha_vigencia);
                 if (persona.getDiscapacidad().equals("DISCAPACITADO")) {
                     licencia.setCosto(700.0F);
@@ -71,14 +76,21 @@ public class TramitesDAO implements ITramitesDAO {
                 }
             }
             
+            EntityManager em = conexion.crearConexion();
+            em.getTransaction().begin();
+            em.persist(licencia);
+            em.getTransaction().commit();
+            em.close();
+            
             return licencia;
             
 
 
         } catch (PersistenciaException ex) {
             Logger.getLogger(TramitesDAO.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
+         throw new PersistenceException("No se ha podido realizar el registro de licencia");
         }
-        return null;
+        
     }
 
 }

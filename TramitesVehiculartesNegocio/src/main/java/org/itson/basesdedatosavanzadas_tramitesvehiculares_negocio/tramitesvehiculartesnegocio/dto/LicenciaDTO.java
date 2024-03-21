@@ -4,7 +4,7 @@
  */
 package org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.dto;
 
-import java.util.Date;
+import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.Fecha;
 
 /**
  *
@@ -13,10 +13,17 @@ import java.util.Date;
 public class LicenciaDTO extends TramiteDTO{
     private String numero_licencia;
     
-    private Date vigencia;
+    private Fecha vigencia;
     
     private byte estado;
 
+    public LicenciaDTO(String numero_licencia, Fecha vigencia, byte estado) {
+        this.numero_licencia = numero_licencia;
+        this.vigencia = vigencia;
+        this.estado = estado;
+    }
+
+    
     /**
      * Regresa el valor de la licencia
      * @return valor de la licencia
@@ -31,7 +38,7 @@ public class LicenciaDTO extends TramiteDTO{
      * Regresa el valor de la vigencia
      * @return valor de la vigencia
      */
-    public Date getVigencia() {
+    public Fecha getVigencia() {
         return vigencia;
     }
 

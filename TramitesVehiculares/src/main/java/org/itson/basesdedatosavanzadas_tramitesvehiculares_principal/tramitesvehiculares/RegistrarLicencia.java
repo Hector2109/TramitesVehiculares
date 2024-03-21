@@ -5,14 +5,14 @@
 package org.itson.basesdedatosavanzadas_tramitesvehiculares_principal.tramitesvehiculares;
 
 import java.util.List;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.IPersonaBO;
+import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.ITramiteBO;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.PersonaBO;
+import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.TramiteBO;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.dto.PersonaDTO;
-import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia.tramitesvehicularespersisencia.Conexion;
-import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia.tramitesvehicularespersisencia.IConexion;
-import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia.tramitesvehicularespersisencia.PersonasDAO;
 
 /**
  *
@@ -20,6 +20,9 @@ import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia.tramites
  */
 public class RegistrarLicencia extends javax.swing.JDialog {
 
+    private static final Logger LOG = Logger.getLogger(RegistrarLicencia.class.getName());
+
+    
     private final IPersonaBO personaBO;
     private final ITramiteBO tramiteBO;
     private int anio;
@@ -31,6 +34,7 @@ public class RegistrarLicencia extends javax.swing.JDialog {
     public RegistrarLicencia(DlgPrincipal parent, boolean modal) {
         super(parent, modal);
         personaBO = new PersonaBO();
+        tramiteBO = new TramiteBO();
         initComponents();
         consultar();
         
@@ -391,8 +395,14 @@ public class RegistrarLicencia extends javax.swing.JDialog {
         String rfc = tblPersonas.getValueAt(fila, 1).toString();
         PersonaDTO personaSeleccionada = personaBO.consultarPersona(rfc);
         
-        btnGroupAnio
-        tramiteBO.generarLicencia(personaSeleccionada,)
+        if(anio!=1&&anio!=2&&anio!=3){
+            JOptionPane.showMessageDialog(this,"Selecciona año de vigencia", "Año de vigencia",JOptionPane.WARNING_MESSAGE );
+        }
+        else{
+            tramiteBO.generarLicencia(personaSeleccionada,anio);
+            
+        }
+        
         
         
     }//GEN-LAST:event_btnRealizarTramiteActionPerformed

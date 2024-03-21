@@ -70,7 +70,7 @@ public class PersonasDAO implements IPersonasDAO {
      * @return regresa el objeto de tipo persona
      */
     @Override
-    public Persona consultarPeresona(String rfc)throws PersistenciaException {
+    public Persona consultarPersona(String rfc)throws PersistenciaException {
 
         EntityManager entityManager = this.conexion.crearConexion();
         

@@ -12,4 +12,5 @@ public interface IPersonaBO {
     
     public void insercionMasiva();
     public List<PersonaDTO> consultar();
+    public PersonaDTO consultarPersona(String rfc);
 }

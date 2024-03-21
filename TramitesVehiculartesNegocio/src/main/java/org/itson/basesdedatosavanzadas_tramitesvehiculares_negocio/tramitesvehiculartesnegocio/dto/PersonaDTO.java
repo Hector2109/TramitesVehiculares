@@ -1,7 +1,7 @@
 package org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.dto;
 
-import java.util.Date;
 import java.util.List;
+import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.Fecha;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia_entidad.tramitesvehicularespersisencia.Discapacidad;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia_entidad.tramitesvehicularespersisencia.Tramite;
 
@@ -15,7 +15,7 @@ public class PersonaDTO {
     /**
      * Fecha de nacimiento de la persona.
      */
-    private Date fecha_nacimiento;
+    private Fecha fecha_nacimiento;
 
     /**
      * RFC (Registro Federal de Contribuyentes) de la persona.
@@ -51,7 +51,7 @@ public class PersonaDTO {
      */
     private Discapacidad discapacidad;
 
-    public PersonaDTO(Date fecha_nacimiento, String rfc, String nombre, String apellido_paterno, String apellido_materno) {
+    public PersonaDTO(Fecha fecha_nacimiento, String rfc, String nombre, String apellido_paterno, String apellido_materno) {
         this.fecha_nacimiento = fecha_nacimiento;
         this.rfc = rfc;
         this.nombre = nombre;
@@ -61,7 +61,7 @@ public class PersonaDTO {
    
 
 
-    public Date getFecha_nacimiento() {
+    public Fecha getFecha_nacimiento() {
         return fecha_nacimiento;
     }
 

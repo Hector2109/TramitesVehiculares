@@ -17,6 +17,6 @@ public interface IPersonasDAO {
     
     public List <Persona> insercionMasiva(List<Persona> personas);
     public List<Persona> consultar();
-    public Persona consultarPeresona(String rfc)throws PersistenciaException;
+    public Persona consultarPersona(String rfc)throws PersistenciaException;
     
 }
