@@ -154,7 +154,9 @@ public class Tramite implements Serializable {
      */
     @Override
     public String toString() {
-        return "org.itson.basesdedatosavanzadas_tramitesvehiculares_dominio.tramitesvehicularesdominio.Tramite[ id=" + id + " ]";
+        return "Tramite{" + "id=" + id + ", fecha_tramite=" + fecha_tramite + ", costo=" + costo + '}';
     }
 
+    
+   
 }

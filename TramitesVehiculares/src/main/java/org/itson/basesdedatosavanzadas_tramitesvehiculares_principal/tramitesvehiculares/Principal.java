@@ -4,9 +4,11 @@
  */
 package org.itson.basesdedatosavanzadas_tramitesvehiculares_principal.tramitesvehiculares;
 
+import java.util.Date;
 import javax.persistence.EntityManager;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia.tramitesvehicularespersisencia.Conexion;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia.tramitesvehicularespersisencia.IConexion;
+import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia_entidad.tramitesvehicularespersisencia.Discapacidad;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia_entidad.tramitesvehicularespersisencia.Licencia;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia_entidad.tramitesvehicularespersisencia.Persona;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia_entidad.tramitesvehicularespersisencia.Tramite;
@@ -26,9 +28,24 @@ public class Principal {
         EntityManager em = conexion.crearConexion();
         em.getTransaction().begin();
         Persona persona = new Persona();
-        persona.setCurp("WTGGHHJGHHJ");
+        persona.setNombre("Abel");
+        persona.setApellido_materno("Sanchez");
+        persona.setApellido_paterno("Guerrero");
+        persona.setCurp("SAGA040513HSRNRBA2");
+        persona.setDiscapacidad(Discapacidad.DISCAPACITADO);
+        persona.setFecha_nacimiento(new Date(2004, 05, 13));
+        persona.setRfc("asdfghjklñqwe");
+        persona.setTelefono("6441297653");
+        
+        Licencia licencia = new Licencia();
+        licencia.setFecha_tramite(new Date(2024, 01, 1));
+        licencia.setEstado((byte)0);
+        licencia.setCosto(200f);
+        licencia.setNumero_licencia("2345678");
+        licencia.setVigencia(new Date(2028, 12, 12));
         
         em.persist(persona);
+        em.persist(licencia);
         em.getTransaction().commit();
         em.close();
     }

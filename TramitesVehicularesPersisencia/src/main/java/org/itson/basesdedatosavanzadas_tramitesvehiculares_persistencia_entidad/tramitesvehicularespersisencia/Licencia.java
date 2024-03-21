@@ -25,7 +25,7 @@ public class Licencia extends Tramite implements Serializable {
     
     /** Estado de la licencia. */
     @Column(name = "estado", nullable = false)
-    private Byte estado;
+    private byte estado;
 
     /**
      * Devuelve el número de la licencia.
@@ -63,7 +63,7 @@ public class Licencia extends Tramite implements Serializable {
      * Devuelve el estado de la licencia.
      * @return El estado de la licencia.
      */
-    public Byte getEstado() {
+    public byte getEstado() {
         return estado;
     }
 
@@ -71,7 +71,7 @@ public class Licencia extends Tramite implements Serializable {
      * Establece el estado de la licencia.
      * @param estado El estado de la licencia.
      */
-    public void setEstado(Byte estado) {
+    public void setEstado(byte estado) {
         this.estado = estado;
     }
 

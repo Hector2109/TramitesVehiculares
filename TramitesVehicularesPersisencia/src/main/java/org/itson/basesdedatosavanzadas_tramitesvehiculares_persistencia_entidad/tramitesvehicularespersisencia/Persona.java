@@ -75,14 +75,15 @@ public class Persona implements Serializable {
     /**
      * Lista de tramites de la persona
      */
+    
     /**
      * Indica si la persona tiene alguna discapacidad.
      */
     @Enumerated(EnumType.STRING)
     @Column(name = "discapacidad", nullable = false)
     private Discapacidad discapacidad;
-    
-//    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "persona")
+   
+    //@OneToMany(cascade = CascadeType.PERSIST, mappedBy = "persona")
 //    private List<Tramite> tramites;
 
     public Persona() {
