@@ -7,6 +7,9 @@ package org.itson.basesdedatosavanzadas_tramitesvehiculares_principal.tramitesve
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia.excepciones.PersistenciaException;
+import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia.tramitesvehicularespersisencia.IPersonasDAO;
+import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia_entidad.tramitesvehicularespersisencia.Persona;
 
 /**
  *
@@ -14,13 +17,16 @@ import javax.swing.table.DefaultTableModel;
  */
 public class RegistrarLicencia extends javax.swing.JFrame {
 
+    private final IPersonasDAO personasDAO;
     DefaultTableModel modelo;
 
-    /**
+    /*
      * Creates new form RegistrarLicencia
      */
-    public RegistrarLicencia() {
+    public RegistrarLicencia(IPersonasDAO personasDAO) {
         initComponents();
+        this.personasDAO = personasDAO;
+        consultar();
     }
 
     /**
@@ -196,15 +202,17 @@ public class RegistrarLicencia extends javax.swing.JFrame {
 
         tblPersonas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+
             },
             new String [] {
-                "Nombre", "Curp", "Año de nacimiento"
+                "ID", "Nombre", "Curp", "Año de nacimiento"
             }
         ));
+        tblPersonas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblPersonasMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblPersonas);
 
         btnGroup1.add(rdbtn1);
@@ -364,26 +372,30 @@ public class RegistrarLicencia extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_rdbtn3ActionPerformed
 
-     private void consultar() {
+    private void tblPersonasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblPersonasMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tblPersonasMouseClicked
 
-//        try {
-//            List<Persona> listaPersonas = sociosDAO.consultar();
-//            Object[] socioFila = new Object[4];
-//            modelo = (DefaultTableModel) tblSocios.getModel();
-//            for (Socio listaSocio : listaSocios) {
-//                socioFila[0] = listaSocio.getId();
-//                socioFila[1] = listaSocio.getNombre();
-//                socioFila[2] = listaSocio.getTelefono();
-//                socioFila[3] = listaSocio.getCorreo();
-//
-//                modelo.addRow(socioFila);
-//            }
-//
-//            tblSocios.setModel(modelo);
-//        } catch (PersistenciaException e) {
-//            JOptionPane.showMessageDialog(this, "No se puede acceder a los socios", "Error de consulta", 
-//                    JOptionPane.ERROR_MESSAGE);
-//        }
+    private void consultar() {
+
+        try {
+            List<Persona> listaPersonas = personasDAO.consultar();
+            Object[] personaFila = new Object[4];
+            modelo = (DefaultTableModel) tblPersonas.getModel();
+            for (Persona listapersonas : listaPersonas) {
+                personaFila[0] = listapersonas.getId();
+                personaFila[1] = listapersonas.getNombre()+" "+listapersonas.getApellido_materno()+" "+listapersonas.getApellido_paterno();
+                personaFila[2] = listapersonas.getCurp();
+                personaFila[3] = listapersonas.getFecha_nacimiento();
+
+                modelo.addRow(personaFila);
+            }
+
+            tblPersonas.setModel(modelo);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "No se puede acceder a los socios", "Error de consulta",
+                    JOptionPane.ERROR_MESSAGE);
+        }
 
     }
 

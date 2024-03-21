@@ -34,10 +34,9 @@ public class Principal {
 
         
         PersonaBO personaBO = new PersonaBO((PersonasDAO) personasDAO);
-        personaBO.insercionMasiva();
         
-        List<Persona> listaPersonas = personasDAO.consultar();
-        listaPersonas.forEach(socio -> System.out.println(listaPersonas));
+        RegistrarLicencia RL = new RegistrarLicencia(personasDAO);
+        RL.setVisible(true);
 
 //        DlgPrincipal principal = new DlgPrincipal(conexion);
 //        principal.setVisible(true);
