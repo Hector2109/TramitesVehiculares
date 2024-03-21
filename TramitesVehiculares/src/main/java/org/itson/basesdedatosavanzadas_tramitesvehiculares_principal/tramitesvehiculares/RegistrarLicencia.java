@@ -1,6 +1,6 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
  */
 package org.itson.basesdedatosavanzadas_tramitesvehiculares_principal.tramitesvehiculares;
 
@@ -8,26 +8,32 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.IPersonaBO;
+import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.PersonaBO;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.dto.PersonaDTO;
-import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia_entidad.tramitesvehicularespersisencia.Persona;
+import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia.tramitesvehicularespersisencia.Conexion;
+import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia.tramitesvehicularespersisencia.IConexion;
+import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia.tramitesvehicularespersisencia.PersonasDAO;
 
 /**
  *
  * @author Abe
  */
-public class RegistrarLicencia extends javax.swing.JFrame {
+public class RegistrarLicencia extends javax.swing.JDialog {
 
-    private final IPersonaBO PersonaBO;
+    private final IPersonaBO personaBO;
+    private final ITramiteBO tramiteBO;
+    private int anio;
     DefaultTableModel modelo;
 
-    /*
-     * Creates new form RegistrarLicencia
+    /**
+     * Creates new form RegistrarLicencia2
      */
-    public RegistrarLicencia(IPersonaBO personaBO) {
+    public RegistrarLicencia(DlgPrincipal parent, boolean modal) {
+        super(parent, modal);
+        personaBO = new PersonaBO();
         initComponents();
-        personaBO.insercionMasiva();
-        this.PersonaBO = personaBO;
         consultar();
+        
     }
 
     /**
@@ -39,7 +45,7 @@ public class RegistrarLicencia extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btnGroup1 = new javax.swing.ButtonGroup();
+        btnGroupAnio = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         btnInicio = new javax.swing.JButton();
         tbnPersonas = new javax.swing.JButton();
@@ -65,7 +71,7 @@ public class RegistrarLicencia extends javax.swing.JFrame {
         btnRealizarTramite = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(130, 206, 238));
@@ -216,10 +222,15 @@ public class RegistrarLicencia extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tblPersonas);
 
-        btnGroup1.add(rdbtn1);
+        btnGroupAnio.add(rdbtn1);
         rdbtn1.setText("1");
+        rdbtn1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rdbtn1ActionPerformed(evt);
+            }
+        });
 
-        btnGroup1.add(rdbtn2);
+        btnGroupAnio.add(rdbtn2);
         rdbtn2.setText("2");
         rdbtn2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -227,7 +238,7 @@ public class RegistrarLicencia extends javax.swing.JFrame {
             }
         });
 
-        btnGroup1.add(rdbtn3);
+        btnGroupAnio.add(rdbtn3);
         rdbtn3.setText("3");
         rdbtn3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -252,7 +263,7 @@ public class RegistrarLicencia extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(99, Short.MAX_VALUE)
+                .addContainerGap(87, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -278,9 +289,9 @@ public class RegistrarLicencia extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(344, 344, 344)
                         .addComponent(rdbtn1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(12, 12, 12)
                         .addComponent(rdbtn2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(rdbtn3))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(339, 339, 339)
@@ -322,19 +333,14 @@ public class RegistrarLicencia extends javax.swing.JFrame {
                 .addGap(27, 27, 27))
         );
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 0, -1, 640));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 0, 810, 640));
 
         pack();
-        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInicioActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnInicioActionPerformed
-
-    private void btnReportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportesActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnReportesActionPerformed
 
     private void tbnPersonasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tbnPersonasActionPerformed
         // TODO add your handling code here:
@@ -343,6 +349,10 @@ public class RegistrarLicencia extends javax.swing.JFrame {
     private void bntPlacasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntPlacasActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_bntPlacasActionPerformed
+
+    private void btnReportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnReportesActionPerformed
 
     private void btnLicenciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLicenciasActionPerformed
         // TODO add your handling code here:
@@ -364,26 +374,38 @@ public class RegistrarLicencia extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtAnioActionPerformed
 
-    private void rdbtn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdbtn2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_rdbtn2ActionPerformed
-
-    private void rdbtn3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdbtn3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_rdbtn3ActionPerformed
-
     private void tblPersonasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblPersonasMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_tblPersonasMouseClicked
 
+    private void rdbtn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdbtn2ActionPerformed
+       anio=2;
+    }//GEN-LAST:event_rdbtn2ActionPerformed
+
+    private void rdbtn3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdbtn3ActionPerformed
+        anio=3;
+    }//GEN-LAST:event_rdbtn3ActionPerformed
+
     private void btnRealizarTramiteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRealizarTramiteActionPerformed
+        int fila = tblPersonas.getSelectedRow();
+        String rfc = tblPersonas.getValueAt(fila, 1).toString();
+        PersonaDTO personaSeleccionada = personaBO.consultarPersona(rfc);
+        
+        btnGroupAnio
+        tramiteBO.generarLicencia(personaSeleccionada,)
+        
         
     }//GEN-LAST:event_btnRealizarTramiteActionPerformed
 
+    private void rdbtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdbtn1ActionPerformed
+        anio=1;
+    }//GEN-LAST:event_rdbtn1ActionPerformed
+
+    
     private void consultar() {
 
         try {
-            List<PersonaDTO> listaPersonas = PersonaBO.consultar();
+            List<PersonaDTO> listaPersonas = personaBO.consultar();
             Object[] personaFila = new Object[3];
             modelo = (DefaultTableModel) tblPersonas.getModel();
             for (PersonaDTO persona : listaPersonas) {
@@ -410,7 +432,7 @@ public class RegistrarLicencia extends javax.swing.JFrame {
     private javax.swing.JButton bntPlacas;
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnConsultas;
-    private javax.swing.ButtonGroup btnGroup1;
+    private javax.swing.ButtonGroup btnGroupAnio;
     private javax.swing.JButton btnInicio;
     private javax.swing.JButton btnLicencias;
     private javax.swing.JButton btnRealizarTramite;

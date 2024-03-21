@@ -35,10 +35,11 @@ public class Principal {
         
         PersonaBO personaBO = new PersonaBO();
         
-        
-        RegistrarLicencia RL = new RegistrarLicencia(personaBO);
+        DlgPrincipal principal = new DlgPrincipal(conexion);
+     
+        personaBO.insercionMasiva();
+        RegistrarLicencia RL = new RegistrarLicencia(principal, true);
         RL.setVisible(true);
-
 
 //        DlgPrincipal principal = new DlgPrincipal(conexion);
 //        principal.setVisible(true);
