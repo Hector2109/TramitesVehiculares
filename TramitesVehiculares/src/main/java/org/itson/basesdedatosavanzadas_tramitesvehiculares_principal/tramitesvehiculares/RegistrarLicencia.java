@@ -238,6 +238,11 @@ public class RegistrarLicencia extends javax.swing.JFrame {
         btnRealizarTramite.setBackground(new java.awt.Color(62, 117, 225));
         btnRealizarTramite.setForeground(new java.awt.Color(255, 255, 255));
         btnRealizarTramite.setText("Realizar trámite");
+        btnRealizarTramite.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRealizarTramiteActionPerformed(evt);
+            }
+        });
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 30)); // NOI18N
         jLabel6.setText("RFC");
@@ -370,6 +375,10 @@ public class RegistrarLicencia extends javax.swing.JFrame {
     private void tblPersonasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblPersonasMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_tblPersonasMouseClicked
+
+    private void btnRealizarTramiteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRealizarTramiteActionPerformed
+        
+    }//GEN-LAST:event_btnRealizarTramiteActionPerformed
 
     private void consultar() {
 
