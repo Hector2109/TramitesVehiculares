@@ -146,13 +146,13 @@ public class PersonaBO implements IPersonaBO {
                 "8409504806", 
                 Discapacidad.NO_DISCAPACITADO);
         Persona persona19 = new Persona("GARS500320HSPRDN00", 
-                new Date(), "JNA80368502110", 
+                new Date(), "JNA8036850211", 
                 "JUAN SANTOS", 
                 "GARCIA",  
                 "RODRIGUEZ",
-                "8540598502", 
+                "8098801544", 
                 Discapacidad.NO_DISCAPACITADO);
-        Persona persona20 = new Persona(" DOTA790607MSPMRR06", 
+        Persona persona20 = new Persona("DOTA790607MSPMRR06", 
                 new Date(), "ANS8402230554", 
                 "ARACELI", 
                 "DOMINGUEZ",
