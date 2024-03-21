@@ -51,7 +51,6 @@ public class PersonasDAO implements IPersonasDAO {
      */
     @Override
     public List<Persona> consultar() {
-        
         EntityManager entityManager = this.conexion.crearConexion();
         
         CriteriaQuery <Persona> criteria = entityManager.getCriteriaBuilder().createQuery(Persona.class);
@@ -63,31 +62,18 @@ public class PersonasDAO implements IPersonasDAO {
         entityManager.close();
         
         return personas;
-//        EntityManager entityManager = this.conexion.crearConexion();
-//
-//        //Objeto consulta que se esta construyendo
-//        String jpqlQuery = """
-//                           SELECT p FROM Persona p
-//                           """;
-//        //Consulta construida
-//        TypedQuery<Persona> query = entityManager.createQuery(jpqlQuery, Persona.class);
-//        List<Persona> personas = query.getResultList();
-//        entityManager.close();
-//        return personas;
     }
 
     /**
      * Obtiene una persona mediante un id
-     *
      * @param id valor del id
      * @return regresa el objeto de tipo persona
      */
     @Override
-    public Persona consultarPeresona(int rfc)throws PersistenciaException {
+    public Persona consultarPeresona(String rfc)throws PersistenciaException {
 
         EntityManager entityManager = this.conexion.crearConexion();
         
-
         try {
             String jpqlQuery = """
                            SELECT p FROM Persona p Where p.rfc = :rfc
@@ -103,4 +89,7 @@ public class PersonasDAO implements IPersonasDAO {
         }
 
     }
+    
+    
+    
 }

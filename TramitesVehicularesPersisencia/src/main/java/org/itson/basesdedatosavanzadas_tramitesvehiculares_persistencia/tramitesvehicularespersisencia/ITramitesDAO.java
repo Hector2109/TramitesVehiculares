@@ -5,7 +5,9 @@
 package org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia.tramitesvehicularespersisencia;
 
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.dto.LicenciaDTO;
+import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.dto.PersonaDTO;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.dto.TramiteDTO;
+import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia_entidad.tramitesvehicularespersisencia.Licencia;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia_entidad.tramitesvehicularespersisencia.Tramite;
 
 /**
@@ -13,6 +15,8 @@ import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia_entidad.
  * @author Abe
  */
 public interface ITramitesDAO {
-    public Tramite realizarTramiteLicencia(LicenciaDTO licenciaDTO);
+    public Licencia realizarTramiteLicencia(PersonaDTO personaDTO, int anios);
+    
+
     
 }

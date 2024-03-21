@@ -8,12 +8,26 @@ import java.util.Date;
 
 /**
  *
- * @author Abe
+ * @author Hector Espinoza
  */
 public class TramiteDTO {
     
     private Date fecha_tramite;
 
     private Float costo; 
+    
+    private PersonaDTO personaDTO;
+
+    public Date getFecha_tramite() {
+        return fecha_tramite;
+    }
+
+    public Float getCosto() {
+        return costo;
+    }
+
+    public PersonaDTO getPersonaDTO() {
+        return personaDTO;
+    }
     
 }
