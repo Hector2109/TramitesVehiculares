@@ -5,11 +5,13 @@
 package org.itson.basesdedatosavanzadas_tramitesvehiculares_principal.tramitesvehiculares;
 
 import java.util.List;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.IPersonaBO;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.ITramiteBO;
+import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.NegocioException;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.PersonaBO;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.TramiteBO;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.dto.PersonaDTO;
@@ -399,7 +401,11 @@ public class RegistrarLicencia extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(this,"Selecciona año de vigencia", "Año de vigencia",JOptionPane.WARNING_MESSAGE );
         }
         else{
-            tramiteBO.generarLicencia(personaSeleccionada,anio);
+            try {
+                tramiteBO.generarLicencia(personaSeleccionada,anio);
+            } catch (NegocioException ex) {
+                JOptionPane.showMessageDialog(rootPane, ex.getMessage(), "Error en generar licencia", JOptionPane.ERROR_MESSAGE);
+            }
             
         }
         

@@ -36,15 +36,15 @@ public class Principal {
         
         PersonaBO personaBO = new PersonaBO();
 //        
-//        DlgPrincipal principal = new DlgPrincipal(conexion);
+        DlgPrincipal principal = new DlgPrincipal(conexion);
 //     
-//        personaBO.insercionMasiva();
-//        RegistrarLicencia RL = new RegistrarLicencia(principal, true);
-//        RL.setVisible(true);
+        personaBO.insercionMasiva();
+        RegistrarLicencia RL = new RegistrarLicencia(principal, true);
+        RL.setVisible(true);
 
-          Fecha fecha1 = new Fecha();
-          Fecha fecha2 = new Fecha("2026-03-22");
-          System.out.println(fecha2.calcularDiferenciaAnios(fecha1));
+//          Fecha fecha1 = new Fecha();
+//          Fecha fecha2 = new Fecha("2026-03-22");
+//          System.out.println(fecha2.calcularDiferenciaAnios(fecha1));
 
 //        DlgPrincipal principal = new DlgPrincipal(conexion);
 //        principal.setVisible(true);
