@@ -63,99 +63,99 @@ public class PersonaBO implements IPersonaBO {
                 AESEncriptador.encriptar("8540598502"),
                 Discapacidad.NO_DISCAPACITADO);
         Persona persona6 = new Persona(
-                new Fecha(""), "ASD8504840F1",
+                new Fecha("2003-04-02"), "ASD8504840F1",
                 "FELIPE",
                 "VAZQUEZ",
                 "PALOMO",
                 AESEncriptador.encriptar("8405950150"),
                 Discapacidad.NO_DISCAPACITADO);
         Persona persona7 = new Persona(
-                new Fecha(), "IFS01235840G1",
+                new Fecha("2002-05-13"), "IFS01235840G1",
                 "LUISA",
                 "GALAVIZ",
                 AESEncriptador.encriptar("6840806204"),
                 Discapacidad.DISCAPACITADO);
         Persona persona8 = new Persona(
-                new Fecha(), "NRB84039508H1",
+                new Fecha("1989-07-25"), "NRB84039508H1",
                 "MARIA GILA",
                 "HURTADO ",
                 AESEncriptador.encriptar("5587058901"),
                 Discapacidad.NO_DISCAPACITADO);
         Persona persona9 = new Persona(
-                new Fecha(), "OPS84058904I1",
+                new Fecha("2000-07-01"), "OPS84058904I1",
                 "PABLO",
                 "CARDONA",
                 "VIDALES",
                 AESEncriptador.encriptar("8540598502"),
                 Discapacidad.NO_DISCAPACITADO);
         Persona persona10 = new Persona(
-                new Fecha(), "OJQ54035904J1",
+                new Fecha("2004-02-07"), "OJQ54035904J1",
                 "MA SOCORRO",
                 "NIÑO",
                 "RUIZ ",
                 AESEncriptador.encriptar("8504803501"),
                 Discapacidad.NO_DISCAPACITADO);
         Persona persona11 = new Persona(
-                new Fecha(), "ABE41090450K1",
+                new Fecha("1990-12-12"), "ABE41090450K1",
                 "ABEL",
                 "SANCHEZ",
                 "GUERRERO",
                 AESEncriptador.encriptar("6447059660"),
                 Discapacidad.NO_DISCAPACITADO);
         Persona persona12 = new Persona(
-                new Fecha(), "SIH84056809L1",
+                new Fecha("1999-11-23"), "SIH84056809L1",
                 "HIPOLITO",
                 "QUIROZ",
                 AESEncriptador.encriptar("8059055096"),
                 Discapacidad.NO_DISCAPACITADO);
         Persona persona13 = new Persona(
-                new Fecha(), "TSG80650196M1",
+                new Fecha("1995-10-13"), "TSG80650196M1",
                 "PEDRO",
                 "MORENO",
                 AESEncriptador.encriptar("6084805502"),
                 Discapacidad.NO_DISCAPACITADO);
         Persona persona14 = new Persona(
-                new Fecha(), "RQX50150365N1",
+                new Fecha("1970-09-22"), "RQX50150365N1",
                 "CECILIA",
                 "MARTINEZ",
                 AESEncriptador.encriptar("6889032324"),
                 Discapacidad.NO_DISCAPACITADO);
         Persona persona15 = new Persona(
-                new Fecha(), "TMA84601503O1",
+                new Fecha("2005-01-02"), "TMA84601503O1",
                 "ABDON",
                 "TORRES",
                 AESEncriptador.encriptar("8406650120"),
                 Discapacidad.DISCAPACITADO);
         Persona persona16 = new Persona(
-                new Fecha(), "INS45095024P1",
+                new Fecha("2008-02-23"), "INS45095024P1",
                 "ELEAZAR",
                 "SILOS",
                 "SORIANO",
                 AESEncriptador.encriptar("8049503405"),
                 Discapacidad.NO_DISCAPACITADO);
         Persona persona17 = new Persona(
-                new Fecha(), "YSN840350S4Q1",
+                new Fecha("2010-06-21"), "YSN840350S4Q1",
                 "JUANA",
                 "TOVAR",
                 "GUEVARA",
                 AESEncriptador.encriptar("8506005848"),
                 Discapacidad.NO_DISCAPACITADO);
         Persona persona18 = new Persona(
-                new Fecha(), "TLQ84060324R1",
+                new Fecha("2006-02-02"), "TLQ84060324R1",
                 "TELESFORO",
                 "REYNA",
                 "RODRIGUEZ",
                 AESEncriptador.encriptar("8409504806"),
                 Discapacidad.NO_DISCAPACITADO);
         Persona persona19 = new Persona(
-                new Fecha(), "JNA80368502S1",
+                new Fecha("2007-11-15"), "JNA80368502S1",
                 "JUAN SANTOS",
                 "GARCIA",
                 "RODRIGUEZ",
                 AESEncriptador.encriptar("8098801544"),
                 Discapacidad.NO_DISCAPACITADO);
         Persona persona20 = new Persona(
-                new Fecha(), "ANS84022305T1",
+                new Fecha("2015-02-08"), "ANS84022305T1",
                 "ARACELI",
                 "DOMINGUEZ",
                 "TORRES ",
