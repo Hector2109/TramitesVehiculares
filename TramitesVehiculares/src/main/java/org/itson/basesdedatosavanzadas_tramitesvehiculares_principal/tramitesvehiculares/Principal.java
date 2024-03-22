@@ -36,10 +36,7 @@ public class Principal {
 
         PersonaBO personaBO = new PersonaBO();
 
-        DlgPrincipal principal = new DlgPrincipal(conexion);
-
-        personaBO.insercionMasiva();
-        DlgPrincipal2 DP = new DlgPrincipal2(conexion);
+        DlgPrincipal DP = new DlgPrincipal(conexion);
         DP.setVisible(true);
 
 
