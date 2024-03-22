@@ -6,6 +6,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceException;
+import javax.persistence.TypedQuery;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia.tramitesvehicularespersisencia_encriptacion.Fecha;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.dto.PersonaDTO;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia.excepciones.PersistenciaException;
@@ -23,9 +24,9 @@ public class TramitesDAO implements ITramitesDAO {
     static final Logger logger = Logger.getLogger(PersonasDAO.class.getName());
 
     /**
-     * Construuctor que recibe un objeto d conexión para lograr
-     * acceder a la BD
-     * @param conexion conexión 
+     * Construuctor que recibe un objeto d conexión para lograr acceder a la BD
+     *
+     * @param conexion conexión
      */
     public TramitesDAO(IConexion conexion) {
         this.conexion = conexion;
@@ -41,35 +42,32 @@ public class TramitesDAO implements ITramitesDAO {
      * @throws PersistenceException en caso de no poder persistir la licencia
      */
     @Override
-    public Licencia realizarTramiteLicencia(PersonaDTO personaDTO, int anios) throws PersistenceException{
+    public Licencia realizarTramiteLicencia(PersonaDTO personaDTO, int anios, String numeroLicencia) throws PersistenceException {
 
         Persona persona = new Persona();
         try {
             persona = personasDAO.consultarPersona(personaDTO.getRfc());
-            
 
-            
             Licencia licencia = new Licencia();
             licencia.setPersona(persona);
             Fecha fechaTramite = new Fecha();
             licencia.setFecha_tramite(fechaTramite);
             Fecha fecha_vigencia = new Fecha();
             fecha_vigencia.add(Calendar.YEAR, anios);
-            //prueba hardcodeada
-            licencia.setNumero_licencia("123456789");
+            licencia.setNumero_licencia(numeroLicencia);
+            licencia.setEstado(Byte.valueOf("1"));
 
             if (anios == 1) {
 
-                
                 licencia.setVigencia(fecha_vigencia);
                 if (persona.getDiscapacidad().equals("DISCAPACITADO")) {
                     licencia.setCosto(200.0F);
                 } else {
                     licencia.setCosto(600.0F);
                 }
-                
+
             } else if (anios == 2) {
-                
+
                 licencia.setPersona(persona);
                 licencia.setVigencia(fecha_vigencia);
                 if (persona.getDiscapacidad().equals("DISCAPACITADO")) {
@@ -77,9 +75,9 @@ public class TramitesDAO implements ITramitesDAO {
                 } else {
                     licencia.setCosto(900.0F);
                 }
-                
+
             } else if (anios == 3) {
-                
+
                 licencia.setPersona(persona);
                 licencia.setVigencia(fecha_vigencia);
                 if (persona.getDiscapacidad().equals("DISCAPACITADO")) {
@@ -88,22 +86,48 @@ public class TramitesDAO implements ITramitesDAO {
                     licencia.setCosto(1100.0F);
                 }
             }
-            
+
             EntityManager em = conexion.crearConexion();
             em.getTransaction().begin();
             em.persist(licencia);
             em.getTransaction().commit();
             em.close();
-            
-            return licencia;
-            
 
+            return licencia;
 
         } catch (PersistenciaException ex) {
             Logger.getLogger(TramitesDAO.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
-         throw new PersistenceException("No se ha podido realizar el registro de licencia");
+            throw new PersistenceException("No se ha podido realizar el registro de licencia");
         }
-        
+
     }
 
+    /**
+     * Método para buscar si una licenciaxiste a través de su número
+     *
+     * @param numeroLicencia número de licencia
+     * @return La licencia si encuentra
+     */
+    @Override
+    public Licencia buscarLicenciaNumero(String numeroLicencia) {
+        
+        EntityManager entityManager = this.conexion.crearConexion();
+
+        Licencia licencia;
+        
+        String jpqlQuery = """
+                           SELECT l FROM Licencia l
+                           WHERE l.numero_licencia = :numero_licencia
+                           """;
+        TypedQuery<Licencia> query = entityManager.createQuery(jpqlQuery, Licencia.class);
+        query.setParameter("numero_licencia", numeroLicencia);
+        try{
+        licencia = query.getSingleResult();
+        entityManager.close();
+        }catch (PersistenceException ex){
+            return null;
+        }
+        
+        return licencia;
+    }
 }
