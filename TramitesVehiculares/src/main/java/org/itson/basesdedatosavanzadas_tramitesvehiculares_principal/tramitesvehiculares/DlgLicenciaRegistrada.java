@@ -24,8 +24,8 @@ public class DlgLicenciaRegistrada extends javax.swing.JDialog {
         
         lblNumeroLicencia.setText(licenciaDTO.getNumero_licencia());
         lblCosto.setText(String.valueOf(licenciaDTO.getCosto()));
-        lblVigencia.setText(licenciaDTO.getFecha_tramite().toString());
-        
+        String vigencia = licenciaDTO.getVigencia().toString();
+        lblVigencia.setText(vigencia);
     }
 
     /**
@@ -157,6 +157,7 @@ public class DlgLicenciaRegistrada extends javax.swing.JDialog {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
