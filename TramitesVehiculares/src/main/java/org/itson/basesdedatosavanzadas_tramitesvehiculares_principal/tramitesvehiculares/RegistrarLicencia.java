@@ -64,10 +64,9 @@ public class RegistrarLicencia extends javax.swing.JDialog {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        txtCURP = new javax.swing.JTextField();
+        txtRFC = new javax.swing.JTextField();
         txtNombre = new javax.swing.JTextField();
         txtAnio = new javax.swing.JTextField();
-        btnBuscar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblPersonas = new javax.swing.JTable();
         rdbtn1 = new javax.swing.JRadioButton();
@@ -190,9 +189,14 @@ public class RegistrarLicencia extends javax.swing.JDialog {
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 30)); // NOI18N
         jLabel5.setText("Años de vigencia");
 
-        txtCURP.addActionListener(new java.awt.event.ActionListener() {
+        txtRFC.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtCURPActionPerformed(evt);
+                txtRFCActionPerformed(evt);
+            }
+        });
+        txtRFC.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtRFCKeyTyped(evt);
             }
         });
 
@@ -212,13 +216,9 @@ public class RegistrarLicencia extends javax.swing.JDialog {
                 txtAnioActionPerformed(evt);
             }
         });
-
-        btnBuscar.setBackground(new java.awt.Color(62, 117, 225));
-        btnBuscar.setForeground(new java.awt.Color(255, 255, 255));
-        btnBuscar.setText("Buscar");
-        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBuscarActionPerformed(evt);
+        txtAnio.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtAnioKeyTyped(evt);
             }
         });
 
@@ -289,15 +289,12 @@ public class RegistrarLicencia extends javax.swing.JDialog {
                                 .addComponent(jLabel2))
                             .addGap(42, 42, 42)
                             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txtCURP, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtRFC, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jLabel6))
                             .addGap(18, 18, 18)
                             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(jLabel4)
-                                .addGroup(jPanel2Layout.createSequentialGroup()
-                                    .addComponent(txtAnio, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(29, 29, 29)
-                                    .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                .addComponent(txtAnio, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addGap(81, 81, 81))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -328,12 +325,10 @@ public class RegistrarLicencia extends javax.swing.JDialog {
                         .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(txtCURP, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(txtAnio, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtRFC, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtAnio, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
@@ -377,9 +372,9 @@ public class RegistrarLicencia extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnConsultasActionPerformed
 
-    private void txtCURPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCURPActionPerformed
+    private void txtRFCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtRFCActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtCURPActionPerformed
+    }//GEN-LAST:event_txtRFCActionPerformed
 
     private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
         // TODO add your handling code here:
@@ -431,15 +426,31 @@ public class RegistrarLicencia extends javax.swing.JDialog {
         } else {
             limpiarTabla();
             consultarSimilar();
-            System.out.println("metodo siliares");
 
         }
     }//GEN-LAST:event_txtNombreKeyTyped
 
-    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        limpiarTabla();
-        consultarSimilar();
-    }//GEN-LAST:event_btnBuscarActionPerformed
+    private void txtRFCKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRFCKeyTyped
+        if (txtRFC.getText().isBlank()) {
+            limpiarTabla();
+            consultar();
+        } else {
+            limpiarTabla();
+            consultarSimilarRFC();
+
+        }
+    }//GEN-LAST:event_txtRFCKeyTyped
+
+    private void txtAnioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAnioKeyTyped
+        if (txtAnio.getText().isBlank()) {
+            limpiarTabla();
+            consultar();
+        } else {
+            limpiarTabla();
+            consultarAnio();
+
+        }
+    }//GEN-LAST:event_txtAnioKeyTyped
 
     public void limpiarTabla() {
         for (int i = 0; i < tblPersonas.getRowCount(); i++) {
@@ -476,7 +487,7 @@ public class RegistrarLicencia extends javax.swing.JDialog {
 
     private void consultarSimilar() {
         try {
-            List<PersonaDTO> listaPersonas = personaBO.consultarPersonaSimilar(txtNombre.getText());
+            List<PersonaDTO> listaPersonas = personaBO.consultarPersonasSimilar(txtNombre.getText());
             Object[] personaFila = new Object[3];
             modelo = (DefaultTableModel) tblPersonas.getModel();
             for (PersonaDTO persona : listaPersonas) {
@@ -496,12 +507,58 @@ public class RegistrarLicencia extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(this, "No se puede acceder a las personas", "Error de consulta",
                     JOptionPane.ERROR_MESSAGE);
         }
+    }
+    
+    private void consultarSimilarRFC() {
+        try {
+            List<PersonaDTO> listaPersonas = personaBO.consultarPersonasSimilarRFC(txtRFC.getText());
+            Object[] personaFila = new Object[3];
+            modelo = (DefaultTableModel) tblPersonas.getModel();
+            for (PersonaDTO persona : listaPersonas) {
+                if (persona.getApellido_materno() != null) {
+                    personaFila[0] = persona.getNombre() + " " + persona.getApellido_paterno() + " " + persona.getApellido_materno();
+                } else {
+                    personaFila[0] = persona.getNombre() + " " + persona.getApellido_paterno();
+                }
+                personaFila[1] = persona.getRfc();
+                personaFila[2] = persona.getFecha_nacimiento();
 
+                modelo.addRow(personaFila);
+            }
+
+            tblPersonas.setModel(modelo);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "No se puede acceder a las personas", "Error de consulta",
+                    JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
+     private void consultarAnio() {
+        try {
+            List<PersonaDTO> listaPersonas = personaBO.consultarPersonasAnio(txtAnio.getText());
+            Object[] personaFila = new Object[3];
+            modelo = (DefaultTableModel) tblPersonas.getModel();
+            for (PersonaDTO persona : listaPersonas) {
+                if (persona.getApellido_materno() != null) {
+                    personaFila[0] = persona.getNombre() + " " + persona.getApellido_paterno() + " " + persona.getApellido_materno();
+                } else {
+                    personaFila[0] = persona.getNombre() + " " + persona.getApellido_paterno();
+                }
+                personaFila[1] = persona.getRfc();
+                personaFila[2] = persona.getFecha_nacimiento();
+
+                modelo.addRow(personaFila);
+            }
+
+            tblPersonas.setModel(modelo);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "No se puede acceder a las personas", "Error de consulta",
+                    JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bntPlacas;
-    private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnConsultas;
     private javax.swing.ButtonGroup btnGroupAnio;
     private javax.swing.JButton btnInicio;
@@ -523,7 +580,7 @@ public class RegistrarLicencia extends javax.swing.JDialog {
     private javax.swing.JTable tblPersonas;
     private javax.swing.JButton tbnPersonas;
     private javax.swing.JTextField txtAnio;
-    private javax.swing.JTextField txtCURP;
     private javax.swing.JTextField txtNombre;
+    private javax.swing.JTextField txtRFC;
     // End of variables declaration//GEN-END:variables
 }

@@ -38,5 +38,27 @@ public interface IPersonasDAO {
      */
     public Persona consultarPersona(String rfc)throws PersistenciaException;
     
-    public List<Persona> buscarPersonaSimilar(String nombre) throws PersistenciaException;
+    /**
+     * Este metodo busca nombres similares que incluyan algunos valores
+     * @param nombre valor del nombre a buscar
+     * @return regresa la lista de personas que tienen ese nombre
+     * @throws PersistenciaException lanza excepcion en caso de error
+     */
+    public List<Persona> buscarPersonasSimilar(String nombre) throws PersistenciaException;
+    
+    /**
+     * Este metodo busca RFC que incluyan algunos valores
+     * @param rfc valor del rfc
+     * @return regresa la lista de personas que tienen ese rfc
+     * @throws PersistenciaException lanza excepcion en caso de error
+     */
+    public List<Persona> buscarRFCSimilar(String rfc) throws PersistenciaException;
+    
+    /**
+     * Este metodo busca fecha de nacimiento que incluyan algunos valores
+     * @param anio valor del año
+     * @return regresa la lista de personas que tienen ese año
+     * @throws PersistenciaException lanza excepcion en caso de error
+     */
+    public List<Persona> buscarAnioSimilar(String anio) throws PersistenciaException;
 }
