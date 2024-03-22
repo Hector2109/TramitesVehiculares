@@ -55,7 +55,7 @@ public class PersonaBO implements IPersonaBO {
                 new Fecha("1997-01-15"), "AAO84054084C1",
                 "AGUSTIN",
                 "VAZQUEZ",
-                "SANFecha",
+                "SANCHEZ",
                 AESEncriptador.encriptar("6485506340"),
                 Discapacidad.DISCAPACITADO);
         Persona persona4 = new Persona(

@@ -384,6 +384,7 @@ public class RegistrarLicencia extends javax.swing.JDialog {
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 0, 810, 640));
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInicioActionPerformed
@@ -445,9 +446,9 @@ public class RegistrarLicencia extends javax.swing.JDialog {
             
             try {
                 tramiteBO.generarLicencia(personaSeleccionada, anio);
-//                LicenciaDTO licencia = buscarLicencia(personaSeleccionada);
-//                DlgLicenciaRegistrada LR = new DlgLicenciaRegistrada(this, rootPaneCheckingEnabled, licencia);
-//                
+                LicenciaDTO licencia = tramiteBO.buscarLicencia(personaSeleccionada);
+                DlgLicenciaRegistrada LR = new DlgLicenciaRegistrada(this, true, licencia);
+                LR.setVisible(true);
                 
             } catch (NegocioException ex) {
                 JOptionPane.showMessageDialog(this, ex.getMessage(), "Error de tramite", JOptionPane.ERROR_MESSAGE);
