@@ -110,24 +110,47 @@ public class TramitesDAO implements ITramitesDAO {
      */
     @Override
     public Licencia buscarLicenciaNumero(String numeroLicencia) {
-        
+
         EntityManager entityManager = this.conexion.crearConexion();
 
         Licencia licencia;
-        
+
         String jpqlQuery = """
                            SELECT l FROM Licencia l
                            WHERE l.numero_licencia = :numero_licencia
                            """;
         TypedQuery<Licencia> query = entityManager.createQuery(jpqlQuery, Licencia.class);
         query.setParameter("numero_licencia", numeroLicencia);
-        try{
-        licencia = query.getSingleResult();
-        entityManager.close();
-        }catch (PersistenceException ex){
+        try {
+            licencia = query.getSingleResult();
+            entityManager.close();
+        } catch (PersistenceException ex) {
             return null;
         }
-        
+
+        return licencia;
+    }
+
+    @Override
+    public Licencia buscarLicenciaActiva(PersonaDTO persona) {
+
+        EntityManager entityManager = this.conexion.crearConexion();
+        Licencia licencia;
+        String jpqlQuery = """
+                   SELECT l FROM Licencia l
+                   JOIN l.persona p
+                   WHERE p.rfc = :rfc
+                   AND l.estado = 1
+                   """;
+        TypedQuery<Licencia> query = entityManager.createQuery(jpqlQuery, Licencia.class);
+        query.setParameter("rfc", persona.getRfc());
+        try {
+            licencia = query.getSingleResult();
+        } catch (PersistenceException ex) {
+            licencia = null;
+        } finally {
+            entityManager.close();
+        }
         return licencia;
     }
 }

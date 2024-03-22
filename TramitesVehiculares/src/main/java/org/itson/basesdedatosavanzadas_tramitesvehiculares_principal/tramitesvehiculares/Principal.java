@@ -43,6 +43,7 @@ public class Principal {
         RL.setVisible(true);
 
 
+
 //        DlgPrincipal principal = new DlgPrincipal(conexion);
 //        principal.setVisible(true);
 //        EntityManager em = conexion.crearConexion();

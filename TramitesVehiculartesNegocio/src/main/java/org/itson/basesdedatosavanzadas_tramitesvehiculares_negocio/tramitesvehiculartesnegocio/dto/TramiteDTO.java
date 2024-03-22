@@ -21,7 +21,7 @@ public class TramiteDTO {
     /**
      * Representa el costo asociado a la licencia.
      */
-    private Float costo;
+    protected Float costo;
 
     /**
      * Representa los datos de la persona asociada a la licencia en formato de

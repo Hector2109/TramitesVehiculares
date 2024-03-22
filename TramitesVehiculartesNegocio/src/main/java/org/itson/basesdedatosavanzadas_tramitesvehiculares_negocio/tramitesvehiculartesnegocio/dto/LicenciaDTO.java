@@ -18,11 +18,22 @@ public class LicenciaDTO extends TramiteDTO{
     
     private byte estado;
 
-    public LicenciaDTO(String numero_licencia, GregorianCalendar vigencia, byte estado) {
+    public LicenciaDTO(
+            String numero_licencia, 
+            GregorianCalendar vigencia, 
+            byte estado,
+            Float costo) {
         this.numero_licencia = numero_licencia;
         this.vigencia = vigencia;
         this.estado = estado;
+        super.costo = costo;
+        
     }
+
+    public LicenciaDTO() {
+    }
+    
+    
 
     
     /**

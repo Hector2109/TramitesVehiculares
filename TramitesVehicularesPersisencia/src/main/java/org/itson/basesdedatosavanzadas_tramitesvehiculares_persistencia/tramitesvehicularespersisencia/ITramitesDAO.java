@@ -30,4 +30,11 @@ public interface ITramitesDAO {
      * @return La licencia si encuentra
      */
     public Licencia buscarLicenciaNumero (String numeroLicencia)throws PersistenceException;
+    
+    /**
+     * Método que busca una licencia activa consultando los datos de una persona DTO
+     * @param persona persona DTO
+     * @return 
+     */
+    public Licencia buscarLicenciaActiva (PersonaDTO persona);
 }
