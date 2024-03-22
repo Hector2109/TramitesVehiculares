@@ -5,8 +5,14 @@ import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.CriteriaUpdate;
+import javax.persistence.criteria.Root;
+import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.dto.LicenciaDTO;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia.tramitesvehicularespersisencia_encriptacion.Fecha;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.dto.PersonaDTO;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia.excepciones.PersistenciaException;
@@ -152,5 +158,40 @@ public class TramitesDAO implements ITramitesDAO {
             entityManager.close();
         }
         return licencia;
+    }
+
+    @Override
+    public Licencia desactivarLicencia(LicenciaDTO licencia) throws PersistenceException {
+        EntityManager entityManager = this.conexion.crearConexion();
+        EntityTransaction transaction = null;
+
+        try {
+            CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+            CriteriaUpdate<Licencia> criteriaUpdate = criteriaBuilder.createCriteriaUpdate(Licencia.class);
+            Root<Licencia> licenciaRoot = criteriaUpdate.from(Licencia.class);
+
+            criteriaUpdate.set(licenciaRoot.get("estado"), Byte.valueOf("0"));
+            criteriaUpdate.where(criteriaBuilder.equal(licenciaRoot.get("numero_licencia"), licencia.getNumero_licencia()));
+            transaction = entityManager.getTransaction();
+            transaction.begin();
+
+            int filasActualizadas = entityManager.createQuery(criteriaUpdate).executeUpdate();
+
+            transaction.commit();
+
+            if (filasActualizadas > 0) {
+                return entityManager.find(Licencia.class, licencia.getNumero_licencia());
+            } else {
+                throw new PersistenceException("No se encontró ninguna licencia con el número: " + licencia.getNumero_licencia());
+            }
+        } catch (PersistenceException e) {
+            if (transaction != null && transaction.isActive()) {
+                transaction.rollback();
+            }
+
+            throw e;
+        } finally {
+            entityManager.close();
+        }
     }
 }
