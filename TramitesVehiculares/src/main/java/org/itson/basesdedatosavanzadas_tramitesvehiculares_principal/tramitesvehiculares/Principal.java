@@ -14,6 +14,7 @@ import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia.tramites
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia.tramitesvehicularespersisencia.IConexion;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia.tramitesvehicularespersisencia.IPersonasDAO;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia.tramitesvehicularespersisencia.PersonasDAO;
+import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia.tramitesvehicularespersisencia_encriptacion.Fecha;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia_entidad.tramitesvehicularespersisencia.Persona;
 
 /**
@@ -34,12 +35,16 @@ public class Principal {
 
         
         PersonaBO personaBO = new PersonaBO();
-        
-        DlgPrincipal principal = new DlgPrincipal(conexion);
-     
-        personaBO.insercionMasiva();
-        RegistrarLicencia RL = new RegistrarLicencia(principal, true);
-        RL.setVisible(true);
+//        
+//        DlgPrincipal principal = new DlgPrincipal(conexion);
+//     
+//        personaBO.insercionMasiva();
+//        RegistrarLicencia RL = new RegistrarLicencia(principal, true);
+//        RL.setVisible(true);
+
+          Fecha fecha1 = new Fecha();
+          Fecha fecha2 = new Fecha("2026-03-22");
+          System.out.println(fecha2.calcularDiferenciaAnios(fecha1));
 
 //        DlgPrincipal principal = new DlgPrincipal(conexion);
 //        principal.setVisible(true);

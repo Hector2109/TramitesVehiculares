@@ -1,4 +1,4 @@
-package org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio;
+package org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia.tramitesvehicularespersisencia_encriptacion;
 
 import java.util.Calendar;
 import static java.util.Calendar.MONTH;
@@ -149,6 +149,29 @@ public class Fecha extends GregorianCalendar {
                 mes = "Diciembre";
         }
         return getDia() + " de " + mes + " de " + getAnio();
+    }
+    /**
+     * Calcula la diferencia en años entre esta fecha y otra fecha dada.
+     *
+     * @param otraFecha La otra fecha con la que se compara.
+     * @return La diferencia en años entre las dos fechas.
+     */
+    public int calcularDiferenciaAnios(Fecha fechaCalcular) {
+        int anioActual = getAnio();
+        int mesActual = getMes();
+        int diaActual = getDia();
+
+        int anioCalcular = fechaCalcular.getAnio();
+        int mesCalcular = fechaCalcular.getMes();
+        int diaCalcular = fechaCalcular.getDia();
+
+        int diferencia = anioActual - anioCalcular;
+
+        if (mesActual < mesCalcular || (mesActual == mesCalcular && diaActual < diaCalcular)) {
+            diferencia--;
+        }
+
+        return diferencia;
     }
 
     /**
