@@ -95,7 +95,7 @@ public class PersonasDAO implements IPersonasDAO {
     }
 
     @Override
-    public List<Persona> buscarPersonaSimilar(String nombre) throws PersistenciaException {
+    public List<Persona> buscarPersonasSimilar(String nombre) throws PersistenciaException {
         EntityManager entityManager = this.conexion.crearConexion();
 
         try {
@@ -109,15 +109,57 @@ public class PersonasDAO implements IPersonasDAO {
             query.setParameter("nombre", "%" + nombre + "%");
             List<Persona> personas = query.getResultList();
             return personas;
-            
+
         } catch (PersistenceException e) {
             logger.log(Level.SEVERE, "No se pudo consultar a la persona.", e);
             throw new PersistenciaException("No se pudo consultar a la persona", e);
-        }
-        finally{
+        } finally {
             entityManager.close();
         }
-              
+
+    }
+
+    @Override
+    public List<Persona> buscarRFCSimilar(String rfc) throws PersistenciaException {
+        EntityManager entityManager = this.conexion.crearConexion();
+
+        try {
+            String jpqlQuery = """
+                               SELECT p FROM Persona p 
+                               WHERE p.rfc LIKE :rfc 
+                               """;
+            TypedQuery<Persona> query = entityManager.createQuery(jpqlQuery, Persona.class);
+            query.setParameter("rfc", "%" + rfc + "%");
+            List<Persona> personas = query.getResultList();
+            return personas;
+
+        } catch (PersistenceException e) {
+            logger.log(Level.SEVERE, "No se pudo consultar a la persona.", e);
+            throw new PersistenciaException("No se pudo consultar a la persona", e);
+        } finally {
+            entityManager.close();
+        }
+    }
+
+    @Override
+    public List<Persona> buscarAnioSimilar(String anio) throws PersistenciaException {
+        EntityManager entitymanager = conexion.crearConexion();
+        try {
+            String jpqlQuery = """
+                SELECT p FROM Persona p 
+                WHERE FUNCTION('YEAR', p.fecha_nacimiento) = :anio
+                """;
+            TypedQuery<Persona> query = entitymanager.createQuery(jpqlQuery, Persona.class);
+            query.setParameter("anio", anio);
+            List<Persona> personas = query.getResultList();
+            return personas;
+        } catch (PersistenceException e) {
+            logger.log(Level.SEVERE, "No se pudo consultar a la persona.", e);
+            throw new PersistenciaException("No se pudo consultar a la persona", e);
+        } finally {
+            entitymanager.close();
+        }
+
     }
 
 }

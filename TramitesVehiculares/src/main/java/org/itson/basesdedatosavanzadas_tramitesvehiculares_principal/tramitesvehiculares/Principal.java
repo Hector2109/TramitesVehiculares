@@ -40,13 +40,8 @@ public class Principal {
 
         personaBO.insercionMasiva();
         RegistrarLicencia RL = new RegistrarLicencia(principal, true);
-//        RL.setVisible(true);
+        RL.setVisible(true);
 
-        List<PersonaDTO> personaSimilares = personaBO.consultarPersonaSimilar("cecilia");
-        for (PersonaDTO personaSimilare : personaSimilares) {
-            System.out.println(personaSimilare);
-        }
-        System.out.println("holas");
 
 //        DlgPrincipal principal = new DlgPrincipal(conexion);
 //        principal.setVisible(true);

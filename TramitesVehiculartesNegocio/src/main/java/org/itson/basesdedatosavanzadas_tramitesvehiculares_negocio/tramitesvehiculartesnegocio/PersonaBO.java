@@ -250,9 +250,9 @@ public class PersonaBO implements IPersonaBO {
      * @throws PersistenceException cuando ocurre un error de persistencia
      */
     @Override
-    public List<PersonaDTO> consultarPersonaSimilar(String nombre) throws PersistenceException {
+    public List<PersonaDTO> consultarPersonasSimilar(String nombre) throws PersistenciaException {
         try {
-            List<Persona> personas = personasDAO.buscarPersonaSimilar(nombre);
+            List<Persona> personas = personasDAO.buscarPersonasSimilar(nombre);
             List<PersonaDTO> personasDTO = new ArrayList<>();
 
             for (Persona persona : personas) {
@@ -262,6 +262,55 @@ public class PersonaBO implements IPersonaBO {
                         persona.getNombre(), 
                         persona.getApellido_paterno(), 
                         persona.getApellido_materno());
+                personasDTO.add(personaDTO);
+            }
+
+            return personasDTO;
+
+        } catch (PersistenciaException ex) {
+              Logger.getLogger(PersonaBO.class.getName()).log(Level.SEVERE, null, ex);
+              throw new PersistenceException("No se pueden consultar las personas");
+        }
+    }
+
+    @Override
+    public List<PersonaDTO> consultarPersonasSimilarRFC(String rfc) throws PersistenciaException {
+        try {
+            List<Persona> personas = personasDAO.buscarRFCSimilar(rfc);
+            List<PersonaDTO> personasDTO = new ArrayList<>();
+
+            for (Persona persona : personas) {
+                PersonaDTO personaDTO = new PersonaDTO(
+                        persona.getFecha_nacimiento(), 
+                        persona.getRfc(),
+                        persona.getNombre(), 
+                        persona.getApellido_paterno(), 
+                        persona.getApellido_materno());
+                personasDTO.add(personaDTO);
+            }
+
+            return personasDTO;
+
+        } catch (PersistenciaException ex) {
+              Logger.getLogger(PersonaBO.class.getName()).log(Level.SEVERE, null, ex);
+              throw new PersistenceException("No se pueden consultar las personas");
+        }
+    }
+
+    @Override
+    public List<PersonaDTO> consultarPersonasAnio(String anio) throws PersistenciaException {
+        try {
+            List<Persona> personas = personasDAO.buscarAnioSimilar(anio);
+            List<PersonaDTO> personasDTO = new ArrayList<>();
+
+            for (Persona persona : personas) {
+                PersonaDTO personaDTO = new PersonaDTO(
+                        persona.getFecha_nacimiento(), 
+                        persona.getRfc(),
+                        persona.getNombre(), 
+                        persona.getApellido_paterno(), 
+                        persona.getApellido_materno());
+                personasDTO.add(personaDTO);
             }
 
             return personasDTO;
