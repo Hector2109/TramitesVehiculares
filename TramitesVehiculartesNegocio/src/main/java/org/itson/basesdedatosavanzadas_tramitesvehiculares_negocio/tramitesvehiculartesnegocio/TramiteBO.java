@@ -33,33 +33,40 @@ public class TramiteBO implements ITramiteBO {
      * @return Objeto de LicenciaDTO
      */
     @Override
-    public LicenciaDTO generarLicencia(PersonaDTO persona, int anios) throws NegocioException{
+    public LicenciaDTO generarLicencia(PersonaDTO persona, int anios) throws NegocioException {
         Fecha fechaActual = new Fecha();
         if (fechaActual.calcularDiferenciaAnios((Fecha) persona.getFecha_nacimiento()) >= 18) {
+
+            if (buscarLicencia(persona) != null) {
+
+            }
             Licencia licencia;
             String numeroLicencia = generarNumeroLicencia();
-            do{
+            do {
                 licencia = tramite.buscarLicenciaNumero(numeroLicencia);
-                if (licencia!=null){
+                if (licencia != null) {
                     numeroLicencia = generarNumeroLicencia();
                 }
-                
-            }while(licencia!=null);
-            
+
+            } while (licencia != null);
+
             licencia = tramite.realizarTramiteLicencia(persona, anios, numeroLicencia);
 
             LicenciaDTO licenciaDTO = new LicenciaDTO(
                     licencia.getNumero_licencia(),
                     licencia.getVigencia(),
-                    licencia.getEstado());
+                    licencia.getEstado(),
+                    licencia.getCosto());
             return licenciaDTO;
-        }else{
-            throw new NegocioException ("ERROR: La persona seleccionada no es mayor de edad");
+
+        } else {
+            throw new NegocioException("ERROR: La persona seleccionada no es mayor de edad");
         }
     }
 
     /**
      * Método que genera un número de licencia
+     *
      * @return retorna el número de licencia
      */
     @Override
@@ -67,13 +74,33 @@ public class TramiteBO implements ITramiteBO {
         Random random = new Random();
         StringBuilder numeroLicencia = new StringBuilder();
 
-
         for (int i = 0; i < 9; i++) {
-            int digito = random.nextInt(10); 
+            int digito = random.nextInt(10);
             numeroLicencia.append(digito);
         }
 
         return numeroLicencia.toString();
+    }
+
+    @Override
+    public LicenciaDTO buscarLicencia(PersonaDTO persona) {
+
+        Licencia licencia = tramite.buscarLicenciaActiva(persona);
+
+        if (licencia != null) {
+            LicenciaDTO licenciaDTO = new LicenciaDTO(
+                    licencia.getNumero_licencia(),
+                    licencia.getVigencia(),
+                    licencia.getEstado(),
+                    licencia.getCosto());
+            return licenciaDTO;
+
+        }else{
+            return null;
+        }
+
+        
+
     }
 
 }
