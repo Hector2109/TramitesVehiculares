@@ -22,11 +22,17 @@ public class PersonaBO implements IPersonaBO {
 
     private PersonasDAO personasDAO;
 
+    /**
+     * Constructor que instancia un objeto de PersonasBO
+     */
     public PersonaBO() {
         IConexion conexion = new Conexion();
         personasDAO = new PersonasDAO(conexion);
     }
 
+    /**
+     * Método el cual hace una inserción masiva de personas a la base de datos
+     */
     @Override
     public void insercionMasiva() {
 
@@ -188,6 +194,11 @@ public class PersonaBO implements IPersonaBO {
 
     }
 
+    /**
+     * Método el cuál nos regresa una lista de PersonaDTO
+     *
+     * @return lista de PersonaDTO
+     */
     @Override
     public List<PersonaDTO> consultar() {
 
@@ -206,24 +217,28 @@ public class PersonaBO implements IPersonaBO {
         return personasDTO;
     }
 
+    /**
+     * Método para consultar una PersonaDTO a través de su RFC
+     *
+     * @param rfc rfc de la persona
+     * @return PersonaDTO que se encontró con la rfc
+     */
     @Override
     public PersonaDTO consultarPersona(String rfc) {
         try {
             Persona persona = personasDAO.consultarPersona(rfc);
-             PersonaDTO personaDTO = new PersonaDTO(
-                    persona.getFecha_nacimiento() , 
-                     persona.getRfc(), 
-                     persona.getNombre(), 
-                     persona.getApellido_paterno(), 
-                     persona.getApellido_materno());
-             return personaDTO;
-            
+            PersonaDTO personaDTO = new PersonaDTO(
+                    persona.getFecha_nacimiento(),
+                    persona.getRfc(),
+                    persona.getNombre(),
+                    persona.getApellido_paterno(),
+                    persona.getApellido_materno());
+            return personaDTO;
+
         } catch (PersistenciaException ex) {
             Logger.getLogger(PersonaBO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
-    
-    
 
 }

@@ -56,12 +56,21 @@ public class Tramite implements Serializable {
         return fecha_tramite;
     }
 
+    /**
+     * Constructor que el cual crea una instancia de Tramite
+     * @param fecha_tramite fecha en que se realizó el tramite
+     * @param costo costo del trámite
+     * @param persona persona que realiza el trámite
+     */
     public Tramite(Fecha fecha_tramite, Float costo, Persona persona) {
         this.fecha_tramite = fecha_tramite;
         this.costo = costo;
         this.persona = persona;
     }
 
+    /**
+     * Constructor que el cual crea una instancia de Tramite
+     */
     public Tramite() {
     }
     

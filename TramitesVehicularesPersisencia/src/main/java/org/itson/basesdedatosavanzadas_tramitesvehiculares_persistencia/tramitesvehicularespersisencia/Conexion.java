@@ -11,6 +11,10 @@ import javax.persistence.Persistence;
  */
 public class Conexion implements IConexion{
 
+    /**
+     * Esté metodo crea la conexionde un EntityManager a la base de datos
+     * @return entitymanager con conexión a la bd
+     */
     @Override
     public EntityManager crearConexion() {
         EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("TramitesPU");

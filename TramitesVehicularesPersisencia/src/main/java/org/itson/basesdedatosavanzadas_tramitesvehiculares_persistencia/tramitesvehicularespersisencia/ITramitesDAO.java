@@ -4,7 +4,6 @@
  */
 package org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia.tramitesvehicularespersisencia;
 
-
 import javax.persistence.PersistenceException;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.dto.PersonaDTO;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia_entidad.tramitesvehicularespersisencia.Licencia;
@@ -14,15 +13,15 @@ import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia_entidad.
  * @author Abe
  */
 public interface ITramitesDAO {
+
     /**
      * Metodo para realizar tramite de licencia
-     * @param personaDTO
-     * @param anios
-     * @return
-     * @throws PersistenceException 
+     *
+     * @param personaDTO objeto de PersonaDTO
+     * @param anios años que se desea la licencia
+     * @return Licencia generada
+     * @throws PersistenceException en caso de no poder persistir la licencia
      */
     public Licencia realizarTramiteLicencia(PersonaDTO personaDTO, int anios) throws PersistenceException;
-    
 
-    
 }
