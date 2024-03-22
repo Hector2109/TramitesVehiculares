@@ -37,8 +37,10 @@ public class TramiteBO implements ITramiteBO {
         Fecha fechaActual = new Fecha();
         if (fechaActual.calcularDiferenciaAnios((Fecha) persona.getFecha_nacimiento()) >= 18) {
 
-            if (buscarLicencia(persona) != null) {
-
+            LicenciaDTO licenciaDTO1 = buscarLicencia(persona);
+            
+            if (licenciaDTO1 != null) {
+                tramite.desactivarLicencia(licenciaDTO1);
             }
             Licencia licencia;
             String numeroLicencia = generarNumeroLicencia();
@@ -52,12 +54,12 @@ public class TramiteBO implements ITramiteBO {
 
             licencia = tramite.realizarTramiteLicencia(persona, anios, numeroLicencia);
 
-            LicenciaDTO licenciaDTO = new LicenciaDTO(
+            LicenciaDTO licenciaDTO2 = new LicenciaDTO(
                     licencia.getNumero_licencia(),
                     licencia.getVigencia(),
                     licencia.getEstado(),
                     licencia.getCosto());
-            return licenciaDTO;
+            return licenciaDTO2;
 
         } else {
             throw new NegocioException("ERROR: La persona seleccionada no es mayor de edad");

@@ -5,6 +5,7 @@
 package org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia.tramitesvehicularespersisencia;
 
 import javax.persistence.PersistenceException;
+import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.dto.LicenciaDTO;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.dto.PersonaDTO;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia_entidad.tramitesvehicularespersisencia.Licencia;
 
@@ -37,4 +38,12 @@ public interface ITramitesDAO {
      * @return 
      */
     public Licencia buscarLicenciaActiva (PersonaDTO persona);
+    
+    /**
+     * Método usado para desactivar una licencia
+     * @param licenciaDTO Licencia que se desea desactiar
+     * @return Licencia desactivada
+     * @throws PersistenceException en caso de no encontrar la iicencia
+     */
+    public Licencia desactivarLicencia(LicenciaDTO licenciaDTO) throws PersistenceException;
 }
