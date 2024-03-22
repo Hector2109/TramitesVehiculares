@@ -15,6 +15,6 @@ public interface ITramiteBO {
      * @param anios años que se requeire la licencia
      * @return Objeto de LicenciaDTO
      */
-    public LicenciaDTO generarLicencia(PersonaDTO rfcPersona, int anios);
+    public LicenciaDTO generarLicencia(PersonaDTO rfcPersona, int anios)throws NegocioException;
     
 }
