@@ -4,7 +4,8 @@
  */
 package org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.dto;
 
-import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.Fecha;
+import java.util.GregorianCalendar;
+
 
 /**
  *
@@ -15,7 +16,7 @@ public class TramiteDTO {
     /**
      * Representa la fecha en la que se tramitó la licencia.
      */
-    private Fecha fecha_tramite;
+    private GregorianCalendar fecha_tramite;
 
     /**
      * Representa el costo asociado a la licencia.
@@ -33,7 +34,7 @@ public class TramiteDTO {
      *
      * @return La fecha en la que se tramitó la licencia.
      */
-    public Fecha getFecha_tramite() {
+    public GregorianCalendar getFecha_tramite() {
         return fecha_tramite;
     }
 

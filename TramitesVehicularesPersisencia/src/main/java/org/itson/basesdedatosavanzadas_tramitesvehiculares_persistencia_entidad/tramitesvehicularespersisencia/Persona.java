@@ -1,6 +1,7 @@
 package org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia_entidad.tramitesvehicularespersisencia;
 
 import java.io.Serializable;
+import java.util.GregorianCalendar;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -14,7 +15,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.Fecha;
 
 /**
  *
@@ -37,7 +37,7 @@ public class Persona implements Serializable {
      */
     @Temporal(TemporalType.DATE)
     @Column(name = "fecha_nacimiento", nullable = false)
-    private Fecha fecha_nacimiento;
+    private GregorianCalendar fecha_nacimiento;
 
     /**
      * RFC (Registro Federal de Contribuyentes) de la persona.
@@ -100,7 +100,7 @@ public class Persona implements Serializable {
      * @param discapacidad indica discapacidad de la persona
      */
     public Persona(
-            Fecha fecha_nacimiento, 
+            GregorianCalendar fecha_nacimiento, 
             String rfc, 
             String nombre, 
             String apellido_paterno, 
@@ -124,7 +124,7 @@ public class Persona implements Serializable {
      * @param telefono telefono de la persona
      * @param discapacidad indica discapacidad de la persona
      */
-    public Persona(Fecha fecha_nacimiento, 
+    public Persona(GregorianCalendar fecha_nacimiento, 
             String rfc, 
             String nombre, 
             String apellido_paterno, 
@@ -163,7 +163,7 @@ public class Persona implements Serializable {
      *
      * @return fecha de nacimiento de la persona
      */
-    public Fecha getFecha_nacimiento() {
+    public GregorianCalendar getFecha_nacimiento() {
         return fecha_nacimiento;
     }
 
@@ -172,7 +172,7 @@ public class Persona implements Serializable {
      *
      * @param fecha_nacimiento La fecha de nacimiento de la persona.
      */
-    public void setFecha_nacimiento(Fecha fecha_nacimiento) {
+    public void setFecha_nacimiento(GregorianCalendar fecha_nacimiento) {
         this.fecha_nacimiento = fecha_nacimiento;
     }
 

@@ -1,12 +1,12 @@
 package org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia_entidad.tramitesvehicularespersisencia;
 
 import java.io.Serializable;
+import java.util.GregorianCalendar;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.Fecha;
 
 /**
  *
@@ -27,7 +27,7 @@ public class Licencia extends Tramite implements Serializable {
      */
     @Temporal(TemporalType.DATE)
     @Column(name = "vigencia", nullable = false)
-    private Fecha vigencia;
+    private GregorianCalendar vigencia;
 
     /**
      * Estado de la licencia.
@@ -48,11 +48,11 @@ public class Licencia extends Tramite implements Serializable {
      * suspendida, etc.).
      */
     public Licencia(
-            Fecha fecha_tramite,
+            GregorianCalendar fecha_tramite,
             Float costo,
             Persona persona,
             String numero_licencia,
-            Fecha vigencia,
+            GregorianCalendar vigencia,
             byte estado) {
         super(fecha_tramite, costo, persona);
         this.numero_licencia = numero_licencia;
@@ -89,7 +89,7 @@ public class Licencia extends Tramite implements Serializable {
      *
      * @return La fecha de vigencia de la licencia.
      */
-    public Fecha getVigencia() {
+    public GregorianCalendar getVigencia() {
         return vigencia;
     }
 
@@ -98,7 +98,7 @@ public class Licencia extends Tramite implements Serializable {
      *
      * @param vigencia La fecha de vigencia de la licencia.
      */
-    public void setVigencia(Fecha vigencia) {
+    public void setVigencia(GregorianCalendar vigencia) {
         this.vigencia = vigencia;
     }
 

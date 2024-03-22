@@ -1,7 +1,7 @@
 package org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.dto;
 
+import java.util.GregorianCalendar;
 import java.util.List;
-import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.Fecha;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia_entidad.tramitesvehicularespersisencia.Discapacidad;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia_entidad.tramitesvehicularespersisencia.Tramite;
 
@@ -15,7 +15,7 @@ public class PersonaDTO {
     /**
      * Fecha de nacimiento de la persona.
      */
-    private Fecha fecha_nacimiento;
+    private GregorianCalendar fecha_nacimiento;
 
     /**
      * RFC (Registro Federal de Contribuyentes) de la persona.
@@ -60,7 +60,7 @@ public class PersonaDTO {
      * @param apellido_paterno El apellido paterno de la persona.
      * @param apellido_materno El apellido materno de la persona.
      */
-    public PersonaDTO(Fecha fecha_nacimiento, String rfc, String nombre, String apellido_paterno, String apellido_materno) {
+    public PersonaDTO(GregorianCalendar fecha_nacimiento, String rfc, String nombre, String apellido_paterno, String apellido_materno) {
         this.fecha_nacimiento = fecha_nacimiento;
         this.rfc = rfc;
         this.nombre = nombre;
@@ -73,7 +73,7 @@ public class PersonaDTO {
      *
      * @return La fecha de nacimiento de la persona.
      */
-    public Fecha getFecha_nacimiento() {
+    public GregorianCalendar getFecha_nacimiento() {
         return fecha_nacimiento;
     }
 
