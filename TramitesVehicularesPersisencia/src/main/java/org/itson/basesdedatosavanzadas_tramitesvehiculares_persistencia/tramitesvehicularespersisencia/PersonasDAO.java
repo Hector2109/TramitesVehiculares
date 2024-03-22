@@ -25,10 +25,11 @@ public class PersonasDAO implements IPersonasDAO {
     }
 
     /**
-     * Este método hace una insersion masiva de personas a la base de datos,
-     * enriptando sus telefonos
+     * Este método retorna una lista de personas las cuales son insertadas de
+     * forma hardcodeada
      *
-     * @return lista de personas insertadas
+     * @param personas lista personas que se desean insertar
+     * @return lista de personas
      */
     @Override
     public List<Persona> insercionMasiva(List<Persona> personas) {
@@ -45,51 +46,52 @@ public class PersonasDAO implements IPersonasDAO {
     }
 
     /**
-     * Metodo que consulta todos los personas registrados
+     * Esté método retorna la lista de personas que se encuentran en los
+     * registros de la base de datos
      *
-     * @return regresa la lista de personas
+     * @return lista de personas en los registros
      */
     @Override
     public List<Persona> consultar() {
         EntityManager entityManager = this.conexion.crearConexion();
-        
-        CriteriaQuery <Persona> criteria = entityManager.getCriteriaBuilder().createQuery(Persona.class);
-        
+
+        CriteriaQuery<Persona> criteria = entityManager.getCriteriaBuilder().createQuery(Persona.class);
+
         criteria.select(criteria.from(Persona.class));
 
         List<Persona> personas = entityManager.createQuery(criteria).getResultList();
-        
+
         entityManager.close();
-        
+
         return personas;
     }
 
     /**
-     * Obtiene una persona mediante un id
-     * @param id valor del id
-     * @return regresa el objeto de tipo persona
+     * Este método retorna una persona en base a la rfc
+     *
+     * @param rfc rfc de la persona
+     * @return persona del registro encontrada con la rfc especificada
+     * @throws PersistenciaException en caso de no encontrar a la persona
      */
     @Override
-    public Persona consultarPersona(String rfc)throws PersistenciaException {
+    public Persona consultarPersona(String rfc) throws PersistenciaException {
 
         EntityManager entityManager = this.conexion.crearConexion();
-        
+
         try {
             String jpqlQuery = """
                            SELECT p FROM Persona p Where p.rfc = :rfc
                            """;
-            
+
             TypedQuery<Persona> query = entityManager.createQuery(jpqlQuery, Persona.class);
             query.setParameter("rfc", rfc);
             Persona persona = query.getSingleResult();
-             return persona;
+            return persona;
         } catch (PersistenceException e) {
             logger.log(Level.SEVERE, "No se pudieron consultar a la persona.", e);
             throw new PersistenciaException("No se pudieron consultar los clientes.", e);
         }
 
     }
-    
-    
-    
+
 }

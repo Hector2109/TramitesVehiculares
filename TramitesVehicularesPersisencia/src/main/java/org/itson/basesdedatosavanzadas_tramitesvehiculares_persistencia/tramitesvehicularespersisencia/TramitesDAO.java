@@ -22,11 +22,24 @@ public class TramitesDAO implements ITramitesDAO {
     private PersonasDAO personasDAO;
     static final Logger logger = Logger.getLogger(PersonasDAO.class.getName());
 
+    /**
+     * Construuctor que recibe un objeto d conexión para lograr
+     * acceder a la BD
+     * @param conexion conexión 
+     */
     public TramitesDAO(IConexion conexion) {
         this.conexion = conexion;
         personasDAO = new PersonasDAO(this.conexion);
     }
 
+    /**
+     * Metodo para realizar tramite de licencia
+     *
+     * @param personaDTO objeto de PersonaDTO
+     * @param anios años que se desea la licencia
+     * @return Licencia generada
+     * @throws PersistenceException en caso de no poder persistir la licencia
+     */
     @Override
     public Licencia realizarTramiteLicencia(PersonaDTO personaDTO, int anios) throws PersistenceException{
 

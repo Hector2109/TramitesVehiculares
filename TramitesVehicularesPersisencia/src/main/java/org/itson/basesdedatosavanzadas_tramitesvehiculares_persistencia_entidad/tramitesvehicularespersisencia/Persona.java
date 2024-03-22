@@ -83,10 +83,30 @@ public class Persona implements Serializable {
     @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "persona")
     private List<Tramite> tramites;
 
+    /**
+     * Constructor que contruye una instancia de Persona
+     */
     public Persona() {
     }
 
-    public Persona(Fecha fecha_nacimiento, String rfc, String nombre, String apellido_paterno, String apellido_materno, String telefono, Discapacidad discapacidad) {
+    /**
+     * Constructor que contruye una instancia de Persona
+     * @param fecha_nacimiento fecha de nacimiento de la persona
+     * @param rfc rfc de la persona
+     * @param nombre nombre de la persona
+     * @param apellido_paterno apellido paterno de la persona
+     * @param apellido_materno apellido materno de la persona
+     * @param telefono telefono de la persona
+     * @param discapacidad indica discapacidad de la persona
+     */
+    public Persona(
+            Fecha fecha_nacimiento, 
+            String rfc, 
+            String nombre, 
+            String apellido_paterno, 
+            String apellido_materno, 
+            String telefono, 
+            Discapacidad discapacidad) {
         this.fecha_nacimiento = fecha_nacimiento;
         this.rfc = rfc;
         this.nombre = nombre;
@@ -95,8 +115,21 @@ public class Persona implements Serializable {
         this.telefono = telefono;
         this.discapacidad = discapacidad;
     }
-    
-    public Persona(Fecha fecha_nacimiento, String rfc, String nombre, String apellido_paterno, String telefono, Discapacidad discapacidad) {
+    /**
+     * Constructor que contruye una instancia de Persona
+     * @param fecha_nacimiento fecha de nacimiento de la persona
+     * @param rfc rfc de la persona
+     * @param nombre nombre de la persona
+     * @param apellido_paterno apellido paterno de la persona
+     * @param telefono telefono de la persona
+     * @param discapacidad indica discapacidad de la persona
+     */
+    public Persona(Fecha fecha_nacimiento, 
+            String rfc, 
+            String nombre, 
+            String apellido_paterno, 
+            String telefono, 
+            Discapacidad discapacidad) {
         this.fecha_nacimiento = fecha_nacimiento;
         this.rfc = rfc;
         this.nombre = nombre;
@@ -105,16 +138,6 @@ public class Persona implements Serializable {
         this.discapacidad = discapacidad;
     }
     
-    public Persona( Fecha fecha_nacimiento, String rfc, String nombre, String apellido_paterno, String apellido_materno, String telefono, List<Tramite> tramites, Discapacidad discapacidad) {
-        this.fecha_nacimiento = fecha_nacimiento;
-        this.rfc = rfc;
-        this.nombre = nombre;
-        this.apellido_paterno = apellido_paterno;
-        this.apellido_materno = apellido_materno;
-        this.telefono = telefono;
-        this.tramites = tramites;
-        this.discapacidad = discapacidad;
-    }
 
     /**
      * Devuelve el identificador único de la persona.

@@ -37,11 +37,14 @@ public class PersistenciaException extends Exception {
     }
 
     /**
-     * 
-     * @param message
-     * @param cause
-     * @param enableSuppression
-     * @param writableStackTrace 
+     * Constructor que establece el mensaje y causa especificados
+     * @param message El detalle del mensaje asociado a la excepción.
+     * @param cause La causa que desencadenó esta excepción. Puede ser nulo si
+     * la causa no se conoce o no está disponible.
+     * @param enableSuppression Un valor booleano que indica si la supresión de
+     * la excepción está habilitada o deshabilitada.
+     * @param writableStackTrace Un valor booleano que indica si el rastreo de
+     * pila es modificable.
      */
     public PersistenciaException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
         super(message, cause, enableSuppression, writableStackTrace);
