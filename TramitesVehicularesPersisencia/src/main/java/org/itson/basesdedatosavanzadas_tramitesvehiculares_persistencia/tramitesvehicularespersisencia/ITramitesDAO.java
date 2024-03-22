@@ -45,5 +45,5 @@ public interface ITramitesDAO {
      * @return Licencia desactivada
      * @throws PersistenceException en caso de no encontrar la iicencia
      */
-    public Licencia desactivarLicencia(LicenciaDTO licenciaDTO) throws PersistenceException;
+    public void desactivarLicencia(LicenciaDTO licenciaDTO) throws PersistenceException;
 }

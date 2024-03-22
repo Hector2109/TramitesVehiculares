@@ -7,6 +7,7 @@ import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceException;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -161,37 +162,24 @@ public class TramitesDAO implements ITramitesDAO {
     }
 
     @Override
-    public Licencia desactivarLicencia(LicenciaDTO licencia) throws PersistenceException {
+    public void desactivarLicencia(LicenciaDTO licencia) throws PersistenceException {
         EntityManager entityManager = this.conexion.crearConexion();
         EntityTransaction transaction = null;
 
-        try {
-            CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-            CriteriaUpdate<Licencia> criteriaUpdate = criteriaBuilder.createCriteriaUpdate(Licencia.class);
-            Root<Licencia> licenciaRoot = criteriaUpdate.from(Licencia.class);
-
-            criteriaUpdate.set(licenciaRoot.get("estado"), Byte.valueOf("0"));
-            criteriaUpdate.where(criteriaBuilder.equal(licenciaRoot.get("numero_licencia"), licencia.getNumero_licencia()));
-            transaction = entityManager.getTransaction();
-            transaction.begin();
-
-            int filasActualizadas = entityManager.createQuery(criteriaUpdate).executeUpdate();
-
-            transaction.commit();
-
-            if (filasActualizadas > 0) {
-                return entityManager.find(Licencia.class, licencia.getNumero_licencia());
-            } else {
-                throw new PersistenceException("No se encontró ninguna licencia con el número: " + licencia.getNumero_licencia());
-            }
-        } catch (PersistenceException e) {
-            if (transaction != null && transaction.isActive()) {
-                transaction.rollback();
-            }
-
-            throw e;
-        } finally {
-            entityManager.close();
+        String jpqlQuery = """
+                                   UPDATE Licencia l
+                                   SET l.estado = 0
+                                   WHERE l.numero_licencia = :numeroLicencia
+                                   """;
+        Query query = entityManager.createQuery(jpqlQuery);
+        query.setParameter("numeroLicencia", licencia.getNumero_licencia());
+        entityManager.getTransaction().begin();
+        int filasActualizadas = query.executeUpdate();
+        entityManager.getTransaction().commit();
+        entityManager.close();
+        
+        if (filasActualizadas==0){
+            throw new PersistenceException ("No se encontraron licencias con ese número");
         }
     }
 }
