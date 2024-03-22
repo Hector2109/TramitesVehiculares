@@ -39,8 +39,8 @@ public class Principal {
         DlgPrincipal principal = new DlgPrincipal(conexion);
 
         personaBO.insercionMasiva();
-        RegistrarLicencia RL = new RegistrarLicencia(principal, true);
-        RL.setVisible(true);
+        DlgPrincipal2 DP = new DlgPrincipal2(conexion);
+        DP.setVisible(true);
 
 
 

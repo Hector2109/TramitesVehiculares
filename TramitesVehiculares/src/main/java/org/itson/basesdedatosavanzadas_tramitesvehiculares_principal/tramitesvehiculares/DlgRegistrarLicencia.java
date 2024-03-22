@@ -21,9 +21,9 @@ import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehic
  *
  * @author Abe
  */
-public class RegistrarLicencia extends javax.swing.JDialog {
+public class DlgRegistrarLicencia extends javax.swing.JDialog {
 
-    private static final Logger LOG = Logger.getLogger(RegistrarLicencia.class.getName());
+    private static final Logger LOG = Logger.getLogger(DlgRegistrarLicencia.class.getName());
 
     private final IPersonaBO personaBO;
     private final ITramiteBO tramiteBO;
@@ -33,7 +33,7 @@ public class RegistrarLicencia extends javax.swing.JDialog {
     /**
      * Creates new form RegistrarLicencia2
      */
-    public RegistrarLicencia(DlgPrincipal parent, boolean modal) {
+    public DlgRegistrarLicencia(java.awt.Dialog parent, boolean modal) {
         super(parent, modal);
         personaBO = new PersonaBO();
         tramiteBO = new TramiteBO();
