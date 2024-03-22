@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.PersonaBO;
+import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.dto.PersonaDTO;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia.excepciones.PersistenciaException;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia.tramitesvehicularespersisencia.Conexion;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia.tramitesvehicularespersisencia.IConexion;
@@ -28,21 +29,24 @@ public class Principal {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws PersistenciaException {
 
         IConexion conexion = new Conexion();
         IPersonasDAO personasDAO = new PersonasDAO(conexion);
 
-        
         PersonaBO personaBO = new PersonaBO();
-        
+
         DlgPrincipal principal = new DlgPrincipal(conexion);
-     
+
         personaBO.insercionMasiva();
         RegistrarLicencia RL = new RegistrarLicencia(principal, true);
-        RL.setVisible(true);
+//        RL.setVisible(true);
 
-          
+        List<PersonaDTO> personaSimilares = personaBO.consultarPersonaSimilar("cecilia");
+        for (PersonaDTO personaSimilare : personaSimilares) {
+            System.out.println(personaSimilare);
+        }
+        System.out.println("holas");
 
 //        DlgPrincipal principal = new DlgPrincipal(conexion);
 //        principal.setVisible(true);
@@ -73,7 +77,6 @@ public class Principal {
 //
 //        em.getTransaction().commit();
 //        em.close();
-
     }
 
 }

@@ -5,11 +5,13 @@
 package org.itson.basesdedatosavanzadas_tramitesvehiculares_principal.tramitesvehiculares;
 
 import java.util.List;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.IPersonaBO;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.ITramiteBO;
+import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.NegocioException;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.PersonaBO;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.TramiteBO;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.dto.PersonaDTO;
@@ -22,7 +24,6 @@ public class RegistrarLicencia extends javax.swing.JDialog {
 
     private static final Logger LOG = Logger.getLogger(RegistrarLicencia.class.getName());
 
-    
     private final IPersonaBO personaBO;
     private final ITramiteBO tramiteBO;
     private int anio;
@@ -37,7 +38,7 @@ public class RegistrarLicencia extends javax.swing.JDialog {
         tramiteBO = new TramiteBO();
         initComponents();
         consultar();
-        
+
     }
 
     /**
@@ -393,48 +394,60 @@ public class RegistrarLicencia extends javax.swing.JDialog {
     }//GEN-LAST:event_tblPersonasMouseClicked
 
     private void rdbtn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdbtn2ActionPerformed
-       anio=2;
+        anio = 2;
     }//GEN-LAST:event_rdbtn2ActionPerformed
 
     private void rdbtn3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdbtn3ActionPerformed
-        anio=3;
+        anio = 3;
     }//GEN-LAST:event_rdbtn3ActionPerformed
 
     private void btnRealizarTramiteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRealizarTramiteActionPerformed
         int fila = tblPersonas.getSelectedRow();
         String rfc = tblPersonas.getValueAt(fila, 1).toString();
         PersonaDTO personaSeleccionada = personaBO.consultarPersona(rfc);
-        
-        if(anio!=1&&anio!=2&&anio!=3){
-            JOptionPane.showMessageDialog(this,"Selecciona año de vigencia", "Año de vigencia",JOptionPane.WARNING_MESSAGE );
-        }
-        else{
-            tramiteBO.generarLicencia(personaSeleccionada,anio);
+
+        if (anio != 1 && anio != 2 && anio != 3) {
+            JOptionPane.showMessageDialog(this, "Selecciona año de vigencia", "Año de vigencia", JOptionPane.WARNING_MESSAGE);
+        } else {
             
+            try {
+                tramiteBO.generarLicencia(personaSeleccionada, anio);
+            } catch (NegocioException ex) {
+                JOptionPane.showMessageDialog(this, ex.getMessage(), "Error de tramite", JOptionPane.ERROR_MESSAGE);
+            }
+
         }
-        
+
     }//GEN-LAST:event_btnRealizarTramiteActionPerformed
 
     private void rdbtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdbtn1ActionPerformed
-        anio=1;
+        anio = 1;
     }//GEN-LAST:event_rdbtn1ActionPerformed
 
     private void txtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyTyped
-        if(txtNombre.getText().isBlank()){
+        if (txtNombre.getText().isBlank()) {
+            limpiarTabla();
             consultar();
-        }
-        else{
+        } else {
+            limpiarTabla();
             consultarSimilar();
             System.out.println("metodo siliares");
-            
+
         }
     }//GEN-LAST:event_txtNombreKeyTyped
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        limpiarTabla();
         consultarSimilar();
     }//GEN-LAST:event_btnBuscarActionPerformed
 
-    
+    public void limpiarTabla() {
+        for (int i = 0; i < tblPersonas.getRowCount(); i++) {
+            modelo.removeRow(i);
+            i = i - 1;
+        }
+    }
+
     private void consultar() {
 
         try {
@@ -442,10 +455,10 @@ public class RegistrarLicencia extends javax.swing.JDialog {
             Object[] personaFila = new Object[3];
             modelo = (DefaultTableModel) tblPersonas.getModel();
             for (PersonaDTO persona : listaPersonas) {
-                if (persona.getApellido_materno() !=null){
-                personaFila[0] = persona.getNombre()+" "+persona.getApellido_paterno()+" "+persona.getApellido_materno();
-                }else{
-                    personaFila[0] = persona.getNombre()+" "+persona.getApellido_paterno();
+                if (persona.getApellido_materno() != null) {
+                    personaFila[0] = persona.getNombre() + " " + persona.getApellido_paterno() + " " + persona.getApellido_materno();
+                } else {
+                    personaFila[0] = persona.getNombre() + " " + persona.getApellido_paterno();
                 }
                 personaFila[1] = persona.getRfc();
                 personaFila[2] = persona.getFecha_nacimiento();
@@ -460,17 +473,17 @@ public class RegistrarLicencia extends javax.swing.JDialog {
         }
 
     }
-    
-    private void consultarSimilar(){
+
+    private void consultarSimilar() {
         try {
             List<PersonaDTO> listaPersonas = personaBO.consultarPersonaSimilar(txtNombre.getText());
             Object[] personaFila = new Object[3];
             modelo = (DefaultTableModel) tblPersonas.getModel();
             for (PersonaDTO persona : listaPersonas) {
-                if (persona.getApellido_materno() !=null){
-                personaFila[0] = persona.getNombre()+" "+persona.getApellido_paterno()+" "+persona.getApellido_materno();
-                }else{
-                    personaFila[0] = persona.getNombre()+" "+persona.getApellido_paterno();
+                if (persona.getApellido_materno() != null) {
+                    personaFila[0] = persona.getNombre() + " " + persona.getApellido_paterno() + " " + persona.getApellido_materno();
+                } else {
+                    personaFila[0] = persona.getNombre() + " " + persona.getApellido_paterno();
                 }
                 personaFila[1] = persona.getRfc();
                 personaFila[2] = persona.getFecha_nacimiento();
@@ -483,7 +496,7 @@ public class RegistrarLicencia extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(this, "No se puede acceder a las personas", "Error de consulta",
                     JOptionPane.ERROR_MESSAGE);
         }
-        
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
