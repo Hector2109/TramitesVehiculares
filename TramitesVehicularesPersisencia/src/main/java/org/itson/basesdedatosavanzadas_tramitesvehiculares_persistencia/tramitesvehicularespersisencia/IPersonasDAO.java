@@ -38,4 +38,5 @@ public interface IPersonasDAO {
      */
     public Persona consultarPersona(String rfc)throws PersistenciaException;
     
+    public List<Persona> buscarPersonaSimilar(String nombre) throws PersistenciaException;
 }

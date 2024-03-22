@@ -1,6 +1,7 @@
 package org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio;
 
 import java.util.List;
+import javax.persistence.PersistenceException;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.dto.PersonaDTO;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia_entidad.tramitesvehicularespersisencia.Persona;
 
@@ -29,4 +30,12 @@ public interface IPersonaBO {
      * @return PersonaDTO que se encontró con la rfc
      */
     public PersonaDTO consultarPersona(String rfc);
+    
+    /**
+     * Regresa la lista de las personas que se consultaron den DAO
+     * @param nombre valor del nombre
+     * @return regresa la lista de las personas
+     * @throws PersistenceException cuando ocurre un error de persistencia
+     */
+    public List<PersonaDTO> consultarPersonaSimilar(String nombre) throws PersistenceException;
 }

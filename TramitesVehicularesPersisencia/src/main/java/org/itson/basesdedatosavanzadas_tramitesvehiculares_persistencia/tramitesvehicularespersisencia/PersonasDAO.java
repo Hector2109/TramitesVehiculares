@@ -94,4 +94,30 @@ public class PersonasDAO implements IPersonasDAO {
 
     }
 
+    @Override
+    public List<Persona> buscarPersonaSimilar(String nombre) throws PersistenciaException {
+        EntityManager entityManager = this.conexion.crearConexion();
+
+        try {
+            String jpqlQuery = """
+                               SELECT p FROM Persona p 
+                               WHERE p.nombre LIKE :nombre 
+                                  OR p.apellido_paterno LIKE :nombre 
+                                  OR p.apellido_materno LIKE :nombre
+                               """;
+            TypedQuery<Persona> query = entityManager.createQuery(jpqlQuery, Persona.class);
+            query.setParameter("nombre", "%" + nombre + "%");
+            List<Persona> personas = query.getResultList();
+            return personas;
+            
+        } catch (PersistenceException e) {
+            logger.log(Level.SEVERE, "No se pudo consultar a la persona.", e);
+            throw new PersistenciaException("No se pudo consultar a la persona", e);
+        }
+        finally{
+            entityManager.close();
+        }
+              
+    }
+
 }

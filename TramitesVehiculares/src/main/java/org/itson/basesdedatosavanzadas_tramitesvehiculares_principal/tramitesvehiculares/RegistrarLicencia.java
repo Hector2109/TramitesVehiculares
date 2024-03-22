@@ -200,6 +200,11 @@ public class RegistrarLicencia extends javax.swing.JDialog {
                 txtNombreActionPerformed(evt);
             }
         });
+        txtNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNombreKeyTyped(evt);
+            }
+        });
 
         txtAnio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -210,6 +215,11 @@ public class RegistrarLicencia extends javax.swing.JDialog {
         btnBuscar.setBackground(new java.awt.Color(62, 117, 225));
         btnBuscar.setForeground(new java.awt.Color(255, 255, 255));
         btnBuscar.setText("Buscar");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
 
         tblPersonas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -403,13 +413,26 @@ public class RegistrarLicencia extends javax.swing.JDialog {
             
         }
         
-        
-        
     }//GEN-LAST:event_btnRealizarTramiteActionPerformed
 
     private void rdbtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdbtn1ActionPerformed
         anio=1;
     }//GEN-LAST:event_rdbtn1ActionPerformed
+
+    private void txtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyTyped
+        if(txtNombre.getText().isBlank()){
+            consultar();
+        }
+        else{
+            consultarSimilar();
+            System.out.println("metodo siliares");
+            
+        }
+    }//GEN-LAST:event_txtNombreKeyTyped
+
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        consultarSimilar();
+    }//GEN-LAST:event_btnBuscarActionPerformed
 
     
     private void consultar() {
@@ -436,6 +459,31 @@ public class RegistrarLicencia extends javax.swing.JDialog {
                     JOptionPane.ERROR_MESSAGE);
         }
 
+    }
+    
+    private void consultarSimilar(){
+        try {
+            List<PersonaDTO> listaPersonas = personaBO.consultarPersonaSimilar(txtNombre.getText());
+            Object[] personaFila = new Object[3];
+            modelo = (DefaultTableModel) tblPersonas.getModel();
+            for (PersonaDTO persona : listaPersonas) {
+                if (persona.getApellido_materno() !=null){
+                personaFila[0] = persona.getNombre()+" "+persona.getApellido_paterno()+" "+persona.getApellido_materno();
+                }else{
+                    personaFila[0] = persona.getNombre()+" "+persona.getApellido_paterno();
+                }
+                personaFila[1] = persona.getRfc();
+                personaFila[2] = persona.getFecha_nacimiento();
+
+                modelo.addRow(personaFila);
+            }
+
+            tblPersonas.setModel(modelo);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "No se puede acceder a las personas", "Error de consulta",
+                    JOptionPane.ERROR_MESSAGE);
+        }
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

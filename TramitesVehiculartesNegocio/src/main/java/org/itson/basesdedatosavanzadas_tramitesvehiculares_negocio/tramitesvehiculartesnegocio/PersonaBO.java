@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.persistence.PersistenceException;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.dto.PersonaDTO;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia.excepciones.PersistenciaException;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia.tramitesvehicularespersisencia.Conexion;
@@ -238,8 +239,37 @@ public class PersonaBO implements IPersonaBO {
 
         } catch (PersistenciaException ex) {
             Logger.getLogger(PersonaBO.class.getName()).log(Level.SEVERE, null, ex);
+            throw new PersistenceException("No se pudo consultar la persona");
         }
-        return null;
+    }
+
+    /**
+     * Regresa la lista de las personas que se consultaron den DAO
+     * @param nombre valor del nombre
+     * @return regresa la lista de las personas
+     * @throws PersistenceException cuando ocurre un error de persistencia
+     */
+    @Override
+    public List<PersonaDTO> consultarPersonaSimilar(String nombre) throws PersistenceException {
+        try {
+            List<Persona> personas = personasDAO.buscarPersonaSimilar(nombre);
+            List<PersonaDTO> personasDTO = new ArrayList<>();
+
+            for (Persona persona : personas) {
+                PersonaDTO personaDTO = new PersonaDTO(
+                        persona.getFecha_nacimiento(), 
+                        persona.getRfc(),
+                        persona.getNombre(), 
+                        persona.getApellido_paterno(), 
+                        persona.getApellido_materno());
+            }
+
+            return personasDTO;
+
+        } catch (PersistenciaException ex) {
+              Logger.getLogger(PersonaBO.class.getName()).log(Level.SEVERE, null, ex);
+              throw new PersistenceException("No se pueden consultar las personas");
+        }
     }
 
 }
