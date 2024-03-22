@@ -17,4 +17,9 @@ public interface ITramiteBO {
      */
     public LicenciaDTO generarLicencia(PersonaDTO rfcPersona, int anios)throws NegocioException;
     
+    /**
+     * Método que genera un número de licencia
+     * @return retorna el número de licencia
+     */
+    public String generarNumeroLicencia();
 }

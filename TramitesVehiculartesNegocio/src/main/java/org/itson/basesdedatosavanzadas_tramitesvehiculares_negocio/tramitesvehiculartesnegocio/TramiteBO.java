@@ -1,5 +1,6 @@
 package org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio;
 
+import java.util.Random;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.dto.LicenciaDTO;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.dto.PersonaDTO;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia.tramitesvehicularespersisencia.Conexion;
@@ -35,7 +36,17 @@ public class TramiteBO implements ITramiteBO {
     public LicenciaDTO generarLicencia(PersonaDTO persona, int anios) throws NegocioException{
         Fecha fechaActual = new Fecha();
         if (fechaActual.calcularDiferenciaAnios((Fecha) persona.getFecha_nacimiento()) >= 18) {
-            Licencia licencia = tramite.realizarTramiteLicencia(persona, anios);
+            Licencia licencia;
+            String numeroLicencia = generarNumeroLicencia();
+            do{
+                licencia = tramite.buscarLicenciaNumero(numeroLicencia);
+                if (licencia!=null){
+                    numeroLicencia = generarNumeroLicencia();
+                }
+                
+            }while(licencia!=null);
+            
+            licencia = tramite.realizarTramiteLicencia(persona, anios, numeroLicencia);
 
             LicenciaDTO licenciaDTO = new LicenciaDTO(
                     licencia.getNumero_licencia(),
@@ -45,6 +56,24 @@ public class TramiteBO implements ITramiteBO {
         }else{
             throw new NegocioException ("ERROR: La persona seleccionada no es mayor de edad");
         }
+    }
+
+    /**
+     * Método que genera un número de licencia
+     * @return retorna el número de licencia
+     */
+    @Override
+    public String generarNumeroLicencia() {
+        Random random = new Random();
+        StringBuilder numeroLicencia = new StringBuilder();
+
+
+        for (int i = 0; i < 9; i++) {
+            int digito = random.nextInt(10); 
+            numeroLicencia.append(digito);
+        }
+
+        return numeroLicencia.toString();
     }
 
 }

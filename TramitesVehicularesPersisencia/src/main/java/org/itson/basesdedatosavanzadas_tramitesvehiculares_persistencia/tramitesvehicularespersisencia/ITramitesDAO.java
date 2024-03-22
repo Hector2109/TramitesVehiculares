@@ -22,6 +22,12 @@ public interface ITramitesDAO {
      * @return Licencia generada
      * @throws PersistenceException en caso de no poder persistir la licencia
      */
-    public Licencia realizarTramiteLicencia(PersonaDTO personaDTO, int anios) throws PersistenceException;
+    public Licencia realizarTramiteLicencia(PersonaDTO personaDTO, int anios, String numeroLicencia) throws PersistenceException;
 
+    /**
+     * Método para buscar si una licenciaxiste a través de su número
+     * @param numeroLicencia número de licencia
+     * @return La licencia si encuentra
+     */
+    public Licencia buscarLicenciaNumero (String numeroLicencia)throws PersistenceException;
 }
