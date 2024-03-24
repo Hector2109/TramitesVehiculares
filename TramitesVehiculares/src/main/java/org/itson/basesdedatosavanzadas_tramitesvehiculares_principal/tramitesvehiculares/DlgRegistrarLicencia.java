@@ -53,13 +53,14 @@ public class DlgRegistrarLicencia extends javax.swing.JDialog {
 
         btnGroupAnio = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
-        btnInicio = new javax.swing.JButton();
-        tbnPersonas = new javax.swing.JButton();
-        bntPlacas = new javax.swing.JButton();
-        btnReportes = new javax.swing.JButton();
-        btnLicencias = new javax.swing.JButton();
-        btnConsultas = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        btnInicio1 = new org.itson.basesdedatosavanzadas_tramitesvehiculares_principal.Elementos.BotonBlanco();
+        btnPersonas = new org.itson.basesdedatosavanzadas_tramitesvehiculares_principal.Elementos.BotonBlanco();
+        btnPlacas = new org.itson.basesdedatosavanzadas_tramitesvehiculares_principal.Elementos.BotonBlanco();
+        btnConsultas = new org.itson.basesdedatosavanzadas_tramitesvehiculares_principal.Elementos.BotonBlanco();
+        btnReportes = new org.itson.basesdedatosavanzadas_tramitesvehiculares_principal.Elementos.BotonBlanco();
+        btnLicencias = new org.itson.basesdedatosavanzadas_tramitesvehiculares_principal.Elementos.BotonAzul();
+        jLabel9 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -73,72 +74,68 @@ public class DlgRegistrarLicencia extends javax.swing.JDialog {
         rdbtn1 = new javax.swing.JRadioButton();
         rdbtn2 = new javax.swing.JRadioButton();
         rdbtn3 = new javax.swing.JRadioButton();
-        btnRealizarTramite = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
+        botonAzul1 = new org.itson.basesdedatosavanzadas_tramitesvehiculares_principal.Elementos.BotonAzul();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(130, 206, 238));
 
-        btnInicio.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        btnInicio.setText(" Inicio      ");
-        btnInicio.setBorder(null);
-        btnInicio.addActionListener(new java.awt.event.ActionListener() {
+        btnInicio1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Inicio.png"))); // NOI18N
+        btnInicio1.setText("  Inicio       ");
+        btnInicio1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnInicio1.setRadius(23);
+
+        btnPersonas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Personas.png"))); // NOI18N
+        btnPersonas.setText(" Personas");
+        btnPersonas.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnPersonas.setRadius(23);
+        btnPersonas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnInicioActionPerformed(evt);
+                btnPersonasActionPerformed(evt);
             }
         });
 
-        tbnPersonas.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        tbnPersonas.setText("Inserción");
-        tbnPersonas.setBorder(null);
-        tbnPersonas.setBorderPainted(false);
-        tbnPersonas.addActionListener(new java.awt.event.ActionListener() {
+        btnPlacas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Placas.png"))); // NOI18N
+        btnPlacas.setText("  Placas     ");
+        btnPlacas.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnPlacas.setRadius(23);
+        btnPlacas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tbnPersonasActionPerformed(evt);
+                btnPlacasActionPerformed(evt);
             }
         });
 
-        bntPlacas.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        bntPlacas.setText(" Placas     ");
-        bntPlacas.setBorder(null);
-        bntPlacas.addActionListener(new java.awt.event.ActionListener() {
+        btnConsultas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Consultas.png"))); // NOI18N
+        btnConsultas.setText("  Consultas");
+        btnConsultas.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnConsultas.setRadius(23);
+        btnConsultas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bntPlacasActionPerformed(evt);
+                btnConsultasActionPerformed(evt);
             }
         });
 
+        btnReportes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Reportes.png"))); // NOI18N
+        btnReportes.setText("  Reportes");
         btnReportes.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        btnReportes.setText("Reportes");
-        btnReportes.setBorder(null);
+        btnReportes.setRadius(23);
         btnReportes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnReportesActionPerformed(evt);
             }
         });
 
-        btnLicencias.setBackground(new java.awt.Color(62, 117, 225));
+        btnLicencias.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Licencias_Seleccionado.png"))); // NOI18N
+        btnLicencias.setText("  Licencias");
         btnLicencias.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        btnLicencias.setText(" Licencias");
-        btnLicencias.setBorder(null);
-        btnLicencias.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLicenciasActionPerformed(evt);
-            }
-        });
+        btnLicencias.setRadius(23);
 
-        btnConsultas.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        btnConsultas.setText("Consultas");
-        btnConsultas.setBorder(null);
-        btnConsultas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnConsultasActionPerformed(evt);
-            }
-        });
+        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Logo.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -147,37 +144,42 @@ public class DlgRegistrarLicencia extends javax.swing.JDialog {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(15, 15, 15)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(btnInicio1, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnPersonas, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnPlacas, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(btnConsultas, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(btnLicencias, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(bntPlacas, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(tbnPersonas, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnReportes, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(20, Short.MAX_VALUE))
+                        .addComponent(btnReportes, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(15, 15, 15))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(15, 15, 15)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(66, 66, 66)
-                .addComponent(btnInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
-                .addComponent(tbnPersonas, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
-                .addComponent(bntPlacas, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(74, 74, 74)
+                .addComponent(btnInicio1, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(btnPersonas, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(btnPlacas, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
                 .addComponent(btnLicencias, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
+                .addGap(20, 20, 20)
                 .addComponent(btnConsultas, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
+                .addGap(20, 20, 20)
                 .addComponent(btnReportes, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addContainerGap(56, Short.MAX_VALUE))
         );
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 644));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 180, 650));
 
         jPanel2.setBackground(new java.awt.Color(240, 252, 255));
 
@@ -221,8 +223,8 @@ public class DlgRegistrarLicencia extends javax.swing.JDialog {
             }
         });
         txtAnio.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtAnioKeyTyped(evt);
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtAnioKeyReleased(evt);
             }
         });
 
@@ -265,15 +267,6 @@ public class DlgRegistrarLicencia extends javax.swing.JDialog {
             }
         });
 
-        btnRealizarTramite.setBackground(new java.awt.Color(62, 117, 225));
-        btnRealizarTramite.setForeground(new java.awt.Color(255, 255, 255));
-        btnRealizarTramite.setText("Realizar trámite");
-        btnRealizarTramite.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRealizarTramiteActionPerformed(evt);
-            }
-        });
-
         jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 30)); // NOI18N
         jLabel6.setText("RFC");
 
@@ -303,30 +296,39 @@ public class DlgRegistrarLicencia extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
+        botonAzul1.setForeground(new java.awt.Color(255, 255, 255));
+        botonAzul1.setText("Realizar trámite");
+        botonAzul1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        botonAzul1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonAzul1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(87, Short.MAX_VALUE)
+                .addContainerGap(43, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addGroup(jPanel2Layout.createSequentialGroup()
                             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(jPanel2Layout.createSequentialGroup()
-                                    .addGap(257, 257, 257)
-                                    .addComponent(rdbtn1)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(rdbtn2)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(rdbtn3))
+                                    .addGap(240, 240, 240)
+                                    .addComponent(jLabel5))
                                 .addGroup(jPanel2Layout.createSequentialGroup()
-                                    .addGap(252, 252, 252)
-                                    .addComponent(btnRealizarTramite))
-                                .addGroup(jPanel2Layout.createSequentialGroup()
-                                    .addGap(196, 196, 196)
-                                    .addComponent(jLabel5)))
+                                    .addGap(297, 297, 297)
+                                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(botonAzul1, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                            .addComponent(rdbtn1)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(rdbtn2)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(rdbtn3)))))
                             .addGap(219, 219, 219))
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -366,7 +368,7 @@ public class DlgRegistrarLicencia extends javax.swing.JDialog {
                     .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
                 .addComponent(jLabel5)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -374,41 +376,15 @@ public class DlgRegistrarLicencia extends javax.swing.JDialog {
                     .addComponent(rdbtn2)
                     .addComponent(rdbtn3))
                 .addGap(18, 18, 18)
-                .addComponent(btnRealizarTramite, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27))
+                .addComponent(botonAzul1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(41, 41, 41))
         );
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 0, 810, 640));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 0, 810, 650));
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInicioActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnInicioActionPerformed
-
-    private void tbnPersonasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tbnPersonasActionPerformed
-        PersonaBO personaBO = new PersonaBO();
-        personaBO.insercionMasiva();
-        consultar();
-    }//GEN-LAST:event_tbnPersonasActionPerformed
-
-    private void bntPlacasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntPlacasActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_bntPlacasActionPerformed
-
-    private void btnReportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportesActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnReportesActionPerformed
-
-    private void btnLicenciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLicenciasActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnLicenciasActionPerformed
-
-    private void btnConsultasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultasActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnConsultasActionPerformed
 
     private void txtRFCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtRFCActionPerformed
         // TODO add your handling code here:
@@ -433,29 +409,6 @@ public class DlgRegistrarLicencia extends javax.swing.JDialog {
     private void rdbtn3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdbtn3ActionPerformed
         anio = 3;
     }//GEN-LAST:event_rdbtn3ActionPerformed
-
-    private void btnRealizarTramiteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRealizarTramiteActionPerformed
-        int fila = tblPersonas.getSelectedRow();
-        String rfc = tblPersonas.getValueAt(fila, 1).toString();
-        PersonaDTO personaSeleccionada = personaBO.consultarPersona(rfc);
-
-        if (anio != 1 && anio != 2 && anio != 3) {
-            JOptionPane.showMessageDialog(this, "Selecciona año de vigencia", "Año de vigencia", JOptionPane.WARNING_MESSAGE);
-        } else {
-            
-            try {
-                tramiteBO.generarLicencia(personaSeleccionada, anio);
-                LicenciaDTO licencia = tramiteBO.buscarLicencia(personaSeleccionada);
-                DlgLicenciaRegistrada LR = new DlgLicenciaRegistrada(this, true, licencia);
-                LR.setVisible(true);
-                
-            } catch (NegocioException ex) {
-                JOptionPane.showMessageDialog(this, ex.getMessage(), "Error de tramite", JOptionPane.ERROR_MESSAGE);
-            }
-
-        }
-
-    }//GEN-LAST:event_btnRealizarTramiteActionPerformed
 
     private void rdbtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdbtn1ActionPerformed
         anio = 1;
@@ -483,7 +436,7 @@ public class DlgRegistrarLicencia extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_txtRFCKeyTyped
 
-    private void txtAnioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAnioKeyTyped
+    private void txtAnioKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAnioKeyReleased
         if (txtAnio.getText().isBlank()) {
             limpiarTabla();
             consultar();
@@ -492,7 +445,51 @@ public class DlgRegistrarLicencia extends javax.swing.JDialog {
             consultarAnio();
 
         }
-    }//GEN-LAST:event_txtAnioKeyTyped
+    }//GEN-LAST:event_txtAnioKeyReleased
+
+    private void btnPersonasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPersonasActionPerformed
+        PersonaBO personaBO = new PersonaBO();
+        personaBO.insercionMasiva();
+        consultar();
+    }//GEN-LAST:event_btnPersonasActionPerformed
+
+    private void btnPlacasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlacasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnPlacasActionPerformed
+
+    private void btnConsultasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnConsultasActionPerformed
+
+    private void btnReportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnReportesActionPerformed
+
+    private void botonAzul1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAzul1ActionPerformed
+               int fila = tblPersonas.getSelectedRow();
+        String rfc = tblPersonas.getValueAt(fila, 1).toString();
+        PersonaDTO personaSeleccionada = personaBO.consultarPersona(rfc);
+
+        if (fila < 0) {
+            
+        } else{
+            if (anio != 1 && anio != 2 && anio != 3) {
+                JOptionPane.showMessageDialog(this, "Selecciona año de vigencia", "Año de vigencia", JOptionPane.WARNING_MESSAGE);
+            } else {
+
+                try {
+                    tramiteBO.generarLicencia(personaSeleccionada, anio);
+                    LicenciaDTO licencia = tramiteBO.buscarLicencia(personaSeleccionada);
+                    DlgLicenciaRegistrada LR = new DlgLicenciaRegistrada(this, true, licencia);
+                    LR.setVisible(true);
+
+                } catch (NegocioException ex) {
+                    JOptionPane.showMessageDialog(this, ex.getMessage(), "Error de tramite", JOptionPane.ERROR_MESSAGE);
+                }
+
+            }
+        }
+    }//GEN-LAST:event_botonAzul1ActionPerformed
 
     public void limpiarTabla() {
         for (int i = 0; i < tblPersonas.getRowCount(); i++) {
@@ -550,7 +547,7 @@ public class DlgRegistrarLicencia extends javax.swing.JDialog {
                     JOptionPane.ERROR_MESSAGE);
         }
     }
-    
+
     private void consultarSimilarRFC() {
         try {
             List<PersonaDTO> listaPersonas = personaBO.consultarPersonasSimilarRFC(txtRFC.getText());
@@ -574,11 +571,11 @@ public class DlgRegistrarLicencia extends javax.swing.JDialog {
                     JOptionPane.ERROR_MESSAGE);
         }
     }
-    
+
     /**
      * Consulta u na lista de personas mediante año
      */
-     private void consultarAnio() {
+    private void consultarAnio() {
         try {
             List<PersonaDTO> listaPersonas = personaBO.consultarPersonasAnio(txtAnio.getText());
             Object[] personaFila = new Object[3];
@@ -603,13 +600,14 @@ public class DlgRegistrarLicencia extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton bntPlacas;
-    private javax.swing.JButton btnConsultas;
+    private org.itson.basesdedatosavanzadas_tramitesvehiculares_principal.Elementos.BotonAzul botonAzul1;
+    private org.itson.basesdedatosavanzadas_tramitesvehiculares_principal.Elementos.BotonBlanco btnConsultas;
     private javax.swing.ButtonGroup btnGroupAnio;
-    private javax.swing.JButton btnInicio;
-    private javax.swing.JButton btnLicencias;
-    private javax.swing.JButton btnRealizarTramite;
-    private javax.swing.JButton btnReportes;
+    private org.itson.basesdedatosavanzadas_tramitesvehiculares_principal.Elementos.BotonBlanco btnInicio1;
+    private org.itson.basesdedatosavanzadas_tramitesvehiculares_principal.Elementos.BotonAzul btnLicencias;
+    private org.itson.basesdedatosavanzadas_tramitesvehiculares_principal.Elementos.BotonBlanco btnPersonas;
+    private org.itson.basesdedatosavanzadas_tramitesvehiculares_principal.Elementos.BotonBlanco btnPlacas;
+    private org.itson.basesdedatosavanzadas_tramitesvehiculares_principal.Elementos.BotonBlanco btnReportes;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -618,6 +616,7 @@ public class DlgRegistrarLicencia extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -626,7 +625,6 @@ public class DlgRegistrarLicencia extends javax.swing.JDialog {
     private javax.swing.JRadioButton rdbtn2;
     private javax.swing.JRadioButton rdbtn3;
     private javax.swing.JTable tblPersonas;
-    private javax.swing.JButton tbnPersonas;
     private javax.swing.JTextField txtAnio;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtRFC;
