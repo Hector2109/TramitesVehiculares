@@ -24,6 +24,11 @@ public class VehiculoDTO {
         return marca;
     }
 
+    public VehiculoDTO() {
+    }
+    
+    
+
     /**
      * Retorna el color de un vehiculo
      * @return 
@@ -31,7 +36,16 @@ public class VehiculoDTO {
     public String getColor() {
         return color;
     }
+
+    public void setMarca(String marca) {
+        this.marca = marca;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
    
+    
     
     
 }

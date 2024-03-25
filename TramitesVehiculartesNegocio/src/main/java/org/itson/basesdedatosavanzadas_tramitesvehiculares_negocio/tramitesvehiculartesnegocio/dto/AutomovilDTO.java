@@ -14,13 +14,18 @@ public class AutomovilDTO extends VehiculoDTO{
     /**
      * Representa la linea de un automovil
      */
-    private String limea;
+    private String linea;
     
     /**
      * Representa el modelo de un automovil
      */
     private String modelo;
 
+    public AutomovilDTO() {
+    }
+
+    
+    
     /**
      * Obtiene el numero des serie de un automovil
      * @return número de serie del autoovil
@@ -33,8 +38,8 @@ public class AutomovilDTO extends VehiculoDTO{
      * Retorna la linea del automovil
      * @return linea del automovil
      */
-    public String getLimea() {
-        return limea;
+    public String getLinea() {
+        return linea;
     }
 
     /**
@@ -44,6 +49,19 @@ public class AutomovilDTO extends VehiculoDTO{
     public String getModelo() {
         return modelo;
     }
+
+    public void setNumero_serie(String numero_serie) {
+        this.numero_serie = numero_serie;
+    }
+
+    public void setLinea(String linea) {
+        this.linea = linea;
+    }
+
+    public void setModelo(String modelo) {
+        this.modelo = modelo;
+    }
+    
     
     
     

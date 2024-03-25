@@ -5,8 +5,10 @@
 package org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia.tramitesvehicularespersisencia;
 
 import javax.persistence.PersistenceException;
+import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.dto.AutomovilDTO;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.dto.LicenciaDTO;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.dto.PersonaDTO;
+import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia_entidad.tramitesvehicularespersisencia.Automovil;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia_entidad.tramitesvehicularespersisencia.Licencia;
 
 /**
@@ -47,4 +49,12 @@ public interface ITramitesDAO {
      * @throws PersistenceException en caso de no encontrar la iicencia
      */
     public void desactivarLicencia(LicenciaDTO licenciaDTO) throws PersistenceException;
+    
+    /**
+     * Método el cual es utilizado para verificar si un automovil ya no existe 
+     * tomando en cuenta el numero de serie del objeto AutomovilDTO
+     * @param automovilDTO automovil que se requere verificar que no existe
+     * @return automovil encontrado
+     */
+    public Automovil obtenerAutomovil (AutomovilDTO automovilDTO);
 }

@@ -6,6 +6,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceException;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
@@ -13,10 +14,12 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.CriteriaUpdate;
 import javax.persistence.criteria.Root;
+import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.dto.AutomovilDTO;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.dto.LicenciaDTO;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia.tramitesvehicularespersisencia_encriptacion.Fecha;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.dto.PersonaDTO;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia.excepciones.PersistenciaException;
+import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia_entidad.tramitesvehicularespersisencia.Automovil;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia_entidad.tramitesvehicularespersisencia.Licencia;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia_entidad.tramitesvehicularespersisencia.Persona;
 
@@ -206,5 +209,31 @@ public class TramitesDAO implements ITramitesDAO {
         if (filasActualizadas == 0) {
             throw new PersistenceException("No se encontraron licencias con ese número");
         }
+    }
+
+    /**
+     * Método el cual es utilizado para verificar si un automovil ya no existe 
+     * tomando en cuenta el numero de serie del objeto AutomovilDTO
+     * @param automovilDTO automovil que se requere verificar que no existe
+     * @return automovil encontrado
+     */
+    @Override
+    public Automovil obtenerAutomovil(AutomovilDTO automovilDTO) {
+        EntityManager entityManager = this.conexion.crearConexion();
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<Automovil> criteriaQuery = criteriaBuilder.createQuery(Automovil.class);
+        Root<Automovil> root = criteriaQuery.from(Automovil.class);
+        
+        criteriaQuery.select(root)
+                     .where(criteriaBuilder.equal(root.get("numero_serie"), automovilDTO.getNumero_serie()));
+
+        Automovil automovil = null;
+        try {
+            automovil = entityManager.createQuery(criteriaQuery).getSingleResult();
+        } catch (NoResultException e) { 
+            return null;
+        }
+        entityManager.close();
+        return automovil;
     }
 }

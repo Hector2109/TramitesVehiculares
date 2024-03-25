@@ -1,5 +1,7 @@
 package org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio;
 
+import javax.persistence.PersistenceException;
+import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.dto.AutomovilDTO;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.dto.LicenciaDTO;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.dto.PersonaDTO;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia_entidad.tramitesvehicularespersisencia.Licencia;
@@ -31,4 +33,15 @@ public interface ITramiteBO {
      * @return pbjeto de instancia Licencia- 
      */
     public LicenciaDTO buscarLicencia (PersonaDTO persona) throws NegocioException;
+    
+    /**
+     * Método el cual crea un automovil
+     * @param automovilDTO automovil que se  usará para transportar los datos
+     * @return automovilDTO si este se creo de forma exitosa
+     * @throws NegocioException en caso de error
+     * @throws PersistenceException en caso de algún error al momento de registrar el automovil
+     */
+    public AutomovilDTO crearAutomovil (AutomovilDTO automovilDTO) throws NegocioException, PersistenceException;
+    
+    
 }

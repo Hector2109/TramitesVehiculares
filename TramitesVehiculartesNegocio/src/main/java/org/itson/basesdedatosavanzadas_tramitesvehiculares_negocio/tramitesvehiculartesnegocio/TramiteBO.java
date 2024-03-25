@@ -2,12 +2,14 @@ package org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehi
 
 import java.util.Random;
 import javax.persistence.PersistenceException;
+import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.dto.AutomovilDTO;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.dto.LicenciaDTO;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.dto.PersonaDTO;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia.tramitesvehicularespersisencia.Conexion;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia.tramitesvehicularespersisencia.IConexion;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia.tramitesvehicularespersisencia.TramitesDAO;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia.tramitesvehicularespersisencia_encriptacion.Fecha;
+import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia_entidad.tramitesvehicularespersisencia.Automovil;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia_entidad.tramitesvehicularespersisencia.Licencia;
 
 /**
@@ -85,6 +87,13 @@ public class TramiteBO implements ITramiteBO {
         return numeroLicencia.toString();
     }
 
+    
+    /**
+     * Método el cual regresa una licencia activa de una persona
+     * @param persona persona la cual se verifica si tiene una licencia 
+     * activa
+     * @return pbjeto de instancia Licencia- 
+     */
     @Override
     public LicenciaDTO buscarLicencia(PersonaDTO persona) throws NegocioException {
 
@@ -104,4 +113,34 @@ public class TramiteBO implements ITramiteBO {
         
     }
 
+    /**
+     * Método el cual crea un automovil
+     * @param automovilDTO automovil que se  usará para transportar los datos
+     * @return automovilDTO si este se creo de forma exitosa
+     * @throws NegocioException en caso de error
+     */
+    @Override
+    public AutomovilDTO crearAutomovil(AutomovilDTO automovilDTO) throws NegocioException, PersistenceException {
+        if (ValidacionNegocio.validacionAutomovil(automovilDTO)){
+            Automovil automovil = tramite.obtenerAutomovil(automovilDTO);
+            
+            if (automovil!=null){
+                
+                automovilDTO.setColor(automovil.getColor());
+                automovilDTO.setLinea(automovil.getLinea());
+                automovilDTO.setMarca(automovil.getMarca());
+                automovilDTO.setNumero_serie(automovil.getNumero_serie());
+                automovilDTO.setModelo(automovil.getModelo());
+                return automovilDTO;
+                
+            }else{
+                throw new PersistenceException ("Error: Ha ocurrido un error al querer registrar al automovil");
+            }
+        }else{
+            throw new NegocioException ("Error: Verifique bein los datos proporcionados");
+        }
+    }
+
+    
+    
 }
