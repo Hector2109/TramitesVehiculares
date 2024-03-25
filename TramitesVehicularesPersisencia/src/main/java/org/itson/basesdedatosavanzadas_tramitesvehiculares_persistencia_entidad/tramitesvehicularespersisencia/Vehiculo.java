@@ -49,7 +49,7 @@ public class Vehiculo implements Serializable {
     private String color;
 
     
-    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "placa")
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "vehiculo")
     private List<Placa> placas;
     
     

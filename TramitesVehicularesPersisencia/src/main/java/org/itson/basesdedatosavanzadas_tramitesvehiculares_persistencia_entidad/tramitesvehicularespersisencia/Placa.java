@@ -29,7 +29,7 @@ public class Placa extends Tramite implements Serializable {
     /**
      * Matricula de la placa
      */
-    @Column (name = "matriula", nullable = false, unique = true, length = 7)
+    @Column (name = "matricula", nullable = false, unique = true, length = 7)
     private String matricula;
     
     /**
