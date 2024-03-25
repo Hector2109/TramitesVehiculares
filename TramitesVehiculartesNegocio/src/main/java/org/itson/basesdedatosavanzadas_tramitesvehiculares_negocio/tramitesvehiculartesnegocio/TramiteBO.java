@@ -1,16 +1,20 @@
 package org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio;
 
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.persistence.PersistenceException;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.dto.AutomovilDTO;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.dto.LicenciaDTO;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.dto.PersonaDTO;
+import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.dto.PlacaDTO;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia.tramitesvehicularespersisencia.Conexion;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia.tramitesvehicularespersisencia.IConexion;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia.tramitesvehicularespersisencia.TramitesDAO;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia.tramitesvehicularespersisencia_encriptacion.Fecha;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia_entidad.tramitesvehicularespersisencia.Automovil;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia_entidad.tramitesvehicularespersisencia.Licencia;
+import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia_entidad.tramitesvehicularespersisencia.Placa;
 
 /**
  *
@@ -118,6 +122,7 @@ public class TramiteBO implements ITramiteBO {
      * @param automovilDTO automovil que se  usará para transportar los datos
      * @return automovilDTO si este se creo de forma exitosa
      * @throws NegocioException en caso de error
+     * @throws PersistenceException en caso de algún error al momento de registrar el automovil
      */
     @Override
     public AutomovilDTO crearAutomovil(AutomovilDTO automovilDTO) throws NegocioException, PersistenceException {
@@ -139,6 +144,56 @@ public class TramiteBO implements ITramiteBO {
         }else{
             throw new NegocioException ("Error: Verifique bein los datos proporcionados");
         }
+    }
+
+    @Override
+    public PlacaDTO placaAutomovilNuevo(AutomovilDTO automovilNuevo, PersonaDTO persona) throws PersistenceException {
+        
+        try {
+            crearAutomovil(automovilNuevo);
+            
+            Placa placa;
+            String matricula = generarMatricula();
+            do {
+                placa = tramite.obtenerPlaca(matricula);
+                if (placa != null) {
+                    matricula = generarMatricula();
+                }
+
+            } while (placa != null);
+            
+            
+            
+            
+        } catch (NegocioException ex) {
+            Logger.getLogger(TramiteBO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+
+    /**
+     * Método que nos ayuda a generar una matricula poara placa
+     * @return 
+     */
+    @Override
+    public String generarMatricula() {
+        String letras = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        String numeros = "0123456789";
+
+        StringBuilder sbLetras = new StringBuilder();
+        Random random = new Random();
+        for (int i = 0; i < 3; i++) {
+            char letra = letras.charAt(random.nextInt(letras.length()));
+            sbLetras.append(letra);
+        }
+        
+        StringBuilder sbNumeros = new StringBuilder();
+        for (int i = 0; i < 3; i++) {
+            char numero = numeros.charAt(random.nextInt(numeros.length()));
+            sbNumeros.append(numero);
+        }
+
+        return sbLetras.toString() + "-" + sbNumeros.toString();
     }
 
     

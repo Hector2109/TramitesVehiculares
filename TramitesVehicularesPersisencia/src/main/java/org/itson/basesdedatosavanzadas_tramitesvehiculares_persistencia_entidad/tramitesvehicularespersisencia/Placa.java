@@ -143,6 +143,14 @@ public class Placa extends Tramite implements Serializable {
     public void setEstado(byte estado) {
         this.estado = estado;
     }
+
+    public Vehiculo getVehiculo() {
+        return vehiculo;
+    }
+
+    public void setVehiculo(Vehiculo vehiculo) {
+        this.vehiculo = vehiculo;
+    }
     
     
     

@@ -18,14 +18,17 @@ import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehic
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.dto.LicenciaDTO;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia.tramitesvehicularespersisencia_encriptacion.Fecha;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.dto.PersonaDTO;
+import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.dto.PlacaDTO;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia.excepciones.PersistenciaException;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia_entidad.tramitesvehicularespersisencia.Automovil;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia_entidad.tramitesvehicularespersisencia.Licencia;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia_entidad.tramitesvehicularespersisencia.Persona;
+import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia_entidad.tramitesvehicularespersisencia.Placa;
+import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia_entidad.tramitesvehicularespersisencia.Vehiculo;
 
 /**
  *
- * @author Abe
+ * @author Hector Espinoza & Abel Sanchez
  */
 public class TramitesDAO implements ITramitesDAO {
 
@@ -163,7 +166,6 @@ public class TramitesDAO implements ITramitesDAO {
 //        }
 //        return licencia;
 //    }
-
     @Override
     public Licencia buscarLicenciaActiva(PersonaDTO persona) {
 
@@ -212,8 +214,9 @@ public class TramitesDAO implements ITramitesDAO {
     }
 
     /**
-     * Método el cual es utilizado para verificar si un automovil ya no existe 
+     * Método el cual es utilizado para verificar si un automovil ya no existe
      * tomando en cuenta el numero de serie del objeto AutomovilDTO
+     *
      * @param automovilDTO automovil que se requere verificar que no existe
      * @return automovil encontrado
      */
@@ -223,17 +226,70 @@ public class TramitesDAO implements ITramitesDAO {
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<Automovil> criteriaQuery = criteriaBuilder.createQuery(Automovil.class);
         Root<Automovil> root = criteriaQuery.from(Automovil.class);
-        
+
         criteriaQuery.select(root)
-                     .where(criteriaBuilder.equal(root.get("numero_serie"), automovilDTO.getNumero_serie()));
+                .where(criteriaBuilder.equal(root.get("numero_serie"), automovilDTO.getNumero_serie()));
 
         Automovil automovil = null;
         try {
             automovil = entityManager.createQuery(criteriaQuery).getSingleResult();
-        } catch (NoResultException e) { 
+        } catch (NoResultException e) {
             return null;
         }
         entityManager.close();
         return automovil;
+    }
+
+    @Override
+    public Placa obtenerPlaca(String matricula) {
+        EntityManager entityManager = this.conexion.crearConexion();
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<Placa> criteriaQuery = criteriaBuilder.createQuery(Placa.class);
+        Root<Placa> root = criteriaQuery.from(Placa.class);
+
+        criteriaQuery.select(root)
+                .where(criteriaBuilder.equal(root.get("matricula"), matricula));
+
+        Placa placa = null;
+        try {
+            placa = entityManager.createQuery(criteriaQuery).getSingleResult();
+        } catch (NoResultException e) {
+            return null;
+        }
+        entityManager.close();
+        return placa;
+    }
+
+    @Override
+    public Placa crearPlacaVehiculoNuevo(PlacaDTO placa, PersonaDTO persona, AutomovilDTO automovil, String matricula) throws PersistenceException {
+
+        Placa placaNueva = new Placa();
+
+        Persona personaE;
+        try {
+            personaE = personasDAO.consultarPersona(persona.getRfc());
+            Vehiculo vehiculo = obtenerAutomovil(automovil);
+
+            if (vehiculo != null) {
+
+                placaNueva.setVehiculo(vehiculo);
+                placaNueva.setEstado(Byte.valueOf("1"));
+                placaNueva.setPersona(personaE);
+                placaNueva.setCosto(1500F);
+
+                EntityManager em = conexion.crearConexion();
+                em.getTransaction().begin();
+                em.persist(placaNueva);
+                em.getTransaction().commit();
+                em.close();
+                
+                
+            } else {
+                throw new PersistenceException("Este automovil no esta registrado");
+            }
+        } catch (PersistenciaException ex) {
+            Logger.getLogger(TramitesDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return placaNueva;
     }
 }

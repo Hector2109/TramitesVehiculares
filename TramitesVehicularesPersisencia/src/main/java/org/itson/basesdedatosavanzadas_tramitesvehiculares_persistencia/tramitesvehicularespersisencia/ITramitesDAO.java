@@ -8,8 +8,10 @@ import javax.persistence.PersistenceException;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.dto.AutomovilDTO;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.dto.LicenciaDTO;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.dto.PersonaDTO;
+import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.dto.PlacaDTO;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia_entidad.tramitesvehicularespersisencia.Automovil;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia_entidad.tramitesvehicularespersisencia.Licencia;
+import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia_entidad.tramitesvehicularespersisencia.Placa;
 
 /**
  *
@@ -57,4 +59,15 @@ public interface ITramitesDAO {
      * @return automovil encontrado
      */
     public Automovil obtenerAutomovil (AutomovilDTO automovilDTO);
+    
+    /**
+     * Método el cual verifica la existencia de plcas
+     * en base a su matricula
+     * @param matricula matricula que se busca
+     * @return Placa que contiene la matricula
+     */
+    public Placa obtenerPlaca(String matricula);
+    
+    
+    public Placa crearPlacaVehiculoNuevo (PlacaDTO placa, PersonaDTO persona, AutomovilDTO automovil, String matricula) throws PersistenceException;
 }

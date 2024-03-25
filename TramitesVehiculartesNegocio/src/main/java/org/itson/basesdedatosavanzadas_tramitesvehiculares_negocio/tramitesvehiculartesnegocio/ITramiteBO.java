@@ -4,6 +4,7 @@ import javax.persistence.PersistenceException;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.dto.AutomovilDTO;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.dto.LicenciaDTO;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.dto.PersonaDTO;
+import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.dto.PlacaDTO;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia_entidad.tramitesvehicularespersisencia.Licencia;
 
 /**
@@ -43,5 +44,17 @@ public interface ITramiteBO {
      */
     public AutomovilDTO crearAutomovil (AutomovilDTO automovilDTO) throws NegocioException, PersistenceException;
     
-    
+    /**
+     * Método el cual crea una placa para un automovil nuevo
+     * @param automovilNuevo automovil nuevo que se desea registrar
+     * @return Placa del automovil  nuevo
+     * @throws PersistenceException  
+     */
+    public PlacaDTO placaAutomovilNuevo (AutomovilDTO automovilNuevo, PersonaDTO persona) throws PersistenceException;
+
+    /**
+     * Método que genera una matricula para las placas
+     * @return matrioula generada
+     */
+    public String generarMatricula ();
 }
