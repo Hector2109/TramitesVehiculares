@@ -16,7 +16,7 @@ public class TramiteDTO {
     /**
      * Representa la fecha en la que se tramitó la licencia.
      */
-    private GregorianCalendar fecha_tramite;
+    protected GregorianCalendar fecha_tramite;
 
     /**
      * Representa el costo asociado a la licencia.
@@ -27,7 +27,7 @@ public class TramiteDTO {
      * Representa los datos de la persona asociada a la licencia en formato de
      * DTO (Data Transfer Object).
      */
-    private PersonaDTO personaDTO;
+    protected PersonaDTO personaDTO;
 
     /**
      * Obtiene la fecha en la que se tramitó la licencia.

@@ -261,7 +261,7 @@ public class TramitesDAO implements ITramitesDAO {
     }
 
     @Override
-    public Placa crearPlacaVehiculoNuevo(PlacaDTO placa, PersonaDTO persona, AutomovilDTO automovil, String matricula) throws PersistenceException {
+    public Placa crearPlacaVehiculoNuevo(PersonaDTO persona, AutomovilDTO automovil, String matricula) throws PersistenceException {
 
         Placa placaNueva = new Placa();
 
@@ -276,6 +276,7 @@ public class TramitesDAO implements ITramitesDAO {
                 placaNueva.setEstado(Byte.valueOf("1"));
                 placaNueva.setPersona(personaE);
                 placaNueva.setCosto(1500F);
+                placaNueva.setMatricula(matricula);
 
                 EntityManager em = conexion.crearConexion();
                 em.getTransaction().begin();

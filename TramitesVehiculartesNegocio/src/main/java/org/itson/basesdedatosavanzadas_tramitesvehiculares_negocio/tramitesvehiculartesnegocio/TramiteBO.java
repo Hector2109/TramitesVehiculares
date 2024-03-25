@@ -45,7 +45,7 @@ public class TramiteBO implements ITramiteBO {
         if (fechaActual.calcularDiferenciaAnios((Fecha) persona.getFecha_nacimiento()) >= 18) {
 
             LicenciaDTO licenciaDTO1 = buscarLicencia(persona);
-            
+
             if (licenciaDTO1 != null) {
                 tramite.desactivarLicencia(licenciaDTO1);
             }
@@ -91,12 +91,11 @@ public class TramiteBO implements ITramiteBO {
         return numeroLicencia.toString();
     }
 
-    
     /**
      * Método el cual regresa una licencia activa de una persona
-     * @param persona persona la cual se verifica si tiene una licencia 
-     * activa
-     * @return pbjeto de instancia Licencia- 
+     *
+     * @param persona persona la cual se verifica si tiene una licencia activa
+     * @return pbjeto de instancia Licencia-
      */
     @Override
     public LicenciaDTO buscarLicencia(PersonaDTO persona) throws NegocioException {
@@ -110,48 +109,50 @@ public class TramiteBO implements ITramiteBO {
                     licencia.getEstado(),
                     licencia.getCosto());
             return licenciaDTO;
-            
+
         } else {
             return null;
         }
-        
+
     }
 
     /**
      * Método el cual crea un automovil
-     * @param automovilDTO automovil que se  usará para transportar los datos
+     *
+     * @param automovilDTO automovil que se usará para transportar los datos
      * @return automovilDTO si este se creo de forma exitosa
      * @throws NegocioException en caso de error
-     * @throws PersistenceException en caso de algún error al momento de registrar el automovil
+     * @throws PersistenceException en caso de algún error al momento de
+     * registrar el automovil
      */
     @Override
     public AutomovilDTO crearAutomovil(AutomovilDTO automovilDTO) throws NegocioException, PersistenceException {
-        if (ValidacionNegocio.validacionAutomovil(automovilDTO)){
+        if (ValidacionNegocio.validacionAutomovil(automovilDTO)) {
             Automovil automovil = tramite.obtenerAutomovil(automovilDTO);
-            
-            if (automovil!=null){
-                
+
+            if (automovil != null) {
+
                 automovilDTO.setColor(automovil.getColor());
                 automovilDTO.setLinea(automovil.getLinea());
                 automovilDTO.setMarca(automovil.getMarca());
                 automovilDTO.setNumero_serie(automovil.getNumero_serie());
                 automovilDTO.setModelo(automovil.getModelo());
                 return automovilDTO;
-                
-            }else{
-                throw new PersistenceException ("Error: Ha ocurrido un error al querer registrar al automovil");
+
+            } else {
+                throw new PersistenceException("Error: Ha ocurrido un error al querer registrar al automovil");
             }
-        }else{
-            throw new NegocioException ("Error: Verifique bein los datos proporcionados");
+        } else {
+            throw new NegocioException("Error: Verifique bein los datos proporcionados");
         }
     }
 
     @Override
-    public PlacaDTO placaAutomovilNuevo(AutomovilDTO automovilNuevo, PersonaDTO persona) throws PersistenceException {
-        
+    public PlacaDTO placaAutomovilNuevo(AutomovilDTO automovilNuevo, PersonaDTO persona) throws PersistenceException, NegocioException {
+
         try {
             crearAutomovil(automovilNuevo);
-            
+
             Placa placa;
             String matricula = generarMatricula();
             do {
@@ -161,19 +162,32 @@ public class TramiteBO implements ITramiteBO {
                 }
 
             } while (placa != null);
-            
-            
-            
-            
+
+            try {
+                placa = tramite.crearPlacaVehiculoNuevo(persona, automovilNuevo, matricula);
+
+                PlacaDTO placaDTO = new PlacaDTO();
+
+                placaDTO.setCosto(placa.getCosto());
+                placaDTO.setEstado(placa.getEstado());
+                placaDTO.setMatricula(matricula);
+
+                return placaDTO;
+            } catch (PersistenceException e) {
+                
+                throw new PersistenceException (e.getMessage());
+            }
+
         } catch (NegocioException ex) {
             Logger.getLogger(TramiteBO.class.getName()).log(Level.SEVERE, null, ex);
+            throw new NegocioException (ex.getMessage());  
         }
-        
     }
 
     /**
      * Método que nos ayuda a generar una matricula poara placa
-     * @return 
+     *
+     * @return
      */
     @Override
     public String generarMatricula() {
@@ -186,7 +200,7 @@ public class TramiteBO implements ITramiteBO {
             char letra = letras.charAt(random.nextInt(letras.length()));
             sbLetras.append(letra);
         }
-        
+
         StringBuilder sbNumeros = new StringBuilder();
         for (int i = 0; i < 3; i++) {
             char numero = numeros.charAt(random.nextInt(numeros.length()));
@@ -196,6 +210,4 @@ public class TramiteBO implements ITramiteBO {
         return sbLetras.toString() + "-" + sbNumeros.toString();
     }
 
-    
-    
 }

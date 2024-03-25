@@ -50,7 +50,7 @@ public interface ITramiteBO {
      * @return Placa del automovil  nuevo
      * @throws PersistenceException  
      */
-    public PlacaDTO placaAutomovilNuevo (AutomovilDTO automovilNuevo, PersonaDTO persona) throws PersistenceException;
+    public PlacaDTO placaAutomovilNuevo (AutomovilDTO automovilNuevo, PersonaDTO persona) throws PersistenceException, NegocioException;
 
     /**
      * Método que genera una matricula para las placas

@@ -11,6 +11,14 @@ import java.util.GregorianCalendar;
  * @author Abe
  */
 public class PlacaDTO extends TramiteDTO{
+
+    public PlacaDTO() {
+    }
+    
+    
+    
+    
+    
     
     /**
      * Representa la matricula de la placa
@@ -51,6 +59,32 @@ public class PlacaDTO extends TramiteDTO{
     public Byte getEstado() {
         return estado;
     }
+
+    public void setMatricula(String matricula) {
+        this.matricula = matricula;
+    }
+
+    public void setFecha_recepcion(GregorianCalendar fecha_recepcion) {
+        this.fecha_recepcion = fecha_recepcion;
+    }
+
+    public void setEstado(Byte estado) {
+        this.estado = estado;
+    }
+
+    public void setFecha_tramite(GregorianCalendar fecha_tramite) {
+        this.fecha_tramite = fecha_tramite;
+    }
+
+    public void setCosto(Float costo) {
+        this.costo = costo;
+    }
+
+    public void setPersonaDTO(PersonaDTO personaDTO) {
+        this.personaDTO = personaDTO;
+    }
+    
+    
 
     
     

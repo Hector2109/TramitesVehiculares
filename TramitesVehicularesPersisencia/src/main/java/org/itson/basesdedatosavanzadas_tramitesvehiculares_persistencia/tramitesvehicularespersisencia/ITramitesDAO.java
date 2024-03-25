@@ -69,5 +69,5 @@ public interface ITramitesDAO {
     public Placa obtenerPlaca(String matricula);
     
     
-    public Placa crearPlacaVehiculoNuevo (PlacaDTO placa, PersonaDTO persona, AutomovilDTO automovil, String matricula) throws PersistenceException;
+    public Placa crearPlacaVehiculoNuevo (PersonaDTO persona, AutomovilDTO automovil, String matricula) throws PersistenceException;
 }
