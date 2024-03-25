@@ -71,16 +71,17 @@ public class PersonaBO implements IPersonaBO {
                 AESEncriptador.encriptar("8540598502"),
                 Discapacidad.NO_DISCAPACITADO);
         Persona persona6 = new Persona(
-                new Fecha("2003-04-02"), "ASD8504840F1",
-                "FELIPE",
-                "VAZQUEZ",
-                "PALOMO",
+                new Fecha("2004-09-02"), "ASD8504840F1",
+                "DANIEL ARTURO",
+                "LOPEZ",
+                "LOZOYA",
                 AESEncriptador.encriptar("8405950150"),
                 Discapacidad.NO_DISCAPACITADO);
         Persona persona7 = new Persona(
                 new Fecha("2002-05-13"), "IFS01235840G1",
-                "LUISA",
-                "GALAVIZ",
+                "BRYAN DAVID",
+                "GARCIA",
+                "GONZALEZ",
                 AESEncriptador.encriptar("6840806204"),
                 Discapacidad.DISCAPACITADO);
         Persona persona8 = new Persona(
@@ -202,21 +203,56 @@ public class PersonaBO implements IPersonaBO {
      * @return lista de PersonaDTO
      */
     @Override
-    public List<PersonaDTO> consultar() {
+    public List<PersonaDTO> consultar() throws NegocioException {
 
-        List<Persona> personas = personasDAO.consultar();
-        List<PersonaDTO> personasDTO = new ArrayList<>();
+        List<PersonaDTO> personasDTO = null;
+        try {
+            List<Persona> personas = personasDAO.consultar();
+            personasDTO = new ArrayList<>();
 
-        for (Persona persona : personas) {
-            personasDTO.add(new PersonaDTO(
-                    persona.getFecha_nacimiento(),
-                    persona.getRfc(),
-                    persona.getNombre(),
-                    persona.getApellido_paterno(),
-                    persona.getApellido_materno()));
+            for (Persona persona : personas) {
+                personasDTO.add(new PersonaDTO(
+                        persona.getFecha_nacimiento(),
+                        persona.getRfc(),
+                        persona.getNombre(),
+                        persona.getApellido_paterno(),
+                        persona.getApellido_materno()));
+            }
+        } catch (PersistenciaException ex) {
+            Logger.getLogger(PersonaBO.class.getName()).log(Level.SEVERE, null, ex);
+            throw new NegocioException("No se pudo consultar las personas");
         }
 
         return personasDTO;
+    }
+
+    /**
+     * Método que regresa una lista de personas que cuenten con licencias activas
+     * @return regresa la lista de las personasDTO
+     * @throws NegocioException si ocurre un erro lanza el error
+     */
+    @Override
+    public List<PersonaDTO> consultarPersonasLicenciaActiva() throws NegocioException {
+        List<PersonaDTO> personasDTO = null;
+        try {
+            List<Persona> personas = personasDAO.consultarPersonasConLicencia();
+            personasDTO = new ArrayList<>();
+
+            for (Persona persona : personas) {
+                personasDTO.add(new PersonaDTO(
+                        persona.getFecha_nacimiento(),
+                        persona.getRfc(),
+                        persona.getNombre(),
+                        persona.getApellido_paterno(),
+                        persona.getApellido_materno()));
+            }
+        } catch (PersistenciaException ex) {
+            Logger.getLogger(PersonaBO.class.getName()).log(Level.SEVERE, null, ex);
+            throw new NegocioException("No se pudo consultar las personas");
+        }
+
+        return personasDTO;
+        
     }
 
     /**
@@ -226,7 +262,7 @@ public class PersonaBO implements IPersonaBO {
      * @return PersonaDTO que se encontró con la rfc
      */
     @Override
-    public PersonaDTO consultarPersona(String rfc) {
+    public PersonaDTO consultarPersona(String rfc) throws NegocioException {
         try {
             Persona persona = personasDAO.consultarPersona(rfc);
             PersonaDTO personaDTO = new PersonaDTO(
@@ -239,28 +275,29 @@ public class PersonaBO implements IPersonaBO {
 
         } catch (PersistenciaException ex) {
             Logger.getLogger(PersonaBO.class.getName()).log(Level.SEVERE, null, ex);
-            throw new PersistenceException("No se pudo consultar la persona");
+            throw new NegocioException("No se pudo consultar la persona");
         }
     }
 
     /**
      * Regresa la lista de las personas que se consultaron den DAO
+     *
      * @param nombre valor del nombre
      * @return regresa la lista de las personas
      * @throws PersistenceException cuando ocurre un error de persistencia
      */
     @Override
-    public List<PersonaDTO> consultarPersonasSimilar(String nombre) throws PersistenciaException {
+    public List<PersonaDTO> consultarPersonasSimilar(String nombre) throws NegocioException {
         try {
             List<Persona> personas = personasDAO.buscarPersonasSimilar(nombre);
             List<PersonaDTO> personasDTO = new ArrayList<>();
 
             for (Persona persona : personas) {
                 PersonaDTO personaDTO = new PersonaDTO(
-                        persona.getFecha_nacimiento(), 
+                        persona.getFecha_nacimiento(),
                         persona.getRfc(),
-                        persona.getNombre(), 
-                        persona.getApellido_paterno(), 
+                        persona.getNombre(),
+                        persona.getApellido_paterno(),
                         persona.getApellido_materno());
                 personasDTO.add(personaDTO);
             }
@@ -268,23 +305,23 @@ public class PersonaBO implements IPersonaBO {
             return personasDTO;
 
         } catch (PersistenciaException ex) {
-              Logger.getLogger(PersonaBO.class.getName()).log(Level.SEVERE, null, ex);
-              throw new PersistenceException("No se pueden consultar las personas");
+            Logger.getLogger(PersonaBO.class.getName()).log(Level.SEVERE, null, ex);
+            throw new NegocioException("No se pueden consultar las personas");
         }
     }
 
     @Override
-    public List<PersonaDTO> consultarPersonasSimilarRFC(String rfc) throws PersistenciaException {
+    public List<PersonaDTO> consultarPersonasSimilarRFC(String rfc) throws NegocioException {
         try {
             List<Persona> personas = personasDAO.buscarRFCSimilar(rfc);
             List<PersonaDTO> personasDTO = new ArrayList<>();
 
             for (Persona persona : personas) {
                 PersonaDTO personaDTO = new PersonaDTO(
-                        persona.getFecha_nacimiento(), 
+                        persona.getFecha_nacimiento(),
                         persona.getRfc(),
-                        persona.getNombre(), 
-                        persona.getApellido_paterno(), 
+                        persona.getNombre(),
+                        persona.getApellido_paterno(),
                         persona.getApellido_materno());
                 personasDTO.add(personaDTO);
             }
@@ -292,23 +329,23 @@ public class PersonaBO implements IPersonaBO {
             return personasDTO;
 
         } catch (PersistenciaException ex) {
-              Logger.getLogger(PersonaBO.class.getName()).log(Level.SEVERE, null, ex);
-              throw new PersistenceException("No se pueden consultar las personas");
+            Logger.getLogger(PersonaBO.class.getName()).log(Level.SEVERE, null, ex);
+            throw new NegocioException("No se pueden consultar las personas");
         }
     }
 
     @Override
-    public List<PersonaDTO> consultarPersonasAnio(String anio) throws PersistenciaException {
+    public List<PersonaDTO> consultarPersonasAnio(String anio) throws NegocioException {
         try {
             List<Persona> personas = personasDAO.buscarAnioSimilar(anio);
             List<PersonaDTO> personasDTO = new ArrayList<>();
 
             for (Persona persona : personas) {
                 PersonaDTO personaDTO = new PersonaDTO(
-                        persona.getFecha_nacimiento(), 
+                        persona.getFecha_nacimiento(),
                         persona.getRfc(),
-                        persona.getNombre(), 
-                        persona.getApellido_paterno(), 
+                        persona.getNombre(),
+                        persona.getApellido_paterno(),
                         persona.getApellido_materno());
                 personasDTO.add(personaDTO);
             }
@@ -316,8 +353,8 @@ public class PersonaBO implements IPersonaBO {
             return personasDTO;
 
         } catch (PersistenciaException ex) {
-              Logger.getLogger(PersonaBO.class.getName()).log(Level.SEVERE, null, ex);
-              throw new PersistenceException("No se pueden consultar las personas");
+            Logger.getLogger(PersonaBO.class.getName()).log(Level.SEVERE, null, ex);
+            throw new NegocioException("No se pueden consultar las personas");
         }
     }
 

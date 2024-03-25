@@ -30,5 +30,5 @@ public interface ITramiteBO {
      * activa
      * @return pbjeto de instancia Licencia- 
      */
-    public LicenciaDTO buscarLicencia (PersonaDTO persona);
+    public LicenciaDTO buscarLicencia (PersonaDTO persona) throws NegocioException;
 }

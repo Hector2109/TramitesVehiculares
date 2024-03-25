@@ -39,7 +39,7 @@ public class Principal {
         DlgPrincipal DP = new DlgPrincipal(conexion);
         DP.setVisible(true);
 
-
+      
 
 //        DlgPrincipal principal = new DlgPrincipal(conexion);
 //        principal.setVisible(true);

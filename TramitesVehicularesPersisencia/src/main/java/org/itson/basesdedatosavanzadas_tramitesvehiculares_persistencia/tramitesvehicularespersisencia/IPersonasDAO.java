@@ -28,7 +28,7 @@ public interface IPersonasDAO {
      * en los registros de la base de datos
      * @return lista de personas en los registros
      */
-    public List<Persona> consultar();
+    public List<Persona> consultar() throws PersistenciaException;
     
     /**
      * Este método retorna una persona en base a la rfc
@@ -38,6 +38,13 @@ public interface IPersonasDAO {
      */
     public Persona consultarPersona(String rfc)throws PersistenciaException;
     
+    /**
+     * Permite consultar todas las personas que esten registradas con licenciaS
+     * @return regresa la lista de personas con licencia
+     * @throws PersistenciaException  lanza excepcion si no encuentra las personas
+     */
+    public List<Persona> consultarPersonasConLicencia()throws PersistenciaException;
+   
     /**
      * Este metodo busca nombres similares que incluyan algunos valores
      * @param nombre valor del nombre a buscar

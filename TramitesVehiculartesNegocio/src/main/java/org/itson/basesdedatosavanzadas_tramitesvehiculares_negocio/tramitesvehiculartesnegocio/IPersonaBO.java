@@ -21,15 +21,21 @@ public interface IPersonaBO {
      *
      * @return lista de PersonaDTO
      */
-    public List<PersonaDTO> consultar();
+    public List<PersonaDTO> consultar() throws NegocioException ;
 
+    /**
+     * Método que regresa una lista de personas que cuenten con licencias activas
+     * @return regresa la lista de las personasDTO
+     * @throws NegocioException si ocurre un erro lanza el error
+     */
+    public List<PersonaDTO> consultarPersonasLicenciaActiva() throws NegocioException ;
     /**
      * Método para consultar una PersonaDTO a través de su RFC
      *
      * @param rfc rfc de la persona
      * @return PersonaDTO que se encontró con la rfc
      */
-    public PersonaDTO consultarPersona(String rfc);
+    public PersonaDTO consultarPersona(String rfc) throws NegocioException;
     
     /**
      * Regresa la lista de las personas que se consultaron del DAO similares
@@ -37,7 +43,7 @@ public interface IPersonaBO {
      * @return regresa la lista de las personas
      * @throws PersistenceException cuando ocurre un error de persistencia
      */
-    public List<PersonaDTO> consultarPersonasSimilar(String nombre) throws PersistenciaException;
+    public List<PersonaDTO> consultarPersonasSimilar(String nombre) throws NegocioException;
     
     /**
      * Regresa la lista de las personas que se consultaron del DAO con rfc
@@ -45,7 +51,7 @@ public interface IPersonaBO {
      * @return regresa la lista de las personas
      * @throws PersistenceException cuando ocurre un error de persistencia
      */
-    public List<PersonaDTO> consultarPersonasSimilarRFC(String rfc) throws PersistenciaException;
+    public List<PersonaDTO> consultarPersonasSimilarRFC(String rfc) throws NegocioException;
     
     /**
      * Regresa una lista de personas con el año dado en el parametro
@@ -53,5 +59,5 @@ public interface IPersonaBO {
      * @return regresa una lista de personas con el año
      * @throws PersistenciaException lanza excepcion en caso de error
      */
-    public List<PersonaDTO> consultarPersonasAnio(String anio) throws PersistenciaException;
+    public List<PersonaDTO> consultarPersonasAnio(String anio) throws NegocioException;
 }

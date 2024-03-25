@@ -39,6 +39,7 @@ public interface ITramitesDAO {
      */
     public Licencia buscarLicenciaActiva (PersonaDTO persona);
     
+    
     /**
      * Método usado para desactivar una licencia
      * @param licenciaDTO Licencia que se desea desactiar

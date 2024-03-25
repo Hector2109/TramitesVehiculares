@@ -52,18 +52,44 @@ public class PersonasDAO implements IPersonasDAO {
      * @return lista de personas en los registros
      */
     @Override
-    public List<Persona> consultar() {
+    public List<Persona> consultar() throws PersistenciaException {
         EntityManager entityManager = this.conexion.crearConexion();
-
+        List<Persona> personas = null;
         CriteriaQuery<Persona> criteria = entityManager.getCriteriaBuilder().createQuery(Persona.class);
-
         criteria.select(criteria.from(Persona.class));
-
-        List<Persona> personas = entityManager.createQuery(criteria).getResultList();
-
+        personas = entityManager.createQuery(criteria).getResultList();
         entityManager.close();
-
         return personas;
+    }
+
+    /**
+     * Permite consultar todas las personas que esten registradas con licenciaS
+     *
+     * @return regresa la lista de personas con licencia
+     * @throws PersistenciaException lanza excepcion si no encuentra las
+     * personas
+     */
+    @Override
+    public List<Persona> consultarPersonasConLicencia() throws PersistenciaException {
+        EntityManager entityManager = this.conexion.crearConexion();
+        String jpqlQuery = """
+                           SELECT p
+                           FROM Persona p
+                           JOIN p.tramites t
+                           JOIN Licencia l ON t.id = l.id
+                           WHERE l.estado = 1
+                           """;
+        try {
+            TypedQuery<Persona> query = entityManager.createQuery(jpqlQuery, Persona.class);
+            List<Persona> personas = query.getResultList();
+            return personas;
+        } catch (PersistenceException e) {
+            logger.log(Level.SEVERE, "No se pudieron consultar a las persona.", e);
+            throw new PersistenciaException("No se pudieron consultar los clientes.", e);
+        } finally {
+            entityManager.close();
+        }
+
     }
 
     /**

@@ -1,6 +1,7 @@
 package org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio;
 
 import java.util.Random;
+import javax.persistence.PersistenceException;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.dto.LicenciaDTO;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.dto.PersonaDTO;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia.tramitesvehicularespersisencia.Conexion;
@@ -85,10 +86,10 @@ public class TramiteBO implements ITramiteBO {
     }
 
     @Override
-    public LicenciaDTO buscarLicencia(PersonaDTO persona) {
+    public LicenciaDTO buscarLicencia(PersonaDTO persona) throws NegocioException {
 
-        Licencia licencia = tramite.buscarLicenciaActiva(persona);
-
+        Licencia licencia = null;
+        licencia = tramite.buscarLicenciaActiva(persona);
         if (licencia != null) {
             LicenciaDTO licenciaDTO = new LicenciaDTO(
                     licencia.getNumero_licencia(),
@@ -96,13 +97,11 @@ public class TramiteBO implements ITramiteBO {
                     licencia.getEstado(),
                     licencia.getCosto());
             return licenciaDTO;
-
-        }else{
+            
+        } else {
             return null;
         }
-
         
-
     }
 
 }

@@ -179,6 +179,7 @@ public class DlgMenuPlacasCondicion extends javax.swing.JDialog {
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 0, 810, 640));
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnInicio1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInicio1ActionPerformed
@@ -203,7 +204,9 @@ public class DlgMenuPlacasCondicion extends javax.swing.JDialog {
     }//GEN-LAST:event_botonIcono1ActionPerformed
 
     private void btnAutoNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAutoNuevoActionPerformed
-        // TODO add your handling code here:
+        DlgAutomóvilNuevo AN = new DlgAutomóvilNuevo(this, false);
+        this.dispose();
+        AN.setVisible(true);
     }//GEN-LAST:event_btnAutoNuevoActionPerformed
 
     private void btnLicenciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLicenciasActionPerformed

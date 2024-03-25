@@ -138,6 +138,29 @@ public class TramitesDAO implements ITramitesDAO {
         return licencia;
     }
 
+//    @Override
+//    public Licencia buscarLicenciaActiva(PersonaDTO persona) {
+//
+//        EntityManager entityManager = this.conexion.crearConexion();
+//        Licencia licencia;
+//        String jpqlQuery = """
+//                   SELECT l FROM Licencia l
+//                   JOIN l.persona p
+//                   WHERE p.rfc = :rfc
+//                   AND l.estado = 1
+//                   """;
+//        TypedQuery<Licencia> query = entityManager.createQuery(jpqlQuery, Licencia.class);
+//        query.setParameter("rfc", persona.getRfc());
+//        try {
+//            licencia = query.getSingleResult();
+//        } catch (PersistenceException ex) {
+//            licencia = null;
+//        } finally {
+//            entityManager.close();
+//        }
+//        return licencia;
+//    }
+
     @Override
     public Licencia buscarLicenciaActiva(PersonaDTO persona) {
 
@@ -149,10 +172,12 @@ public class TramitesDAO implements ITramitesDAO {
                    WHERE p.rfc = :rfc
                    AND l.estado = 1
                    """;
+
         TypedQuery<Licencia> query = entityManager.createQuery(jpqlQuery, Licencia.class);
         query.setParameter("rfc", persona.getRfc());
         try {
             licencia = query.getSingleResult();
+            logger.log(Level.INFO, "Se consulto {0}", licencia);
         } catch (PersistenceException ex) {
             licencia = null;
         } finally {
@@ -177,9 +202,9 @@ public class TramitesDAO implements ITramitesDAO {
         int filasActualizadas = query.executeUpdate();
         entityManager.getTransaction().commit();
         entityManager.close();
-        
-        if (filasActualizadas==0){
-            throw new PersistenceException ("No se encontraron licencias con ese número");
+
+        if (filasActualizadas == 0) {
+            throw new PersistenceException("No se encontraron licencias con ese número");
         }
     }
 }
