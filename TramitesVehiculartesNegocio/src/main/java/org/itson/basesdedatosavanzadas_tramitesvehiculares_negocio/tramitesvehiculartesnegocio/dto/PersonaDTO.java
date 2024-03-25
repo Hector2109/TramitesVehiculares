@@ -67,7 +67,14 @@ public class PersonaDTO {
         this.apellido_paterno = apellido_paterno;
         this.apellido_materno = apellido_materno;
     }
+
+    public PersonaDTO(String rfc) {
+        this.rfc = rfc;
+    }
    
+    
+    
+    
     /**
      * Obtiene la fecha de nacimiento de la persona.
      *

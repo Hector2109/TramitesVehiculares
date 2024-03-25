@@ -187,7 +187,7 @@ public class TramiteBO implements ITramiteBO {
     /**
      * Método que nos ayuda a generar una matricula poara placa
      *
-     * @return
+     * @return matricula que se genero
      */
     @Override
     public String generarMatricula() {

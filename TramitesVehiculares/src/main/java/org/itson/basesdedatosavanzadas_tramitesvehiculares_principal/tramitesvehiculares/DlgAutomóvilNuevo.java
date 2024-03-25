@@ -5,7 +5,12 @@
 package org.itson.basesdedatosavanzadas_tramitesvehiculares_principal.tramitesvehiculares;
 
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.ITramiteBO;
+import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.TramiteBO;
+import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.dto.AutomovilDTO;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.dto.LicenciaDTO;
+import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.dto.PersonaDTO;
 
 /**
  *
@@ -17,14 +22,16 @@ public class DlgAutomóvilNuevo extends javax.swing.JDialog {
     
 
     private LicenciaDTO licenciaDTO;
+    private final ITramiteBO tramiteBO;
     /**
      * Creates new form DlgVacio
      */
     public DlgAutomóvilNuevo(java.awt.Dialog parent, boolean modal) {
         super(parent, modal);
-        if(licenciaDTO!=null){
-            
-        }
+        tramiteBO = new TramiteBO();
+//        if(licenciaDTO!=null){
+//            
+//        }
         initComponents();
     }
 
@@ -412,7 +419,20 @@ public class DlgAutomóvilNuevo extends javax.swing.JDialog {
     }//GEN-LAST:event_txtColorActionPerformed
 
     private void btnRealizarTramiteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRealizarTramiteActionPerformed
-        // TODO add your handling code here:
+        if (camposVacios()){
+            AutomovilDTO autoNuevo = new AutomovilDTO();
+            autoNuevo.setColor(txtColor.getText());
+            autoNuevo.setLinea(txtLinea.getText());
+            autoNuevo.setNumero_serie(txtNumSerie.getText());
+            autoNuevo.setModelo(txtModelo.getText());
+            autoNuevo.setMarca(txtMarca.getText());
+            
+//            PersonaDTO persona = new PersonaDTO();
+            
+            
+        }else{
+            JOptionPane.showMessageDialog(rootPane, "Favor de llenar todos los campos", "Campos vacios", JOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_btnRealizarTramiteActionPerformed
 
     private void btnBuscarLicenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarLicenciaActionPerformed
@@ -430,6 +450,23 @@ public class DlgAutomóvilNuevo extends javax.swing.JDialog {
 
     public void setLicenciaDTO(LicenciaDTO licenciaDTO) {
         this.licenciaDTO = licenciaDTO;
+    }
+    
+    public boolean camposVacios(){
+        if (txtLicencia.getText().isBlank()){
+            return false;
+        }else if (txtLinea.getText().isBlank()){
+            return false;
+        }else if (txtNumSerie.getText().isBlank()){
+            return false;
+        }else if (txtModelo.getText().isBlank()){
+            return false;
+        }else if (txtMarca.getText().isBlank()){
+            return false;
+        }else if (txtColor.getText().isBlank()){
+            return false;
+        }
+        return true;
     }
 
     
