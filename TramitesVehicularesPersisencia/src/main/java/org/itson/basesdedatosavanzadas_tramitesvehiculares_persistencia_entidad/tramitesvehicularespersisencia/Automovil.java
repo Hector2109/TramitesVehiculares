@@ -15,7 +15,7 @@ import javax.persistence.Table;
 
 /**
  *
- * @author Abe
+ * @author Hector Espinoza & Abel Sanchez
  */
 @Entity
 @DiscriminatorValue("Automovil")
@@ -26,19 +26,19 @@ public class Automovil extends Vehiculo implements Serializable {
     /**
      * Número de serie del vehiculo
      */
-    @Column(name = "numero_serie", nullable =false, unique = true)
+    @Column(name = "numero_serie", nullable =false, unique = true, length = 17)
     private String numero_serie;
     
     /**
      * Línea a la pertenece el automovil
      */
-    @Column(name = "linea", nullable =false)
+    @Column(name = "linea", nullable =false, length = 50)
     private String linea;
     
     /**
      * Modelo del automovil
      */
-    @Column (name = "modelo", nullable = false)
+    @Column (name = "modelo", nullable = false, length = 50)
     private String modelo;
 
     /**

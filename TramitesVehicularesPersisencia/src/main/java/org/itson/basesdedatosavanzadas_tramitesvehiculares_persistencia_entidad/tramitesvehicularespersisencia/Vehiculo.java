@@ -36,13 +36,13 @@ public class Vehiculo implements Serializable {
     /**
      * Marca del vehiculo
      */
-    @Column (name = "marca", nullable = false)
+    @Column (name = "marca", nullable = false, length = 50)
     private String marca;
     
     /**
      * Color del vehiculo
      */
-    @Column (name = "color", nullable = false)
+    @Column (name = "color", nullable = false, length = 50)
     private String color;
 
     /**
