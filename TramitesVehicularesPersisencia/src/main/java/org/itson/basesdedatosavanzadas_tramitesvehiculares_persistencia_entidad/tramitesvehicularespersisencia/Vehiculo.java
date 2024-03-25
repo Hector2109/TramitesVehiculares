@@ -5,6 +5,8 @@
 package org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia_entidad.tramitesvehicularespersisencia;
 
 import java.io.Serializable;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
@@ -13,6 +15,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -45,6 +48,11 @@ public class Vehiculo implements Serializable {
     @Column (name = "color", nullable = false, length = 50)
     private String color;
 
+    
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "placa")
+    private List<Placa> placas;
+    
+    
     /**
      * Método para obtener el identificadr dekl vehiculo
      * @return id del vehiculo

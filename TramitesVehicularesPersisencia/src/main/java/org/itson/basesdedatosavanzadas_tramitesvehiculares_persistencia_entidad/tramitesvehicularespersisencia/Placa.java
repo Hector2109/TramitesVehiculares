@@ -12,6 +12,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -41,6 +43,10 @@ public class Placa extends Tramite implements Serializable {
      */
     @Column(name = "estado", nullable = false)
     private byte estado;
+    
+    @ManyToOne
+    @JoinColumn (name = "id_vehiculo", nullable = false)
+    private Vehiculo vehiculo;
 
     /**
      * Constructor usado para la generacíon de una placa nueva para un automovil
