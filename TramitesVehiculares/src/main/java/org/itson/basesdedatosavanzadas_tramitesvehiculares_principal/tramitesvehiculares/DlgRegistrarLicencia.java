@@ -1,4 +1,4 @@
-/*
+ /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
  */
@@ -457,7 +457,7 @@ public class DlgRegistrarLicencia extends javax.swing.JDialog {
                     LR.setVisible(true);
 
                 } catch (NegocioException ex) {
-                    JOptionPane.showMessageDialog(this, ex, "Error de tramite" + ex, JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(this, ex.getMessage(), "Error de tramite" + ex.getCause(), JOptionPane.ERROR_MESSAGE);
                 }
 
             }

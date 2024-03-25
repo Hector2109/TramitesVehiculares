@@ -25,18 +25,75 @@ import javax.persistence.Table;
 @DiscriminatorColumn(name = "tipo_vehiculo")
 public class Vehiculo implements Serializable {
 
+    /**
+     * Identificador del vehiculo
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_vehiculo")
     private Long id_vehiculo;
+    
+    /**
+     * Marca del vehiculo
+     */
+    @Column (name = "marca", nullable = false)
+    private String marca;
+    
+    /**
+     * Color del vehiculo
+     */
+    @Column (name = "color", nullable = false)
+    private String color;
 
-    public Long getId() {
+    /**
+     * Método para obtener el identificadr dekl vehiculo
+     * @return id del vehiculo
+     */
+    public Long getId_vehiculo() {
         return id_vehiculo;
     }
 
-    public void setId(Long id) {
+    /**
+     * Método para establecer identificador del vehiculo
+     * @param id id del vehiculo
+     */
+    public void setId_vehiculo(Long id) {
         this.id_vehiculo = id;
     }
+
+    /**
+     * Método para obtener la marca del vehiculo
+     * @return 
+     */
+    public String getMarca() {
+        return marca;
+    }
+
+    /**
+     * Método para establecer la marca del vehiculo
+     * @param marca marca del vehicuo
+     */
+    public void setMarca(String marca) {
+        this.marca = marca;
+    }
+
+    /**
+     * Método para obtener el color del vehiculo
+     * @return 
+     */
+    public String getColor() {
+        return color;
+    }
+
+    /**
+     * Método para establecer el color del vehiculo
+     * @param color 
+     */
+    public void setColor(String color) {
+        this.color = color;
+    }
+    
+    
     
     
 

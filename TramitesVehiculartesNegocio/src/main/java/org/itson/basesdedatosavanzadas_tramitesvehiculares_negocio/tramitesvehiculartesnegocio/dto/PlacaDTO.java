@@ -11,4 +11,5 @@ package org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehi
 public class PlacaDTO extends TramiteDTO{
     private String matricula;
     
+    
 }

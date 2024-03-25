@@ -6,6 +6,7 @@ package org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia_entidad
 
 import java.io.Serializable;
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,71 +18,93 @@ import javax.persistence.Table;
  * @author Abe
  */
 @Entity
-@Table(name = "licencias")
+@DiscriminatorValue("Automovil")
+@Table(name = "automoviles")
 public class Automovil extends Vehiculo implements Serializable {
 
-    @Column(name = "numero_serie", nullable =false)
+    
+    /**
+     * Número de serie del vehiculo
+     */
+    @Column(name = "numero_serie", nullable =false, unique = true)
     private String numero_serie;
     
-    @Column(name = "condicion", nullable =false)
-    private Condicion condicion;
-    
-    @Column(name = "marca", nullable =false)
-    private String marca;
-    
+    /**
+     * Línea a la pertenece el automovil
+     */
     @Column(name = "linea", nullable =false)
     private String linea;
     
-    @Column(name = "color", nullable =false)
-    private String color;
-    
-    @Column(name = "modelo", nullable =false)
+    /**
+     * Modelo del automovil
+     */
+    @Column (name = "modelo", nullable = false)
     private String modelo;
 
+    /**
+     * Constructor vacio
+     */
+    public Automovil() {
+    }
+
+    /**
+     * Construictor que instancia al automovil
+     * @param numero_serie númeroi de serie del automovil
+     * @param linea linea del automovil
+     * @param modelo modelo del automovil
+     */
+    public Automovil(String numero_serie, String linea, String modelo) {
+        this.numero_serie = numero_serie;
+        this.linea = linea;
+        this.modelo = modelo;
+    }
+    
+    
+            
+    /**
+     * Método para btener el numero de serie del automovil
+     * @return número de serie del automovil
+     */
     public String getNumero_serie() {
         return numero_serie;
     }
 
+    /**
+     * Método para establecer el número de serie del automovil
+     * @param numero_serie número de serie del automovil
+     */
     public void setNumero_serie(String numero_serie) {
         this.numero_serie = numero_serie;
     }
 
-    public Condicion getCondicion() {
-        return condicion;
-    }
-
-    public void setCondicion(Condicion condicion) {
-        this.condicion = condicion;
-    }
-
-    public String getMarca() {
-        return marca;
-    }
-
-    public void setMarca(String marca) {
-        this.marca = marca;
-    }
-
+    /**
+     * Método para obtener la línea del automovil
+     * @return linea del automovil
+     */
     public String getLinea() {
         return linea;
     }
 
+    /**
+     * Método para establecer la linea del automovil
+     * @param linea linea del automovil
+     */
     public void setLinea(String linea) {
         this.linea = linea;
     }
 
-    public String getColor() {
-        return color;
-    }
-
-    public void setColor(String color) {
-        this.color = color;
-    }
-
+    /**
+     * Método para obtener el modelo del automovil
+     * @return modelo del automovil
+     */
     public String getModelo() {
         return modelo;
     }
 
+    /**
+     * Método para establecer el modelo del automovil
+     * @param modelo modelo del automovil
+     */
     public void setModelo(String modelo) {
         this.modelo = modelo;
     }

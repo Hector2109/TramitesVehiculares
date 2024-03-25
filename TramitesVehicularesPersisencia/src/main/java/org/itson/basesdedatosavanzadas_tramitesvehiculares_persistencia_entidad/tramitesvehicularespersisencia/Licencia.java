@@ -3,6 +3,7 @@ package org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia_entidad
 import java.io.Serializable;
 import java.util.GregorianCalendar;
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -13,6 +14,7 @@ import javax.persistence.TemporalType;
  * @author Hector Espinoza & Abel Sanchez
  */
 @Entity
+@DiscriminatorValue("Licencia")
 @Table(name = "licencias")
 public class Licencia extends Tramite implements Serializable {
 
