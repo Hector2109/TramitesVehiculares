@@ -23,7 +23,7 @@ public class DlgPrincipal extends javax.swing.JDialog {
      */
     public DlgPrincipal(IConexion conexion) {
         this.conexion = conexion;
-        this.personasDAO = new PersonasDAO(conexion);
+        this.personasDAO = new PersonasDAO(this.conexion);
         initComponents();
     }
 
@@ -262,7 +262,7 @@ public class DlgPrincipal extends javax.swing.JDialog {
     }//GEN-LAST:event_btnReportesActionPerformed
 
     private void btnModuloLicenciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModuloLicenciasActionPerformed
-        DlgRegistrarLicencia RL = new DlgRegistrarLicencia(this, true);
+        DlgRegistrarLicencia RL = new DlgRegistrarLicencia(this, true, conexion);
         this.setVisible(false);
         RL.setVisible(true);
         this.setVisible(true);

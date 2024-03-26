@@ -28,7 +28,7 @@ public class DlgBuscarLicencia extends javax.swing.JDialog {
 
     private final IPersonaBO personaBO;
     private final ITramiteBO tramiteBO;
-    private LicenciaDTO licenciaDTO;
+    private PersonaDTO personaDTO;
     DefaultTableModel modelo;
 
     /**
@@ -368,35 +368,32 @@ public class DlgBuscarLicencia extends javax.swing.JDialog {
         String rfc = tblPersonas.getValueAt(fila, 1).toString();
         PersonaDTO personaSeleccionada = null;
         try {
-            personaSeleccionada = personaBO.consultarPersona(rfc);
+            personaDTO = personaBO.consultarPersona(rfc);
         } catch (NegocioException ex) {
             Logger.getLogger(DlgBuscarLicencia.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        if (fila < 0) {
-
-        } else {
-            try {
-                LicenciaDTO licencia = tramiteBO.buscarLicencia(personaSeleccionada);
-                setLicenciaDTO(licencia);
-                
-            } catch (NegocioException ex) {
-                JOptionPane.showMessageDialog(this, ex.getMessage(), "Error de busqueda", JOptionPane.ERROR_MESSAGE);
-                System.out.println(ex.getMessage());
-            }
-
-        }
+//        if (fila < 0) {
+//
+//        } else {
+//            try {
+//                LicenciaDTO licencia = tramiteBO.buscarLicencia(personaSeleccionada);
+//                setLicenciaDTO(licencia);
+//                
+//            } catch (NegocioException ex) {
+//                JOptionPane.showMessageDialog(this, ex.getMessage(), "Error de busqueda", JOptionPane.ERROR_MESSAGE);
+//                System.out.println(ex.getMessage());
+//            }
+//
+//        }
         this.setVisible(false);
     }//GEN-LAST:event_btnBuscarActionPerformed
 
-    public LicenciaDTO getLicenciaDTO() {
-        return licenciaDTO;
+    public PersonaDTO getPersonaDTO() {
+        return personaDTO;
     }
 
-    public void setLicenciaDTO(LicenciaDTO licenciaDTO) {
-        this.licenciaDTO = licenciaDTO;
-    }
-
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private org.itson.basesdedatosavanzadas_tramitesvehiculares_principal.Elementos.BotonAzul btnBuscar;

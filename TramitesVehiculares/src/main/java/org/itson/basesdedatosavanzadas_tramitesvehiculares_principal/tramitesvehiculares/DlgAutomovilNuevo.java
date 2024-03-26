@@ -4,9 +4,12 @@
  */
 package org.itson.basesdedatosavanzadas_tramitesvehiculares_principal.tramitesvehiculares;
 
+import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.persistence.PersistenceException;
 import javax.swing.JOptionPane;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.ITramiteBO;
+import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.NegocioException;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.TramiteBO;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.dto.AutomovilDTO;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.dto.LicenciaDTO;
@@ -16,17 +19,17 @@ import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehic
  *
  * @author Abe
  */
-public class DlgAutomóvilNuevo extends javax.swing.JDialog {
+public class DlgAutomovilNuevo extends javax.swing.JDialog {
 
-    private static final Logger LOG = Logger.getLogger(DlgAutomóvilNuevo.class.getName());
+    private static final Logger LOG = Logger.getLogger(DlgAutomovilNuevo.class.getName());
     
 
-    private LicenciaDTO licenciaDTO;
+    private PersonaDTO personaDTO;
     private final ITramiteBO tramiteBO;
     /**
      * Creates new form DlgVacio
      */
-    public DlgAutomóvilNuevo(java.awt.Dialog parent, boolean modal) {
+    public DlgAutomovilNuevo(java.awt.Dialog parent, boolean modal) {
         super(parent, modal);
         tramiteBO = new TramiteBO();
 //        if(licenciaDTO!=null){
@@ -221,7 +224,7 @@ public class DlgAutomóvilNuevo extends javax.swing.JDialog {
         });
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 0, 30)); // NOI18N
-        jLabel10.setText("Número de licencia");
+        jLabel10.setText("RFC Persona");
 
         txtLicencia.setEditable(false);
         txtLicencia.addActionListener(new java.awt.event.ActionListener() {
@@ -427,7 +430,19 @@ public class DlgAutomóvilNuevo extends javax.swing.JDialog {
             autoNuevo.setModelo(txtModelo.getText());
             autoNuevo.setMarca(txtMarca.getText());
             
-//            PersonaDTO persona = new PersonaDTO();
+            if (personaDTO!=null){
+                
+                try {
+                    tramiteBO.placaAutomovilNuevo(autoNuevo, personaDTO);
+                } catch (PersistenceException ex) {
+                    JOptionPane.showMessageDialog(rootPane, ex.getMessage(), ex.getCause().getMessage(), JOptionPane.ERROR_MESSAGE);
+                } catch (NegocioException ex) {
+                    JOptionPane.showMessageDialog(rootPane, ex.getMessage(), ex.getCause().getMessage(), JOptionPane.ERROR_MESSAGE);
+                }
+                
+            }else{
+                JOptionPane.showMessageDialog(rootPane, "Seleccione una persona", "Error: No se ha seleccionado a ninguna persona", JOptionPane.WARNING_MESSAGE);
+            }
             
             
         }else{
@@ -438,18 +453,15 @@ public class DlgAutomóvilNuevo extends javax.swing.JDialog {
     private void btnBuscarLicenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarLicenciaActionPerformed
         DlgBuscarLicencia BL = new DlgBuscarLicencia(this, true);
         BL.setVisible(true);
-        this.licenciaDTO = BL.getLicenciaDTO();
-        if(licenciaDTO!=null){
-            txtLicencia.setText(licenciaDTO.getNumero_licencia());
-        }
-        else{
-            
+        this.personaDTO = BL.getPersonaDTO();
+        if(personaDTO!=null){
+            txtLicencia.setText(personaDTO.getRfc());
         }
         BL.dispose();
     }//GEN-LAST:event_btnBuscarLicenciaActionPerformed
 
-    public void setLicenciaDTO(LicenciaDTO licenciaDTO) {
-        this.licenciaDTO = licenciaDTO;
+    public void setPersonaDTO(PersonaDTO personaDTO) {
+        this.personaDTO = personaDTO;
     }
     
     public boolean camposVacios(){

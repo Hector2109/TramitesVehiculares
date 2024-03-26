@@ -127,7 +127,7 @@ public class TramiteBO implements ITramiteBO {
      */
     @Override
     public AutomovilDTO crearAutomovil(AutomovilDTO automovilDTO) throws NegocioException, PersistenceException {
-        if (ValidacionNegocio.validacionAutomovil(automovilDTO)) {
+//        if (ValidacionNegocio.validacionAutomovil(automovilDTO)) {
             Automovil automovil = tramite.obtenerAutomovil(automovilDTO);
 
             if (automovil != null) {
@@ -142,9 +142,9 @@ public class TramiteBO implements ITramiteBO {
             } else {
                 throw new PersistenceException("Error: Ha ocurrido un error al querer registrar al automovil");
             }
-        } else {
-            throw new NegocioException("Error: Verifique bein los datos proporcionados");
-        }
+//        } else {
+//            throw new NegocioException("Error: Verifique bein los datos proporcionados");
+//        }
     }
 
     @Override

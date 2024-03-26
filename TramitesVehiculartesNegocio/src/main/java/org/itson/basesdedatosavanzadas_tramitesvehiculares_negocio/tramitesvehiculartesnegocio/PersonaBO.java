@@ -271,6 +271,7 @@ public class PersonaBO implements IPersonaBO {
                     persona.getNombre(),
                     persona.getApellido_paterno(),
                     persona.getApellido_materno());
+            
             return personaDTO;
 
         } catch (PersistenciaException ex) {

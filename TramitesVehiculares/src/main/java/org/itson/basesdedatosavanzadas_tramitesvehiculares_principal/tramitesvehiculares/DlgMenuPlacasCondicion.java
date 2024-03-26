@@ -204,7 +204,7 @@ public class DlgMenuPlacasCondicion extends javax.swing.JDialog {
     }//GEN-LAST:event_botonIcono1ActionPerformed
 
     private void btnAutoNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAutoNuevoActionPerformed
-        DlgAutomóvilNuevo AN = new DlgAutomóvilNuevo(this, false);
+        DlgAutomovilNuevo AN = new DlgAutomovilNuevo(this, false);
         this.dispose();
         AN.setVisible(true);
     }//GEN-LAST:event_btnAutoNuevoActionPerformed

@@ -17,6 +17,7 @@ import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehic
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.dto.LicenciaDTO;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.dto.PersonaDTO;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.dto.TramiteDTO;
+import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia.tramitesvehicularespersisencia.IConexion;
 
 /**
  *
@@ -31,10 +32,11 @@ public class DlgRegistrarLicencia extends javax.swing.JDialog {
     private int anio;
     DefaultTableModel modelo;
 
+
     /**
      * Creates new form RegistrarLicencia2
      */
-    public DlgRegistrarLicencia(java.awt.Dialog parent, boolean modal) {
+    public DlgRegistrarLicencia(java.awt.Dialog parent, boolean modal, IConexion conexion) {
         super(parent, modal);
         personaBO = new PersonaBO();
         tramiteBO = new TramiteBO();
@@ -439,7 +441,7 @@ public class DlgRegistrarLicencia extends javax.swing.JDialog {
         try {
             personaSeleccionada = personaBO.consultarPersona(rfc);
         } catch (NegocioException ex) {
-            Logger.getLogger(DlgRegistrarLicencia.class.getName()).log(Level.SEVERE, "No hay persona con ese rfc"+rfc,ex);
+            Logger.getLogger(DlgRegistrarLicencia.class.getName()).log(Level.SEVERE, "No hay persona con ese rfc "+rfc,ex);
             
         }
 
