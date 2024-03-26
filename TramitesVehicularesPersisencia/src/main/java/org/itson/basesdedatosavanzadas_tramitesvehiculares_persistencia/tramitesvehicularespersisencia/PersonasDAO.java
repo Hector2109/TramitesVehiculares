@@ -112,6 +112,7 @@ public class PersonasDAO implements IPersonasDAO {
             TypedQuery<Persona> query = entityManager.createQuery(jpqlQuery, Persona.class);
             query.setParameter("rfc", rfc);
             Persona persona = query.getSingleResult();
+            entityManager.close();
             return persona;
         } catch (PersistenceException e) {
             logger.log(Level.SEVERE, "No se pudieron consultar a la persona.", e);
