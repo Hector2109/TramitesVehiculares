@@ -97,5 +97,14 @@ public interface ITramitesDAO {
     public Placa crearPlacaVehiculoNuevo (PersonaDTO persona, AutomovilDTO automovil, String matricula) throws PersistenciaException;
     
     
+    /**
+     * Método el cuál crea un automovil 
+     * @param automovil Automovil que se desea crear
+     * @return Automovil creado
+     * @throws PersistenciaException 
+     */
     public Automovil crearAutomovil (AutomovilDTO automovil) throws PersistenciaException;
+    
+    
+    
 }
