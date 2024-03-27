@@ -4,11 +4,13 @@
  */
 package org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia.tramitesvehicularespersisencia;
 
+import java.util.List;
 import javax.persistence.PersistenceException;
+import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.NegocioException;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.dto.AutomovilDTO;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.dto.LicenciaDTO;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.dto.PersonaDTO;
-import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.dto.PlacaDTO;
+import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia.excepciones.PersistenciaException;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia_entidad.tramitesvehicularespersisencia.Automovil;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia_entidad.tramitesvehicularespersisencia.Licencia;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia_entidad.tramitesvehicularespersisencia.Placa;
@@ -51,6 +53,14 @@ public interface ITramitesDAO {
      * @throws PersistenceException en caso de no encontrar la iicencia
      */
     public void desactivarLicencia(LicenciaDTO licenciaDTO) throws PersistenceException;
+    
+    /**
+     * Regresa una lista de licencias que le pertenecen a una persona
+     * @param persona persona a la que se le buscaran las licencias
+     * @return lista de licencias
+     * @throws NegocioException en caso de algun error al momento de consultar
+     */
+    public List<Licencia> consultarLicenciasPersona(PersonaDTO personaDTO) throws PersistenciaException;
     
     /**
      * Método el cual es utilizado para verificar si un automovil ya no existe 

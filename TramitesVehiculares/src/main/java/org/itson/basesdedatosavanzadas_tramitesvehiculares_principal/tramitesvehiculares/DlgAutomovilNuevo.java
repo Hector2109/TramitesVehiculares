@@ -438,7 +438,7 @@ public class DlgAutomovilNuevo extends javax.swing.JDialog {
                 } catch (NegocioException ex) {
                     JOptionPane.showMessageDialog(rootPane, ex.getMessage(), ex.getCause().getMessage(), JOptionPane.ERROR_MESSAGE);
                 } catch (PersistenciaException ex) {
-                    Logger.getLogger(DlgAutomovilNuevo.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(DlgAutomovilNuevo.class.getName()).log(Level.SEVERE, "Error al crear el automovil y generar las placas", ex);
                 }
                 
             }else{

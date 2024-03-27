@@ -2,6 +2,7 @@ package org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia.tramite
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;
@@ -168,7 +169,6 @@ public class TramitesDAO implements ITramitesDAO {
 //    }
     @Override
     public Licencia buscarLicenciaActiva(PersonaDTO persona) {
-
         EntityManager entityManager = this.conexion.crearConexion();
         Licencia licencia;
         String jpqlQuery = """
@@ -189,6 +189,30 @@ public class TramitesDAO implements ITramitesDAO {
             entityManager.close();
         }
         return licencia;
+    }
+
+    @Override
+    public List<Licencia> consultarLicenciasPersona(PersonaDTO personaDTO) throws PersistenciaException {
+        EntityManager entityManager = this.conexion.crearConexion();
+
+        String jpqlQuery = """
+                       SELECT l FROM Licencia l
+                       JOIN l.persona p
+                       WHERE p.rfc = :rfc
+                       """;
+        TypedQuery<Licencia> query = entityManager.createQuery(jpqlQuery, Licencia.class);
+        query.setParameter("rfc", personaDTO.getRfc());
+
+        List<Licencia> licencias;
+        try {
+            licencias = query.getResultList();
+        } catch (NoResultException ex) {
+            throw new PersistenciaException("No se encontraron licencias para la persona con RFC: " + personaDTO.getRfc(), ex);
+        } finally {
+            entityManager.close();
+        }
+
+        return licencias;
     }
 
     @Override
@@ -283,8 +307,7 @@ public class TramitesDAO implements ITramitesDAO {
                 em.persist(placaNueva);
                 em.getTransaction().commit();
                 em.close();
-                
-                
+
             } else {
                 throw new PersistenceException("Este automovil no esta registrado");
             }
@@ -293,4 +316,5 @@ public class TramitesDAO implements ITramitesDAO {
         }
         return placaNueva;
     }
+
 }

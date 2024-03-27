@@ -10,8 +10,6 @@ import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehic
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia.excepciones.PersistenciaException;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia.tramitesvehicularespersisencia.Conexion;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia.tramitesvehicularespersisencia.IConexion;
-import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia.tramitesvehicularespersisencia.IPersonasDAO;
-import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia.tramitesvehicularespersisencia.PersonasDAO;
 
 
 /**
@@ -28,10 +26,7 @@ public class Principal {
     public static void main(String[] args) throws PersistenciaException {
 
         IConexion conexion = new Conexion();
-        IPersonasDAO personasDAO = new PersonasDAO(conexion);
-
         PersonaBO personaBO = new PersonaBO();
-
         DlgPrincipal DP = new DlgPrincipal(conexion);
         DP.setVisible(true);
 

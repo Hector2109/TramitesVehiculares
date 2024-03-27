@@ -5,6 +5,7 @@
 package org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.dto;
 
 import java.util.GregorianCalendar;
+import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia.tramitesvehicularespersisencia_encriptacion.Fecha;
 
 
 /**
@@ -14,13 +15,13 @@ import java.util.GregorianCalendar;
 public class LicenciaDTO extends TramiteDTO{
     private String numero_licencia;
     
-    private GregorianCalendar vigencia;
+    private Fecha vigencia;
     
     private byte estado;
 
     public LicenciaDTO(
             String numero_licencia, 
-            GregorianCalendar vigencia, 
+            Fecha vigencia, 
             byte estado,
             Float costo) {
         this.numero_licencia = numero_licencia;
@@ -33,8 +34,7 @@ public class LicenciaDTO extends TramiteDTO{
     public LicenciaDTO() {
     }
     
-    
-
+   
     
     /**
      * Regresa el valor de la licencia
@@ -50,7 +50,7 @@ public class LicenciaDTO extends TramiteDTO{
      * Regresa el valor de la vigencia
      * @return valor de la vigencia
      */
-    public GregorianCalendar getVigencia() {
+    public Fecha getVigencia() {
         return vigencia;
     }
 

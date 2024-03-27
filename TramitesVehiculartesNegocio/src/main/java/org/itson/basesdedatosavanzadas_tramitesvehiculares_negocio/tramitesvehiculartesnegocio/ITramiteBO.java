@@ -1,5 +1,6 @@
 package org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio;
 
+import java.util.List;
 import javax.persistence.PersistenceException;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.dto.AutomovilDTO;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.dto.LicenciaDTO;
@@ -31,9 +32,17 @@ public interface ITramiteBO {
      * Método el cual regresa una licencia activa de una persona
      * @param persona persona la cual se verifica si tiene una licencia 
      * activa
-     * @return pbjeto de instancia Licencia- 
+     * @return objeto de instancia Licencia- 
      */
     public LicenciaDTO buscarLicencia (PersonaDTO persona) throws NegocioException;
+    
+    /**
+     * Regresa una lista de licencias que le pertenecen a una persona
+     * @param persona persona a la que se le buscaran las licencias
+     * @return lista de licencias
+     * @throws NegocioException en caso de algun error al momento de consultar
+     */
+    public List<LicenciaDTO> consultarLicenciasPersona(PersonaDTO persona) throws NegocioException;
     
     /**
      * Método el cual crea un automovil

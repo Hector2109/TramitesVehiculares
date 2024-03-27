@@ -1,5 +1,8 @@
 package org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio;
 
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -62,9 +65,13 @@ public class TramiteBO implements ITramiteBO {
 
             licencia = tramite.realizarTramiteLicencia(persona, anios, numeroLicencia);
 
+            Fecha vigencia = new Fecha(
+                    String.valueOf(licencia.getVigencia().get(Calendar.YEAR)) + "-"
+                    + String.valueOf(licencia.getVigencia().get(Calendar.MONTH) + 1) + "-"
+                    + String.valueOf(licencia.getVigencia().get(Calendar.DAY_OF_MONTH)));
             LicenciaDTO licenciaDTO2 = new LicenciaDTO(
                     licencia.getNumero_licencia(),
-                    licencia.getVigencia(),
+                    vigencia,
                     licencia.getEstado(),
                     licencia.getCosto());
             return licenciaDTO2;
@@ -104,11 +111,16 @@ public class TramiteBO implements ITramiteBO {
         Licencia licencia = null;
         licencia = tramite.buscarLicenciaActiva(persona);
         if (licencia != null) {
+            Fecha vigencia = new Fecha(
+                    String.valueOf(licencia.getVigencia().get(Calendar.YEAR)) + "-"
+                    + String.valueOf(licencia.getVigencia().get(Calendar.MONTH) + 1) + "-"
+                    + String.valueOf(licencia.getVigencia().get(Calendar.DAY_OF_MONTH)));
             LicenciaDTO licenciaDTO = new LicenciaDTO(
                     licencia.getNumero_licencia(),
-                    licencia.getVigencia(),
+                    vigencia,
                     licencia.getEstado(),
-                    licencia.getCosto());
+                    licencia.getCosto()
+            );
             return licenciaDTO;
 
         } else {
@@ -139,10 +151,9 @@ public class TramiteBO implements ITramiteBO {
             automovilDTO.setModelo(automovil.getModelo());
             return automovilDTO;
 
-        } else 
-            Logger.getLogger(TramiteBO.class.getName()).log(Level.SEVERE, null, ex);
+        } else {
             throw new PersistenciaException("Error: Ha ocurrido un error al querer registrar al automovil");
-            
+
         }
         // } else {
         //  throw new NegocioException("Error: Verifique bein los datos proporcionados");
@@ -205,6 +216,40 @@ public class TramiteBO implements ITramiteBO {
         }
 
         return sbLetras.toString() + "-" + sbNumeros.toString();
+    }
+
+    /**
+     * Regresa una lista de licencias que le pertenecen a una persona
+     *
+     * @param persona persona a la que se le buscaran las licencias
+     * @return lista de licencias
+     * @throws NegocioException en caso de algun error al momento de consultar
+     */
+    @Override
+    public List<LicenciaDTO> consultarLicenciasPersona(PersonaDTO persona) throws NegocioException {
+        List<LicenciaDTO> licenciasDTO;
+        licenciasDTO = new ArrayList<>();
+        try {
+            List<Licencia> licencias = tramite.consultarLicenciasPersona(persona);
+            
+
+            for (Licencia licencia : licencias) {
+                Fecha vigencia = new Fecha(
+                        String.valueOf(licencia.getVigencia().get(Calendar.YEAR)) + "-"
+                        + String.valueOf(licencia.getVigencia().get(Calendar.MONTH) + 1) + "-"
+                        + String.valueOf(licencia.getVigencia().get(Calendar.DAY_OF_MONTH)));
+                licenciasDTO.add(new LicenciaDTO(
+                        licencia.getNumero_licencia(),
+                        vigencia,
+                        licencia.getEstado(),
+                        licencia.getCosto()));
+            }
+
+        } catch (PersistenciaException ex) {
+            Logger.getLogger(TramiteBO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return licenciasDTO;
     }
 
 }

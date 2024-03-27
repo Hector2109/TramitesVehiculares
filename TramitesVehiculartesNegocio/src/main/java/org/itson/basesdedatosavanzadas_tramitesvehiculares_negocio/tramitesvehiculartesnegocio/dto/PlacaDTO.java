@@ -5,6 +5,7 @@
 package org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.dto;
 
 import java.util.GregorianCalendar;
+import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia.tramitesvehicularespersisencia_encriptacion.Fecha;
 
 /**
  *
@@ -14,11 +15,7 @@ public class PlacaDTO extends TramiteDTO{
 
     public PlacaDTO() {
     }
-    
-    
-    
-    
-    
+
     
     /**
      * Representa la matricula de la placa
@@ -28,7 +25,7 @@ public class PlacaDTO extends TramiteDTO{
     /**
      * Representa la fecha en que se hizo una plca para un vehiculo ya usado
      */
-    private GregorianCalendar fecha_recepcion;
+    private Fecha fecha_recepcion;
     
     /**
      * Representa el estado de la placa
@@ -48,7 +45,7 @@ public class PlacaDTO extends TramiteDTO{
      * para un auto usado
      * @return fecha de solicitud de placa
      */
-    public GregorianCalendar getFecha_recepcion() {
+    public Fecha getFecha_recepcion() {
         return fecha_recepcion;
     }
 
@@ -64,7 +61,7 @@ public class PlacaDTO extends TramiteDTO{
         this.matricula = matricula;
     }
 
-    public void setFecha_recepcion(GregorianCalendar fecha_recepcion) {
+    public void setFecha_recepcion(Fecha fecha_recepcion) {
         this.fecha_recepcion = fecha_recepcion;
     }
 
@@ -72,7 +69,7 @@ public class PlacaDTO extends TramiteDTO{
         this.estado = estado;
     }
 
-    public void setFecha_tramite(GregorianCalendar fecha_tramite) {
+    public void setFecha_tramite(Fecha fecha_tramite) {
         this.fecha_tramite = fecha_tramite;
     }
 

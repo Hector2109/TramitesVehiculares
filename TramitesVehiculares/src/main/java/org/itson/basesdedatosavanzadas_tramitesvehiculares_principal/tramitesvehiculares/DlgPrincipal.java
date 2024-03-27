@@ -103,6 +103,11 @@ public class DlgPrincipal extends javax.swing.JDialog {
         btnInicio.setText("  Inicio       ");
         btnInicio.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnInicio.setRadius(23);
+        btnInicio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnInicioActionPerformed(evt);
+            }
+        });
 
         btnLicencias.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Licencias.png"))); // NOI18N
         btnLicencias.setText("  Licencias");
@@ -265,16 +270,20 @@ public class DlgPrincipal extends javax.swing.JDialog {
         DlgRegistrarLicencia RL = new DlgRegistrarLicencia(this, true, conexion);
         this.setVisible(false);
         RL.setVisible(true);
+        this.setVisible(true);
     }//GEN-LAST:event_btnModuloLicenciasActionPerformed
 
     private void btnModuloPlacasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModuloPlacasActionPerformed
         DlgMenuPlacasCondicion MPC = new DlgMenuPlacasCondicion(this, false);
-        this.dispose();
+        this.setVisible(false);
         MPC.setVisible(true);
+        this.setVisible(true);
     }//GEN-LAST:event_btnModuloPlacasActionPerformed
 
     private void btnModuloConsultasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModuloConsultasActionPerformed
-        // TODO add your handling code here:
+        DlgConsultasPersonas CP = new DlgConsultasPersonas(this, false);
+        this.setVisible(false);
+        CP.setVisible(true);
     }//GEN-LAST:event_btnModuloConsultasActionPerformed
 
     private void btnModuloReportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModuloReportesActionPerformed
@@ -284,6 +293,10 @@ public class DlgPrincipal extends javax.swing.JDialog {
     private void btnLicenciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLicenciasActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnLicenciasActionPerformed
+
+    private void btnInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInicioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnInicioActionPerformed
 
     /**
      * @param args the command line arguments
