@@ -325,6 +325,7 @@ public class TramitesDAO implements ITramitesDAO {
                 placaNueva.setPersona(personaE);
                 placaNueva.setCosto(1500F);
                 placaNueva.setMatricula(matricula);
+                placaNueva.setFecha_tramite(new Fecha());
 
                 EntityManager em = conexion.crearConexion();
                 em.getTransaction().begin();
@@ -339,6 +340,29 @@ public class TramitesDAO implements ITramitesDAO {
             Logger.getLogger(TramitesDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return placaNueva;
+    }
+
+    @Override
+    public Automovil crearAutomovil(AutomovilDTO automovil) throws PersistenciaException {
+        EntityManager em = conexion.crearConexion();
+        
+        
+        Automovil automovilEntity = new Automovil();
+        
+        automovilEntity.setColor(automovil.getColor());
+        automovilEntity.setLinea(automovil.getLinea());
+        automovilEntity.setMarca(automovil.getMarca());
+        automovilEntity.setModelo(automovil.getModelo());
+        automovilEntity.setNumero_serie(automovil.getNumero_serie());
+        
+
+        em.getTransaction().begin();
+        
+        em.persist(automovilEntity);
+
+        em.getTransaction().commit();
+        em.close();
+        return automovilEntity;
     }
 
 }

@@ -143,7 +143,8 @@ public class TramiteBO implements ITramiteBO {
         //if (ValidacionNegocio.validacionAutomovil(automovilDTO)) {
         Automovil automovil = tramite.obtenerAutomovil(automovilDTO);
 
-        if (automovil != null) {
+        if (automovil == null) {
+            automovil = tramite.crearAutomovil(automovilDTO);
             automovilDTO.setColor(automovil.getColor());
             automovilDTO.setLinea(automovil.getLinea());
             automovilDTO.setMarca(automovil.getMarca());

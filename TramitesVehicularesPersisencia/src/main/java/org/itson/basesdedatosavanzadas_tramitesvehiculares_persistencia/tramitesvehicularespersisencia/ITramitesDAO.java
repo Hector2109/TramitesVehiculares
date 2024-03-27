@@ -86,6 +86,16 @@ public interface ITramitesDAO {
      */
     public Placa obtenerPlaca(String matricula);
     
+    /**
+     * Método para crear la placa de un vehiculo nuevo
+     * @param persona persona la cual realiza el tramite de placa
+     * @param automovil automovil que se desea registrar
+     * @param matricula matricula d la placa
+     * @return Placa del nuevo vehiculo
+     * @throws PersistenceException 
+     */
+    public Placa crearPlacaVehiculoNuevo (PersonaDTO persona, AutomovilDTO automovil, String matricula) throws PersistenciaException;
     
-    public Placa crearPlacaVehiculoNuevo (PersonaDTO persona, AutomovilDTO automovil, String matricula) throws PersistenceException;
+    
+    public Automovil crearAutomovil (AutomovilDTO automovil) throws PersistenciaException;
 }
