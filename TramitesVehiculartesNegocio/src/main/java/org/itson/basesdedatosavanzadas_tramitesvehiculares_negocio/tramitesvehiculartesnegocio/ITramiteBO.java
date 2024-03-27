@@ -78,5 +78,8 @@ public interface ITramiteBO {
     
     
     public AutomovilDTO obtenerAutomovilPlaca (PlacaDTO placa) throws NegocioException;
+    
+    
+    public PlacaDTO obtenerPlacaActiva (PlacaDTO placa) throws NegocioException;
 
 }

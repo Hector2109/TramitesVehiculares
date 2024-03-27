@@ -255,12 +255,13 @@ public class TramiteBO implements ITramiteBO {
 
     /**
      * Método para consultar placas de una persona
+     *
      * @param persona persona a la que se buscarán las placas
      * @return regresa la lista de placas
      * @throws NegocioException en caso de error
      */
     @Override
-    public List<PlacaDTO> consultarPlacasPersona(PersonaDTO persona) throws NegocioException{
+    public List<PlacaDTO> consultarPlacasPersona(PersonaDTO persona) throws NegocioException {
         List<PlacaDTO> placasDTO;
         placasDTO = new ArrayList<>();
         try {
@@ -275,11 +276,11 @@ public class TramiteBO implements ITramiteBO {
                         String.valueOf(placa.getFecha_recepcion().get(Calendar.YEAR)) + "-"
                         + String.valueOf(placa.getFecha_recepcion().get(Calendar.MONTH) + 1) + "-"
                         + String.valueOf(placa.getFecha_recepcion().get(Calendar.DAY_OF_MONTH)));
-                
+
                 placasDTO.add(new PlacaDTO(
-                        placa.getMatricula(), 
-                        recepcion, 
-                        placa.getEstado(), 
+                        placa.getMatricula(),
+                        recepcion,
+                        placa.getEstado(),
                         emision));
             }
 
@@ -292,30 +293,44 @@ public class TramiteBO implements ITramiteBO {
 
     @Override
     public AutomovilDTO obtenerAutomovilPlaca(PlacaDTO placa) throws NegocioException {
-        
+
         try {
             Automovil automovil = tramite.obtenerAutomovilPlaca(placa);
-            
+
             AutomovilDTO automovilDTO = new AutomovilDTO();
-            
+
             automovilDTO.setColor(automovil.getColor());
             automovilDTO.setLinea(automovil.getLinea());
             automovilDTO.setMarca(automovil.getMarca());
             automovilDTO.setModelo(automovil.getModelo());
             automovilDTO.setNumero_serie(automovil.getNumero_serie());
-            
+
             return automovilDTO;
-            
+
         } catch (PersistenciaException ex) {
             Logger.getLogger(TramiteBO.class.getName()).log(Level.SEVERE, null, ex);
-            throw new NegocioException ("No se encontro ningún automovil con esas placas");
+            throw new NegocioException("No se encontro ningún automovil con esas placas");
         }
-        
+
     }
 
-    
-    
-    
-    
-    
+    @Override
+    public PlacaDTO obtenerPlacaActiva(PlacaDTO placaDTO) throws NegocioException {
+        try {
+            Placa placa = tramite.obtenerPlacaActiva(placaDTO);
+
+            if (placa != null) {
+
+                placaDTO.setMatricula(placa.getMatricula());
+                placaDTO.setEstado(placa.getEstado());
+            } else {
+                throw new NegocioException ("La placa no esta activa");
+            }
+            return placaDTO;
+        } catch (PersistenciaException ex) {
+            Logger.getLogger(TramiteBO.class.getName()).log(Level.SEVERE, null, ex);
+            throw new NegocioException("No se encontro ninguna placa activa");
+        }
+    }
+
 }

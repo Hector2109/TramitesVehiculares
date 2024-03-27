@@ -222,7 +222,7 @@
                                           <Component id="txtNumLicencia" alignment="1" max="32767" attributes="0"/>
                                       </Group>
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Component id="btnBuscarLicencia" min="-2" pref="74" max="-2" attributes="0"/>
+                                      <Component id="btnBuscar" min="-2" pref="74" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                               <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
@@ -286,7 +286,7 @@
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="txtPlaca" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
-                                  <Component id="btnBuscarLicencia" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
+                                  <Component id="btnBuscar" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
@@ -384,7 +384,7 @@
                 <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtNumSerieKeyTyped"/>
               </Events>
             </Component>
-            <Component class="org.itson.basesdedatosavanzadas_tramitesvehiculares_principal.Elementos.BotonAzul" name="btnBuscarLicencia">
+            <Component class="org.itson.basesdedatosavanzadas_tramitesvehiculares_principal.Elementos.BotonAzul" name="btnBuscar">
               <Properties>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -396,7 +396,7 @@
                 <Property name="radius" type="int" value="18"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBuscarLicenciaActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBuscarActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel7">

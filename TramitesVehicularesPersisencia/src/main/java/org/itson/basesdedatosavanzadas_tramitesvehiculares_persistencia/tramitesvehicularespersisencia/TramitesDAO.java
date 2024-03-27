@@ -390,4 +390,26 @@ public class TramitesDAO implements ITramitesDAO {
 
     }
 
+    @Override
+    public Placa obtenerPlacaActiva(PlacaDTO placaDTO) throws PersistenciaException {
+        EntityManager entityManager = this.conexion.crearConexion();
+        String jpqlQuery = """
+                   SELECT p
+                   FROM Placa p
+                   WHERE p.estado = 1
+                   """;
+        Placa placa;
+        
+        TypedQuery<Placa> query = entityManager.createQuery(jpqlQuery, Placa.class);
+        try {
+            placa = query.getSingleResult();
+            logger.log(Level.INFO, "Se consulto {0}", placa);
+        } catch (PersistenceException ex) {
+            placa = null;
+        } finally {
+            entityManager.close();
+        }
+        return placa;
+    }
+
 }

@@ -106,6 +106,22 @@ public interface ITramitesDAO {
      */
     public Automovil crearAutomovil (AutomovilDTO automovil) throws PersistenciaException;
     
+    /**
+     * Obtiene un automovil basandose en la placa 
+     * @param placa placa del automovila buscar
+     * @return automovil encontrado
+     * @throws PersistenciaException en caso de no encontrar ningún automovil 
+     */
     public Automovil obtenerAutomovilPlaca (PlacaDTO placa) throws PersistenciaException;
+    
+    /**
+     * Obtiene la placa activa de un automovil
+     * @param automovil automovil del cual se desea saber la placa
+     * @return placa encontrada
+     * @throws PersistenciaException en caso de no encontrar ninguna placa 
+     */
+    public Placa obtenerPlacaActiva(PlacaDTO placa) throws PersistenciaException;
+    
+    
     
 }

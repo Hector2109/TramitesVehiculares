@@ -10,10 +10,13 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.IPersonaBO;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.ITramiteBO;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.NegocioException;
+import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.PersonaBO;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.TramiteBO;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.dto.AutomovilDTO;
+import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.dto.LicenciaDTO;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.dto.PersonaDTO;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.dto.PlacaDTO;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia.excepciones.PersistenciaException;
@@ -25,12 +28,14 @@ import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia.excepcio
 public class DlgRenovarPlaca extends javax.swing.JDialog {
 
     private final ITramiteBO tramiteBO;
+    private final IPersonaBO personaBO;
 
     /**
      * Creates new form DlgRenovarPlaca
      */
     public DlgRenovarPlaca() {
         tramiteBO = new TramiteBO();
+        personaBO = new PersonaBO();
         initComponents();
     }
 
@@ -58,7 +63,7 @@ public class DlgRenovarPlaca extends javax.swing.JDialog {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         txtNumSerie = new javax.swing.JTextField();
-        btnBuscarLicencia = new org.itson.basesdedatosavanzadas_tramitesvehiculares_principal.Elementos.BotonAzul();
+        btnBuscar = new org.itson.basesdedatosavanzadas_tramitesvehiculares_principal.Elementos.BotonAzul();
         jLabel7 = new javax.swing.JLabel();
         txtColor = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
@@ -175,13 +180,13 @@ public class DlgRenovarPlaca extends javax.swing.JDialog {
             }
         });
 
-        btnBuscarLicencia.setForeground(new java.awt.Color(255, 255, 255));
-        btnBuscarLicencia.setText("Buscar");
-        btnBuscarLicencia.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        btnBuscarLicencia.setRadius(18);
-        btnBuscarLicencia.addActionListener(new java.awt.event.ActionListener() {
+        btnBuscar.setForeground(new java.awt.Color(255, 255, 255));
+        btnBuscar.setText("Buscar");
+        btnBuscar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnBuscar.setRadius(18);
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBuscarLicenciaActionPerformed(evt);
+                btnBuscarActionPerformed(evt);
             }
         });
 
@@ -289,7 +294,7 @@ public class DlgRenovarPlaca extends javax.swing.JDialog {
                                     .addComponent(txtColor)
                                     .addComponent(txtNumLicencia, javax.swing.GroupLayout.Alignment.TRAILING))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnBuscarLicencia, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(53, 53, 53)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel4)
@@ -336,7 +341,7 @@ public class DlgRenovarPlaca extends javax.swing.JDialog {
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtPlaca, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnBuscarLicencia, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
@@ -461,9 +466,9 @@ public class DlgRenovarPlaca extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtColorActionPerformed
 
-    private void btnBuscarLicenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarLicenciaActionPerformed
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
 
-        if (!txtPlaca.getText().isBlank()){
+        if (!txtPlaca.getText().isBlank()) {
 
             PlacaDTO placaDTO = new PlacaDTO(txtPlaca.getText());
 
@@ -471,20 +476,42 @@ public class DlgRenovarPlaca extends javax.swing.JDialog {
                 AutomovilDTO automovilDTO;
                 automovilDTO = tramiteBO.obtenerAutomovilPlaca(placaDTO);
 
-                txtMarca.setText(automovilDTO.getMarca());
-                txtModelo.setText(automovilDTO.getModelo());
-                txtColor.setText(automovilDTO.getColor());
-                txtNumSerie.setText(automovilDTO.getNumero_serie());
-                txtLinea.setText(automovilDTO.getLinea());
+                PersonaDTO persona = personaBO.consultaPersonaPlaca(placaDTO);
+
+                try {
+                    placaDTO = tramiteBO.obtenerPlacaActiva(placaDTO);
+
+                    if (placaDTO != null && placaDTO.getEstado() == 1) {
+                        LicenciaDTO licencia = tramiteBO.buscarLicencia(persona);
+                        if (licencia != null) {
+                            txtNumLicencia.setText(licencia.getNumero_licencia());
+                            btnBuscar.setEnabled(false);
+                            txtPlaca.setEditable(false);
+                            txtMarca.setText(automovilDTO.getMarca());
+                            txtModelo.setText(automovilDTO.getModelo());
+                            txtColor.setText(automovilDTO.getColor());
+                            txtNumSerie.setText(automovilDTO.getNumero_serie());
+                            txtLinea.setText(automovilDTO.getLinea());
+
+                        }else{
+                            JOptionPane.showMessageDialog(rootPane, "No es posible generar nueva placa", "La licencia esta inactiva", HEIGHT);
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(rootPane, "No es posible realizar el tramite", "La placa no esta activa", JOptionPane.ERROR_MESSAGE);
+                    }
+                } catch (NegocioException ex) {
+                    JOptionPane.showMessageDialog(rootPane, ex.getMessage(), "Placa inactiva", JOptionPane.ERROR_MESSAGE);
+                }
+
             } catch (NegocioException ex) {
                 JOptionPane.showMessageDialog(rootPane, ex.getMessage(), "Automovil no encontrado", JOptionPane.ERROR_MESSAGE);
             }
 
-        }else{
+        } else {
             JOptionPane.showMessageDialog(rootPane, "Escriba la matricula", "Llene el campo", JOptionPane.WARNING_MESSAGE);
         }
 
-    }//GEN-LAST:event_btnBuscarLicenciaActionPerformed
+    }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void txtNumSerieKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumSerieKeyTyped
         // TODO add your handling code here:
@@ -524,7 +551,7 @@ public class DlgRenovarPlaca extends javax.swing.JDialog {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private org.itson.basesdedatosavanzadas_tramitesvehiculares_principal.Elementos.BotonAzul btnBuscarLicencia;
+    private org.itson.basesdedatosavanzadas_tramitesvehiculares_principal.Elementos.BotonAzul btnBuscar;
     private org.itson.basesdedatosavanzadas_tramitesvehiculares_principal.Elementos.BotonBlanco btnConsultas;
     private org.itson.basesdedatosavanzadas_tramitesvehiculares_principal.Elementos.BotonBlanco btnInicio1;
     private org.itson.basesdedatosavanzadas_tramitesvehiculares_principal.Elementos.BotonBlanco btnLicencias;

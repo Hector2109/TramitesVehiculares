@@ -3,6 +3,7 @@ package org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehi
 import java.util.List;
 import javax.persistence.PersistenceException;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.dto.PersonaDTO;
+import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.dto.PlacaDTO;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia.excepciones.PersistenciaException;
 
 /**
@@ -59,5 +60,8 @@ public interface IPersonaBO {
      * @return regresa una lista de personas con el año
      * @throws PersistenciaException lanza excepcion en caso de error
      */
-    public List<PersonaDTO> consultarPersonasAnio(String anio) throws NegocioException;
+    public List<PersonaDTO> consultarPersonasAnio(String anio) throws NegocioException; 
+    
+    
+    public PersonaDTO consultaPersonaPlaca (PlacaDTO placa) throws  NegocioException;
 }

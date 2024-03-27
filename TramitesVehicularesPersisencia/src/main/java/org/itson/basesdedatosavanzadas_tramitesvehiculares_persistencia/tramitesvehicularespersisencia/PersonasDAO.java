@@ -8,6 +8,7 @@ import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.dto.PersonaDTO;
+import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.dto.PlacaDTO;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia.excepciones.PersistenciaException;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia_entidad.tramitesvehicularespersisencia.Persona;
 
@@ -112,7 +113,7 @@ public class PersonasDAO implements IPersonasDAO {
             TypedQuery<Persona> query = entityManager.createQuery(jpqlQuery, Persona.class);
             query.setParameter("rfc", rfc);
             Persona persona = query.getSingleResult();
-            
+
             entityManager.close();
             return persona;
         } catch (PersistenceException e) {
@@ -136,7 +137,7 @@ public class PersonasDAO implements IPersonasDAO {
             TypedQuery<Persona> query = entityManager.createQuery(jpqlQuery, Persona.class);
             query.setParameter("nombre", "%" + nombre + "%");
             List<Persona> personas = query.getResultList();
-            
+
             return personas;
 
         } catch (PersistenceException e) {
@@ -189,6 +190,30 @@ public class PersonasDAO implements IPersonasDAO {
             entitymanager.close();
         }
 
+    }
+
+    @Override
+    public Persona buscarPersonaPlaca(PlacaDTO placa) throws PersistenciaException {
+        EntityManager entitymanager = conexion.crearConexion();
+
+        String jpqlQuery = """
+                   SELECT DISTINCT p
+                   FROM Persona p
+                   JOIN p.tramites t
+                   JOIN Placa pl ON t.id = pl.id
+                   WHERE pl.matricula = :matricula
+                   """;
+
+        TypedQuery<Persona> query = entitymanager.createQuery(jpqlQuery, Persona.class);
+        query.setParameter("matricula", placa.getMatricula());
+
+        try {
+            Persona persona = query.getSingleResult();
+            return persona;
+        } catch (PersistenceException ex) {
+            logger.log(Level.SEVERE, "No se pudo consultar a la persona.", ex);
+            throw new PersistenciaException("No se encontraron personas con esta placa");
+        }
     }
 
 }
