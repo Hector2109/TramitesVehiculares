@@ -345,27 +345,49 @@ public class TramitesDAO implements ITramitesDAO {
     @Override
     public Automovil crearAutomovil(AutomovilDTO automovil) throws PersistenciaException {
         EntityManager em = conexion.crearConexion();
-        
-        
+
         Automovil automovilEntity = new Automovil();
-        
+
         automovilEntity.setColor(automovil.getColor());
         automovilEntity.setLinea(automovil.getLinea());
         automovilEntity.setMarca(automovil.getMarca());
         automovilEntity.setModelo(automovil.getModelo());
         automovilEntity.setNumero_serie(automovil.getNumero_serie());
-        
 
         em.getTransaction().begin();
-        
+
         em.persist(automovilEntity);
 
         em.getTransaction().commit();
         em.close();
         return automovilEntity;
     }
-    
-    
-    
+
+    @Override
+    public Automovil obtenerAutomovilPlaca(PlacaDTO placa) throws PersistenciaException {
+        EntityManager em = conexion.crearConexion();
+
+        Automovil automovil;
+
+        String jpqlQuery = """
+                       SELECT a 
+                           FROM Automovil a 
+                           JOIN a.placas p 
+                           WHERE p.matricula = :matricula
+                       """;
+        TypedQuery<Automovil> query = em.createQuery(jpqlQuery, Automovil.class);
+        query.setParameter("matricula", placa.getMatricula());
+
+        try {
+            automovil = query.getSingleResult();
+            logger.log(Level.INFO, "Consulta de 1 automovil realizada con éxito.");
+        } catch (NoResultException ex) {
+            throw new PersistenciaException("No se encontraron automoviles con la placa: " + placa.getMatricula(), ex);
+        } finally {
+            em.close();
+        }
+        return automovil;
+
+    }
 
 }

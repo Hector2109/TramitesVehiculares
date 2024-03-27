@@ -75,4 +75,8 @@ public interface ITramiteBO {
      * @return matrioula generada
      */
     public String generarMatricula ();
+    
+    
+    public AutomovilDTO obtenerAutomovilPlaca (PlacaDTO placa) throws NegocioException;
+
 }

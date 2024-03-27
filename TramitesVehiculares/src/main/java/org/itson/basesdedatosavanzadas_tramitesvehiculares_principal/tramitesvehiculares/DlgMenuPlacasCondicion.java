@@ -200,7 +200,9 @@ public class DlgMenuPlacasCondicion extends javax.swing.JDialog {
     }//GEN-LAST:event_btnReportesActionPerformed
 
     private void botonIcono1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonIcono1ActionPerformed
-        // TODO add your handling code here:
+        DlgRenovarPlaca renovacion = new DlgRenovarPlaca ();
+        this.dispose();
+        renovacion.setVisible(true);
     }//GEN-LAST:event_botonIcono1ActionPerformed
 
     private void btnAutoNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAutoNuevoActionPerformed

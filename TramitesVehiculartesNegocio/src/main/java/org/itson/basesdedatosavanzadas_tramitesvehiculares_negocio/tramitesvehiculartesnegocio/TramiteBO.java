@@ -2,6 +2,7 @@ package org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehi
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 import java.util.logging.Level;
@@ -288,4 +289,33 @@ public class TramiteBO implements ITramiteBO {
 
         return placasDTO;
     }
+
+    @Override
+    public AutomovilDTO obtenerAutomovilPlaca(PlacaDTO placa) throws NegocioException {
+        
+        try {
+            Automovil automovil = tramite.obtenerAutomovilPlaca(placa);
+            
+            AutomovilDTO automovilDTO = new AutomovilDTO();
+            
+            automovilDTO.setColor(automovil.getColor());
+            automovilDTO.setLinea(automovil.getLinea());
+            automovilDTO.setMarca(automovil.getMarca());
+            automovilDTO.setModelo(automovil.getModelo());
+            automovilDTO.setNumero_serie(automovil.getNumero_serie());
+            
+            return automovilDTO;
+            
+        } catch (PersistenciaException ex) {
+            Logger.getLogger(TramiteBO.class.getName()).log(Level.SEVERE, null, ex);
+            throw new NegocioException ("No se encontro ningún automovil con esas placas");
+        }
+        
+    }
+
+    
+    
+    
+    
+    
 }
