@@ -5,7 +5,7 @@ import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehic
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.dto.LicenciaDTO;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.dto.PersonaDTO;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.dto.PlacaDTO;
-import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia_entidad.tramitesvehicularespersisencia.Licencia;
+import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia.excepciones.PersistenciaException;
 
 /**
  *
@@ -42,7 +42,7 @@ public interface ITramiteBO {
      * @throws NegocioException en caso de error
      * @throws PersistenceException en caso de algún error al momento de registrar el automovil
      */
-    public AutomovilDTO crearAutomovil (AutomovilDTO automovilDTO) throws NegocioException, PersistenceException;
+    public AutomovilDTO crearAutomovil (AutomovilDTO automovilDTO) throws NegocioException, PersistenciaException;
     
     /**
      * Método el cual crea una placa para un automovil nuevo
@@ -50,7 +50,7 @@ public interface ITramiteBO {
      * @return Placa del automovil  nuevo
      * @throws PersistenceException  
      */
-    public PlacaDTO placaAutomovilNuevo (AutomovilDTO automovilNuevo, PersonaDTO persona) throws PersistenceException, NegocioException;
+    public PlacaDTO placaAutomovilNuevo (AutomovilDTO automovilNuevo, PersonaDTO persona) throws PersistenciaException, NegocioException;
 
     /**
      * Método que genera una matricula para las placas

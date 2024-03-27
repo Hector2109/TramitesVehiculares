@@ -265,7 +265,6 @@ public class DlgPrincipal extends javax.swing.JDialog {
         DlgRegistrarLicencia RL = new DlgRegistrarLicencia(this, true, conexion);
         this.setVisible(false);
         RL.setVisible(true);
-        this.setVisible(true);
     }//GEN-LAST:event_btnModuloLicenciasActionPerformed
 
     private void btnModuloPlacasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModuloPlacasActionPerformed

@@ -23,9 +23,7 @@ public class AutomovilDTO extends VehiculoDTO{
 
     public AutomovilDTO() {
     }
-
-    
-    
+ 
     /**
      * Obtiene el numero des serie de un automovil
      * @return número de serie del autoovil

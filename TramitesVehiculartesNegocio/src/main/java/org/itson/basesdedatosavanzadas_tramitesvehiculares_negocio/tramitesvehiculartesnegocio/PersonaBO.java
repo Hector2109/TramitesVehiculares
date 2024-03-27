@@ -2,6 +2,7 @@ package org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehi
 
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia.tramitesvehicularespersisencia_encriptacion.Fecha;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -211,8 +212,12 @@ public class PersonaBO implements IPersonaBO {
             personasDTO = new ArrayList<>();
 
             for (Persona persona : personas) {
+                Fecha fechaNacimiento = new Fecha(
+                        String.valueOf(persona.getFecha_nacimiento().get(Calendar.YEAR)) + "-"
+                        + String.valueOf(persona.getFecha_nacimiento().get(Calendar.MONTH) + 1) + "-"
+                        + String.valueOf(persona.getFecha_nacimiento().get(Calendar.DAY_OF_MONTH)));
                 personasDTO.add(new PersonaDTO(
-                        persona.getFecha_nacimiento(),
+                        fechaNacimiento,
                         persona.getRfc(),
                         persona.getNombre(),
                         persona.getApellido_paterno(),
@@ -227,7 +232,9 @@ public class PersonaBO implements IPersonaBO {
     }
 
     /**
-     * Método que regresa una lista de personas que cuenten con licencias activas
+     * Método que regresa una lista de personas que cuenten con licencias
+     * activas
+     *
      * @return regresa la lista de las personasDTO
      * @throws NegocioException si ocurre un erro lanza el error
      */
@@ -239,8 +246,12 @@ public class PersonaBO implements IPersonaBO {
             personasDTO = new ArrayList<>();
 
             for (Persona persona : personas) {
+                Fecha fechaNacimiento = new Fecha(
+                        String.valueOf(persona.getFecha_nacimiento().get(Calendar.YEAR)) + "-"
+                        + String.valueOf(persona.getFecha_nacimiento().get(Calendar.MONTH) + 1) + "-"
+                        + String.valueOf(persona.getFecha_nacimiento().get(Calendar.DAY_OF_MONTH)));
                 personasDTO.add(new PersonaDTO(
-                        persona.getFecha_nacimiento(),
+                        fechaNacimiento,
                         persona.getRfc(),
                         persona.getNombre(),
                         persona.getApellido_paterno(),
@@ -252,7 +263,7 @@ public class PersonaBO implements IPersonaBO {
         }
 
         return personasDTO;
-        
+
     }
 
     /**
@@ -264,14 +275,21 @@ public class PersonaBO implements IPersonaBO {
     @Override
     public PersonaDTO consultarPersona(String rfc) throws NegocioException {
         try {
+
             Persona persona = personasDAO.consultarPersona(rfc);
+
+            Fecha fechaNacimiento = new Fecha(
+                    String.valueOf(persona.getFecha_nacimiento().get(Calendar.YEAR)) + "-"
+                    + String.valueOf(persona.getFecha_nacimiento().get(Calendar.MONTH) + 1) + "-"
+                    + String.valueOf(persona.getFecha_nacimiento().get(Calendar.DAY_OF_MONTH)));
+
             PersonaDTO personaDTO = new PersonaDTO(
-                    persona.getFecha_nacimiento(),
+                    fechaNacimiento,
                     persona.getRfc(),
                     persona.getNombre(),
                     persona.getApellido_paterno(),
                     persona.getApellido_materno());
-            
+
             return personaDTO;
 
         } catch (PersistenciaException ex) {
@@ -294,8 +312,12 @@ public class PersonaBO implements IPersonaBO {
             List<PersonaDTO> personasDTO = new ArrayList<>();
 
             for (Persona persona : personas) {
+                Fecha fechaNacimiento = new Fecha(
+                        String.valueOf(persona.getFecha_nacimiento().get(Calendar.YEAR)) + "-"
+                        + String.valueOf(persona.getFecha_nacimiento().get(Calendar.MONTH) + 1) + "-"
+                        + String.valueOf(persona.getFecha_nacimiento().get(Calendar.DAY_OF_MONTH)));
                 PersonaDTO personaDTO = new PersonaDTO(
-                        persona.getFecha_nacimiento(),
+                        fechaNacimiento,
                         persona.getRfc(),
                         persona.getNombre(),
                         persona.getApellido_paterno(),
@@ -318,8 +340,12 @@ public class PersonaBO implements IPersonaBO {
             List<PersonaDTO> personasDTO = new ArrayList<>();
 
             for (Persona persona : personas) {
+                Fecha fechaNacimiento = new Fecha(
+                        String.valueOf(persona.getFecha_nacimiento().get(Calendar.YEAR)) + "-"
+                        + String.valueOf(persona.getFecha_nacimiento().get(Calendar.MONTH) + 1) + "-"
+                        + String.valueOf(persona.getFecha_nacimiento().get(Calendar.DAY_OF_MONTH)));
                 PersonaDTO personaDTO = new PersonaDTO(
-                        persona.getFecha_nacimiento(),
+                        fechaNacimiento,
                         persona.getRfc(),
                         persona.getNombre(),
                         persona.getApellido_paterno(),
@@ -342,8 +368,12 @@ public class PersonaBO implements IPersonaBO {
             List<PersonaDTO> personasDTO = new ArrayList<>();
 
             for (Persona persona : personas) {
+                Fecha fechaNacimiento = new Fecha(
+                        String.valueOf(persona.getFecha_nacimiento().get(Calendar.YEAR)) + "-"
+                        + String.valueOf(persona.getFecha_nacimiento().get(Calendar.MONTH) + 1) + "-"
+                        + String.valueOf(persona.getFecha_nacimiento().get(Calendar.DAY_OF_MONTH)));
                 PersonaDTO personaDTO = new PersonaDTO(
-                        persona.getFecha_nacimiento(),
+                       fechaNacimiento,
                         persona.getRfc(),
                         persona.getNombre(),
                         persona.getApellido_paterno(),

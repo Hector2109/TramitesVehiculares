@@ -8,6 +8,7 @@ import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehic
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.dto.LicenciaDTO;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.dto.PersonaDTO;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.dto.PlacaDTO;
+import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia.excepciones.PersistenciaException;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia.tramitesvehicularespersisencia.Conexion;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia.tramitesvehicularespersisencia.IConexion;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia.tramitesvehicularespersisencia.TramitesDAO;
@@ -126,29 +127,30 @@ public class TramiteBO implements ITramiteBO {
      * registrar el automovil
      */
     @Override
-    public AutomovilDTO crearAutomovil(AutomovilDTO automovilDTO) throws NegocioException, PersistenceException {
-//        if (ValidacionNegocio.validacionAutomovil(automovilDTO)) {
-            Automovil automovil = tramite.obtenerAutomovil(automovilDTO);
+    public AutomovilDTO crearAutomovil(AutomovilDTO automovilDTO) throws NegocioException, PersistenciaException {
+        //if (ValidacionNegocio.validacionAutomovil(automovilDTO)) {
+        Automovil automovil = tramite.obtenerAutomovil(automovilDTO);
 
-            if (automovil != null) {
+        if (automovil != null) {
+            automovilDTO.setColor(automovil.getColor());
+            automovilDTO.setLinea(automovil.getLinea());
+            automovilDTO.setMarca(automovil.getMarca());
+            automovilDTO.setNumero_serie(automovil.getNumero_serie());
+            automovilDTO.setModelo(automovil.getModelo());
+            return automovilDTO;
 
-                automovilDTO.setColor(automovil.getColor());
-                automovilDTO.setLinea(automovil.getLinea());
-                automovilDTO.setMarca(automovil.getMarca());
-                automovilDTO.setNumero_serie(automovil.getNumero_serie());
-                automovilDTO.setModelo(automovil.getModelo());
-                return automovilDTO;
-
-            } else {
-                throw new PersistenceException("Error: Ha ocurrido un error al querer registrar al automovil");
-            }
-//        } else {
-//            throw new NegocioException("Error: Verifique bein los datos proporcionados");
-//        }
+        } else 
+            Logger.getLogger(TramiteBO.class.getName()).log(Level.SEVERE, null, ex);
+            throw new PersistenciaException("Error: Ha ocurrido un error al querer registrar al automovil");
+            
+        }
+        // } else {
+        //  throw new NegocioException("Error: Verifique bein los datos proporcionados");
+        //}
     }
 
     @Override
-    public PlacaDTO placaAutomovilNuevo(AutomovilDTO automovilNuevo, PersonaDTO persona) throws PersistenceException, NegocioException {
+    public PlacaDTO placaAutomovilNuevo(AutomovilDTO automovilNuevo, PersonaDTO persona) throws PersistenciaException, NegocioException {
 
         try {
             crearAutomovil(automovilNuevo);
@@ -163,24 +165,19 @@ public class TramiteBO implements ITramiteBO {
 
             } while (placa != null);
 
-            try {
-                placa = tramite.crearPlacaVehiculoNuevo(persona, automovilNuevo, matricula);
+            placa = tramite.crearPlacaVehiculoNuevo(persona, automovilNuevo, matricula);
 
-                PlacaDTO placaDTO = new PlacaDTO();
+            PlacaDTO placaDTO = new PlacaDTO();
 
-                placaDTO.setCosto(placa.getCosto());
-                placaDTO.setEstado(placa.getEstado());
-                placaDTO.setMatricula(matricula);
+            placaDTO.setCosto(placa.getCosto());
+            placaDTO.setEstado(placa.getEstado());
+            placaDTO.setMatricula(matricula);
 
-                return placaDTO;
-            } catch (PersistenceException e) {
-                
-                throw new PersistenceException (e.getMessage());
-            }
+            return placaDTO;
 
         } catch (NegocioException ex) {
             Logger.getLogger(TramiteBO.class.getName()).log(Level.SEVERE, null, ex);
-            throw new NegocioException (ex.getMessage());  
+            throw new NegocioException(ex.getMessage());
         }
     }
 

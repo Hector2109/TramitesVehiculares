@@ -18,6 +18,7 @@ import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehic
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.dto.PersonaDTO;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.dto.TramiteDTO;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia.tramitesvehicularespersisencia.IConexion;
+import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia.tramitesvehicularespersisencia_encriptacion.Fecha;
 
 /**
  *
@@ -492,9 +493,10 @@ public class DlgRegistrarLicencia extends javax.swing.JDialog {
             }
 
             tblPersonas.setModel(modelo);
-        } catch (Exception e) {
+        } catch (NegocioException e) {
             JOptionPane.showMessageDialog(this, "No se puede acceder a las personas", "Error de consulta",
                     JOptionPane.ERROR_MESSAGE);
+            
         }
 
     }
