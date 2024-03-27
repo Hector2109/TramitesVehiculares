@@ -14,6 +14,7 @@ import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehic
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.TramiteBO;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.dto.LicenciaDTO;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.dto.PersonaDTO;
+import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.dto.PlacaDTO;
 import static org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia_entidad.tramitesvehicularespersisencia.Tramite_.persona;
 
 /**
@@ -26,7 +27,7 @@ public class DlgConsultarHistorial extends javax.swing.JDialog {
     private ITramiteBO tramiteBO;
     private PersonaDTO personaDTO;
     DefaultTableModel modelo;
-    
+
     /**
      * Creates new form DlgVacio
      */
@@ -34,7 +35,7 @@ public class DlgConsultarHistorial extends javax.swing.JDialog {
         super(parent, modal);
         personaBO = new PersonaBO();
         tramiteBO = new TramiteBO();
-        this.personaDTO=personaDTO;
+        this.personaDTO = personaDTO;
         initComponents();
         String nombre = "";
         if (personaDTO.getApellido_materno() != null) {
@@ -43,7 +44,7 @@ public class DlgConsultarHistorial extends javax.swing.JDialog {
             nombre = personaDTO.getNombre() + " " + personaDTO.getApellido_paterno();
         }
         lblPersona.setText(nombre);
-        
+
         consultarPlacas();
         consultarLicencias();
     }
@@ -243,7 +244,31 @@ public class DlgConsultarHistorial extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     public void consultarPlacas() {
+        try {
+            List<PlacaDTO> listaPlacas = tramiteBO.consultarPlacasPersona(personaDTO);
+            Object[] licenciaPlaca = new Object[3];
+            modelo = (DefaultTableModel) tblPlacas.getModel();
 
+            for (PlacaDTO placa : listaPlacas) {
+                licenciaPlaca[0] = placa.getMatricula();
+                licenciaPlaca[1] = placa.getFecha_tramite();
+                String activo = "";
+                if (placa.getEstado()== 1) {
+                    activo = "ACTIVA";
+                } else {
+                    activo = "INACTIVA";
+                }
+                licenciaPlaca[2] = activo;
+
+                modelo.addRow(licenciaPlaca);
+            }
+
+            tblPlacas.setModel(modelo);
+        } catch (NegocioException e) {
+            JOptionPane.showMessageDialog(this, "No se puede acceder a las personas", "Error de consulta",
+                    JOptionPane.ERROR_MESSAGE);
+
+        }
     }
 
     public void consultarLicencias() {
@@ -251,16 +276,15 @@ public class DlgConsultarHistorial extends javax.swing.JDialog {
             List<LicenciaDTO> listaLicencias = tramiteBO.consultarLicenciasPersona(personaDTO);
             Object[] licenciaFila = new Object[3];
             modelo = (DefaultTableModel) tblLicencias.getModel();
-            
+
             for (LicenciaDTO licencia : listaLicencias) {
                 licenciaFila[0] = licencia.getNumero_licencia();
                 licenciaFila[1] = licencia.getVigencia();
                 String vigente = "";
-                if(licencia.getEstado()==1){
+                if (licencia.getEstado() == 1) {
                     vigente = "VIGENTE";
-                }
-                else{
-                    vigente= "NO VIGENTE";
+                } else {
+                    vigente = "NO VIGENTE";
                 }
                 licenciaFila[2] = vigente;
 

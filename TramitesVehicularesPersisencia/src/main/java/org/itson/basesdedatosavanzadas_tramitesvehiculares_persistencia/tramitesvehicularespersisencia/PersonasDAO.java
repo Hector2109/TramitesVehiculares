@@ -112,6 +112,7 @@ public class PersonasDAO implements IPersonasDAO {
             TypedQuery<Persona> query = entityManager.createQuery(jpqlQuery, Persona.class);
             query.setParameter("rfc", rfc);
             Persona persona = query.getSingleResult();
+            
             entityManager.close();
             return persona;
         } catch (PersistenceException e) {
@@ -135,6 +136,7 @@ public class PersonasDAO implements IPersonasDAO {
             TypedQuery<Persona> query = entityManager.createQuery(jpqlQuery, Persona.class);
             query.setParameter("nombre", "%" + nombre + "%");
             List<Persona> personas = query.getResultList();
+            
             return personas;
 
         } catch (PersistenceException e) {

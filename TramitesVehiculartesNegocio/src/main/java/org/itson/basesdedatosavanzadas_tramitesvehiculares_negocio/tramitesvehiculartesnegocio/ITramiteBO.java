@@ -54,6 +54,15 @@ public interface ITramiteBO {
     public AutomovilDTO crearAutomovil (AutomovilDTO automovilDTO) throws NegocioException, PersistenciaException;
     
     /**
+     * Método para consultar placas de una persona
+     * @param persona persona a la que se buscarán las placas
+     * @return regresa la lista de placas
+     * @throws NegocioException en caso de error
+     */
+    public List<PlacaDTO> consultarPlacasPersona(PersonaDTO persona) throws NegocioException;
+    
+    
+    /**
      * Método el cual crea una placa para un automovil nuevo
      * @param automovilNuevo automovil nuevo que se desea registrar
      * @return Placa del automovil  nuevo

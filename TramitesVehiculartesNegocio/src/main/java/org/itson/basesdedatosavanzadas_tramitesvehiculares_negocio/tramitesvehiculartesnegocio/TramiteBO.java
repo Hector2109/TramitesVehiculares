@@ -231,7 +231,6 @@ public class TramiteBO implements ITramiteBO {
         licenciasDTO = new ArrayList<>();
         try {
             List<Licencia> licencias = tramite.consultarLicenciasPersona(persona);
-            
 
             for (Licencia licencia : licencias) {
                 Fecha vigencia = new Fecha(
@@ -252,4 +251,40 @@ public class TramiteBO implements ITramiteBO {
         return licenciasDTO;
     }
 
+    /**
+     * Método para consultar placas de una persona
+     * @param persona persona a la que se buscarán las placas
+     * @return regresa la lista de placas
+     * @throws NegocioException en caso de error
+     */
+    @Override
+    public List<PlacaDTO> consultarPlacasPersona(PersonaDTO persona) throws NegocioException{
+        List<PlacaDTO> placasDTO;
+        placasDTO = new ArrayList<>();
+        try {
+            List<Placa> placas = tramite.consultarPlacasPersona(persona);
+
+            for (Placa placa : placas) {
+                Fecha emision = new Fecha(
+                        String.valueOf(placa.getFecha_tramite().get(Calendar.YEAR)) + "-"
+                        + String.valueOf(placa.getFecha_tramite().get(Calendar.MONTH) + 1) + "-"
+                        + String.valueOf(placa.getFecha_tramite().get(Calendar.DAY_OF_MONTH)));
+                Fecha recepcion = new Fecha(
+                        String.valueOf(placa.getFecha_recepcion().get(Calendar.YEAR)) + "-"
+                        + String.valueOf(placa.getFecha_recepcion().get(Calendar.MONTH) + 1) + "-"
+                        + String.valueOf(placa.getFecha_recepcion().get(Calendar.DAY_OF_MONTH)));
+                
+                placasDTO.add(new PlacaDTO(
+                        placa.getMatricula(), 
+                        recepcion, 
+                        placa.getEstado(), 
+                        emision));
+            }
+
+        } catch (PersistenciaException ex) {
+            Logger.getLogger(TramiteBO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return placasDTO;
+    }
 }

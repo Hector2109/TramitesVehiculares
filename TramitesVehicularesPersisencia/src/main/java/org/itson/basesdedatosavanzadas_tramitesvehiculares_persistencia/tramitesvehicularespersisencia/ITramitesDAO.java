@@ -71,6 +71,14 @@ public interface ITramitesDAO {
     public Automovil obtenerAutomovil (AutomovilDTO automovilDTO);
     
     /**
+     * Permite consultar una lista de placas que le pertenecen a una persona
+     * @param personaDTO persona que se desea buscar
+     * @return regresa la lista de las personas que tienen esa placa
+     * @throws PersistenciaException en caso de error lanza una exception
+     */
+    public List<Placa> consultarPlacasPersona(PersonaDTO personaDTO) throws PersistenciaException;
+    
+    /**
      * Método el cual verifica la existencia de plcas
      * en base a su matricula
      * @param matricula matricula que se busca

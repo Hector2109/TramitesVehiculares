@@ -16,6 +16,16 @@ public class PlacaDTO extends TramiteDTO{
     public PlacaDTO() {
     }
 
+    public PlacaDTO(String matricula, Fecha fecha_recepcion, Byte estado, Fecha fecha_emision) {
+        this.matricula = matricula;
+        this.fecha_recepcion = fecha_recepcion;
+        this.estado = estado;
+        super.fecha_tramite=fecha_emision;
+    }
+    
+    
+
+    
     
     /**
      * Representa la matricula de la placa

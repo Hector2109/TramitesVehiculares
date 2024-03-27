@@ -5,8 +5,14 @@
 package org.itson.basesdedatosavanzadas_tramitesvehiculares_principal.tramitesvehiculares;
 
 
+import java.util.List;
+import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.NegocioException;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.PersonaBO;
+import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.TramiteBO;
+import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.dto.PersonaDTO;
+import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.dto.PlacaDTO;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia.excepciones.PersistenciaException;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia.tramitesvehicularespersisencia.Conexion;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia.tramitesvehicularespersisencia.IConexion;
@@ -27,9 +33,33 @@ public class Principal {
 
         IConexion conexion = new Conexion();
         PersonaBO personaBO = new PersonaBO();
+        TramiteBO tramiteBO = new TramiteBO();
+        
         DlgPrincipal DP = new DlgPrincipal(conexion);
         DP.setVisible(true);
 
+//        PersonaDTO persona;
+//        try {
+//            persona = personaBO.consultarPersona("HSR210940254B");
+//            if(persona==null){
+//                System.out.println("null");
+//            }
+//            else{
+//                System.out.println(persona.getNombre());
+//            }
+//            
+//            List<PlacaDTO> placas = tramiteBO.consultarPlacasPersona(persona);
+//            int num =0;
+//            for (PlacaDTO placa : placas) {
+//                System.out.println(placa.getMatricula());
+//                num++;
+//                System.out.println(num);
+//            }
+//            System.out.println(num);
+//            
+//        } catch (NegocioException ex) {
+//            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+//        }
       
 
 //        DlgPrincipal principal = new DlgPrincipal(conexion);

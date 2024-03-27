@@ -285,6 +285,30 @@ public class TramitesDAO implements ITramitesDAO {
     }
 
     @Override
+    public List<Placa> consultarPlacasPersona(PersonaDTO personaDTO) throws PersistenciaException {
+        EntityManager entityManager = this.conexion.crearConexion();
+
+        String jpqlQuery = """
+                       SELECT p FROM Placa p
+                       JOIN p.persona pe
+                       WHERE pe.rfc = :rfc
+                       """;
+        TypedQuery<Placa> query = entityManager.createQuery(jpqlQuery, Placa.class);
+        query.setParameter("rfc", personaDTO.getRfc());
+
+        List<Placa> placas;
+        try {
+            placas = query.getResultList();
+            logger.log(Level.INFO, "Consulta de {0} placas realizada con éxito.", placas.size());
+        } catch (NoResultException ex) {
+            throw new PersistenciaException("No se encontraron placas para la persona con RFC: " + personaDTO.getRfc(), ex);
+        } finally {
+            entityManager.close();
+        }
+        return placas;
+    }
+
+    @Override
     public Placa crearPlacaVehiculoNuevo(PersonaDTO persona, AutomovilDTO automovil, String matricula) throws PersistenceException {
 
         Placa placaNueva = new Placa();
