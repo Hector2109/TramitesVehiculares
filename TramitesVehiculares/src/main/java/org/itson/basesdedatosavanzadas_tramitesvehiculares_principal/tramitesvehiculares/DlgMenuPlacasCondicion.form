@@ -160,6 +160,9 @@
             </Property>
             <Property name="radius" type="int" value="23"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPlacasActionPerformed"/>
+          </Events>
         </Component>
         <Component class="org.itson.basesdedatosavanzadas_tramitesvehiculares_principal.Elementos.BotonBlanco" name="btnLicencias">
           <Properties>

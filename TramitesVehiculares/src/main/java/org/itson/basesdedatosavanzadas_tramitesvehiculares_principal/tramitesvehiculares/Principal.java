@@ -29,11 +29,11 @@ public class Principal {
      */
     public static void main(String[] args) throws PersistenciaException, NegocioException {
 
-        IConexion conexion = new Conexion();
+        
         IPersonaBO personaBO = new PersonaBO();
         ITramiteBO tramiteBO = new TramiteBO();
 
-        DlgPrincipal DP = new DlgPrincipal(conexion);
+        DlgPrincipal DP = new DlgPrincipal();
         DP.setVisible(true);
 
 //        ITramitesDAO tramiteDAO = new TramitesDAO(conexion);

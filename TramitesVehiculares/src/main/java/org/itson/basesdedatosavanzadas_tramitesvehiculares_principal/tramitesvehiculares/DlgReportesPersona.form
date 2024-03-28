@@ -123,8 +123,11 @@
         </Component>
         <Component class="org.itson.basesdedatosavanzadas_tramitesvehiculares_principal.Elementos.BotonBlanco" name="btnReportes">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="e1" green="75" red="3e" type="rgb"/>
+            </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/imagenes/Reportes.png"/>
+              <Image iconType="3" name="/imagenes/Reportes_Seleccionado.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="  Reportes"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -143,8 +146,11 @@
         </Component>
         <Component class="org.itson.basesdedatosavanzadas_tramitesvehiculares_principal.Elementos.BotonAzul" name="btnLicencias">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/imagenes/Licencias_Seleccionado.png"/>
+              <Image iconType="3" name="/imagenes/Licencias.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="  Licencias"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -152,6 +158,9 @@
             </Property>
             <Property name="radius" type="int" value="23"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLicenciasActionPerformed"/>
+          </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
               <AbsoluteConstraints x="15" y="386" width="148" height="56"/>

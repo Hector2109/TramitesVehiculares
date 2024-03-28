@@ -104,7 +104,8 @@ public class DlgConsultasPersonas extends javax.swing.JDialog {
         });
         jPanel1.add(btnPlacas, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 310, 148, 56));
 
-        btnConsultas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Consultas.png"))); // NOI18N
+        btnConsultas.setBackground(new java.awt.Color(62, 117, 225));
+        btnConsultas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Consultas_Seleccionado.png"))); // NOI18N
         btnConsultas.setText("  Consultas");
         btnConsultas.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnConsultas.setRadius(23);
@@ -126,10 +127,16 @@ public class DlgConsultasPersonas extends javax.swing.JDialog {
         });
         jPanel1.add(btnReportes, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 538, 148, 56));
 
-        btnLicencias.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Licencias_Seleccionado.png"))); // NOI18N
+        btnLicencias.setBackground(new java.awt.Color(255, 255, 255));
+        btnLicencias.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Licencias.png"))); // NOI18N
         btnLicencias.setText("  Licencias");
         btnLicencias.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnLicencias.setRadius(23);
+        btnLicencias.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLicenciasActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnLicencias, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 386, 148, 56));
 
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Logo.png"))); // NOI18N
@@ -300,15 +307,21 @@ public class DlgConsultasPersonas extends javax.swing.JDialog {
     }//GEN-LAST:event_txtAnioKeyReleased
 
     private void btnReportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportesActionPerformed
-        // TODO add your handling code here:
+        DlgReportesPersona RP = new DlgReportesPersona(this, false);
+        dispose();
+        RP.setVisible(true);
     }//GEN-LAST:event_btnReportesActionPerformed
 
     private void btnConsultasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultasActionPerformed
-        // TODO add your handling code here:
+        DlgConsultasPersonas CP = new DlgConsultasPersonas(this, false);
+        dispose();
+        CP.setVisible(true);
     }//GEN-LAST:event_btnConsultasActionPerformed
 
     private void btnPlacasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlacasActionPerformed
-        // TODO add your handling code here:
+        DlgMenuPlacasCondicion MPC = new DlgMenuPlacasCondicion(this, false);
+        dispose();
+        MPC.setVisible(true);
     }//GEN-LAST:event_btnPlacasActionPerformed
 
     private void btnPersonasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPersonasActionPerformed
@@ -316,8 +329,16 @@ public class DlgConsultasPersonas extends javax.swing.JDialog {
     }//GEN-LAST:event_btnPersonasActionPerformed
 
     private void btnInicio1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInicio1ActionPerformed
-        // TODO add your handling code here:
+        DlgPrincipal DP = new DlgPrincipal();
+        dispose();
+        DP.setVisible(true);
     }//GEN-LAST:event_btnInicio1ActionPerformed
+
+    private void btnLicenciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLicenciasActionPerformed
+        DlgRegistrarLicencia RL = new DlgRegistrarLicencia(this, true);
+        dispose();
+        RL.setVisible(true);
+    }//GEN-LAST:event_btnLicenciasActionPerformed
 
     public void limpiarTabla() {
         for (int i = 0; i < tblPersonas.getRowCount(); i++) {

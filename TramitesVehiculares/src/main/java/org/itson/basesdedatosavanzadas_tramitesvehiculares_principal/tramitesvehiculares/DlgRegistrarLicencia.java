@@ -37,8 +37,8 @@ public class DlgRegistrarLicencia extends javax.swing.JDialog {
     /**
      * Creates new form RegistrarLicencia2
      */
-    public DlgRegistrarLicencia(java.awt.Dialog parent, boolean modal, IConexion conexion) {
-        super(parent, modal);
+    public DlgRegistrarLicencia(java.awt.Dialog parent, boolean modal) {
+        
         personaBO = new PersonaBO();
         tramiteBO = new TramiteBO();
         initComponents();
@@ -89,6 +89,11 @@ public class DlgRegistrarLicencia extends javax.swing.JDialog {
         btnInicio1.setText("  Inicio       ");
         btnInicio1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnInicio1.setRadius(23);
+        btnInicio1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnInicio1ActionPerformed(evt);
+            }
+        });
 
         btnPersonas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Personas.png"))); // NOI18N
         btnPersonas.setText(" Personas");
@@ -134,6 +139,11 @@ public class DlgRegistrarLicencia extends javax.swing.JDialog {
         btnLicencias.setText("  Licencias");
         btnLicencias.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnLicencias.setRadius(23);
+        btnLicencias.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLicenciasActionPerformed(evt);
+            }
+        });
 
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Logo.png"))); // NOI18N
 
@@ -432,15 +442,21 @@ public class DlgRegistrarLicencia extends javax.swing.JDialog {
     }//GEN-LAST:event_btnPersonasActionPerformed
 
     private void btnPlacasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlacasActionPerformed
-        // TODO add your handling code here:
+        DlgMenuPlacasCondicion MPC = new DlgMenuPlacasCondicion(this, false);
+        MPC.setVisible(true);
+        dispose();
     }//GEN-LAST:event_btnPlacasActionPerformed
 
     private void btnConsultasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultasActionPerformed
-        // TODO add your handling code here:
+        DlgConsultasPersonas CP = new DlgConsultasPersonas(this, false);
+        dispose();
+        CP.setVisible(true);
     }//GEN-LAST:event_btnConsultasActionPerformed
 
     private void btnReportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportesActionPerformed
-        // TODO add your handling code here:
+        DlgReportesPersona RP = new DlgReportesPersona(this, false);
+        dispose();
+        RP.setVisible(true);
     }//GEN-LAST:event_btnReportesActionPerformed
 
     private void btnRealizarTramiteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRealizarTramiteActionPerformed
@@ -474,6 +490,16 @@ public class DlgRegistrarLicencia extends javax.swing.JDialog {
             }
         }
     }//GEN-LAST:event_btnRealizarTramiteActionPerformed
+
+    private void btnLicenciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLicenciasActionPerformed
+
+    }//GEN-LAST:event_btnLicenciasActionPerformed
+
+    private void btnInicio1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInicio1ActionPerformed
+        DlgPrincipal DP = new DlgPrincipal();
+        dispose();
+        DP.setVisible(true);
+    }//GEN-LAST:event_btnInicio1ActionPerformed
 
     public void limpiarTabla() {
         for (int i = 0; i < tblPersonas.getRowCount(); i++) {

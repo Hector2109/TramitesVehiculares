@@ -93,6 +93,11 @@ public class DlgMenuPlacasCondicion extends javax.swing.JDialog {
         btnPlacas.setText("  Placas   ");
         btnPlacas.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnPlacas.setRadius(23);
+        btnPlacas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPlacasActionPerformed(evt);
+            }
+        });
 
         btnLicencias.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Licencias.png"))); // NOI18N
         btnLicencias.setText("  Licencias");
@@ -183,7 +188,9 @@ public class DlgMenuPlacasCondicion extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnInicio1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInicio1ActionPerformed
-        // TODO add your handling code here:
+        DlgPrincipal DP = new DlgPrincipal();
+        dispose();
+        DP.setVisible(true);
     }//GEN-LAST:event_btnInicio1ActionPerformed
 
     private void btnPersonasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPersonasActionPerformed
@@ -192,15 +199,19 @@ public class DlgMenuPlacasCondicion extends javax.swing.JDialog {
     }//GEN-LAST:event_btnPersonasActionPerformed
 
     private void btnConsultasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultasActionPerformed
-        // TODO add your handling code here:
+        DlgConsultasPersonas CP = new DlgConsultasPersonas(this, false);
+        dispose();
+        CP.setVisible(true);
     }//GEN-LAST:event_btnConsultasActionPerformed
 
     private void btnReportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportesActionPerformed
-        // TODO add your handling code here:
+        DlgReportesPersona RP = new DlgReportesPersona(this, false);
+        dispose();
+        RP.setVisible(true);
     }//GEN-LAST:event_btnReportesActionPerformed
 
     private void botonIcono1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonIcono1ActionPerformed
-        DlgRenovarPlaca renovacion = new DlgRenovarPlaca ();
+        DlgRenovarPlaca renovacion = new DlgRenovarPlaca (this, true);
         this.dispose();
         renovacion.setVisible(true);
     }//GEN-LAST:event_botonIcono1ActionPerformed
@@ -212,8 +223,14 @@ public class DlgMenuPlacasCondicion extends javax.swing.JDialog {
     }//GEN-LAST:event_btnAutoNuevoActionPerformed
 
     private void btnLicenciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLicenciasActionPerformed
-        // TODO add your handling code here:
+        DlgRegistrarLicencia RL = new DlgRegistrarLicencia(this, true);
+        dispose();
+        RL.setVisible(true);
     }//GEN-LAST:event_btnLicenciasActionPerformed
+
+    private void btnPlacasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlacasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnPlacasActionPerformed
 
 
 

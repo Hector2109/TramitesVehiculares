@@ -37,7 +37,8 @@ public class DlgRenovarPlaca extends javax.swing.JDialog {
     /**
      * Creates new form DlgRenovarPlaca
      */
-    public DlgRenovarPlaca() {
+    public DlgRenovarPlaca(java.awt.Dialog parent, boolean modal) {
+        super(parent, modal);
         tramiteBO = new TramiteBO();
         personaBO = new PersonaBO();
         initComponents();
@@ -536,19 +537,27 @@ public class DlgRenovarPlaca extends javax.swing.JDialog {
     }//GEN-LAST:event_btnRealizarTramiteActionPerformed
 
     private void btnLicenciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLicenciasActionPerformed
-        // TODO add your handling code here:
+        DlgRegistrarLicencia RL = new DlgRegistrarLicencia(this, true);
+        dispose();
+        RL.setVisible(true);
     }//GEN-LAST:event_btnLicenciasActionPerformed
 
     private void btnPlacasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlacasActionPerformed
-        // TODO add your handling code here:
+        DlgMenuPlacasCondicion MPC = new DlgMenuPlacasCondicion(this, false);
+        dispose();
+        MPC.setVisible(true);
     }//GEN-LAST:event_btnPlacasActionPerformed
 
     private void btnReportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportesActionPerformed
-        // TODO add your handling code here:
+        DlgReportesPersona RP = new DlgReportesPersona(this, false);
+        dispose();
+        RP.setVisible(true);
     }//GEN-LAST:event_btnReportesActionPerformed
 
     private void btnConsultasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultasActionPerformed
-        // TODO add your handling code here:
+        DlgConsultasPersonas CP = new DlgConsultasPersonas(this, false);
+        dispose();
+        CP.setVisible(true);
     }//GEN-LAST:event_btnConsultasActionPerformed
 
     private void btnPersonasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPersonasActionPerformed
@@ -556,7 +565,9 @@ public class DlgRenovarPlaca extends javax.swing.JDialog {
     }//GEN-LAST:event_btnPersonasActionPerformed
 
     private void btnInicio1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInicio1ActionPerformed
-        // TODO add your handling code here:
+        DlgPrincipal DP = new DlgPrincipal();
+        dispose();
+        DP.setVisible(true);
     }//GEN-LAST:event_btnInicio1ActionPerformed
 
 

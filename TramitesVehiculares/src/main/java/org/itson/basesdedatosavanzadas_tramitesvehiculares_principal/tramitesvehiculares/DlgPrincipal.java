@@ -5,6 +5,7 @@
 package org.itson.basesdedatosavanzadas_tramitesvehiculares_principal.tramitesvehiculares;
 
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.PersonaBO;
+import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia.tramitesvehicularespersisencia.Conexion;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia.tramitesvehicularespersisencia.IConexion;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia.tramitesvehicularespersisencia.PersonasDAO;
 
@@ -14,16 +15,13 @@ import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia.tramites
  */
 public class DlgPrincipal extends javax.swing.JDialog {
 
-    private PersonasDAO personasDAO;
 
-    IConexion conexion;
+
 
     /**
      * Creates new form DlgPrincipal2
      */
-    public DlgPrincipal(IConexion conexion) {
-        this.conexion = conexion;
-        this.personasDAO = new PersonasDAO(this.conexion);
+    public DlgPrincipal() {
         initComponents();
     }
 
@@ -247,54 +245,57 @@ public class DlgPrincipal extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnPersonasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPersonasActionPerformed
+        IConexion conexion = new Conexion();
         PersonaBO personaBO = new PersonaBO();
         personaBO.insercionMasiva();
-       
     }//GEN-LAST:event_btnPersonasActionPerformed
 
     private void btnPlacasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlacasActionPerformed
         DlgMenuPlacasCondicion MPC = new DlgMenuPlacasCondicion(this, false);
-        this.dispose();
+        dispose();
         MPC.setVisible(true);
     }//GEN-LAST:event_btnPlacasActionPerformed
 
     private void btnConsultasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultasActionPerformed
-        // TODO add your handling code here:
+        DlgConsultasPersonas CP = new DlgConsultasPersonas(this, false);
+        dispose();
+        CP.setVisible(true);
     }//GEN-LAST:event_btnConsultasActionPerformed
 
     private void btnReportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportesActionPerformed
         DlgReportesPersona RP = new DlgReportesPersona(this, false);
-        this.setVisible(false);
+        dispose();
         RP.setVisible(true);
-        this.setVisible(true);
     }//GEN-LAST:event_btnReportesActionPerformed
 
     private void btnModuloLicenciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModuloLicenciasActionPerformed
-        DlgRegistrarLicencia RL = new DlgRegistrarLicencia(this, true, conexion);
-        this.setVisible(false);
+        DlgRegistrarLicencia RL = new DlgRegistrarLicencia(this, true);
+        dispose();
         RL.setVisible(true);
-        this.setVisible(true);
     }//GEN-LAST:event_btnModuloLicenciasActionPerformed
 
     private void btnModuloPlacasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModuloPlacasActionPerformed
         DlgMenuPlacasCondicion MPC = new DlgMenuPlacasCondicion(this, false);
-        this.setVisible(false);
+        dispose();
         MPC.setVisible(true);
-        this.setVisible(true);
     }//GEN-LAST:event_btnModuloPlacasActionPerformed
 
     private void btnModuloConsultasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModuloConsultasActionPerformed
         DlgConsultasPersonas CP = new DlgConsultasPersonas(this, false);
-        this.setVisible(false);
+        dispose();
         CP.setVisible(true);
     }//GEN-LAST:event_btnModuloConsultasActionPerformed
 
     private void btnModuloReportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModuloReportesActionPerformed
-        // TODO add your handling code here:
+        DlgReportesPersona RP = new DlgReportesPersona(this, false);
+        dispose();
+        RP.setVisible(true);
     }//GEN-LAST:event_btnModuloReportesActionPerformed
 
     private void btnLicenciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLicenciasActionPerformed
-        // TODO add your handling code here:
+        DlgRegistrarLicencia RL = new DlgRegistrarLicencia(this, true);
+        dispose();
+        RL.setVisible(true);
     }//GEN-LAST:event_btnLicenciasActionPerformed
 
     private void btnInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInicioActionPerformed
