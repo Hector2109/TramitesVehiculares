@@ -77,6 +77,7 @@ public interface ITramiteBO {
      */
     public String generarMatricula ();
     
+
     /**
      * Método para consultar trámites asociados a una persona
      * @param personaDTO persona de la que se desea buscar trámites
@@ -84,4 +85,12 @@ public interface ITramiteBO {
      * @throws NegocioException lanza excepcion en caso de error
      */
     public List<TramiteDTO> consultarTramitesPersona(PersonaDTO personaDTO) throws NegocioException;
+
+    
+    public AutomovilDTO obtenerAutomovilPlaca (PlacaDTO placa) throws NegocioException;
+    
+    
+    public PlacaDTO obtenerPlacaActiva (PlacaDTO placa) throws NegocioException;
+
+
 }

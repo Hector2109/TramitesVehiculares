@@ -22,6 +22,10 @@ public class PlacaDTO extends TramiteDTO{
         this.estado = estado;
         super.fecha_tramite=fecha_emision;
     }
+
+    public PlacaDTO(String matricula) {
+        this.matricula = matricula;
+    }
     
     
 

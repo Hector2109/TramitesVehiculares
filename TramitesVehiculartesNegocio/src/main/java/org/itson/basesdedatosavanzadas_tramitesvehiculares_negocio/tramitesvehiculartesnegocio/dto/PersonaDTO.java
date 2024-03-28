@@ -72,6 +72,10 @@ public class PersonaDTO {
     public PersonaDTO(String rfc) {
         this.rfc = rfc;
     }
+
+    public PersonaDTO() {
+    }
+    
    
     
     
@@ -138,6 +142,43 @@ public class PersonaDTO {
     public Discapacidad getDiscapacidad() {
         return discapacidad;
     }    
+
+    /**
+     * Métdo el cual sirve para establecer la rfc de la 
+     * persona
+     * @param rfc rfc de la persona 
+     */
+    public void setRfc(String rfc) {
+        this.rfc = rfc;
+    }
+
+    /**
+     * Método el cual establece el nombre de la persona
+     * @param nombre 
+     */
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    /**
+     * Método el cual establece el apellido paterno de la persona
+     * @param apellido_paterno apellido paterno de la persona
+     */
+    public void setApellido_paterno(String apellido_paterno) {
+        this.apellido_paterno = apellido_paterno;
+    }
+
+    /**
+     * Método el cual establece el apellido materno de la persona
+     * @param apellido_materno apellido materno de la persona
+     */
+    public void setApellido_materno(String apellido_materno) {
+        this.apellido_materno = apellido_materno;
+    }
+    
+    
+    
+    
     
     
 }

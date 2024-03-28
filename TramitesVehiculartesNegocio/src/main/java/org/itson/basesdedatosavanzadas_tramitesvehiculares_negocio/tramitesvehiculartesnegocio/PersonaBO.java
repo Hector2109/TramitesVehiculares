@@ -8,6 +8,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.PersistenceException;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.dto.PersonaDTO;
+import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.dto.PlacaDTO;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia.excepciones.PersistenciaException;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia.tramitesvehicularespersisencia.Conexion;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia.tramitesvehicularespersisencia.IConexion;
@@ -333,6 +334,12 @@ public class PersonaBO implements IPersonaBO {
         }
     }
 
+    /**
+     * Regresa la lista de las personas que se consultaron del DAO con rfc
+     * @param nombre valor del nombre
+     * @return regresa la lista de las personas
+     * @throws PersistenceException cuando ocurre un error de persistencia
+     */
     @Override
     public List<PersonaDTO> consultarPersonasSimilarRFC(String rfc) throws NegocioException {
         try {
@@ -361,6 +368,13 @@ public class PersonaBO implements IPersonaBO {
         }
     }
 
+    
+    /**
+     * Regresa una lista de personas con el año dado en el parametro
+     * @param anio año de nacimiento de las personas a buscar
+     * @return regresa una lista de personas con el año
+     * @throws PersistenciaException lanza excepcion en caso de error
+     */
     @Override
     public List<PersonaDTO> consultarPersonasAnio(String anio) throws NegocioException {
         try {
@@ -388,5 +402,23 @@ public class PersonaBO implements IPersonaBO {
             throw new NegocioException("No se pueden consultar las personas");
         }
     }
+
+    @Override
+    public PersonaDTO consultaPersonaPlaca(PlacaDTO placa) throws NegocioException {
+        
+        try {
+            Persona persona = personasDAO.buscarPersonaPlaca(placa);
+            
+            PersonaDTO personaDTO = new PersonaDTO(persona.getRfc());
+            return personaDTO;
+        } catch (PersistenciaException ex) {
+            Logger.getLogger(PersonaBO.class.getName()).log(Level.SEVERE, null, ex);
+            throw new NegocioException ("No se encontraron personas para este vehiculo");
+        }
+        
+    }
+    
+    
+    
 
 }
