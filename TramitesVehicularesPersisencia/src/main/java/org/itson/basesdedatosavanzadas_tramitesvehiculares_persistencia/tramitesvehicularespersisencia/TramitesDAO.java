@@ -20,11 +20,13 @@ import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehic
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia.tramitesvehicularespersisencia_encriptacion.Fecha;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.dto.PersonaDTO;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.dto.PlacaDTO;
+import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.dto.TramiteDTO;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia.excepciones.PersistenciaException;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia_entidad.tramitesvehicularespersisencia.Automovil;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia_entidad.tramitesvehicularespersisencia.Licencia;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia_entidad.tramitesvehicularespersisencia.Persona;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia_entidad.tramitesvehicularespersisencia.Placa;
+import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia_entidad.tramitesvehicularespersisencia.Tramite;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia_entidad.tramitesvehicularespersisencia.Vehiculo;
 
 /**
@@ -343,29 +345,94 @@ public class TramitesDAO implements ITramitesDAO {
     }
 
     @Override
+    public List<Tramite> consultarTramitesPersona(PersonaDTO personaDTO) throws PersistenciaException {
+        EntityManager entityManager = this.conexion.crearConexion();
+
+        String jpqlQuery = """
+                   SELECT t FROM Tramite t
+                   JOIN t.persona pe
+                   WHERE pe.rfc = :rfc
+                   """;
+        TypedQuery<Tramite> query = entityManager.createQuery(jpqlQuery, Tramite.class);
+        query.setParameter("rfc", personaDTO.getRfc());
+
+        List<Tramite> tramites;
+        try {
+            tramites = query.getResultList();
+            logger.log(Level.INFO, "Consulta de {0} trámites realizada con éxito.", tramites.size());
+        } catch (NoResultException ex) {
+            throw new PersistenciaException("No se encontraron trámites para la persona con RFC: " + personaDTO.getRfc(), ex);
+        } finally {
+            entityManager.close();
+        }
+        return tramites;
+    }
+
+    @Override
+    public Placa obtenerPlaca(Tramite tramite) throws PersistenciaException {
+        EntityManager entityManager = this.conexion.crearConexion();
+
+        String jpqlQuery = """
+                SELECT t.placa FROM Tramite t
+                WHERE t.id = :tramiteId
+                """;
+        TypedQuery<Placa> query = entityManager.createQuery(jpqlQuery, Placa.class);
+        query.setParameter("tramiteId", tramite.getId());
+
+        Placa placa;
+        try {
+            placa = query.getSingleResult();
+            logger.log(Level.INFO, "Se consultó la placa con matrícula {0} realizada con éxito.", placa.getMatricula());
+        } catch (NoResultException ex) {
+            throw new PersistenciaException("No se encontró una placa para el trámite con ID: " + tramite.getId(), ex);
+        } finally {
+            entityManager.close();
+        }
+        return placa;
+    }
+
+    @Override
+    public Licencia obtenerLicencia(Tramite tramite) throws PersistenciaException {
+        EntityManager entityManager = this.conexion.crearConexion();
+
+        String jpqlQuery = """
+                SELECT t.licencia FROM Tramite t
+                WHERE t.id = :tramiteId
+                """;
+        TypedQuery<Licencia> query = entityManager.createQuery(jpqlQuery, Licencia.class);
+        query.setParameter("tramiteId", tramite.getId());
+
+        Licencia licencia;
+        try {
+            licencia = query.getSingleResult();
+            logger.log(Level.INFO, "Se consultó la licencia con número {0} realizada con éxito.", licencia.getNumero_licencia());
+        } catch (NoResultException ex) {
+            throw new PersistenciaException("No se encontró una licencia para el trámite con ID: " + tramite.getId(), ex);
+        } finally {
+            entityManager.close();
+        }
+        return licencia;
+    }
+
+    @Override
     public Automovil crearAutomovil(AutomovilDTO automovil) throws PersistenciaException {
         EntityManager em = conexion.crearConexion();
-        
-        
+
         Automovil automovilEntity = new Automovil();
-        
+
         automovilEntity.setColor(automovil.getColor());
         automovilEntity.setLinea(automovil.getLinea());
         automovilEntity.setMarca(automovil.getMarca());
         automovilEntity.setModelo(automovil.getModelo());
         automovilEntity.setNumero_serie(automovil.getNumero_serie());
-        
 
         em.getTransaction().begin();
-        
+
         em.persist(automovilEntity);
 
         em.getTransaction().commit();
         em.close();
         return automovilEntity;
     }
-    
-    
-    
 
 }

@@ -4,19 +4,17 @@
  */
 package org.itson.basesdedatosavanzadas_tramitesvehiculares_principal.tramitesvehiculares;
 
-
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.IPersonaBO;
+import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.ITramiteBO;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.NegocioException;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.PersonaBO;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.TramiteBO;
-import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.dto.PersonaDTO;
-import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.dto.PlacaDTO;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia.excepciones.PersistenciaException;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia.tramitesvehicularespersisencia.Conexion;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia.tramitesvehicularespersisencia.IConexion;
-
 
 /**
  *
@@ -29,15 +27,40 @@ public class Principal {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) throws PersistenciaException {
+    public static void main(String[] args) throws PersistenciaException, NegocioException {
 
         IConexion conexion = new Conexion();
-        PersonaBO personaBO = new PersonaBO();
-        TramiteBO tramiteBO = new TramiteBO();
-        
+        IPersonaBO personaBO = new PersonaBO();
+        ITramiteBO tramiteBO = new TramiteBO();
+
         DlgPrincipal DP = new DlgPrincipal(conexion);
         DP.setVisible(true);
 
+//        ITramitesDAO tramiteDAO = new TramitesDAO(conexion);
+//        PersonaDTO persona = null;
+//        try {
+//            persona = personaBO.consultarPersona("HSR210940254B");
+//            if (persona == null) {
+//                System.out.println("null");
+//            } else {
+//                System.out.println(persona.getNombre());
+//            }
+//
+//        } catch (NegocioException ex) {
+//            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//
+//        List<Tramite> tramites = tramiteDAO.consultarTramitesPersona(persona);
+//        
+//        for (Tramite tramite : tramites) {
+//            if (tramite instanceof Placa) {
+//                System.out.println("Tipo de trámite: Placa");
+//            } else if (tramite instanceof Licencia) {
+//                System.out.println("Tipo de trámite: Licencia");
+//            } else {
+//                System.out.println("Tipo de trámite desconocido");
+//            }
+//        }
 //        PersonaDTO persona;
 //        try {
 //            persona = personaBO.consultarPersona("HSR210940254B");
@@ -60,8 +83,6 @@ public class Principal {
 //        } catch (NegocioException ex) {
 //            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
 //        }
-      
-
 //        DlgPrincipal principal = new DlgPrincipal(conexion);
 //        principal.setVisible(true);
 //        EntityManager em = conexion.crearConexion();

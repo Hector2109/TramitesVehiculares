@@ -11,6 +11,7 @@ import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehic
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.dto.LicenciaDTO;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.dto.PersonaDTO;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.dto.PlacaDTO;
+import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.dto.TramiteDTO;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia.excepciones.PersistenciaException;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia.tramitesvehicularespersisencia.Conexion;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia.tramitesvehicularespersisencia.IConexion;
@@ -19,6 +20,9 @@ import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia.tramites
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia_entidad.tramitesvehicularespersisencia.Automovil;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia_entidad.tramitesvehicularespersisencia.Licencia;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia_entidad.tramitesvehicularespersisencia.Placa;
+import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia_entidad.tramitesvehicularespersisencia.Tramite;
+import static org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia_entidad.tramitesvehicularespersisencia.Tramite_.persona;
+import static org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia_entidad.tramitesvehicularespersisencia.Vehiculo_.placas;
 
 /**
  *
@@ -27,6 +31,7 @@ import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia_entidad.
 public class TramiteBO implements ITramiteBO {
 
     private TramitesDAO tramite;
+    private static final Logger LOG = Logger.getLogger(TramiteBO.class.getName());
 
     /**
      * Constructor que instancia un objeto de tipo TramiteBO
@@ -254,38 +259,72 @@ public class TramiteBO implements ITramiteBO {
 
     /**
      * Método para consultar placas de una persona
+     *
      * @param persona persona a la que se buscarán las placas
      * @return regresa la lista de placas
      * @throws NegocioException en caso de error
      */
     @Override
-    public List<PlacaDTO> consultarPlacasPersona(PersonaDTO persona) throws NegocioException{
-        List<PlacaDTO> placasDTO;
-        placasDTO = new ArrayList<>();
+    public List<TramiteDTO> consultarTramitesPersona(PersonaDTO personaDTO) throws NegocioException {
+        List<TramiteDTO> tramitesDTO = new ArrayList<>();
         try {
-            List<Placa> placas = tramite.consultarPlacasPersona(persona);
+            List<Tramite> tramites = tramite.consultarTramitesPersona(personaDTO);
 
-            for (Placa placa : placas) {
-                Fecha emision = new Fecha(
-                        String.valueOf(placa.getFecha_tramite().get(Calendar.YEAR)) + "-"
-                        + String.valueOf(placa.getFecha_tramite().get(Calendar.MONTH) + 1) + "-"
-                        + String.valueOf(placa.getFecha_tramite().get(Calendar.DAY_OF_MONTH)));
-                Fecha recepcion = new Fecha(
-                        String.valueOf(placa.getFecha_recepcion().get(Calendar.YEAR)) + "-"
-                        + String.valueOf(placa.getFecha_recepcion().get(Calendar.MONTH) + 1) + "-"
-                        + String.valueOf(placa.getFecha_recepcion().get(Calendar.DAY_OF_MONTH)));
-                
-                placasDTO.add(new PlacaDTO(
-                        placa.getMatricula(), 
-                        recepcion, 
-                        placa.getEstado(), 
-                        emision));
+            for (Tramite tramite : tramites) {
+                if (tramite instanceof Licencia) {
+                    Licencia licencia = (Licencia) tramite;
+                    LicenciaDTO licenciaDTO = new LicenciaDTO();
+                    licenciaDTO.setId_tramite(licencia.getId());
+                    Fecha fechaTramite = new Fecha(
+                            String.valueOf(licencia.getFecha_tramite().get(Calendar.YEAR)) + "-"
+                            + String.valueOf(licencia.getFecha_tramite().get(Calendar.MONTH) + 1) + "-"
+                            + String.valueOf(licencia.getFecha_tramite().get(Calendar.DAY_OF_MONTH)));
+
+                    licenciaDTO.setFecha_tramite(fechaTramite);
+                    licenciaDTO.setCosto(licencia.getCosto());
+                    licenciaDTO.setPersonaDTO(personaDTO);
+                    licenciaDTO.setNumero_licencia(licencia.getNumero_licencia());
+                    Fecha vigencia = new Fecha(
+                            String.valueOf(licencia.getVigencia().get(Calendar.YEAR)) + "-"
+                            + String.valueOf(licencia.getVigencia().get(Calendar.MONTH) + 1) + "-"
+                            + String.valueOf(licencia.getVigencia().get(Calendar.DAY_OF_MONTH)));
+
+                    licenciaDTO.setVigencia(vigencia);
+                    licenciaDTO.setEstado(licencia.getEstado());
+                    tramitesDTO.add(licenciaDTO);
+                } else if (tramite instanceof Placa) {
+                    Placa placa = (Placa) tramite;
+                    PlacaDTO placaDTO = new PlacaDTO();
+                    placaDTO.setId_tramite(placa.getId());
+                    Fecha fechaTramite = new Fecha(
+                            String.valueOf(placa.getFecha_tramite().get(Calendar.YEAR)) + "-"
+                            + String.valueOf(placa.getFecha_tramite().get(Calendar.MONTH) + 1) + "-"
+                            + String.valueOf(placa.getFecha_tramite().get(Calendar.DAY_OF_MONTH)));
+
+                    placaDTO.setFecha_tramite(fechaTramite);
+                    placaDTO.setCosto(placa.getCosto());
+                    placaDTO.setPersonaDTO(personaDTO);
+                    placaDTO.setMatricula(placa.getMatricula());
+                    Fecha fechaRecepcion = new Fecha(
+                            String.valueOf(placa.getFecha_recepcion().get(Calendar.YEAR)) + "-"
+                            + String.valueOf(placa.getFecha_recepcion().get(Calendar.MONTH) + 1) + "-"
+                            + String.valueOf(placa.getFecha_recepcion().get(Calendar.DAY_OF_MONTH)));
+                    placaDTO.setFecha_recepcion(fechaRecepcion);
+                    placaDTO.setEstado(placa.getEstado());
+                    tramitesDTO.add(placaDTO);
+                }
             }
 
         } catch (PersistenciaException ex) {
             Logger.getLogger(TramiteBO.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        return placasDTO;
+        return tramitesDTO;
     }
+
+    @Override
+    public List<PlacaDTO> consultarPlacasPersona(PersonaDTO persona) throws NegocioException {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
 }

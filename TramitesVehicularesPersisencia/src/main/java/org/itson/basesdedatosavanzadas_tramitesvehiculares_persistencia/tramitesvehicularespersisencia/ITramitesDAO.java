@@ -10,10 +10,12 @@ import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehic
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.dto.AutomovilDTO;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.dto.LicenciaDTO;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.dto.PersonaDTO;
+import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.dto.TramiteDTO;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia.excepciones.PersistenciaException;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia_entidad.tramitesvehicularespersisencia.Automovil;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia_entidad.tramitesvehicularespersisencia.Licencia;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia_entidad.tramitesvehicularespersisencia.Placa;
+import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia_entidad.tramitesvehicularespersisencia.Tramite;
 
 /**
  *
@@ -105,6 +107,29 @@ public interface ITramitesDAO {
      */
     public Automovil crearAutomovil (AutomovilDTO automovil) throws PersistenciaException;
     
+    /**
+     * Consulta los trámites de una persona
+     * @param personaDTO persona para buscar los trámites
+     * @return regresa la lista de tramties asociados a una persona
+     * @throws PersistenciaException  lanza una excepcion en caso de error
+     */
+    public List<Tramite> consultarTramitesPersona(PersonaDTO personaDTO) throws PersistenciaException;
+    
+    /**
+     * 
+     * @param tramite
+     * @return
+     * @throws PersistenciaException 
+     */
+    public Placa obtenerPlaca(Tramite tramite) throws PersistenciaException;
+    
+    /**
+     * 
+     * @param tramiteDTO
+     * @return
+     * @throws PersistenciaException 
+     */
+     public Licencia obtenerLicencia(Tramite tramite) throws PersistenciaException;
     
     
 }
