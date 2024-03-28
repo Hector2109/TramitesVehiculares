@@ -150,6 +150,7 @@ public class Fecha extends GregorianCalendar {
         }
         return getDia() + " de " + mes + " de " + getAnio();
     }
+
     /**
      * Calcula la diferencia en años entre esta fecha y otra fecha dada.
      *
@@ -174,6 +175,35 @@ public class Fecha extends GregorianCalendar {
         return diferencia;
     }
 
+    
+    /**
+     * Compara si una fecha esta dentro de un rango
+     * @param fechaInicio fecha de inicio del rango
+     * @param fechaFin fecha de final del rango
+     * @return 
+     */
+    public boolean fechaEnRango(Fecha fechaInicio, Fecha fechaFin) {
+        return this.compareTo(fechaInicio) >= 0 && this.compareTo(fechaFin) <= 0;
+    }
+
+    /**
+     * Verifica si una fecha se encuentra desde la fecha indicada hasta la fecha actual
+     * @param otraFecha
+     * @return 
+     */
+    public boolean fechaDesde(Fecha otraFecha) {
+        return this.compareTo(otraFecha) >= 0;
+    }
+
+    /**
+     * Verifica si una fecha se encuentra hasta la fecha indica hacia atras
+     * @param otraFecha
+     * @return 
+     */
+    public boolean fechaHasta(Fecha otraFecha) {
+        return this.compareTo(otraFecha) <= 0;
+    }
+
     /**
      * Devuelve una cadena de texto con una fecha con formato "aaaa-mm-dd"
      *
@@ -181,14 +211,17 @@ public class Fecha extends GregorianCalendar {
      */
     @Override
     public String toString() {
-        String texto =getAnio() + "-" + getMes() + "-" + getDia();
+        String texto = getAnio() + "-" + getMes() + "-" + getDia();
         return texto;
     }
-    
+
+    /**
+     * Devuelve una cadena de texto con una fecha con formato "aaaa-mm-dd hh:mm:ss"
+     * @return regresa la cadaena de la fecha con el formato establecido
+     */
     public String toStringHora() {
-        String texto =getAnio() + "-" + getMes() + "-" + getDia()+" " + get(HOUR) + ":" + get(MINUTE) + ":" + get(SECOND);
+        String texto = getAnio() + "-" + getMes() + "-" + getDia() + " " + get(HOUR) + ":" + get(MINUTE) + ":" + get(SECOND);
         return texto;
     }
-    
 
 }

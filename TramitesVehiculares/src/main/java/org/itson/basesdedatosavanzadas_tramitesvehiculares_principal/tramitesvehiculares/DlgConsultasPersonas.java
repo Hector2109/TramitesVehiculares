@@ -189,6 +189,7 @@ public class DlgConsultasPersonas extends javax.swing.JDialog {
                 "Nombre", "RFC", "Fecha de nacimiento", ""
             }
         ));
+        tblPersonas.setRowHeight(22);
         tblPersonas.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblPersonasMouseClicked(evt);

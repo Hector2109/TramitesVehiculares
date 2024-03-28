@@ -5,6 +5,8 @@
 package org.itson.basesdedatosavanzadas_tramitesvehiculares_principal.tramitesvehiculares;
 
 import com.github.lgooddatepicker.components.DatePickerSettings;
+import com.github.lgooddatepicker.optionalusertools.DateChangeListener;
+import com.github.lgooddatepicker.zinternaltools.DateChangeEvent;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -18,6 +20,7 @@ import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehic
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.dto.PersonaDTO;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.dto.PlacaDTO;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.dto.TramiteDTO;
+import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia.tramitesvehicularespersisencia_encriptacion.Fecha;
 
 /**
  *
@@ -50,15 +53,29 @@ public class DlgReportes extends javax.swing.JDialog {
         }
 
         lblPersona.setText(nombre);
-        
+
         DatePickerSettings desdeSettings = new DatePickerSettings();
         DatePickerSettings hastaSettings = new DatePickerSettings();
 
         desdeSettings.setFormatForDatesCommonEra("yyyy-MM-dd");
+        desdeSettings.setAllowKeyboardEditing(false);
         hastaSettings.setFormatForDatesCommonEra("yyyy-MM-dd");
+        hastaSettings.setAllowKeyboardEditing(false);
 
         dateDesde.setSettings(desdeSettings);
         dateHasta.setSettings(hastaSettings);
+        dateDesde.addDateChangeListener(new DateChangeListener() {
+            @Override
+            public void dateChanged(DateChangeEvent event) {
+                consultar();
+            }
+        });
+        dateHasta.addDateChangeListener(new DateChangeListener() {
+            @Override
+            public void dateChanged(DateChangeEvent event) {
+                consultar();
+            }
+        });
         consultar();
 
     }
@@ -78,8 +95,8 @@ public class DlgReportes extends javax.swing.JDialog {
         btnPlacas = new org.itson.basesdedatosavanzadas_tramitesvehiculares_principal.Elementos.BotonBlanco();
         btnConsultas = new org.itson.basesdedatosavanzadas_tramitesvehiculares_principal.Elementos.BotonBlanco();
         btnReportes = new org.itson.basesdedatosavanzadas_tramitesvehiculares_principal.Elementos.BotonBlanco();
-        btnLicencias = new org.itson.basesdedatosavanzadas_tramitesvehiculares_principal.Elementos.BotonAzul();
         jLabel9 = new javax.swing.JLabel();
+        btnLicencias1 = new org.itson.basesdedatosavanzadas_tramitesvehiculares_principal.Elementos.BotonAzul();
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -93,6 +110,7 @@ public class DlgReportes extends javax.swing.JDialog {
         chkLicencias = new javax.swing.JCheckBox();
         chkPlacas = new javax.swing.JCheckBox();
         lblPersona = new javax.swing.JLabel();
+        btnLicencias = new org.itson.basesdedatosavanzadas_tramitesvehiculares_principal.Elementos.BotonAzul();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -155,14 +173,15 @@ public class DlgReportes extends javax.swing.JDialog {
         });
         jPanel1.add(btnReportes, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 538, 148, 56));
 
-        btnLicencias.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Licencias_Seleccionado.png"))); // NOI18N
-        btnLicencias.setText("  Licencias");
-        btnLicencias.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        btnLicencias.setRadius(23);
-        jPanel1.add(btnLicencias, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 386, 148, 56));
-
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Logo.png"))); // NOI18N
         jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 15, -1, -1));
+
+        btnLicencias1.setForeground(new java.awt.Color(255, 255, 255));
+        btnLicencias1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Licencias_Seleccionado.png"))); // NOI18N
+        btnLicencias1.setText("  Licencias");
+        btnLicencias1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnLicencias1.setRadius(23);
+        jPanel1.add(btnLicencias1, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 386, 148, 56));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 180, 650));
 
@@ -192,17 +211,47 @@ public class DlgReportes extends javax.swing.JDialog {
         });
         jScrollPane1.setViewportView(tblTramites);
 
+        dateDesde.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                dateDesdeMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                dateDesdeMouseReleased(evt);
+            }
+        });
+        dateDesde.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                dateDesdeKeyPressed(evt);
+            }
+        });
+
         jLabel5.setText("Desde:");
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
 
         jLabel6.setText("Hasta:");
         jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
 
+        dateHasta.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                dateHastaMouseReleased(evt);
+            }
+        });
+        dateHasta.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                dateHastaKeyPressed(evt);
+            }
+        });
+
         chkLicencias.setText("Licencias");
         chkLicencias.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
         chkLicencias.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 chkLicenciasMouseReleased(evt);
+            }
+        });
+        chkLicencias.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chkLicenciasActionPerformed(evt);
             }
         });
         chkLicencias.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -231,6 +280,12 @@ public class DlgReportes extends javax.swing.JDialog {
         lblPersona.setFont(new java.awt.Font("Segoe UI", 1, 30)); // NOI18N
         lblPersona.setForeground(new java.awt.Color(156, 156, 156));
 
+        btnLicencias.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Licencias_Seleccionado.png"))); // NOI18N
+        btnLicencias.setText("Descargar Reporte");
+        btnLicencias.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnLicencias.setForeground(new java.awt.Color(255, 255, 255));
+        btnLicencias.setRadius(23);
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -238,23 +293,28 @@ public class DlgReportes extends javax.swing.JDialog {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap(111, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel6)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 610, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel5)
-                        .addComponent(jLabel2)
-                        .addComponent(lblPersona))
-                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(dateHasta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(dateDesde, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(138, 138, 138)
-                        .addComponent(chkLicencias, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(39, 39, 39)
-                        .addComponent(chkPlacas, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(89, 89, 89))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel6)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 610, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel5)
+                                .addComponent(jLabel2)
+                                .addComponent(lblPersona))
+                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(dateHasta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(dateDesde, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(155, 155, 155)
+                                .addComponent(chkLicencias, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(39, 39, 39)
+                                .addComponent(chkPlacas, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(89, 89, 89))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addComponent(btnLicencias, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(247, 247, 247))))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -283,7 +343,9 @@ public class DlgReportes extends javax.swing.JDialog {
                     .addComponent(dateHasta, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(148, 148, 148))
+                .addGap(18, 18, 18)
+                .addComponent(btnLicencias, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(74, 74, 74))
         );
 
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 0, 810, 650));
@@ -317,91 +379,192 @@ public class DlgReportes extends javax.swing.JDialog {
     }//GEN-LAST:event_tblTramitesMouseClicked
 
     private void chkPlacasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkPlacasActionPerformed
-        // TODO add your handling code here:
+//        limpiarTabla();
+        consultar();
     }//GEN-LAST:event_chkPlacasActionPerformed
 
     private void chkLicenciasMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_chkLicenciasMouseReleased
-        limpiarTabla();
-        consultar();
+//        limpiarTabla();
+//        consultar();
     }//GEN-LAST:event_chkLicenciasMouseReleased
 
     private void chkPlacasKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_chkPlacasKeyReleased
-        limpiarTabla();
-        consultar();
+//        limpiarTabla();
+//        consultar();
     }//GEN-LAST:event_chkPlacasKeyReleased
 
     private void chkPlacasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_chkPlacasKeyPressed
-        limpiarTabla();
-        consultar();
+//        limpiarTabla();
+//        consultar();
     }//GEN-LAST:event_chkPlacasKeyPressed
 
     private void chkLicenciasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_chkLicenciasKeyPressed
-        limpiarTabla();
-        consultar();
+//        limpiarTabla();
+//        consultar();
     }//GEN-LAST:event_chkLicenciasKeyPressed
 
-    public void limpiarTabla() {
-        for (int i = 0; i < tblTramites.getRowCount(); i++) {
-            modelo.removeRow(i);
-            i = i - 1;
-        }
-    }
+    private void chkLicenciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkLicenciasActionPerformed
+        consultar();
+    }//GEN-LAST:event_chkLicenciasActionPerformed
+
+    private void dateDesdeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_dateDesdeKeyPressed
+//        limpiarTabla();
+//        consultar();
+    }//GEN-LAST:event_dateDesdeKeyPressed
+
+    private void dateHastaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_dateHastaKeyPressed
+////        limpiarTabla();
+////        consultar();
+    }//GEN-LAST:event_dateHastaKeyPressed
+
+    private void dateDesdeMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dateDesdeMouseReleased
+//        limpiarTabla();
+//        consultar();
+    }//GEN-LAST:event_dateDesdeMouseReleased
+
+    private void dateHastaMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dateHastaMouseReleased
+//        limpiarTabla();
+//        consultar();
+    }//GEN-LAST:event_dateHastaMouseReleased
+
+    private void dateDesdeMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dateDesdeMousePressed
+
+    }//GEN-LAST:event_dateDesdeMousePressed
 
     public void consultar() {
         try {
             List<TramiteDTO> listaTramites = tramiteBO.consultarTramitesPersona(persona);
-            List<TramiteDTO> listaTramitesImpimir = new ArrayList<>();
-            Object[] tramitesFila = new Object[3];
+            List<List<String>> listaParaReporte = new ArrayList<>();
             modelo = (DefaultTableModel) tblTramites.getModel();
+            modelo.setRowCount(0);
 
-            //Si solo se ha seleccionado a licencia
-            if (chkLicencias.isSelected() && !chkPlacas.isSelected()) {
-                for (TramiteDTO tramite : listaTramites) {
-                    if (tramite instanceof LicenciaDTO) {
-                        listaTramitesImpimir.add(tramite);
+            for (TramiteDTO tramite : listaTramites) {
+                boolean agregarTramite = false;
+                if (chkLicencias.isSelected() && tramite instanceof LicenciaDTO) {
+                    agregarTramite = true;
+                } else if (chkPlacas.isSelected() && tramite instanceof PlacaDTO) {
+                    agregarTramite = true;
+                }
+
+                if (agregarTramite) {
+                    Fecha fechaTramite = tramite.getFecha_tramite();
+                    boolean enRango = true;
+                    if (!dateDesde.getText().isBlank()) {
+                        enRango &= fechaTramite.fechaDesde(new Fecha(dateDesde.getText()));
+                    }
+                    if (!dateHasta.getText().isBlank()) {
+                        enRango &= fechaTramite.fechaHasta(new Fecha(dateHasta.getText()));
+                    }
+
+                    if (enRango) {
+                        String tipoTramite = (tramite instanceof PlacaDTO) ? "Placa" : "Licencia";
+                        String fecha = fechaTramite.toString(); // Convertir la fecha a String
+                        String costo = String.valueOf(tramite.getCosto()); // Convertir el costo a String
+                        modelo.addRow(new Object[]{tipoTramite, fecha, costo});
+                        
+                        List<String> datosTramite = new ArrayList<>();
+                        datosTramite.add(tipoTramite);
+                        datosTramite.add(fecha);
+                        datosTramite.add(costo);
+                        listaParaReporte.add(datosTramite);
                     }
                 }
-            }
-            //Si solo se ha seleccinado placas
-            else if(!chkLicencias.isSelected() && chkPlacas.isSelected()){
-                for (TramiteDTO tramite : listaTramites) {
-                    if (tramite instanceof PlacaDTO) {
-                        listaTramitesImpimir.add(tramite);
-                    }
-                }
-            }
-            else if(chkLicencias.isSelected() && chkPlacas.isSelected()){
-                listaTramitesImpimir=listaTramites;
-            }
-            for (TramiteDTO tramite : listaTramitesImpimir) {
-
-                String tipoTramite = "";
-                if (tramite instanceof PlacaDTO) {
-                    tipoTramite = "Placa";
-                } else if (tramite instanceof LicenciaDTO) {
-                    tipoTramite = "Tramite";
-                } else {
-                    tipoTramite = "Desconocido";
-                }
-                tramitesFila[0] = tipoTramite;
-                tramitesFila[1] = tramite.getFecha_tramite();
-                tramitesFila[2] = tramite.getCosto();
-
-                modelo.addRow(tramitesFila);
             }
 
             tblTramites.setModel(modelo);
         } catch (NegocioException e) {
-            JOptionPane.showMessageDialog(this, "No se puede acceder a las personas", "Error de consulta",
-                    JOptionPane.ERROR_MESSAGE);
-
+            JOptionPane.showMessageDialog(this, "No se puede acceder a las personas", "Error de consulta", JOptionPane.ERROR_MESSAGE);
         }
     }
+
+//    public void consultar() {
+//        try {
+//            List<TramiteDTO> listaTramites = tramiteBO.consultarTramitesPersona(persona);
+//            List<TramiteDTO> listaTramitesImpimir = new ArrayList<>();
+//            Object[] tramitesFila = new Object[3];
+//            modelo = (DefaultTableModel) tblTramites.getModel();
+//
+//            //Si solo se ha seleccionado a licencia
+//            if (chkLicencias.isSelected() && !chkPlacas.isSelected()) {
+//                for (TramiteDTO tramite : listaTramites) {
+//                    if (tramite instanceof LicenciaDTO) {
+//                        listaTramitesImpimir.add(tramite);
+//                    }
+//                }
+//            } //Si solo se ha seleccinado placas
+//            else if (!chkLicencias.isSelected() && chkPlacas.isSelected()) {
+//                for (TramiteDTO tramite : listaTramites) {
+//                    if (tramite instanceof PlacaDTO) {
+//                        listaTramitesImpimir.add(tramite);
+//                    }
+//                }
+//            } else if (chkLicencias.isSelected() && chkPlacas.isSelected()) {
+//                listaTramitesImpimir = listaTramites;
+//            } else if (chkLicencias.isSelected() && chkPlacas.isSelected()) {
+//                listaTramitesImpimir = null;
+//            }
+//
+////            //Si existe un desde y un hasta
+////            if (!dateDesde.getText().isBlank() && !dateHasta.getText().isBlank()) {
+////                for (TramiteDTO tramite : listaTramites) {
+////                    if (tramite.getFecha_tramite().fechaEnRango(
+////                            new Fecha(dateDesde.getText()),
+////                            new Fecha(dateDesde.getText()))) {
+////                        listaTramitesImpimir.add(tramite);
+////
+////                    }
+////                }
+////            } //Si solo se selecciona desde
+////            else if (!dateDesde.getText().isBlank() && dateHasta.getText().isBlank()) {
+////                for (TramiteDTO tramite : listaTramites) {
+////                    if (tramite.getFecha_tramite().fechaDesde(new Fecha(dateDesde.getText()))) {
+////                        listaTramitesImpimir.add(tramite);
+////                    }
+////                }
+////            } //Si solo se selecciona hasta
+////            else if (dateDesde.getText().isBlank() && !dateHasta.getText().isBlank()) {
+////                for (TramiteDTO tramite : listaTramites) {
+////                    if (tramite.getFecha_tramite().fechaHasta(new Fecha(dateHasta.getText()))) {
+////                        listaTramitesImpimir.add(tramite);
+////                    }
+////                }
+////            } //si no se selecciona ninguno
+////            else if (dateDesde.getText().isBlank() && dateHasta.getText().isBlank()) {
+////                for (TramiteDTO tramite : listaTramites) {
+////                    listaTramitesImpimir = listaTramites;
+////                }
+////            }
+//            modelo.setRowCount(0);
+//            for (TramiteDTO tramite : listaTramitesImpimir) {
+//
+//                String tipoTramite = "";
+//                if (tramite instanceof PlacaDTO) {
+//                    tipoTramite = "Placa";
+//                } else if (tramite instanceof LicenciaDTO) {
+//                    tipoTramite = "Tramite";
+//                } else {
+//                    tipoTramite = "Desconocido";
+//                }
+//                tramitesFila[0] = tipoTramite;
+//                tramitesFila[1] = tramite.getFecha_tramite();
+//                tramitesFila[2] = tramite.getCosto();
+//
+//                modelo.addRow(tramitesFila);
+//            }
+//
+//            tblTramites.setModel(modelo);
+//        } catch (NegocioException e) {
+//            JOptionPane.showMessageDialog(this, "No se puede acceder a las personas", "Error de consulta",
+//                    JOptionPane.ERROR_MESSAGE);
+//
+//        }
+//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private org.itson.basesdedatosavanzadas_tramitesvehiculares_principal.Elementos.BotonBlanco btnConsultas;
     private org.itson.basesdedatosavanzadas_tramitesvehiculares_principal.Elementos.BotonBlanco btnInicio1;
     private org.itson.basesdedatosavanzadas_tramitesvehiculares_principal.Elementos.BotonAzul btnLicencias;
+    private org.itson.basesdedatosavanzadas_tramitesvehiculares_principal.Elementos.BotonAzul btnLicencias1;
     private org.itson.basesdedatosavanzadas_tramitesvehiculares_principal.Elementos.BotonBlanco btnPersonas;
     private org.itson.basesdedatosavanzadas_tramitesvehiculares_principal.Elementos.BotonBlanco btnPlacas;
     private org.itson.basesdedatosavanzadas_tramitesvehiculares_principal.Elementos.BotonBlanco btnReportes;
