@@ -469,10 +469,12 @@ public class TramitesDAO implements ITramitesDAO {
                    SELECT p
                    FROM Placa p
                    WHERE p.estado = 1
+                   AND p.matricula = :matricula
                    """;
         Placa placa;
         
         TypedQuery<Placa> query = entityManager.createQuery(jpqlQuery, Placa.class);
+        query.setParameter("matricula", placaDTO.getMatricula());
         try {
             placa = query.getSingleResult();
             logger.log(Level.INFO, "Se consulto {0}", placa);

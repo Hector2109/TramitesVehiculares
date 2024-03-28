@@ -18,18 +18,23 @@ public class DlgPlacaRegistrada extends javax.swing.JDialog {
      * Creates new form DlgPlacaRegistrada
      */
     public DlgPlacaRegistrada(PlacaDTO placa, PersonaDTO persona, AutomovilDTO automovil) {
-        this.lblCosto.setText(placa.getCosto().toString());
-        this.lblRfc.setText(persona.getRfc());
-        this.lblPlaca.setText(placa.getMatricula());
-        this.lblAutomovil.setText(automovil.getMarca() + " "+automovil.getModelo());
         
         
+         
+        initComponents();
         if (placa.getFecha_recepcion()!=null){
         this.lblFechaRecepcion.setText(placa.getFecha_recepcion().toString());
         }else{
           this.lblFechaRecepcion.setText("Vehiculo nuevo, no aplica");  
-        } 
-        initComponents();
+        }
+        String costo ="";
+        costo = String.valueOf(placa.getCosto());
+        this.lblCosto.setText(costo);
+        this.lblRfc.setText(persona.getRfc());
+        this.lblPlaca.setText(placa.getMatricula());
+        this.lblAutomovil.setText(automovil.getMarca() + " "+automovil.getModelo());
+        
+        setVisible(true);
     }
 
     /**
@@ -47,7 +52,6 @@ public class DlgPlacaRegistrada extends javax.swing.JDialog {
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
-        lblCosto2 = new javax.swing.JLabel();
         lblPlaca = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
         jLabel15 = new javax.swing.JLabel();
@@ -56,6 +60,7 @@ public class DlgPlacaRegistrada extends javax.swing.JDialog {
         lblAutomovil = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
         lblRfc = new javax.swing.JLabel();
+        lblCosto = new javax.swing.JLabel();
 
         jLabel16.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel16.setForeground(new java.awt.Color(255, 255, 255));
@@ -80,10 +85,6 @@ public class DlgPlacaRegistrada extends javax.swing.JDialog {
         jLabel14.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(255, 255, 255));
         jLabel14.setText("$");
-
-        lblCosto2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        lblCosto2.setForeground(new java.awt.Color(255, 255, 255));
-        lblCosto2.setText("0");
 
         lblPlaca.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         lblPlaca.setForeground(new java.awt.Color(255, 255, 255));
@@ -123,6 +124,10 @@ public class DlgPlacaRegistrada extends javax.swing.JDialog {
         lblRfc.setForeground(new java.awt.Color(255, 255, 255));
         lblRfc.setText("0");
 
+        lblCosto.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        lblCosto.setForeground(new java.awt.Color(255, 255, 255));
+        lblCosto.setText("0");
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -150,11 +155,11 @@ public class DlgPlacaRegistrada extends javax.swing.JDialog {
                             .addComponent(lblPlaca, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addComponent(jLabel14)
-                                .addGap(18, 18, 18)
-                                .addComponent(lblCosto2, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lblCosto, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(lblFechaRecepcion, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblRfc, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(39, Short.MAX_VALUE))
+                .addContainerGap(51, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -169,7 +174,7 @@ public class DlgPlacaRegistrada extends javax.swing.JDialog {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13)
                     .addComponent(jLabel14)
-                    .addComponent(lblCosto2))
+                    .addComponent(lblCosto))
                 .addGap(20, 20, 20)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblFechaRecepcion)
@@ -213,11 +218,7 @@ public class DlgPlacaRegistrada extends javax.swing.JDialog {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
@@ -226,27 +227,11 @@ public class DlgPlacaRegistrada extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JLabel lblAutomovil;
     private javax.swing.JLabel lblCosto;
-    private javax.swing.JLabel lblCosto1;
-    private javax.swing.JLabel lblCosto2;
     private javax.swing.JLabel lblFechaRecepcion;
-    private javax.swing.JLabel lblNumeroLicencia;
-    private javax.swing.JLabel lblNumeroLicencia1;
     private javax.swing.JLabel lblPlaca;
     private javax.swing.JLabel lblRfc;
-    private javax.swing.JLabel lblVigencia;
-    private javax.swing.JLabel lblVigencia1;
     // End of variables declaration//GEN-END:variables
 }
