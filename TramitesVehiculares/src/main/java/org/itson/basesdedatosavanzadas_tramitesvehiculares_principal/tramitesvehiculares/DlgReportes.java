@@ -34,11 +34,13 @@ public class DlgReportes extends javax.swing.JDialog {
     private int campoSeleccionado;
     private PersonaDTO persona;
 
+    private List<List<String>> listaParaReporte;
     /**
      * Creates new form DlgVacio
      */
     public DlgReportes(java.awt.Dialog parent, boolean modal, PersonaDTO persona) {
         super(parent, modal);
+        listaParaReporte = new ArrayList<>();
         personaBO = new PersonaBO();
         tramiteBO = new TramiteBO();
         this.persona = persona;
@@ -285,6 +287,11 @@ public class DlgReportes extends javax.swing.JDialog {
         btnLicencias.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnLicencias.setForeground(new java.awt.Color(255, 255, 255));
         btnLicencias.setRadius(23);
+        btnLicencias.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLicenciasActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -431,10 +438,28 @@ public class DlgReportes extends javax.swing.JDialog {
 
     }//GEN-LAST:event_dateDesdeMousePressed
 
+    private void btnLicenciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLicenciasActionPerformed
+        PDFReportGenerator pdfGenerador = new PDFReportGenerator();
+        String nombre = " ";
+        if (persona.getApellido_materno() != null) {
+            nombre = persona.getNombre() + " " + persona.getApellido_paterno() + " " + persona.getApellido_materno();
+        } else {
+            nombre = persona.getNombre() + " " + persona.getApellido_paterno();
+        }
+        
+        PDFReportGenerator.generatePDFReport(listaParaReporte,nombre);
+    }//GEN-LAST:event_btnLicenciasActionPerformed
+
     public void consultar() {
         try {
             List<TramiteDTO> listaTramites = tramiteBO.consultarTramitesPersona(persona);
-            List<List<String>> listaParaReporte = new ArrayList<>();
+            listaParaReporte= new  ArrayList<>();
+            List<String> datos = new ArrayList<>();
+                        datos.add("Tipo de trámite");
+                        datos.add("Fecha de realización");
+                        datos.add("costo");
+            listaParaReporte.add(datos);
+            
             modelo = (DefaultTableModel) tblTramites.getModel();
             modelo.setRowCount(0);
 
@@ -471,6 +496,8 @@ public class DlgReportes extends javax.swing.JDialog {
                 }
             }
 
+            
+            
             tblTramites.setModel(modelo);
         } catch (NegocioException e) {
             JOptionPane.showMessageDialog(this, "No se puede acceder a las personas", "Error de consulta", JOptionPane.ERROR_MESSAGE);
