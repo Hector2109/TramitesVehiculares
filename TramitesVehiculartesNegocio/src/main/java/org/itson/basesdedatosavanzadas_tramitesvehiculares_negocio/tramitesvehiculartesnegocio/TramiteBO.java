@@ -356,11 +356,6 @@ public class TramiteBO implements ITramiteBO {
             
 
     @Override
-    public List<PlacaDTO> consultarPlacasPersona(PersonaDTO persona) throws NegocioException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
     public AutomovilDTO obtenerAutomovilPlaca(PlacaDTO placa) throws NegocioException {
 
         try {
