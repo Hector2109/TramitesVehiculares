@@ -5,6 +5,7 @@
 package org.itson.basesdedatosavanzadas_tramitesvehiculares_principal.tramitesvehiculares;
 
 import com.github.lgooddatepicker.components.DatePickerSettings;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -39,6 +40,8 @@ public class DlgReportes extends javax.swing.JDialog {
         tramiteBO = new TramiteBO();
         this.persona = persona;
         initComponents();
+        chkLicencias.setSelected(true);
+        chkPlacas.setSelected(true);
         String nombre = "";
         if (persona.getApellido_materno() != null) {
             nombre = persona.getNombre() + " " + persona.getApellido_paterno() + " " + persona.getApellido_materno();
@@ -47,7 +50,7 @@ public class DlgReportes extends javax.swing.JDialog {
         }
 
         lblPersona.setText(nombre);
-        consultar();
+        
         DatePickerSettings desdeSettings = new DatePickerSettings();
         DatePickerSettings hastaSettings = new DatePickerSettings();
 
@@ -56,6 +59,7 @@ public class DlgReportes extends javax.swing.JDialog {
 
         dateDesde.setSettings(desdeSettings);
         dateHasta.setSettings(hastaSettings);
+        consultar();
 
     }
 
@@ -86,8 +90,8 @@ public class DlgReportes extends javax.swing.JDialog {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         dateHasta = new com.github.lgooddatepicker.components.DatePicker();
-        jCheckBox1 = new javax.swing.JCheckBox();
-        jCheckBox2 = new javax.swing.JCheckBox();
+        chkLicencias = new javax.swing.JCheckBox();
+        chkPlacas = new javax.swing.JCheckBox();
         lblPersona = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -194,11 +198,34 @@ public class DlgReportes extends javax.swing.JDialog {
         jLabel6.setText("Hasta:");
         jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
 
-        jCheckBox1.setText("Licencias");
-        jCheckBox1.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
+        chkLicencias.setText("Licencias");
+        chkLicencias.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
+        chkLicencias.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                chkLicenciasMouseReleased(evt);
+            }
+        });
+        chkLicencias.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                chkLicenciasKeyPressed(evt);
+            }
+        });
 
-        jCheckBox2.setText("Placas");
-        jCheckBox2.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
+        chkPlacas.setText("Placas");
+        chkPlacas.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
+        chkPlacas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chkPlacasActionPerformed(evt);
+            }
+        });
+        chkPlacas.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                chkPlacasKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                chkPlacasKeyReleased(evt);
+            }
+        });
 
         lblPersona.setText("Nombre Persona");
         lblPersona.setFont(new java.awt.Font("Segoe UI", 1, 30)); // NOI18N
@@ -224,9 +251,9 @@ public class DlgReportes extends javax.swing.JDialog {
                             .addComponent(dateHasta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(dateDesde, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(138, 138, 138)
-                        .addComponent(jCheckBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(chkLicencias, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(39, 39, 39)
-                        .addComponent(jCheckBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(chkPlacas, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(89, 89, 89))
         );
         jPanel3Layout.setVerticalGroup(
@@ -247,8 +274,8 @@ public class DlgReportes extends javax.swing.JDialog {
                         .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jCheckBox1)
-                            .addComponent(jCheckBox2))
+                            .addComponent(chkLicencias)
+                            .addComponent(chkPlacas))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -289,6 +316,30 @@ public class DlgReportes extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_tblTramitesMouseClicked
 
+    private void chkPlacasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkPlacasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_chkPlacasActionPerformed
+
+    private void chkLicenciasMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_chkLicenciasMouseReleased
+        limpiarTabla();
+        consultar();
+    }//GEN-LAST:event_chkLicenciasMouseReleased
+
+    private void chkPlacasKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_chkPlacasKeyReleased
+        limpiarTabla();
+        consultar();
+    }//GEN-LAST:event_chkPlacasKeyReleased
+
+    private void chkPlacasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_chkPlacasKeyPressed
+        limpiarTabla();
+        consultar();
+    }//GEN-LAST:event_chkPlacasKeyPressed
+
+    private void chkLicenciasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_chkLicenciasKeyPressed
+        limpiarTabla();
+        consultar();
+    }//GEN-LAST:event_chkLicenciasKeyPressed
+
     public void limpiarTabla() {
         for (int i = 0; i < tblTramites.getRowCount(); i++) {
             modelo.removeRow(i);
@@ -299,10 +350,31 @@ public class DlgReportes extends javax.swing.JDialog {
     public void consultar() {
         try {
             List<TramiteDTO> listaTramites = tramiteBO.consultarTramitesPersona(persona);
+            List<TramiteDTO> listaTramitesImpimir = new ArrayList<>();
             Object[] tramitesFila = new Object[3];
             modelo = (DefaultTableModel) tblTramites.getModel();
 
-            for (TramiteDTO tramite : listaTramites) {
+            //Si solo se ha seleccionado a licencia
+            if (chkLicencias.isSelected() && !chkPlacas.isSelected()) {
+                for (TramiteDTO tramite : listaTramites) {
+                    if (tramite instanceof LicenciaDTO) {
+                        listaTramitesImpimir.add(tramite);
+                    }
+                }
+            }
+            //Si solo se ha seleccinado placas
+            else if(!chkLicencias.isSelected() && chkPlacas.isSelected()){
+                for (TramiteDTO tramite : listaTramites) {
+                    if (tramite instanceof PlacaDTO) {
+                        listaTramitesImpimir.add(tramite);
+                    }
+                }
+            }
+            else if(chkLicencias.isSelected() && chkPlacas.isSelected()){
+                listaTramitesImpimir=listaTramites;
+            }
+            for (TramiteDTO tramite : listaTramitesImpimir) {
+
                 String tipoTramite = "";
                 if (tramite instanceof PlacaDTO) {
                     tipoTramite = "Placa";
@@ -333,10 +405,10 @@ public class DlgReportes extends javax.swing.JDialog {
     private org.itson.basesdedatosavanzadas_tramitesvehiculares_principal.Elementos.BotonBlanco btnPersonas;
     private org.itson.basesdedatosavanzadas_tramitesvehiculares_principal.Elementos.BotonBlanco btnPlacas;
     private org.itson.basesdedatosavanzadas_tramitesvehiculares_principal.Elementos.BotonBlanco btnReportes;
+    private javax.swing.JCheckBox chkLicencias;
+    private javax.swing.JCheckBox chkPlacas;
     private com.github.lgooddatepicker.components.DatePicker dateDesde;
     private com.github.lgooddatepicker.components.DatePicker dateHasta;
-    private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JCheckBox jCheckBox2;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
