@@ -164,14 +164,14 @@ public class DlgReportes extends javax.swing.JDialog {
 
         jPanel3.setBackground(new java.awt.Color(240, 252, 255));
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 30)); // NOI18N
         jLabel2.setText("Periodo");
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 30)); // NOI18N
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
         jLabel3.setText("Reportes");
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 30)); // NOI18N
         jLabel4.setText("Tipos de trámite");
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 30)); // NOI18N
 
         tblTramites.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -188,21 +188,21 @@ public class DlgReportes extends javax.swing.JDialog {
         });
         jScrollPane1.setViewportView(tblTramites);
 
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
         jLabel5.setText("Desde:");
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
 
-        jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
         jLabel6.setText("Hasta:");
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
 
-        jCheckBox1.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
         jCheckBox1.setText("Licencias");
+        jCheckBox1.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
 
-        jCheckBox2.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
         jCheckBox2.setText("Placas");
+        jCheckBox2.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
 
+        lblPersona.setText("Nombre Persona");
         lblPersona.setFont(new java.awt.Font("Segoe UI", 1, 30)); // NOI18N
         lblPersona.setForeground(new java.awt.Color(156, 156, 156));
-        lblPersona.setText("Nombre Persona");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -262,6 +262,7 @@ public class DlgReportes extends javax.swing.JDialog {
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 0, 810, 650));
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnReportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportesActionPerformed
