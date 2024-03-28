@@ -29,6 +29,10 @@ public class DlgRenovarPlaca extends javax.swing.JDialog {
 
     private final ITramiteBO tramiteBO;
     private final IPersonaBO personaBO;
+    private PersonaDTO persona;
+    private LicenciaDTO licencia;
+    private AutomovilDTO automovilDTO;
+    private PlacaDTO placaDTO;
 
     /**
      * Creates new form DlgRenovarPlaca
@@ -279,6 +283,9 @@ public class DlgRenovarPlaca extends javax.swing.JDialog {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel3))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(83, 83, 83)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel13)
@@ -304,15 +311,11 @@ public class DlgRenovarPlaca extends javax.swing.JDialog {
                             .addComponent(jLabel11)
                             .addComponent(txtLinea, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(471, 471, 471)
-                        .addComponent(btnRealizarTramite, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(1203, 1203, 1203)
                         .addComponent(jLabel6))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel3)
-                        .addGap(517, 517, 517)))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(414, 414, 414)
+                        .addComponent(btnRealizarTramite, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -470,19 +473,18 @@ public class DlgRenovarPlaca extends javax.swing.JDialog {
 
         if (!txtPlaca.getText().isBlank()) {
 
-            PlacaDTO placaDTO = new PlacaDTO(txtPlaca.getText());
+            placaDTO = new PlacaDTO(txtPlaca.getText());
 
             try {
-                AutomovilDTO automovilDTO;
                 automovilDTO = tramiteBO.obtenerAutomovilPlaca(placaDTO);
 
-                PersonaDTO persona = personaBO.consultaPersonaPlaca(placaDTO);
+                this.persona = personaBO.consultaPersonaPlaca(placaDTO);
 
                 try {
                     placaDTO = tramiteBO.obtenerPlacaActiva(placaDTO);
 
                     if (placaDTO != null && placaDTO.getEstado() == 1) {
-                        LicenciaDTO licencia = tramiteBO.buscarLicencia(persona);
+                        licencia = tramiteBO.buscarLicencia(persona);
                         if (licencia != null) {
                             txtNumLicencia.setText(licencia.getNumero_licencia());
                             btnBuscar.setEnabled(false);
@@ -522,7 +524,13 @@ public class DlgRenovarPlaca extends javax.swing.JDialog {
     }//GEN-LAST:event_txtNumSerieActionPerformed
 
     private void btnRealizarTramiteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRealizarTramiteActionPerformed
-
+        if (!txtNumLicencia.getText().isBlank()){
+            try {
+                tramiteBO.crearPlacaAutoUsado(placaDTO, automovilDTO, persona);
+            } catch (NegocioException ex) {
+                JOptionPane.showMessageDialog(rootPane, "No fue posible generar la nueva placa", "Error en generación", HEIGHT);
+            }
+        }
     }//GEN-LAST:event_btnRealizarTramiteActionPerformed
 
     private void btnLicenciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLicenciasActionPerformed

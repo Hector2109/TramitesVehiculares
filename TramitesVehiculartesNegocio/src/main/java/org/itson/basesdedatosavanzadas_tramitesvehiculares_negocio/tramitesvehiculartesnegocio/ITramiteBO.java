@@ -76,10 +76,30 @@ public interface ITramiteBO {
      */
     public String generarMatricula ();
     
-    
+    /**
+     * Método usado para obtener el automovil por medio de una placa
+     * @param placa placa del automovil
+     * @return automovil encontrado
+     * @throws NegocioException en caso de no encontrarlo
+     */
     public AutomovilDTO obtenerAutomovilPlaca (PlacaDTO placa) throws NegocioException;
     
-    
+    /**
+     * Método para verificar si una placa es activa
+     * @param placa placa que se evaluara
+     * @return se regresa la placa si esta activa,null en caso contrario
+     * @throws NegocioException  en caso de no encontrar la placa
+     */
     public PlacaDTO obtenerPlacaActiva (PlacaDTO placa) throws NegocioException;
 
+    /**
+     * Método el cual es usado para generar una placa nueva
+     * para un automovil el cual ya tiene una
+     * @param placa placa actual
+     * @param automovil automovil al que se le quiere asignar la placa
+     * @param persona persona la cual es deuaña del automovil
+     * @return placa generada
+     * @throws NegocioException en caso de no poder generar la placa 
+     */
+    public PlacaDTO crearPlacaAutoUsado (PlacaDTO placa, AutomovilDTO automovil, PersonaDTO persona) throws NegocioException;
 }
