@@ -263,7 +263,10 @@ public class DlgPrincipal extends javax.swing.JDialog {
     }//GEN-LAST:event_btnConsultasActionPerformed
 
     private void btnReportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportesActionPerformed
-        // TODO add your handling code here:
+        DlgReportesPersona RP = new DlgReportesPersona(this, false);
+        this.setVisible(false);
+        RP.setVisible(true);
+        this.setVisible(true);
     }//GEN-LAST:event_btnReportesActionPerformed
 
     private void btnModuloLicenciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModuloLicenciasActionPerformed

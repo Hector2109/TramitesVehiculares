@@ -61,6 +61,19 @@ public class LicenciaDTO extends TramiteDTO{
     public byte getEstado() {
         return estado;
     }
+
+    public void setNumero_licencia(String numero_licencia) {
+        this.numero_licencia = numero_licencia;
+    }
+
+    public void setVigencia(Fecha vigencia) {
+        this.vigencia = vigencia;
+    }
+
+    public void setEstado(byte estado) {
+        this.estado = estado;
+    }
+    
     
     
 }
