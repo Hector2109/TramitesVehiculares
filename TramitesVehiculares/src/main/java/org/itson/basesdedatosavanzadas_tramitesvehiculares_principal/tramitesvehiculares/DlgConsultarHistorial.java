@@ -241,6 +241,7 @@ public class DlgConsultarHistorial extends javax.swing.JDialog {
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 0, 810, 650));
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     public void consultarPlacas() {

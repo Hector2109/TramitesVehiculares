@@ -24,6 +24,7 @@ public class DlgReportesPersona extends javax.swing.JDialog {
     private IPersonaBO personaBO;
     private ITramiteBO tramiteBO;
     DefaultTableModel modelo;
+
     /**
      * Creates new form DlgVacio
      */
@@ -199,6 +200,7 @@ public class DlgReportesPersona extends javax.swing.JDialog {
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 0, 810, 650));
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnInicio1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInicio1ActionPerformed
@@ -227,19 +229,23 @@ public class DlgReportesPersona extends javax.swing.JDialog {
     }//GEN-LAST:event_txtNombreActionPerformed
 
     private void txtNombreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyReleased
-        
+        if(txtNombre.getText().isBlank()){
+            consultar();
+        }
+        else{
+            consultarNombre();
+        }
     }//GEN-LAST:event_txtNombreKeyReleased
 
     private void tblPersonasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblPersonasMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_tblPersonasMouseClicked
 
-    public void consultar(){
-        // Obtener la lista dyhe socios
+    public void consultar() {
         List<PersonaDTO> listaPersonas;
         try {
             listaPersonas = personaBO.consultar();
-                    
+
             modelo = new DefaultTableModel() {
                 @Override
                 public boolean isCellEditable(int row, int column) {
@@ -274,9 +280,6 @@ public class DlgReportesPersona extends javax.swing.JDialog {
                 PersonaDTO personaSeleccionada = listaPersonas.get(fila);
                 DlgReportes DR = new DlgReportes(this, false, personaSeleccionada);
                 DR.setVisible(true);
-//                PantallaCuenta pantallaCuenta = new PantallaCuenta(parent, true, conexion, cuenta);
-//                pantallaCuenta.setVisible(true);
-//                llenarTabla();
             });
             tblPersonas.getColumnModel().getColumn(tblPersonas.getColumnCount() - 1).setCellRenderer(buttonColumn);
             tblPersonas.getColumnModel().getColumn(tblPersonas.getColumnCount() - 1).setCellEditor(buttonColumn);
@@ -285,7 +288,52 @@ public class DlgReportesPersona extends javax.swing.JDialog {
         }
     }
 
+    public void consultarNombre() {
+        List<PersonaDTO> listaPersonas;
+        try {
+            listaPersonas = personaBO.consultarPersonasSimilar(txtNombre.getText());
 
+            modelo = new DefaultTableModel() {
+                @Override
+                public boolean isCellEditable(int row, int column) {
+                    return column == getColumnCount() - 1;
+                }
+            };
+
+            modelo.addColumn("Nombre");
+            modelo.addColumn("RFC");
+            modelo.addColumn("Fecha nacimiento");
+            modelo.addColumn("");
+
+            for (PersonaDTO persona : listaPersonas) {
+                String nombre = "";
+                if (persona.getApellido_materno() != null) {
+                    nombre = persona.getNombre() + " " + persona.getApellido_paterno() + " " + persona.getApellido_materno();
+                } else {
+                    nombre = persona.getNombre() + " " + persona.getApellido_paterno();
+                }
+                Object[] fila = {
+                    nombre,
+                    persona.getRfc(),
+                    persona.getFecha_nacimiento(),
+                    "Seleccionar"};
+                modelo.addRow(fila);
+            }
+
+            tblPersonas.setModel(modelo);
+
+            ButtonColumn buttonColumn = new ButtonColumn("Seleccionar", (e) -> {
+                int fila = tblPersonas.convertRowIndexToModel(tblPersonas.getSelectedRow());
+                PersonaDTO personaSeleccionada = listaPersonas.get(fila);
+                DlgReportes DR = new DlgReportes(this, false, personaSeleccionada);
+                DR.setVisible(true);
+            });
+            tblPersonas.getColumnModel().getColumn(tblPersonas.getColumnCount() - 1).setCellRenderer(buttonColumn);
+            tblPersonas.getColumnModel().getColumn(tblPersonas.getColumnCount() - 1).setCellEditor(buttonColumn);
+        } catch (NegocioException e) {
+            JOptionPane.showMessageDialog(this, "Error al consultar la información de las personas: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private org.itson.basesdedatosavanzadas_tramitesvehiculares_principal.Elementos.BotonBlanco btnConsultas;
     private org.itson.basesdedatosavanzadas_tramitesvehiculares_principal.Elementos.BotonBlanco btnInicio1;
