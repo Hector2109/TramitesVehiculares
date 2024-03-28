@@ -147,7 +147,18 @@ public interface ITramitesDAO {
      */
     public Placa obtenerPlacaActiva(PlacaDTO placa) throws PersistenciaException;
     
-
+    /**
+     * Crea una placa para un automovil usado
+     * @param placa la placa actual
+     * @param automovil automovil que pertenecerá a la placa 
+     * @param persona persona dueña dueña del automovil
+     * @param matricula matricula de la nueva placa
+     * @return Placa nueva generada
+     * @throws PersistenciaException en caso de algún error 
+     */
+    public Placa placasAutomovilUsado (PlacaDTO placa, AutomovilDTO automovil, PersonaDTO persona, String matricula) throws PersistenciaException;
     
+    
+    public void desactivarPlaca(PlacaDTO placa) throws PersistenciaException;
     
 }

@@ -484,4 +484,72 @@ public class TramitesDAO implements ITramitesDAO {
         return placa;
     }
 
+    /**
+     * Crea una placa para un automovil usado
+     * @param placa la placa actual
+     * @param automovil automovil que pertenecerá a la placa 
+     * @param persona persona dueña dueña del automovil
+     * @param matricula matricula de la nueva placa
+     * @return Placa nueva generada
+     * @throws PersistenciaException en caso de algún error 
+     */
+    @Override
+    public Placa placasAutomovilUsado(PlacaDTO placa, AutomovilDTO automovil, PersonaDTO persona, String matricula) throws PersistenciaException {
+        Placa placaNueva = new Placa();
+
+        Persona personaE;
+        try {
+            personaE = personasDAO.consultarPersona(persona.getRfc());
+            Vehiculo vehiculo = obtenerAutomovil(automovil);
+            
+            
+
+            if (vehiculo != null) {
+
+                desactivarPlaca(placa);
+                placaNueva.setVehiculo(vehiculo);
+                placaNueva.setEstado(Byte.valueOf("1"));
+                placaNueva.setPersona(personaE);
+                placaNueva.setCosto(1000F);
+                placaNueva.setMatricula(matricula);
+                placaNueva.setFecha_tramite(new Fecha());
+                placaNueva.setFecha_recepcion(new Fecha());
+
+                EntityManager em = conexion.crearConexion();
+                em.getTransaction().begin();
+                em.persist(placaNueva);
+                em.getTransaction().commit();
+                em.close();
+
+            } else {
+                throw new PersistenceException("Este automovil no esta registrado");
+            }
+        } catch (PersistenciaException ex) {
+            Logger.getLogger(TramitesDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return placaNueva;
+    }
+
+    @Override
+    public void desactivarPlaca(PlacaDTO placa) throws PersistenciaException {
+        EntityManager entityManager = this.conexion.crearConexion();
+        EntityTransaction transaction = null;
+
+        String jpqlQuery = """
+                            UPDATE Placa p
+                            SET p.estado = 0
+                            WHERE p.matricula = :matricula
+                            """;
+        Query query = entityManager.createQuery(jpqlQuery);
+        query.setParameter("matricula", placa.getMatricula());
+        entityManager.getTransaction().begin();
+        int filasActualizadas = query.executeUpdate();
+        entityManager.getTransaction().commit();
+        entityManager.close();
+
+        if (filasActualizadas == 0) {
+            throw new PersistenceException("No se encontraron licencias con ese número");
+        }
+    }
+
 }
