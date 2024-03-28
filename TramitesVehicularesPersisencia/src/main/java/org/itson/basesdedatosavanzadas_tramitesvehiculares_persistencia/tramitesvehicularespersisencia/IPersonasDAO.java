@@ -6,6 +6,7 @@ package org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia.tramite
 
 import java.util.List;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.dto.PersonaDTO;
+import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.dto.PlacaDTO;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia.excepciones.PersistenciaException;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia_entidad.tramitesvehicularespersisencia.Persona;
 
@@ -68,4 +69,7 @@ public interface IPersonasDAO {
      * @throws PersistenciaException lanza excepcion en caso de error
      */
     public List<Persona> buscarAnioSimilar(String anio) throws PersistenciaException;
+    
+    
+    public Persona buscarPersonaPlaca (PlacaDTO placa) throws PersistenciaException;
 }

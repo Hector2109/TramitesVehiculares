@@ -2,6 +2,7 @@ package org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehi
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 import java.util.logging.Level;
@@ -313,7 +314,7 @@ public class TramiteBO implements ITramiteBO {
                     placaDTO.setEstado(placa.getEstado());
                     tramitesDTO.add(placaDTO);
                 }
-            }
+              }
 
         } catch (PersistenciaException ex) {
             Logger.getLogger(TramiteBO.class.getName()).log(Level.SEVERE, null, ex);
@@ -322,9 +323,83 @@ public class TramiteBO implements ITramiteBO {
         return tramitesDTO;
     }
 
+    public List<PlacaDTO> consultarPlacasPersona(PersonaDTO persona) throws NegocioException {
+        List<PlacaDTO> placasDTO;
+        placasDTO = new ArrayList<>();
+        try {
+            List<Placa> placas = tramite.consultarPlacasPersona(persona);
+
+            for (Placa placa : placas) {
+                Fecha emision = new Fecha(
+                        String.valueOf(placa.getFecha_tramite().get(Calendar.YEAR)) + "-"
+                        + String.valueOf(placa.getFecha_tramite().get(Calendar.MONTH) + 1) + "-"
+                        + String.valueOf(placa.getFecha_tramite().get(Calendar.DAY_OF_MONTH)));
+                Fecha recepcion = new Fecha(
+                        String.valueOf(placa.getFecha_recepcion().get(Calendar.YEAR)) + "-"
+                        + String.valueOf(placa.getFecha_recepcion().get(Calendar.MONTH) + 1) + "-"
+                        + String.valueOf(placa.getFecha_recepcion().get(Calendar.DAY_OF_MONTH)));
+
+                placasDTO.add(new PlacaDTO(
+                        placa.getMatricula(),
+                        recepcion,
+                        placa.getEstado(),
+                        emision));
+              }
+
+        } catch (PersistenciaException ex) {
+            Logger.getLogger(TramiteBO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return placasDTO;
+    }
+
+            
+
     @Override
     public List<PlacaDTO> consultarPlacasPersona(PersonaDTO persona) throws NegocioException {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public AutomovilDTO obtenerAutomovilPlaca(PlacaDTO placa) throws NegocioException {
+
+        try {
+            Automovil automovil = tramite.obtenerAutomovilPlaca(placa);
+
+            AutomovilDTO automovilDTO = new AutomovilDTO();
+
+            automovilDTO.setColor(automovil.getColor());
+            automovilDTO.setLinea(automovil.getLinea());
+            automovilDTO.setMarca(automovil.getMarca());
+            automovilDTO.setModelo(automovil.getModelo());
+            automovilDTO.setNumero_serie(automovil.getNumero_serie());
+
+            return automovilDTO;
+
+        } catch (PersistenciaException ex) {
+            Logger.getLogger(TramiteBO.class.getName()).log(Level.SEVERE, null, ex);
+            throw new NegocioException("No se encontro ningún automovil con esas placas");
+        }
+
+    }
+
+    @Override
+    public PlacaDTO obtenerPlacaActiva(PlacaDTO placaDTO) throws NegocioException {
+        try {
+            Placa placa = tramite.obtenerPlacaActiva(placaDTO);
+
+            if (placa != null) {
+
+                placaDTO.setMatricula(placa.getMatricula());
+                placaDTO.setEstado(placa.getEstado());
+            } else {
+                throw new NegocioException ("La placa no esta activa");
+            }
+            return placaDTO;
+        } catch (PersistenciaException ex) {
+            Logger.getLogger(TramiteBO.class.getName()).log(Level.SEVERE, null, ex);
+            throw new NegocioException("No se encontro ninguna placa activa");
+        }
     }
 
 }

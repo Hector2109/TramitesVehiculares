@@ -435,4 +435,53 @@ public class TramitesDAO implements ITramitesDAO {
         return automovilEntity;
     }
 
+    @Override
+    public Automovil obtenerAutomovilPlaca(PlacaDTO placa) throws PersistenciaException {
+        EntityManager em = conexion.crearConexion();
+
+        Automovil automovil;
+
+        String jpqlQuery = """
+                       SELECT a 
+                           FROM Automovil a 
+                           JOIN a.placas p 
+                           WHERE p.matricula = :matricula
+                       """;
+        TypedQuery<Automovil> query = em.createQuery(jpqlQuery, Automovil.class);
+        query.setParameter("matricula", placa.getMatricula());
+
+        try {
+            automovil = query.getSingleResult();
+            logger.log(Level.INFO, "Consulta de 1 automovil realizada con éxito.");
+        } catch (NoResultException ex) {
+            throw new PersistenciaException("No se encontraron automoviles con la placa: " + placa.getMatricula(), ex);
+        } finally {
+            em.close();
+        }
+        return automovil;
+
+    }
+
+    @Override
+    public Placa obtenerPlacaActiva(PlacaDTO placaDTO) throws PersistenciaException {
+        EntityManager entityManager = this.conexion.crearConexion();
+        String jpqlQuery = """
+                   SELECT p
+                   FROM Placa p
+                   WHERE p.estado = 1
+                   """;
+        Placa placa;
+        
+        TypedQuery<Placa> query = entityManager.createQuery(jpqlQuery, Placa.class);
+        try {
+            placa = query.getSingleResult();
+            logger.log(Level.INFO, "Se consulto {0}", placa);
+        } catch (PersistenceException ex) {
+            placa = null;
+        } finally {
+            entityManager.close();
+        }
+        return placa;
+    }
+
 }
