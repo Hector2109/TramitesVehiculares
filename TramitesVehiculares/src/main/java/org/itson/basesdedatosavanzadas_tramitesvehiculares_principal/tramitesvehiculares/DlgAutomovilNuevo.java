@@ -14,6 +14,7 @@ import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehic
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.dto.AutomovilDTO;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.dto.LicenciaDTO;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.dto.PersonaDTO;
+import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.dto.PlacaDTO;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia.excepciones.PersistenciaException;
 
 /**
@@ -434,7 +435,9 @@ public class DlgAutomovilNuevo extends javax.swing.JDialog {
             if (personaDTO!=null){
                 
                 try {
-                    tramiteBO.placaAutomovilNuevo(autoNuevo, personaDTO);
+                    PlacaDTO placa = tramiteBO.placaAutomovilNuevo(autoNuevo, personaDTO);
+                    
+                    DlgPlacaRegistrada dlgPlaca = new DlgPlacaRegistrada(placa, personaDTO, autoNuevo);
                 } catch (NegocioException ex) {
                     JOptionPane.showMessageDialog(rootPane, ex.getMessage(), ex.getCause().getMessage(), JOptionPane.ERROR_MESSAGE);
                 } catch (PersistenciaException ex) {

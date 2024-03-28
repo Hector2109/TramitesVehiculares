@@ -527,6 +527,8 @@ public class DlgRenovarPlaca extends javax.swing.JDialog {
         if (!txtNumLicencia.getText().isBlank()){
             try {
                 tramiteBO.crearPlacaAutoUsado(placaDTO, automovilDTO, persona);
+                dispose();
+                DlgPlacaRegistrada dlgPlaca = new DlgPlacaRegistrada(placaDTO, persona, automovilDTO);
             } catch (NegocioException ex) {
                 JOptionPane.showMessageDialog(rootPane, "No fue posible generar la nueva placa", "Error en generación", HEIGHT);
             }
