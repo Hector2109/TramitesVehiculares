@@ -6,6 +6,7 @@ import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehic
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.dto.LicenciaDTO;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.dto.PersonaDTO;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.dto.PlacaDTO;
+import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.dto.TramiteDTO;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia.excepciones.PersistenciaException;
 
 /**
@@ -76,10 +77,20 @@ public interface ITramiteBO {
      */
     public String generarMatricula ();
     
+
+    /**
+     * Método para consultar trámites asociados a una persona
+     * @param personaDTO persona de la que se desea buscar trámites
+     * @return regresa las listas de trámites
+     * @throws NegocioException lanza excepcion en caso de error
+     */
+    public List<TramiteDTO> consultarTramitesPersona(PersonaDTO personaDTO) throws NegocioException;
+
     
     public AutomovilDTO obtenerAutomovilPlaca (PlacaDTO placa) throws NegocioException;
     
     
     public PlacaDTO obtenerPlacaActiva (PlacaDTO placa) throws NegocioException;
+
 
 }
