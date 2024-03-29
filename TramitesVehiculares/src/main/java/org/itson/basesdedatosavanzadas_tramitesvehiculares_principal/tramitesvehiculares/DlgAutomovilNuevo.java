@@ -104,8 +104,10 @@ public class DlgAutomovilNuevo extends javax.swing.JDialog {
         jPanel1.add(btnPersonas, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 234, 148, 56));
 
         btnPlacas.setBackground(new java.awt.Color(62, 117, 225));
+        btnPlacas.setForeground(new java.awt.Color(255, 255, 255));
         btnPlacas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Placas_Seleccionado.png"))); // NOI18N
         btnPlacas.setText("  Placas     ");
+        btnPlacas.setColor(new java.awt.Color(62, 117, 225));
         btnPlacas.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnPlacas.setRadius(23);
         btnPlacas.addActionListener(new java.awt.event.ActionListener() {

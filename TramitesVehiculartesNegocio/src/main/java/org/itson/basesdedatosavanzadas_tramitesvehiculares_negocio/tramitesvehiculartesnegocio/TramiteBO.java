@@ -314,7 +314,7 @@ public class TramiteBO implements ITramiteBO {
                     placaDTO.setEstado(placa.getEstado());
                     tramitesDTO.add(placaDTO);
                 }
-              }
+            }
 
         } catch (PersistenciaException ex) {
             Logger.getLogger(TramiteBO.class.getName()).log(Level.SEVERE, null, ex);
@@ -334,17 +334,19 @@ public class TramiteBO implements ITramiteBO {
                         String.valueOf(placa.getFecha_tramite().get(Calendar.YEAR)) + "-"
                         + String.valueOf(placa.getFecha_tramite().get(Calendar.MONTH) + 1) + "-"
                         + String.valueOf(placa.getFecha_tramite().get(Calendar.DAY_OF_MONTH)));
-                Fecha recepcion = new Fecha(
-                        String.valueOf(placa.getFecha_recepcion().get(Calendar.YEAR)) + "-"
-                        + String.valueOf(placa.getFecha_recepcion().get(Calendar.MONTH) + 1) + "-"
-                        + String.valueOf(placa.getFecha_recepcion().get(Calendar.DAY_OF_MONTH)));
-
+                Fecha recepcion = null;
+                if (placa.getFecha_recepcion() != null) {
+                    recepcion = new Fecha(
+                            String.valueOf(placa.getFecha_recepcion().get(Calendar.YEAR)) + "-"
+                            + String.valueOf(placa.getFecha_recepcion().get(Calendar.MONTH) + 1) + "-"
+                            + String.valueOf(placa.getFecha_recepcion().get(Calendar.DAY_OF_MONTH)));
+                }
                 placasDTO.add(new PlacaDTO(
                         placa.getMatricula(),
                         recepcion,
                         placa.getEstado(),
                         emision));
-              }
+            }
 
         } catch (PersistenciaException ex) {
             Logger.getLogger(TramiteBO.class.getName()).log(Level.SEVERE, null, ex);
@@ -353,8 +355,9 @@ public class TramiteBO implements ITramiteBO {
         return placasDTO;
     }
 
-     /**
+    /**
      * Método usado para obtener el automovil por medio de una placa
+     *
      * @param placa placa del automovil
      * @return automovil encontrado
      * @throws NegocioException en caso de no encontrarlo
@@ -384,9 +387,10 @@ public class TramiteBO implements ITramiteBO {
 
     /**
      * Método para verificar si una placa es activa
+     *
      * @param placa placa que se evaluara
      * @return se regresa la placa si esta activa,null en caso contrario
-     * @throws NegocioException  en caso de no encontrar la placa
+     * @throws NegocioException en caso de no encontrar la placa
      */
     @Override
     public PlacaDTO obtenerPlacaActiva(PlacaDTO placaDTO) throws NegocioException {
@@ -398,7 +402,7 @@ public class TramiteBO implements ITramiteBO {
                 placaDTO.setMatricula(placa.getMatricula());
                 placaDTO.setEstado(placa.getEstado());
             } else {
-                throw new NegocioException ("La placa no esta activa");
+                throw new NegocioException("La placa no esta activa");
             }
             return placaDTO;
         } catch (PersistenciaException ex) {
@@ -408,43 +412,42 @@ public class TramiteBO implements ITramiteBO {
     }
 
     /**
-     * Método el cual es usado para generar una placa nueva
-     * para un automovil el cual ya tiene una
+     * Método el cual es usado para generar una placa nueva para un automovil el
+     * cual ya tiene una
+     *
      * @param placa placa actual
      * @param automovil automovil al que se le quiere asignar la placa
      * @param persona persona la cual es deuaña del automovil
      * @return placa generada
-     * @throws NegocioException en caso de no poder generar la placa 
+     * @throws NegocioException en caso de no poder generar la placa
      */
     @Override
     public PlacaDTO crearPlacaAutoUsado(PlacaDTO placaDTO, AutomovilDTO automovil, PersonaDTO persona) throws NegocioException {
-        
-        Placa placaEntity;
-            String matricula = generarMatricula();
-            do {
-                placaEntity = tramite.obtenerPlaca(matricula);
-                if (placaEntity != null) {
-                    matricula = generarMatricula();
-                }
 
-            } while (placaEntity != null);
-        
+        Placa placaEntity;
+        String matricula = generarMatricula();
+        do {
+            placaEntity = tramite.obtenerPlaca(matricula);
+            if (placaEntity != null) {
+                matricula = generarMatricula();
+            }
+
+        } while (placaEntity != null);
+
         try {
             placaEntity = tramite.placasAutomovilUsado(placaDTO, automovil, persona, matricula);
-            
+
             placaDTO.setCosto(placaEntity.getCosto());
             placaDTO.setEstado(placaEntity.getEstado());
             placaDTO.setMatricula(matricula);
             placaDTO.setFecha_recepcion((Fecha) placaEntity.getFecha_recepcion());
             placaDTO.setFecha_tramite((Fecha) placaEntity.getFecha_tramite());
             return placaDTO;
-            
-        } catch (PersistenciaException ex) {
-            throw new NegocioException ("Ha ocurrido un error al querer generar una nueva placa");
-        }
-        
-    }
-    
 
+        } catch (PersistenciaException ex) {
+            throw new NegocioException("Ha ocurrido un error al querer generar una nueva placa");
+        }
+
+    }
 
 }

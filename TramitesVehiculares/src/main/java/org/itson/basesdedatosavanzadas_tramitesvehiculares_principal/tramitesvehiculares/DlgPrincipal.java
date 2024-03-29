@@ -4,19 +4,16 @@
  */
 package org.itson.basesdedatosavanzadas_tramitesvehiculares_principal.tramitesvehiculares;
 
+import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.NegocioException;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_negocio.tramitesvehiculartesnegocio.PersonaBO;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia.tramitesvehicularespersisencia.Conexion;
 import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia.tramitesvehicularespersisencia.IConexion;
-import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia.tramitesvehicularespersisencia.PersonasDAO;
 
 /**
  *
  * @author Abe
  */
 public class DlgPrincipal extends javax.swing.JDialog {
-
-
-
 
     /**
      * Creates new form DlgPrincipal2
@@ -247,7 +244,17 @@ public class DlgPrincipal extends javax.swing.JDialog {
     private void btnPersonasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPersonasActionPerformed
         IConexion conexion = new Conexion();
         PersonaBO personaBO = new PersonaBO();
-        personaBO.insercionMasiva();
+        try {
+            personaBO.insercionMasiva();
+            DlgPersonasGuardadas PR = new DlgPersonasGuardadas(this, true);
+            PR.setVisible(true);
+        } catch (Exception e) {
+            DlgPersonasGuardadas PR = new DlgPersonasGuardadas(this, true);
+            PR.setTexto();
+            PR.setVisible(true);
+        }
+
+
     }//GEN-LAST:event_btnPersonasActionPerformed
 
     private void btnPlacasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlacasActionPerformed

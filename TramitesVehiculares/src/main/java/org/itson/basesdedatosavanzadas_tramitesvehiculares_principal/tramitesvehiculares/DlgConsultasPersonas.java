@@ -105,8 +105,10 @@ public class DlgConsultasPersonas extends javax.swing.JDialog {
         jPanel1.add(btnPlacas, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 310, 148, 56));
 
         btnConsultas.setBackground(new java.awt.Color(62, 117, 225));
+        btnConsultas.setForeground(new java.awt.Color(255, 255, 255));
         btnConsultas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Consultas_Seleccionado.png"))); // NOI18N
         btnConsultas.setText("  Consultas");
+        btnConsultas.setColor(new java.awt.Color(62, 117, 225));
         btnConsultas.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnConsultas.setRadius(23);
         btnConsultas.addActionListener(new java.awt.event.ActionListener() {

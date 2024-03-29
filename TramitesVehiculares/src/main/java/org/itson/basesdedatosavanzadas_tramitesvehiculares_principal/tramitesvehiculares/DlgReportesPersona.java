@@ -111,8 +111,10 @@ public class DlgReportesPersona extends javax.swing.JDialog {
         jPanel1.add(btnConsultas, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 462, 148, 56));
 
         btnReportes.setBackground(new java.awt.Color(62, 117, 225));
+        btnReportes.setForeground(new java.awt.Color(255, 255, 255));
         btnReportes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Reportes_Seleccionado.png"))); // NOI18N
         btnReportes.setText("  Reportes");
+        btnReportes.setColor(new java.awt.Color(62, 117, 225));
         btnReportes.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnReportes.setRadius(23);
         btnReportes.addActionListener(new java.awt.event.ActionListener() {
