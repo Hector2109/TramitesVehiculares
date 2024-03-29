@@ -36,29 +36,32 @@ import org.itson.basesdedatosavanzadas_tramitesvehiculares_persistencia.tramites
  */
 public class PDFReportGenerator {
 
-    public static void generatePDFReport(List<List<String>> dataList, String nombrePersona) {
+    public static void generatePDFReport(List<List<String>> dataList) {
         try {
             PdfWriter writer = new PdfWriter("reporte.pdf");
             PdfDocument pdf = new PdfDocument(writer);
             Document document = new Document(pdf);
 
+            //numero de paginas
             pdf.addEventHandler(PdfDocumentEvent.END_PAGE, new PageNumberEventHandler());
 
+            //imagen del logo
             String origen = "src\\main\\resources\\imagenes\\logo.jpg";
             Image logo = new Image(ImageDataFactory.create(origen));
             logo.scaleToFit(80, 80);
             logo.setFixedPosition(450, 750);
             document.add(logo);
 
+            //titulo
             Paragraph titulo = new Paragraph("Reporte de trámites generados").setBold().setFontSize(18f).setTextAlignment(TextAlignment.CENTER);
             document.add(titulo);
 
-            Paragraph persona = new Paragraph("Nombre de la persona: " + nombrePersona).setFontSize(12);
-            document.add(persona);
-
+            //Fecha del repote
             Fecha fechaa = new Fecha();
             Paragraph fecha = new Paragraph("Fecha del reporte: " + fechaa).setFontSize(12);
             document.add(fecha);
+
+           
 
             Table table = new Table(UnitValue.createPercentArray(dataList.get(0).size())).useAllAvailableWidth();
 
@@ -68,11 +71,12 @@ public class PDFReportGenerator {
                 }
             }
 
-            Paragraph centered = new Paragraph().setTextAlignment(TextAlignment.CENTER);
-            centered.add(table);
-
-            document.add(centered);
-
+            document.add(table);
+            
+            int totalPages = pdf.getNumberOfPages();
+            Paragraph totalPagesParagraph = new Paragraph("Número total de páginas: " + totalPages).setFontSize(12);
+            document.add(totalPagesParagraph);
+            
             document.close();
             openPDFFile("reporte.pdf");
             System.out.println("PDF generado correctamente en: " + "reporte.pdf");
@@ -83,6 +87,12 @@ public class PDFReportGenerator {
         }
     }
 
+    /**
+     * Abre automaticamente el pdf
+     *
+     * @param filePath origen del pdf
+     * @throws IOException
+     */
     private static void openPDFFile(String filePath) throws IOException {
         if (Desktop.isDesktopSupported()) {
             Desktop desktop = Desktop.getDesktop();
@@ -97,32 +107,9 @@ public class PDFReportGenerator {
         }
     }
 
-//    private static class PageNumberEventHandler implements IEventHandler {
-//
-//        
-//
-//    @Override
-//        public void handleEvent(Event event) {
-//            PdfDocumentEvent docEvent = (PdfDocumentEvent) event;
-//            PdfCanvas canvas = new PdfCanvas(docEvent.getPage());
-//            int pageNumber = docEvent.getDocument().getPageNumber(docEvent.getPage());
-//
-//            PdfFont font = null;
-//            try {
-//                font = PdfFontFactory.createFont(StandardFonts.HELVETICA_BOLD);
-//            } catch (IOException ex) {
-//                Logger.getLogger(PDFReportGenerator.class.getName()).log(Level.SEVERE, null, ex);
-//            }
-//            // Establecer la fuente y el tamaño de letra
-//            canvas.setFontAndSize(font, 12);
-//
-//            // Mover al lugar donde se escribirá el número de página
-//            canvas.moveTo(10, 10);
-//
-//            // Mostrar el número de página
-//            canvas.beginText().showText(String.valueOf(pageNumber)).endText();
-//        }
-//    }
+    /**
+     * Permite establecer un numero de paginas en la parte superior izquierda
+     */
     private static class PageNumberEventHandler implements IEventHandler {
 
         @Override

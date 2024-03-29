@@ -306,10 +306,13 @@ public class TramiteBO implements ITramiteBO {
                     placaDTO.setCosto(placa.getCosto());
                     placaDTO.setPersonaDTO(personaDTO);
                     placaDTO.setMatricula(placa.getMatricula());
-                    Fecha fechaRecepcion = new Fecha(
-                            String.valueOf(placa.getFecha_recepcion().get(Calendar.YEAR)) + "-"
-                            + String.valueOf(placa.getFecha_recepcion().get(Calendar.MONTH) + 1) + "-"
-                            + String.valueOf(placa.getFecha_recepcion().get(Calendar.DAY_OF_MONTH)));
+                    Fecha fechaRecepcion = null;
+                    if (placa.getFecha_recepcion() != null) {
+                        fechaRecepcion = new Fecha(
+                                String.valueOf(placa.getFecha_recepcion().get(Calendar.YEAR)) + "-"
+                                + String.valueOf(placa.getFecha_recepcion().get(Calendar.MONTH) + 1) + "-"
+                                + String.valueOf(placa.getFecha_recepcion().get(Calendar.DAY_OF_MONTH)));
+                    }
                     placaDTO.setFecha_recepcion(fechaRecepcion);
                     placaDTO.setEstado(placa.getEstado());
                     tramitesDTO.add(placaDTO);
@@ -448,6 +451,85 @@ public class TramiteBO implements ITramiteBO {
             throw new NegocioException("Ha ocurrido un error al querer generar una nueva placa");
         }
 
+    }
+
+    @Override
+    public List<TramiteDTO> consultarTramiteTotal(String nombre) throws NegocioException {
+        List<TramiteDTO> tramitesDTO = new ArrayList<>();
+        try {
+            List<Tramite> tramites = tramite.consultarTramitesTotales(nombre);
+
+            for (Tramite tramite : tramites) {
+                if (tramite instanceof Licencia) {
+                    Licencia licencia = (Licencia) tramite;
+                    LicenciaDTO licenciaDTO = new LicenciaDTO();
+                    licenciaDTO.setId_tramite(licencia.getId());
+                    Fecha fechaTramite = new Fecha(
+                            String.valueOf(licencia.getFecha_tramite().get(Calendar.YEAR)) + "-"
+                            + String.valueOf(licencia.getFecha_tramite().get(Calendar.MONTH) + 1) + "-"
+                            + String.valueOf(licencia.getFecha_tramite().get(Calendar.DAY_OF_MONTH)));
+
+                    licenciaDTO.setFecha_tramite(fechaTramite);
+                    licenciaDTO.setCosto(licencia.getCosto());
+                    
+                    Fecha fechaNacimiento = new Fecha(String.valueOf(licencia.getPersona().getFecha_nacimiento().get(Calendar.YEAR)) + "-"
+                            + String.valueOf(licencia.getPersona().getFecha_nacimiento().get(Calendar.MONTH) + 1) + "-"
+                            + String.valueOf(licencia.getPersona().getFecha_nacimiento().get(Calendar.DAY_OF_MONTH)));
+                    
+                    licenciaDTO.setPersonaDTO(new PersonaDTO(
+                            fechaNacimiento,
+                            licencia.getPersona().getRfc(),
+                            licencia.getPersona().getNombre(),
+                            licencia.getPersona().getApellido_paterno(),
+                            licencia.getPersona().getApellido_materno()));
+                    licenciaDTO.setNumero_licencia(licencia.getNumero_licencia());
+                    Fecha vigencia = new Fecha(
+                            String.valueOf(licencia.getVigencia().get(Calendar.YEAR)) + "-"
+                            + String.valueOf(licencia.getVigencia().get(Calendar.MONTH) + 1) + "-"
+                            + String.valueOf(licencia.getVigencia().get(Calendar.DAY_OF_MONTH)));
+
+                    licenciaDTO.setVigencia(vigencia);
+                    licenciaDTO.setEstado(licencia.getEstado());
+                    tramitesDTO.add(licenciaDTO);
+                } else if (tramite instanceof Placa) {
+                    Placa placa = (Placa) tramite;
+                    PlacaDTO placaDTO = new PlacaDTO();
+                    placaDTO.setId_tramite(placa.getId());
+                    Fecha fechaTramite = new Fecha(
+                            String.valueOf(placa.getFecha_tramite().get(Calendar.YEAR)) + "-"
+                            + String.valueOf(placa.getFecha_tramite().get(Calendar.MONTH) + 1) + "-"
+                            + String.valueOf(placa.getFecha_tramite().get(Calendar.DAY_OF_MONTH)));
+
+                    placaDTO.setFecha_tramite(fechaTramite);
+                    placaDTO.setCosto(placa.getCosto());
+                    Fecha fechaNacimiento = new Fecha(String.valueOf(placa.getPersona().getFecha_nacimiento().get(Calendar.YEAR)) + "-"
+                            + String.valueOf(placa.getPersona().getFecha_nacimiento().get(Calendar.MONTH) + 1) + "-"
+                            + String.valueOf(placa.getPersona().getFecha_nacimiento().get(Calendar.DAY_OF_MONTH)));
+                    placaDTO.setPersonaDTO(new PersonaDTO(
+                            fechaNacimiento,
+                            placa.getPersona().getRfc(),
+                            placa.getPersona().getNombre(),
+                            placa.getPersona().getApellido_paterno(),
+                            placa.getPersona().getApellido_materno()));
+                    placaDTO.setMatricula(placa.getMatricula());
+                    Fecha fechaRecepcion = null;
+                    if (placa.getFecha_recepcion() != null) {
+                        fechaRecepcion = new Fecha(
+                                String.valueOf(placa.getFecha_recepcion().get(Calendar.YEAR)) + "-"
+                                + String.valueOf(placa.getFecha_recepcion().get(Calendar.MONTH) + 1) + "-"
+                                + String.valueOf(placa.getFecha_recepcion().get(Calendar.DAY_OF_MONTH)));
+                    }
+                    placaDTO.setFecha_recepcion(fechaRecepcion);
+                    placaDTO.setEstado(placa.getEstado());
+                    tramitesDTO.add(placaDTO);
+                }
+            }
+
+        } catch (PersistenciaException ex) {
+            Logger.getLogger(TramiteBO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return tramitesDTO;
     }
 
 }

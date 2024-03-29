@@ -87,6 +87,7 @@ public interface ITramiteBO {
      */
     public List<TramiteDTO> consultarTramitesPersona(PersonaDTO personaDTO) throws NegocioException;
 
+    public List<TramiteDTO> consultarTramiteTotal(String nombre) throws NegocioException;
   
   /**
      * Método usado para obtener el automovil por medio de una placa

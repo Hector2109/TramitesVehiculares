@@ -270,7 +270,7 @@ public class DlgPrincipal extends javax.swing.JDialog {
     }//GEN-LAST:event_btnConsultasActionPerformed
 
     private void btnReportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportesActionPerformed
-        DlgReportesPersona RP = new DlgReportesPersona(this, false);
+        DlgReportes2 RP = new DlgReportes2(this, false);
         dispose();
         RP.setVisible(true);
     }//GEN-LAST:event_btnReportesActionPerformed

@@ -117,6 +117,12 @@ public interface ITramitesDAO {
     public List<Tramite> consultarTramitesPersona(PersonaDTO personaDTO) throws PersistenciaException;
     
     /**
+     * Consulta todos los trámites realizados
+     * @return regresa la lista de todos los trámites realizados
+     * @throws PersistenceException 
+     */
+    public List<Tramite> consultarTramitesTotales(String nombre)throws PersistenciaException;
+    /**
      * 
      * @param tramite
      * @return

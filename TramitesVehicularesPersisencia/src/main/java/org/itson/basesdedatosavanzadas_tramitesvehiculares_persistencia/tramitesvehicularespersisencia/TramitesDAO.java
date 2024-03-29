@@ -472,7 +472,7 @@ public class TramitesDAO implements ITramitesDAO {
                    AND p.matricula = :matricula
                    """;
         Placa placa;
-        
+
         TypedQuery<Placa> query = entityManager.createQuery(jpqlQuery, Placa.class);
         query.setParameter("matricula", placaDTO.getMatricula());
         try {
@@ -488,12 +488,13 @@ public class TramitesDAO implements ITramitesDAO {
 
     /**
      * Crea una placa para un automovil usado
+     *
      * @param placa la placa actual
-     * @param automovil automovil que pertenecerá a la placa 
+     * @param automovil automovil que pertenecerá a la placa
      * @param persona persona dueña dueña del automovil
      * @param matricula matricula de la nueva placa
      * @return Placa nueva generada
-     * @throws PersistenciaException en caso de algún error 
+     * @throws PersistenciaException en caso de algún error
      */
     @Override
     public Placa placasAutomovilUsado(PlacaDTO placa, AutomovilDTO automovil, PersonaDTO persona, String matricula) throws PersistenciaException {
@@ -503,8 +504,6 @@ public class TramitesDAO implements ITramitesDAO {
         try {
             personaE = personasDAO.consultarPersona(persona.getRfc());
             Vehiculo vehiculo = obtenerAutomovil(automovil);
-            
-            
 
             if (vehiculo != null) {
 
@@ -552,6 +551,40 @@ public class TramitesDAO implements ITramitesDAO {
         if (filasActualizadas == 0) {
             throw new PersistenceException("No se encontraron licencias con ese número");
         }
+    }
+
+    @Override
+    public List<Tramite> consultarTramitesTotales(String nombre) throws PersistenciaException {
+        EntityManager entityManager = this.conexion.crearConexion();
+
+        String jpqlQuery;
+        TypedQuery<Tramite> query;
+
+        if (nombre != null && !nombre.trim().isEmpty()) {
+            jpqlQuery = """
+               SELECT t FROM Tramite t
+               JOIN t.persona p
+               WHERE p.nombre LIKE :nombre 
+               OR p.apellido_paterno LIKE :nombre 
+               OR p.apellido_materno LIKE :nombre
+               """;
+            query = entityManager.createQuery(jpqlQuery, Tramite.class);
+            query.setParameter("nombre", "%" + nombre + "%");
+        } else {
+            jpqlQuery = "SELECT t FROM Tramite t";
+            query = entityManager.createQuery(jpqlQuery, Tramite.class);
+        }
+
+        List<Tramite> tramites;
+        try {
+            tramites = query.getResultList();
+            logger.log(Level.INFO, "Consulta de {0} trámites realizada con éxito.", tramites.size());
+        } catch (NoResultException ex) {
+            throw new PersistenceException("No se encontraron trámites.", ex);
+        } finally {
+            entityManager.close();
+        }
+        return tramites;
     }
 
 }
