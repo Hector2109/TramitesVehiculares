@@ -270,7 +270,7 @@ public class DlgPrincipal extends javax.swing.JDialog {
     }//GEN-LAST:event_btnConsultasActionPerformed
 
     private void btnReportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportesActionPerformed
-        DlgReportes2 RP = new DlgReportes2(this, false);
+        DlgReportes RP = new DlgReportes(this, false);
         dispose();
         RP.setVisible(true);
     }//GEN-LAST:event_btnReportesActionPerformed
@@ -294,7 +294,7 @@ public class DlgPrincipal extends javax.swing.JDialog {
     }//GEN-LAST:event_btnModuloConsultasActionPerformed
 
     private void btnModuloReportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModuloReportesActionPerformed
-        DlgReportesPersona RP = new DlgReportesPersona(this, false);
+        DlgReportes RP = new DlgReportes(this, false);
         dispose();
         RP.setVisible(true);
     }//GEN-LAST:event_btnModuloReportesActionPerformed
