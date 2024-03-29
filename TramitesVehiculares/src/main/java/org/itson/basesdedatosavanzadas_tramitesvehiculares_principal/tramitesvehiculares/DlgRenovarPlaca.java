@@ -485,6 +485,7 @@ public class DlgRenovarPlaca extends javax.swing.JDialog {
                     placaDTO = tramiteBO.obtenerPlacaActiva(placaDTO);
 
                     if (placaDTO != null && placaDTO.getEstado() == 1) {
+                        tramiteBO.desactivarLicenciaFecha();
                         licencia = tramiteBO.buscarLicencia(persona);
                         if (licencia != null) {
                             txtNumLicencia.setText(licencia.getNumero_licencia());

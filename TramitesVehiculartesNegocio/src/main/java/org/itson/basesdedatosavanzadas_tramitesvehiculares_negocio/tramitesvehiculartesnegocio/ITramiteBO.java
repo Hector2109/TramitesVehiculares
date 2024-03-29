@@ -117,4 +117,9 @@ public interface ITramiteBO {
      */
     public PlacaDTO crearPlacaAutoUsado (PlacaDTO placa, AutomovilDTO automovil, PersonaDTO persona) throws NegocioException;
 
+    /**
+     * Método el cual desactiva las licencias basandose en su 
+     * de vigencia y la fecha actual
+     */
+    public void desactivarLicenciaFecha () throws NegocioException;
 }

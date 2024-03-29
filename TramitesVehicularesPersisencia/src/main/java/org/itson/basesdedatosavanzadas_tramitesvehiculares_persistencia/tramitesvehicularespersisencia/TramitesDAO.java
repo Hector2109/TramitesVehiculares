@@ -553,7 +553,7 @@ public class TramitesDAO implements ITramitesDAO {
         }
     }
 
-    @Override
+
     public List<Tramite> consultarTramitesTotales(String nombre) throws PersistenciaException {
         EntityManager entityManager = this.conexion.crearConexion();
 
@@ -585,6 +585,40 @@ public class TramitesDAO implements ITramitesDAO {
             entityManager.close();
         }
         return tramites;
+    }
+    @Override
+    public void desactivarLicenciaFechaActual() throws PersistenciaException {
+        EntityManager entityManager = this.conexion.crearConexion();
+        EntityTransaction transaction = null;
+
+        try {
+            transaction = entityManager.getTransaction();
+            transaction.begin();
+
+            String jpqlQuery = """
+                           UPDATE Licencia l
+                           SET l.estado = 0
+                           WHERE l.vigencia < :fechaActual
+                           """;
+            Query query = entityManager.createQuery(jpqlQuery);
+            query.setParameter("fechaActual", new Fecha());
+            int filasActualizadas = query.executeUpdate();
+
+            transaction.commit();
+
+            if (filasActualizadas == 0) {
+                throw new PersistenceException("No hay estados por actualizar");
+            }
+        } catch (PersistenceException ex) {
+            if (transaction != null && transaction.isActive()) {
+                transaction.rollback();
+            }
+            throw new PersistenciaException("Error al desactivar licencias vencidas", ex);
+        } finally {
+            entityManager.close();
+        }
+
+
     }
 
 }

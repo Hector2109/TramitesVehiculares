@@ -453,6 +453,7 @@ public class TramiteBO implements ITramiteBO {
 
     }
 
+
     @Override
     public List<TramiteDTO> consultarTramiteTotal(String nombre) throws NegocioException {
         List<TramiteDTO> tramitesDTO = new ArrayList<>();
@@ -530,6 +531,21 @@ public class TramiteBO implements ITramiteBO {
         }
 
         return tramitesDTO;
+    }
+    
+    
+    /**
+     * Método el cual desactiva las licencias basandose en su 
+     * de vigencia y la fecha actual
+     */
+    @Override
+    public void desactivarLicenciaFecha() throws NegocioException {
+        try {
+            tramite.desactivarLicenciaFechaActual();
+        } catch (PersistenciaException ex) {
+            throw new NegocioException ("No ha licencias que actualizar");
+        }
+
     }
 
 }

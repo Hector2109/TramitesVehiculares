@@ -463,7 +463,7 @@ public class DlgReportes extends javax.swing.JDialog {
             nombre = persona.getNombre() + " " + persona.getApellido_paterno();
         }
         
-        PDFReportGenerator.generatePDFReport(listaParaReporte,nombre);
+        //PDFReportGenerator.generatePDFReport(listaParaReporte,nombre);
     }//GEN-LAST:event_btnLicenciasActionPerformed
 
     private void btnLicencias1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLicencias1ActionPerformed

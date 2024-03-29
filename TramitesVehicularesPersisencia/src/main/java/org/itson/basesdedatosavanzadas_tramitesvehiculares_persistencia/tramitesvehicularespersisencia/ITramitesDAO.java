@@ -164,7 +164,17 @@ public interface ITramitesDAO {
      */
     public Placa placasAutomovilUsado (PlacaDTO placa, AutomovilDTO automovil, PersonaDTO persona, String matricula) throws PersistenciaException;
     
-    
+    /**
+     * Método que sirve para desactivar las placas de un automovil
+     * @param placa placa que se desea desactivar
+     * @throws PersistenciaException en caso de no encontrar la placa
+     */
     public void desactivarPlaca(PlacaDTO placa) throws PersistenciaException;
     
+    /**
+     * Método el cuál desactiva las licencias
+     * que no se encuentrn vigentes según su la fecha actual
+     * @throws PersistenciaException en caso de no encontrar licencias
+     */
+    public void desactivarLicenciaFechaActual() throws PersistenciaException;
 }

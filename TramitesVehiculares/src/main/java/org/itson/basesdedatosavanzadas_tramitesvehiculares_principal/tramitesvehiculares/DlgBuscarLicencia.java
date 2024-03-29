@@ -260,6 +260,11 @@ public class DlgBuscarLicencia extends javax.swing.JDialog {
 
     private void consultar() {
         try {
+            try{
+            tramiteBO.desactivarLicenciaFecha();
+            }catch(NegocioException e){
+                
+            }
             List<PersonaDTO> listaPersonas = personaBO.consultarPersonasLicenciaActiva();
             Object[] personaFila = new Object[3];
             modelo = (DefaultTableModel) tblPersonas.getModel();
