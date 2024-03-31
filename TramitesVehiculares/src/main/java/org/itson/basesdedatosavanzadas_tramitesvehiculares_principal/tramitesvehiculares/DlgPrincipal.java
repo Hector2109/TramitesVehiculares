@@ -94,6 +94,7 @@ public class DlgPrincipal extends javax.swing.JDialog {
 
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Logo.png"))); // NOI18N
 
+        btnInicio.setForeground(new java.awt.Color(255, 255, 255));
         btnInicio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Inicio_Seleccionado.png"))); // NOI18N
         btnInicio.setText("  Inicio       ");
         btnInicio.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N

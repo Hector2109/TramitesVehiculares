@@ -135,6 +135,7 @@ public class DlgRegistrarLicencia extends javax.swing.JDialog {
             }
         });
 
+        btnLicencias.setForeground(new java.awt.Color(255, 255, 255));
         btnLicencias.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Licencias_Seleccionado.png"))); // NOI18N
         btnLicencias.setText("  Licencias");
         btnLicencias.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
