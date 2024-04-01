@@ -167,6 +167,12 @@ public class TramiteBO implements ITramiteBO {
         //}
     }
 
+    /**
+     * Método el cual crea una placa para un automovil nuevo
+     * @param automovilNuevo automovil nuevo que se desea registrar
+     * @return Placa del automovil  nuevo
+     * @throws PersistenceException  
+     */
     @Override
     public PlacaDTO placaAutomovilNuevo(AutomovilDTO automovilNuevo, PersonaDTO persona) throws PersistenciaException, NegocioException {
 
@@ -326,6 +332,12 @@ public class TramiteBO implements ITramiteBO {
         return tramitesDTO;
     }
 
+     /**
+     * Método para consultar placas de una persona
+     * @param persona persona a la que se buscarán las placas
+     * @return regresa la lista de placas
+     * @throws NegocioException en caso de error
+     */
     public List<PlacaDTO> consultarPlacasPersona(PersonaDTO persona) throws NegocioException {
         List<PlacaDTO> placasDTO;
         placasDTO = new ArrayList<>();
@@ -454,6 +466,12 @@ public class TramiteBO implements ITramiteBO {
     }
 
 
+    /**
+     * Método para consultar los tramites dependiendo del nombre que se de en el paramatro
+     * @param nombre nombre de la persona del que se buscan los trámites
+     * @return lista de tramites que coincidan con el nombre proporcionado
+     * @throws NegocioException en caso de no encontrar
+     */
     @Override
     public List<TramiteDTO> consultarTramiteTotal(String nombre) throws NegocioException {
         List<TramiteDTO> tramitesDTO = new ArrayList<>();

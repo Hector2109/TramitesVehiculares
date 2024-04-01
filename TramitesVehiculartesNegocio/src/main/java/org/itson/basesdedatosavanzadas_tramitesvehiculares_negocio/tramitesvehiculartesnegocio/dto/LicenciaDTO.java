@@ -31,6 +31,9 @@ public class LicenciaDTO extends TramiteDTO{
         
     }
 
+    /**
+     * Constructor por default
+     */
     public LicenciaDTO() {
     }
     
@@ -62,14 +65,26 @@ public class LicenciaDTO extends TramiteDTO{
         return estado;
     }
 
+    /**
+     * Establece el número de licencia de la persona
+     * @param numero_licencia número de licencia
+     */
     public void setNumero_licencia(String numero_licencia) {
         this.numero_licencia = numero_licencia;
     }
 
+    /**
+     * Establece la fecha de vigencia de la licencia
+     * @param vigencia fecha de vigencia
+     */
     public void setVigencia(Fecha vigencia) {
         this.vigencia = vigencia;
     }
 
+    /**
+     * Establece el estado de la licencia
+     * @param estado estado
+     */
     public void setEstado(byte estado) {
         this.estado = estado;
     }

@@ -123,6 +123,12 @@ public class PersonasDAO implements IPersonasDAO {
 
     }
 
+    /**
+     * Este metodo busca nombres similares que incluyan algunos valores
+     * @param nombre valor del nombre a buscar
+     * @return regresa la lista de personas que tienen ese nombre
+     * @throws PersistenciaException lanza excepcion en caso de error
+     */
     @Override
     public List<Persona> buscarPersonasSimilar(String nombre) throws PersistenciaException {
         EntityManager entityManager = this.conexion.crearConexion();
@@ -149,6 +155,12 @@ public class PersonasDAO implements IPersonasDAO {
 
     }
 
+    /**
+     * Este metodo busca RFC que incluyan algunos valores
+     * @param rfc valor del rfc
+     * @return regresa la lista de personas que tienen ese rfc
+     * @throws PersistenciaException lanza excepcion en caso de error
+     */
     @Override
     public List<Persona> buscarRFCSimilar(String rfc) throws PersistenciaException {
         EntityManager entityManager = this.conexion.crearConexion();
@@ -171,6 +183,14 @@ public class PersonasDAO implements IPersonasDAO {
         }
     }
 
+    /**
+     * Este metodo busca fecha de nacimiento que incluyan algunos valores
+     *
+     * @param anio valor del año
+     * @return regresa la lista de personas que tienen ese año
+     * @throws PersistenciaException lanza excepcion en caso de error
+     */
+
     @Override
     public List<Persona> buscarAnioSimilar(String anio) throws PersistenciaException {
         EntityManager entitymanager = conexion.crearConexion();
@@ -192,6 +212,13 @@ public class PersonasDAO implements IPersonasDAO {
 
     }
 
+    /**
+     * Busca una persona a traves de una placa
+     *
+     * @param placa placa de la persona
+     * @return persona que tenga la placa
+     * @throws PersistenciaException en casde error
+     */
     @Override
     public Persona buscarPersonaPlaca(PlacaDTO placa) throws PersistenciaException {
         EntityManager entitymanager = conexion.crearConexion();

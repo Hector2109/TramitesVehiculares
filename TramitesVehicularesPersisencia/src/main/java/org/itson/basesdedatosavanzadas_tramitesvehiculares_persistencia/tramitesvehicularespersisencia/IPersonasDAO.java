@@ -70,6 +70,11 @@ public interface IPersonasDAO {
      */
     public List<Persona> buscarAnioSimilar(String anio) throws PersistenciaException;
     
-    
+    /**
+     * Busca una persona a traves de una placa
+     * @param placa placa de la persona
+     * @return persona que tenga la placa
+     * @throws PersistenciaException en casde error
+     */
     public Persona buscarPersonaPlaca (PlacaDTO placa) throws PersistenciaException;
 }

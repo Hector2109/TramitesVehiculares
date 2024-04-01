@@ -147,28 +147,13 @@ public class TramitesDAO implements ITramitesDAO {
         return licencia;
     }
 
-//    @Override
-//    public Licencia buscarLicenciaActiva(PersonaDTO persona) {
-//
-//        EntityManager entityManager = this.conexion.crearConexion();
-//        Licencia licencia;
-//        String jpqlQuery = """
-//                   SELECT l FROM Licencia l
-//                   JOIN l.persona p
-//                   WHERE p.rfc = :rfc
-//                   AND l.estado = 1
-//                   """;
-//        TypedQuery<Licencia> query = entityManager.createQuery(jpqlQuery, Licencia.class);
-//        query.setParameter("rfc", persona.getRfc());
-//        try {
-//            licencia = query.getSingleResult();
-//        } catch (PersistenceException ex) {
-//            licencia = null;
-//        } finally {
-//            entityManager.close();
-//        }
-//        return licencia;
-//    }
+    /**
+     * Método que busca una licencia activa consultando los datos de una persona
+     * DTO
+     *
+     * @param persona persona DTO
+     * @return Licencia encontrada
+     */
     @Override
     public Licencia buscarLicenciaActiva(PersonaDTO persona) {
         EntityManager entityManager = this.conexion.crearConexion();
@@ -193,6 +178,13 @@ public class TramitesDAO implements ITramitesDAO {
         return licencia;
     }
 
+    /**
+     * Regresa una lista de licencias que le pertenecen a una persona
+     *
+     * @param persona persona a la que se le buscaran las licencias
+     * @return lista de licencias
+     * @throws NegocioException en caso de algun error al momento de consultar
+     */
     @Override
     public List<Licencia> consultarLicenciasPersona(PersonaDTO personaDTO) throws PersistenciaException {
         EntityManager entityManager = this.conexion.crearConexion();
@@ -217,6 +209,12 @@ public class TramitesDAO implements ITramitesDAO {
         return licencias;
     }
 
+    /**
+     * Método usado para desactivar una licencia
+     * @param licenciaDTO Licencia que se desea desactiar
+     * @return Licencia desactivada
+     * @throws PersistenceException en caso de no encontrar la iicencia
+     */
     @Override
     public void desactivarLicencia(LicenciaDTO licencia) throws PersistenceException {
         EntityManager entityManager = this.conexion.crearConexion();
@@ -266,6 +264,12 @@ public class TramitesDAO implements ITramitesDAO {
         return automovil;
     }
 
+    /**
+     * Método el cual verifica la existencia de plcas
+     * en base a su matricula
+     * @param matricula matricula que se busca
+     * @return Placa que contiene la matricula
+     */
     @Override
     public Placa obtenerPlaca(String matricula) {
         EntityManager entityManager = this.conexion.crearConexion();
@@ -310,6 +314,14 @@ public class TramitesDAO implements ITramitesDAO {
         return placas;
     }
 
+    /**
+     * Método para crear la placa de un vehiculo nuevo
+     * @param persona persona la cual realiza el tramite de placa
+     * @param automovil automovil que se desea registrar
+     * @param matricula matricula d la placa
+     * @return Placa del nuevo vehiculo
+     * @throws PersistenceException 
+     */
     @Override
     public Placa crearPlacaVehiculoNuevo(PersonaDTO persona, AutomovilDTO automovil, String matricula) throws PersistenceException {
 
@@ -344,6 +356,12 @@ public class TramitesDAO implements ITramitesDAO {
         return placaNueva;
     }
 
+    /**
+     * Consulta los trámites de una persona
+     * @param personaDTO persona para buscar los trámites
+     * @return regresa la lista de tramties asociados a una persona
+     * @throws PersistenciaException  lanza una excepcion en caso de error
+     */
     @Override
     public List<Tramite> consultarTramitesPersona(PersonaDTO personaDTO) throws PersistenciaException {
         EntityManager entityManager = this.conexion.crearConexion();
@@ -368,6 +386,12 @@ public class TramitesDAO implements ITramitesDAO {
         return tramites;
     }
 
+    /**
+     * Método para obtener la placa a través de un trámite
+     * @param tramite trámite de la placa
+     * @return placa obtenida
+     * @throws PersistenciaException 
+     */
     @Override
     public Placa obtenerPlaca(Tramite tramite) throws PersistenciaException {
         EntityManager entityManager = this.conexion.crearConexion();
@@ -391,6 +415,12 @@ public class TramitesDAO implements ITramitesDAO {
         return placa;
     }
 
+    /**
+     * Método que se usa para obtener una licencia de un trámite
+     * @param tramite trámite de la licencia
+     * @return licencia encontrada
+     * @throws PersistenciaException 
+     */
     @Override
     public Licencia obtenerLicencia(Tramite tramite) throws PersistenciaException {
         EntityManager entityManager = this.conexion.crearConexion();
@@ -414,6 +444,12 @@ public class TramitesDAO implements ITramitesDAO {
         return licencia;
     }
 
+    /**
+     * Método el cuál crea un automovil 
+     * @param automovilDTO Automovil que se desea crear
+     * @return Automovil creado
+     * @throws PersistenciaException 
+     */
     @Override
     public Automovil crearAutomovil(AutomovilDTO automovil) throws PersistenciaException {
         EntityManager em = conexion.crearConexion();
@@ -435,6 +471,12 @@ public class TramitesDAO implements ITramitesDAO {
         return automovilEntity;
     }
 
+    /**   
+     * Obtiene un automovil basandose en la placa 
+     * @param placa placa del automovila buscar
+     * @return automovil encontrado
+     * @throws PersistenciaException en caso de no encontrar ningún automovil 
+     */
     @Override
     public Automovil obtenerAutomovilPlaca(PlacaDTO placa) throws PersistenciaException {
         EntityManager em = conexion.crearConexion();
@@ -462,6 +504,12 @@ public class TramitesDAO implements ITramitesDAO {
 
     }
 
+    /**
+     * Verifica que una placa este activa
+     * @param placa que se desea saber si esta ativa
+     * @return placa encontrada
+     * @throws PersistenciaException en caso de no encontrar ninguna placa 
+     */
     @Override
     public Placa obtenerPlacaActiva(PlacaDTO placaDTO) throws PersistenciaException {
         EntityManager entityManager = this.conexion.crearConexion();
@@ -531,6 +579,11 @@ public class TramitesDAO implements ITramitesDAO {
         return placaNueva;
     }
 
+    /**
+     * Método que sirve para desactivar las placas de un automovil
+     * @param placa placa que se desea desactivar
+     * @throws PersistenciaException en caso de no encontrar la placa
+     */
     @Override
     public void desactivarPlaca(PlacaDTO placa) throws PersistenciaException {
         EntityManager entityManager = this.conexion.crearConexion();
@@ -553,7 +606,11 @@ public class TramitesDAO implements ITramitesDAO {
         }
     }
 
-
+    /**
+     * Consulta todos los trámites realizados
+     * @return regresa la lista de todos los trámites realizados
+     * @throws PersistenceException 
+     */
     public List<Tramite> consultarTramitesTotales(String nombre) throws PersistenciaException {
         EntityManager entityManager = this.conexion.crearConexion();
 
@@ -586,6 +643,12 @@ public class TramitesDAO implements ITramitesDAO {
         }
         return tramites;
     }
+
+    /**
+     * Método el cuál desactiva las licencias
+     * que no se encuentrn vigentes según su la fecha actual
+     * @throws PersistenciaException en caso de no encontrar licencias
+     */
     @Override
     public void desactivarLicenciaFechaActual() throws PersistenciaException {
         EntityManager entityManager = this.conexion.crearConexion();
@@ -617,7 +680,6 @@ public class TramitesDAO implements ITramitesDAO {
         } finally {
             entityManager.close();
         }
-
 
     }
 

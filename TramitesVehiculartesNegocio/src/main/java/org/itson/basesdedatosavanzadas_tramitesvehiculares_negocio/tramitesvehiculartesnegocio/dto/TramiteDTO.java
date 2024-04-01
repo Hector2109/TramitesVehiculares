@@ -77,6 +77,7 @@ public class TramiteDTO {
         return personaDTO;
     }
 
+    
     public Long getId_tramite() {
         return id_tramite;
     }

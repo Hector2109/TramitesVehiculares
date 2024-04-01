@@ -87,6 +87,12 @@ public interface ITramiteBO {
      */
     public List<TramiteDTO> consultarTramitesPersona(PersonaDTO personaDTO) throws NegocioException;
 
+    /**
+     * Método para consultar los tramites dependiendo del nombre que se de en el paramatro
+     * @param nombre nombre de la persona del que se buscan los trámites
+     * @return lista de tramites que coincidan con el nombre proporcionado
+     * @throws NegocioException en caso de no encontrar
+     */
     public List<TramiteDTO> consultarTramiteTotal(String nombre) throws NegocioException;
   
   /**

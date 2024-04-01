@@ -71,26 +71,54 @@ public class PlacaDTO extends TramiteDTO{
         return estado;
     }
 
+    /**
+     * Establece la matricula de la placa
+     * @param matricula matriocula
+     */
     public void setMatricula(String matricula) {
         this.matricula = matricula;
     }
 
+    /**
+     * Establece la fecha en que so modifico o se asigno una nueva
+     * placa a un vehiculo usado
+     * @param fecha_recepcion fecha de modificación
+     */
     public void setFecha_recepcion(Fecha fecha_recepcion) {
         this.fecha_recepcion = fecha_recepcion;
     }
 
+    /**
+     * Establece el estado de la placa
+     * @param estado estado de la placa
+     */
     public void setEstado(Byte estado) {
         this.estado = estado;
     }
 
+    /**
+     * Establece la fecha en que se realizo el trámite de placa
+     * @param fecha_tramite 
+     */
+    @Override
     public void setFecha_tramite(Fecha fecha_tramite) {
         this.fecha_tramite = fecha_tramite;
     }
 
+    /**
+     * Establece el costo del tramite
+     * @param costo costo
+     */
+    @Override
     public void setCosto(Float costo) {
         this.costo = costo;
     }
 
+    /**
+     * Establece que persona realiza el trámite
+     * @param personaDTO 
+     */
+    @Override
     public void setPersonaDTO(PersonaDTO personaDTO) {
         this.personaDTO = personaDTO;
     }

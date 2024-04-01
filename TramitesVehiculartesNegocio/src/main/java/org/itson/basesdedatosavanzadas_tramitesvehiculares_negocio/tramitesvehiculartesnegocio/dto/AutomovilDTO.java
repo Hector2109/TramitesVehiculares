@@ -48,14 +48,26 @@ public class AutomovilDTO extends VehiculoDTO{
         return modelo;
     }
 
+    /**
+     * Establece el numero de serie del automovil
+     * @param numero_serie número de serie del automovil
+     */
     public void setNumero_serie(String numero_serie) {
         this.numero_serie = numero_serie;
     }
 
+    /**
+     * Establece la línea del automovil
+     * @param linea linea del automovil
+     */
     public void setLinea(String linea) {
         this.linea = linea;
     }
 
+    /**
+     *Establece el mopdelo del automovil 
+     * @param modelo modelo del automovil
+     */
     public void setModelo(String modelo) {
         this.modelo = modelo;
     }

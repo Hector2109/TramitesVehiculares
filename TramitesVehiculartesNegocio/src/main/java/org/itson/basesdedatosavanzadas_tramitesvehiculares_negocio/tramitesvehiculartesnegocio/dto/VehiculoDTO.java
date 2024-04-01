@@ -37,10 +37,18 @@ public class VehiculoDTO {
         return color;
     }
 
+    /**
+     * Establece la marca del vehiculo
+     * @param marca marca
+     */
     public void setMarca(String marca) {
         this.marca = marca;
     }
 
+    /**
+     * Establece el color dl vehiculo
+     * @param color color
+     */
     public void setColor(String color) {
         this.color = color;
     }

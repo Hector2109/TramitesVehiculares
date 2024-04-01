@@ -44,7 +44,7 @@ public interface ITramitesDAO {
     /**
      * Método que busca una licencia activa consultando los datos de una persona DTO
      * @param persona persona DTO
-     * @return 
+     * @return licencia encontrada
      */
     public Licencia buscarLicenciaActiva (PersonaDTO persona);
     
@@ -122,18 +122,19 @@ public interface ITramitesDAO {
      * @throws PersistenceException 
      */
     public List<Tramite> consultarTramitesTotales(String nombre)throws PersistenciaException;
+    
     /**
-     * 
-     * @param tramite
-     * @return
+     * Método para obtener la placa a través de un trámite
+     * @param tramite trámite de la placa
+     * @return placa obtenida
      * @throws PersistenciaException 
      */
     public Placa obtenerPlaca(Tramite tramite) throws PersistenciaException;
     
     /**
-     * 
-     * @param tramiteDTO
-     * @return
+     * Método que se usa para obtener una licencia de un trámite
+     * @param tramite trámite de la licencia
+     * @return licencia encontrada
      * @throws PersistenciaException 
      */
      public Licencia obtenerLicencia(Tramite tramite) throws PersistenciaException;
@@ -146,8 +147,8 @@ public interface ITramitesDAO {
     public Automovil obtenerAutomovilPlaca (PlacaDTO placa) throws PersistenciaException;
     
     /**
-     * Obtiene la placa activa de un automovil
-     * @param automovil automovil del cual se desea saber la placa
+     * Verifica que una placa este activa
+     * @param placa que se desea saber si esta ativa
      * @return placa encontrada
      * @throws PersistenciaException en caso de no encontrar ninguna placa 
      */
